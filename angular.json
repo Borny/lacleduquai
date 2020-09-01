@@ -52,6 +52,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -105,6 +106,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "lacleduquai"
+    }
+  },
+  "defaultProject": "lacleduquai",
+  "cli": {
+    "analytics": "fc159a46-1c44-4b79-b224-582efdedc259"
+  }
 }
