@@ -1,8 +1,50 @@
 @import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
 
 h1 {
+  padding: 3rem;
   text-align: center;
-  padding: 4rem;
   background: $color-primary;
   color: $white;
+  font-family: $fontPoppins;
+}
+
+.form__container {
+  max-width: $screen-sm;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px;
+}
+
+.form__response {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 0 auto 2rem;
+  }
+}
+
+.subscription-form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox__container {
+  margin: 2rem auto;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 1rem;
+}
+
+.submit-btn {
+  margin: 1rem auto 2rem;
 }
