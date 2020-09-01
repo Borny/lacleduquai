@@ -24,7 +24,7 @@
     </button>
   </div>
   <form
-    *ngIf="!isLoading"
+    *ngIf="!isLoading && !hideForm"
     class="subscription-form"
     [formGroup]="subscriptionForm"
     (ngSubmit)="onSubmit()"
