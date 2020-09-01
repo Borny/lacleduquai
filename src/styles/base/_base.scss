@@ -20,6 +20,7 @@ body {
   height: 100%;
   font-size: 0.8em;
   font-family: $fontPoppins, sans-serif;
+  background: $white;
 
   @media (min-width: $screen-xs) {
     font-size: 0.9em;
@@ -163,9 +164,11 @@ textarea {
 //   padding: 0 !important;
 // }
 
-// .mat-checkbox-layout {
-//   white-space: initial !important;
-// }
+// Wraps the text for checkboxes
+
+.mat-checkbox-layout {
+  white-space: initial !important;
+}
 
 // // Override the radio buttons on the subscription page
 // .deal-options__content {

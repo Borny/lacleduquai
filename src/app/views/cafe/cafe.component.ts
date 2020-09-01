@@ -28,17 +28,18 @@ export class CafeView implements OnInit {
   public onSubmit(): void {
     this.isLoading = true;
     this.hideForm = true;
-    console.log(this.subscriptionForm.value);
     this.subscriptionService.postCafeSubscriptionForm(this.subscriptionForm.value).subscribe(
       response => {
         this.isLoading = false;
         this.formSentSuccess = true;
-        console.log('response success :', response);
+        this.subscriptionForm.reset();
+        setTimeout(() => {
+          this.onReload()
+        }, 10000);
       },
       error => {
         this.isLoading = false;
         this.formSentFail = true;
-        console.log('response error : ', error)
       }
     )
   }

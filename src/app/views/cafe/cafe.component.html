@@ -2,14 +2,14 @@
 <mat-card class="form__container">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <div class="form__response" *ngIf="formSentSuccess">
-    <p>Merci, votre adhésion à bien été prise en compte.</p>
+    <p>Merci, votre adhésion a bien été prise en compte.</p>
     <button
       mat-raised-button
       color="primary"
       type="button"
       (click)="onReload()"
     >
-      S'inscrire
+      Terminé !
     </button>
   </div>
   <div *ngIf="formSentFail" class="form__response">
@@ -20,7 +20,7 @@
       color="primary"
       (click)="onReload()"
     >
-      Réessayer
+      S'inscrire
     </button>
   </div>
   <form
@@ -82,6 +82,7 @@
       formControlName="newsletterSubscription"
       >Je souhaite m'inscrire à la newsletter de La Clé du Quai</mat-checkbox
     >
+    <p class="price">Adhésion à prix libre</p>
     <button
       mat-raised-button
       class="submit-btn"
