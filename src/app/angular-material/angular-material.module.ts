@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -23,6 +23,8 @@ import { MatCardModule } from '@angular/material/card';
     MatProgressSpinnerModule,
     MatCardModule,
   ],
-  providers: []
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'never' } }
+  ]
 })
 export class MaterialModule { }
