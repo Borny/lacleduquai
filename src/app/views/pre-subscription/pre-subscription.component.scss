@@ -1,0 +1,105 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+h1 {
+  padding: 1rem;
+  text-align: center;
+  background: $color-primary;
+  color: $white;
+  font-family: $fontPoppins;
+
+  @include screen-sm {
+    padding: 3rem;
+  }
+}
+
+.form__container {
+  max-width: $screen-sm;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px;
+}
+
+.form__response {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  p,
+  ul {
+    margin: 0 auto 2rem;
+  }
+}
+
+.subscription-form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-section {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 1rem;
+
+  &__title {
+    width: 100%;
+    padding: 0.5rem 0 0.5rem 1rem;
+    background: $color-primary;
+    color: $cod-gray;
+  }
+
+  &__content {
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+
+    @include screen-sm {
+      padding: 0 0 0 3rem;
+    }
+
+    &-price {
+      @include screen-sm {
+        padding: 0 3rem;
+      }
+
+      mat-card {
+        margin: 0 0 1rem;
+      }
+      .previous-course-toggle {
+        margin: 0 0 0 1rem;
+      }
+      .previous-course-detail {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+.form-control {
+  width: 100%;
+  max-width: 300px;
+}
+
+.radio-group {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+
+  .radio-button {
+    margin: 0.5rem 0;
+  }
+}
+
+.submit-btn {
+  margin: 1rem auto 2rem;
+}

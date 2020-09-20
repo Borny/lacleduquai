@@ -2,23 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CafeView } from './cafe.component';
-import { CafeRoutingModule } from './cafe-routing.module';
+import { PreSubscriptionView } from './pre-subscription.component';
+import { PreSubscriptionRoutingModule } from './pre-subscription-routing.module';
 import { MaterialModule } from '../../angular-material/angular-material.module';
 
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [CafeView],
+  declarations: [PreSubscriptionView],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    CafeRoutingModule,
+    PreSubscriptionRoutingModule,
     MaterialModule
   ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'never' } }
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'auto' } }
   ]
 })
 
-export class CafeViewModule { }
+export class PreSubscriptionViewModule { }

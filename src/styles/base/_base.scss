@@ -141,6 +141,10 @@ textarea {
   color: $color-primary;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -176,6 +180,13 @@ textarea {
 //     border-color: $white;
 //   }
 // }
+
+// Top align the checkboxes on the desired form
+.mat-checkbox.mat-accent {
+  .mat-checkbox-inner-container {
+    margin: 2px 8px auto 0;
+  }
+}
 
 //////////
 // HACKS

@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/cafe/cafe.module').then(m => m.CafeViewModule)
   },
   {
+    path: 'pre-inscription',
+    loadChildren: () => import('./views/pre-subscription/pre-subscription.module').then(m => m.PreSubscriptionViewModule)
+  },
+  {
     path: '',
     redirectTo: 'cafe-inscription',
     pathMatch: 'full'
