@@ -98,3 +98,5 @@ $lcdq-theme: mat-light-theme($lcdq-primary, $lcdq-accent, $lcdq-warn);
 
 @import './styles/base/normalize';
 @import './styles/base/base';
+
+@import './styles/components/buttons';

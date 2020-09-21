@@ -25,50 +25,49 @@ export class PreSubscriptionView implements OnInit {
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
     PaymentMethods.SECOND,
-    PaymentMethods.THIRD,
-    PaymentMethods.FOURTH
+    PaymentMethods.THIRD
   ];
 
   public courses: Course[] = [
     {
       id: '1',
       detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
-      name: 'monday1'
+      name: 'lundi_18h30'
     },
     {
       id: '2',
       detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
-      name: 'monday2'
+      name: 'lundi_20h30'
     },
     {
       id: '3',
       detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
-      name: 'tuesday1'
+      name: 'mardi_18h30'
     },
     {
       id: '4',
       detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
-      name: 'tuesday2'
+      name: 'mardi_20h30'
     },
     {
       id: '5',
       detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
-      name: 'wednesday1'
+      name: 'mercredi_18h30'
     },
     {
       id: '6',
       detail: 'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
-      name: 'wednesday2'
+      name: 'mercredi_20h30'
     },
     {
       id: '7',
       detail: 'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
-      name: 'thursday1'
+      name: 'jeudi_18h30'
     },
     {
       id: '8',
       detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
-      name: 'thursday2'
+      name: 'jeudi_20h30'
     },
   ];
 
@@ -125,13 +124,11 @@ export class PreSubscriptionView implements OnInit {
     this._addControl('courses', this.courses, false);
     this._addControl('workshops', this.workshops, false);
 
-    console.log(this.subscriptionForm)
   }
 
   public onSubmit(): void {
     this.isLoading = true;
     this.hideForm = true;
-    console.log(this.subscriptionForm.value);
 
     // Filtering the choosen course
     const selectedCourseNames = this.subscriptionForm.value.courses

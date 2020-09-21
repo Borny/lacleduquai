@@ -12,10 +12,16 @@ $schoolbusyellow: #ffde00;
 
 $cod-gray: #191919;
 
+$red: #f44336;
+
 $color-primary: $fountainblue;
 $color-secondary: $schoolbusyellow;
+$color-gray: $cod-gray;
+
+$color-warning: $red;
 
 $color-primary-light: color.scale($fountainblue, $lightness: 70%);
+$grey-light: color.scale($cod-gray, $lightness: 70%);
 $grey-dark: darken($cod-gray, 0.5);
 
 //////////

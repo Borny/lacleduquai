@@ -1,0 +1,15 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+:host {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background: $color-primary;
+  color: $white;
+  font-family: $fontPoppins;
+
+  @include screen-sm {
+    padding: 3rem;
+  }
+}

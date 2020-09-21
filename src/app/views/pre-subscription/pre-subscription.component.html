@@ -9,10 +9,12 @@
     <p>Elle sera finalisée au moment de votre règlement.</p>
     <ul>
       <li>- En CB : paiement au comptoir de l’association</li>
-      <li>- Par chèque : à déposer lors de votre prochain passage</li>
       <li>
-        - Par virement : le RIB va vous être communiqué par mail très bientôt
+        - Par chèque : à déposer au comptoir lors de votre prochain passage
       </li>
+      <!-- <li>
+        - Par virement : le RIB va vous être communiqué par mail très bientôt
+      </li> -->
       <li>
         - En espèces : à déposer au comptoir lors de votre prochain passage
       </li>
@@ -133,10 +135,10 @@
         </ul>
       </div>
     </div>
-    <div class="form-section">
+    <!-- <div class="form-section">
       <p class="form-section__title">Stages</p>
       <div class="form-section__content">
-        <!-- <p>Choisissez un stage</p> -->
+        <p>Choisissez un stage</p>
         <ul class="checkbox-list" formArrayName="workshops">
           <li
             *ngFor="let workshop of workshopsFormArray.controls; let i = index"
@@ -148,7 +150,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
     <div class="form-section">
       <p class="form-section__title">Tarifs</p>
       <div class="form-section__content form-section__content-price">
@@ -163,13 +165,13 @@
         <p>
           Etiez-vous inscrit à un atelier auprès de La Clé du Quai l’année
           dernière ?
+          {{ isPreviouslyEnrolled ? 'Oui' : 'Non' }}
           <mat-slide-toggle
             class="previous-course-toggle"
             formControlName="previouslyEnrolled"
             [checked]="isPreviouslyEnrolled"
             (change)="toggleShowDiscountText($event.checked)"
-            >{{ isPreviouslyEnrolled ? 'Oui' : 'Non' }}</mat-slide-toggle
-          >
+          ></mat-slide-toggle>
         </p>
         <div *ngIf="isPreviouslyEnrolled">
           <p class="color-primary italic">

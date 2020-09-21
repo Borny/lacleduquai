@@ -11,9 +11,10 @@ import { PreSubscription } from '../models/preSubscription.model';
 })
 export class SubscriptionService {
 
-  private readonly API_URL = `${environment.apiUrl}/subscription`;
-  private readonly CAFE_URL = `/cafe`;
-  private readonly PRE_SUBSCRIPTION_URL = `/pre-subscription`;
+  private readonly API_URL = `${environment.apiUrl}`;
+  private readonly CAFE_URL = `/subscription/cafe`;
+  private readonly PRE_SUBSCRIPTION_URL = `/subscription/pre-subscription`;
+  private readonly GET_MEMBERS_URL = `/subscription/members`;
 
   constructor(private http: HttpClient) { }
 
@@ -23,5 +24,9 @@ export class SubscriptionService {
 
   public postPreSubscriptionForm(formValue: PreSubscription): Observable<any> {
     return this.http.post<any>(`${this.API_URL}${this.PRE_SUBSCRIPTION_URL}`, formValue);
+  }
+
+  public getMembersData(): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}${this.GET_MEMBERS_URL}`);
   }
 }
