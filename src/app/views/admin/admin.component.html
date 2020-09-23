@@ -20,46 +20,62 @@
       <div>Moyen de paiement</div>
       <div>Réglement reçu</div>
       <div>Encaissement chèques</div>
+      <div></div>
     </li>
     <li
       class="data-table__item"
       [ngClass]="{ odd: odd, even: even }"
-      *ngFor="let data of membersData; let even = even; let odd = odd"
+      *ngFor="let member of membersData; let even = even; let odd = odd"
     >
-      <div>{{ data.lastName }}</div>
-      <div>{{ data.firstName }}</div>
-      <div>{{ data.phone }}</div>
-      <div>{{ data.email }}</div>
+      <div>{{ member.lastName }}</div>
+      <div>{{ member.firstName }}</div>
+      <div>{{ member.phone }}</div>
+      <div>{{ member.email }}</div>
       <div>
-        <span *ngFor="let course of data.courses; let last = last">
+        <span *ngFor="let course of member.courses; let last = last">
           {{ course }}{{ last ? '' : ' / ' }}
         </span>
       </div>
       <!-- <div>
-        <span *ngFor="let workshop of data.workshops; let last = last"
+        <span *ngFor="let workshop of member.workshops; let last = last"
           >{{ workshop }}{{ last ? '' : ' , ' }}
         </span>
       </div> -->
-      <div [ngClass]="data.previouslyEnrolled ? 'primary-color' : ''">
-        {{ data.previouslyEnrolled ? 'Oui' : 'Non' }}
+      <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
+        {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
       </div>
       <div>
-        {{ data.previousCourseInfo ? data.previousCourseInfo : '-' }}
+        {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
       </div>
-      <div>{{ data.paymentMethod }}</div>
+      <div>{{ member.paymentMethod }}</div>
+      <div>
+        <button
+          mat-flat-button
+          [color]="member.paymentReceived ? 'primary' : 'accent'"
+          (click)="onOpenPaymentReceived(member)"
+        >
+          {{ member.paymentReceived ? 'Oui' : 'Non' }}
+        </button>
+      </div>
+      <div>
+        <ng-template *ngIf="member.paymentMethod === paymentMethods[1]">
+          <mat-checkbox
+            *ngFor="let check of member.checks"
+            disabled
+          ></mat-checkbox>
+        </ng-template>
+      </div>
       <div class="lastchild">
-        <mat-checkbox></mat-checkbox>
-      </div>
-      <div>
-        <mat-checkbox
-          *ngIf="data.paymentMethod === paymentMethods[1]"
-        ></mat-checkbox>
-        <mat-checkbox
-          *ngIf="data.paymentMethod === paymentMethods[1]"
-        ></mat-checkbox>
-        <mat-checkbox
-          *ngIf="data.paymentMethod === paymentMethods[1]"
-        ></mat-checkbox>
+        <button
+          mat-raised-button
+          mat-mini-fab
+          class="submit-btn"
+          type="button"
+          color="primary"
+          (click)="onOpenMemberManager(member)"
+        >
+          <mat-icon>create</mat-icon>
+        </button>
       </div>
     </li>
   </ul>

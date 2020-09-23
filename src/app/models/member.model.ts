@@ -1,4 +1,10 @@
+interface Check {
+  amount: string;
+  checked: boolean;
+}
+
 export interface Member {
+  _id: string;
   lastName: string;
   firstName: string;
   phone: string;
@@ -8,4 +14,6 @@ export interface Member {
   previouslyEnrolled: boolean;
   previousCourseInfo?: string;
   paymentMethod: string;
+  checks?: Check[];
+  paymentReceived: boolean;
 }

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>
+  {{
+    !isPaymentReceived
+      ? 'Vous confirmez avoir reçu le paiement'
+      : "Attention, vous indiquez que vous n'avez pas reçu de paiement"
+  }}
+</h1>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCancel()">Annuler</button>
+  <button mat-button color="accent" [mat-dialog-close]="!isPaymentReceived">
+    Confirmer
+  </button>
+</div>
