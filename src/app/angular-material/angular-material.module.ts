@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [
@@ -33,9 +34,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
   ]
 })
 export class MaterialModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { SubscriptionService } from '../../services/subscription.service';
 import { Member } from '../../models/member.model';
@@ -26,6 +27,10 @@ export class AdminView implements OnInit {
   public readonly ADULT_EXCEL_URL = `${environment.apiUrl}/subscription/adult/excel`;
   public readonly CONFIRM = `confirm`;
   public readonly CANCEL = `cancel`;
+  public readonly PAYMENT_UPDATED_SUCCESS = `Paiement mis à jour`;
+  public readonly DEPOSIT_MADE_UPDATED_SUCCESS = `Encaissement des chèques mis à jour`;
+  public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
+
 
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
@@ -35,6 +40,7 @@ export class AdminView implements OnInit {
 
   constructor(
     private subscriptionService: SubscriptionService,
+    private _snackBar: MatSnackBar,
     public dialog: MatDialog,
   ) { }
 
@@ -55,10 +61,15 @@ export class AdminView implements OnInit {
           this.subscriptionService.updateMember(member)
             .subscribe(
               result => {
-                console.log(result);
+                // show snack bar
+                this._snackBar.open(this.PAYMENT_UPDATED_SUCCESS, null, {
+                  duration: 3000,
+                });
               },
               err => {
-                console.log(err)
+                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
+                  duration: 3000,
+                });
               });
         }
       });
@@ -78,10 +89,15 @@ export class AdminView implements OnInit {
           this.subscriptionService.updateMember(result.member)
             .subscribe(
               result => {
-
+                // show snack bar
+                this._snackBar.open(this.DEPOSIT_MADE_UPDATED_SUCCESS, null, {
+                  duration: 3000,
+                });
               },
               err => {
-                console.log(err)
+                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
+                  duration: 3000,
+                });
               });
         }
       });
