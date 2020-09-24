@@ -71,6 +71,13 @@ h1 {
     &.warning-color {
       background-color: #ff8800;
     }
+
+    &.data-table__item-course {
+      display: initial;
+      align-items: initial;
+      justify-content: initial;
+      text-align: center;
+    }
   }
 
   // Removing the border-bottom on the last cell of the table

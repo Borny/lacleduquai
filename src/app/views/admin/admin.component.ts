@@ -1,7 +1,4 @@
-import { Component, Injector, OnDestroy, OnInit, Type } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { SubscriptionService } from '../../services/subscription.service';
@@ -11,8 +8,6 @@ import { PaymentMethods } from '../../models/paymentMethods.enum';
 
 import { MemberManagerDialog } from './member-manager/member-manager.component';
 import { PaymentReceivedDialog } from './payment-received-dialog/payment-received-dialog.component';
-
-// import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'admin',
@@ -29,6 +24,8 @@ export class AdminView implements OnInit {
   public readonly HEADER_TITLE = 'Admin';
   public readonly LOADING_TEXT = 'Chargement des données...';
   public readonly ADULT_EXCEL_URL = `${environment.apiUrl}/subscription/adult/excel`;
+  public readonly CONFIRM = `confirm`;
+  public readonly CANCEL = `cancel`;
 
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
@@ -38,47 +35,59 @@ export class AdminView implements OnInit {
 
   constructor(
     private subscriptionService: SubscriptionService,
-    private injector: Injector,
-    public dialog: MatDialog
-    // private router: Router
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.getMembersInfo();
-  }
-
-  private isReceived(param: string): boolean {
-    if (param === 'received') {
-      return true
-    } else if (param === 'notReceived' || param === undefined) {
-      return false
-    }
+    this._getMembersInfo();
   }
 
   public onOpenPaymentReceived(member: Member): void {
     const dialogRef = this.dialog.open(PaymentReceivedDialog, {
       minWidth: '300px',
-      data: member.paymentReceived
+      data: member
     });
     dialogRef.beforeClosed()
       .subscribe(result => {
-        member.paymentReceived = result;
+        member.paymentReceived = result.isPaymentReceived;
+        member.checks = result.member.checks;
+        if (result.action === this.CONFIRM) {
+          this.subscriptionService.updateMember(member)
+            .subscribe(
+              result => {
+                console.log(result);
+              },
+              err => {
+                console.log(err)
+              });
+        }
       });
   }
 
-  public onOpenMemberManager(memberData): void {
+  public onOpenMemberManager(memb: Member, index: number): void {
+    const id = memb._id;
     const dialogRef = this.dialog.open(MemberManagerDialog, {
-      minWidth: '300px',
-      data: memberData
+      minWidth: '500px',
+      data: id
     });
     dialogRef.afterClosed()
       .subscribe(result => {
-        console.log('The dialog was closed');
-        console.log('close dialog result :', result);
+        if (result.action === this.CONFIRM) {
+          console.log('confirm')
+          this.membersData[index] = result.member;
+          this.subscriptionService.updateMember(result.member)
+            .subscribe(
+              result => {
+
+              },
+              err => {
+                console.log(err)
+              });
+        }
       });
   }
 
-  public getMembersInfo(): void {
+  private _getMembersInfo(): void {
     this.isLoading = true;
     console.log('fetching data...')
     this.subscriptionService.getMembersData()
@@ -94,10 +103,6 @@ export class AdminView implements OnInit {
           this.memberError = true;
         }
       );
-  }
-
-  public onEdit(memberData): void {
-    console.log(memberData)
   }
 
 }

@@ -1,6 +1,7 @@
-interface Check {
+export interface Check {
   amount: string;
-  checked: boolean;
+  depositMade: boolean;
+  depositDate?: Date;
 }
 
 export interface Member {

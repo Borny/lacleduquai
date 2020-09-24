@@ -144,7 +144,7 @@ export class PreSubscriptionView implements OnInit {
     formData.courses = selectedCourseNames;
     formData.workshops = selectedWorkshopDates;
 
-    this.subscriptionService.postPreSubscriptionForm(formData)
+    this.subscriptionService.createMember(formData)
       .subscribe(
         response => {
           this.isLoading = false;

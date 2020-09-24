@@ -1,0 +1,42 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+.spinner {
+  margin: auto;
+}
+
+.check-tab {
+  border: 1px solid $color-primary-light;
+
+  &__title {
+    padding: 1rem;
+    color: $white;
+    font-weight: $fontWeightBold;
+    background: $color-primary;
+  }
+}
+
+.check-row {
+  padding: 1rem;
+  &.odd {
+    background: $color-primary-light;
+  }
+
+  &.even {
+    background: $white;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__amount {
+  }
+
+  &__deposited {
+    mat-label {
+      margin: 0 1rem 0 0;
+    }
+  }
+}
