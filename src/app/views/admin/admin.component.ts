@@ -28,9 +28,8 @@ export class AdminView implements OnInit {
   public readonly CONFIRM = `confirm`;
   public readonly CANCEL = `cancel`;
   public readonly PAYMENT_UPDATED_SUCCESS = `Paiement mis à jour`;
-  public readonly DEPOSIT_MADE_UPDATED_SUCCESS = `Encaissement des chèques mis à jour`;
+  public readonly DEPOSIT_MADE_UPDATED_SUCCESS = `Infos adhérent mises à jour`;
   public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
-
 
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
@@ -84,7 +83,6 @@ export class AdminView implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (result.action === this.CONFIRM) {
-          console.log('confirm')
           this.membersData[index] = result.member;
           this.subscriptionService.updateMember(result.member)
             .subscribe(
