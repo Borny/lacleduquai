@@ -9,6 +9,7 @@ import { PaymentMethods } from '../../models/paymentMethods.enum';
 
 import { MemberManagerDialog } from './member-manager/member-manager.component';
 import { PaymentReceivedDialog } from './payment-received-dialog/payment-received-dialog.component';
+import { Course } from '../../models/courses.model';
 
 @Component({
   selector: 'admin',
@@ -17,10 +18,13 @@ import { PaymentReceivedDialog } from './payment-received-dialog/payment-receive
 })
 
 export class AdminView implements OnInit {
-
-  public membersData: Member[] = [];
+  public originalMembersData: Member[] = [];
+  public currentMembersData: Member[] = [];
+  public previousMembersData: Member[] = [];
   public isLoading = false;
   public memberError = false;
+
+  public matSelect: any;
 
   public readonly HEADER_TITLE = 'Admin';
   public readonly LOADING_TEXT = 'Chargement des données...';
@@ -35,6 +39,68 @@ export class AdminView implements OnInit {
     PaymentMethods.FIRST,
     PaymentMethods.SECOND,
     PaymentMethods.THIRD
+  ];
+
+  public paymentFilterOptions: string[] = [
+    'Paiement dû',
+    'Paiement effectué',
+  ];
+
+  public randomOptions: string[] = [
+    'option 1 ',
+    'option 2',
+  ];
+
+  public courseFilterOptionss: Course[] = [
+    {
+      id: '1',
+      detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
+      name: 'lundi 18h30'
+    },
+    {
+      id: '2',
+      detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
+      name: 'lundi 20h30'
+    },
+    {
+      id: '3',
+      detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
+      name: 'mardi 18h30'
+    },
+    {
+      id: '4',
+      detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
+      name: 'mardi 20h30'
+    },
+    {
+      id: '5',
+      detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
+      name: 'mercredi 18h30'
+    },
+    {
+      id: '6',
+      detail: 'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
+      name: 'mercredi 20h30'
+    },
+    {
+      id: '7',
+      detail: 'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
+      name: 'jeudi 18h30'
+    },
+    {
+      id: '8',
+      detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
+      name: 'jeudi 20h30'
+    },
+  ];
+
+  public courseFilterOptions: string[] = [
+    'lundi 18h30', 'lundi 20h30', 'mardi 18h30', 'mardi 20h30', 'mercredi 18h30', 'mercredi 20h30', 'jeudi 18h30', 'jeudi 20h30'
+  ];
+
+  public alphaOrderFilterOptions: string[] = [
+    'A - Z',
+    'Z - A'
   ];
 
   constructor(
@@ -83,7 +149,7 @@ export class AdminView implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (result.action === this.CONFIRM) {
-          this.membersData[index] = result.member;
+          this.currentMembersData[index] = result.member;
           this.subscriptionService.updateMember(result.member)
             .subscribe(
               result => {
@@ -101,22 +167,95 @@ export class AdminView implements OnInit {
       });
   }
 
+  public onSelectedOption(value: string, filter?: string): void {
+    this.matSelect = value;
+    switch (filter) {
+      case 'paymentMethod':
+        this.filterPayment(value);
+        break;
+      case 'courses':
+        this.filterCourses(value);
+        break;
+      case 'alphaOrder':
+        this.filterAlphaOrder(value);
+        break;
+      default:
+        this.currentMembersData = this.originalMembersData;
+        break;
+    }
+  }
+
+
+  public onResetFilters(): void {
+    this.currentMembersData = this.originalMembersData;
+    this.matSelect = null;
+  }
+
+  // PRIVATE
   private _getMembersInfo(): void {
     this.isLoading = true;
     console.log('fetching data...')
     this.subscriptionService.getMembersData()
       .subscribe(
         response => {
-          console.log('Members data :', response);
           this.isLoading = false;
-          this.membersData = response.data;
+          this.originalMembersData = response.data;
+          this.currentMembersData = [...this.originalMembersData];
         },
         err => {
-          console.log('get adult data error :', err);
           this.isLoading = false;
           this.memberError = true;
         }
       );
+  }
+
+  private filterPayment(selectValue: string): void {
+    if (selectValue === this.paymentFilterOptions[0]) {
+      this.currentMembersData = this.originalMembersData.filter(member => member.paymentReceived === false)
+    } else if (selectValue === this.paymentFilterOptions[1]) {
+      this.currentMembersData = this.originalMembersData.filter(member => member.paymentReceived === true)
+    } else {
+      this.currentMembersData = this.originalMembersData;
+    }
+  }
+
+  private filterCourses(selectValue: string): Member[] | void {
+    if (selectValue === undefined) {
+      return this.currentMembersData = this.originalMembersData;
+    }
+    this.currentMembersData = this.originalMembersData.filter(member => member.courses.includes(selectValue));
+  }
+
+  private filterAlphaOrder(selectValue: string): void {
+    if (selectValue === this.alphaOrderFilterOptions[0]) {
+      this.currentMembersData = this.currentMembersData.sort(function (a, b) {
+        const nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.lastName.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    } else if (selectValue === this.alphaOrderFilterOptions[1]) {
+      this.currentMembersData = this.currentMembersData.sort((a, b) => {
+        const nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.lastName.toUpperCase(); // ignore upper and lowercase
+        if (nameA > nameB) {
+          return -1;
+        }
+        if (nameA < nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    } else {
+      this.currentMembersData = this.originalMembersData;
+    }
   }
 
 }

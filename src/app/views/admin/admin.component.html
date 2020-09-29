@@ -5,8 +5,34 @@
 <p *ngIf="memberError">
   Impossible de récupérer les données, veuillez réessayer
 </p>
-<section class="adult-section" *ngIf="!isLoading">
+
+<section class="main-section" *ngIf="!isLoading">
   <h2>Pré-inscriptions 2020/2021</h2>
+  <div class="filter__container">
+    <button mat-flat-button color="accent" (click)="onResetFilters()">
+      Reset
+    </button>
+    <filter-molecule
+      [selectLabel]="'Paiement'"
+      [filterOptions]="paymentFilterOptions"
+      [select]="matSelect"
+      (selectedFilterOption)="onSelectedOption($event, 'paymentMethod')"
+    ></filter-molecule>
+    <filter-molecule
+      [selectLabel]="'Cours'"
+      [filterOptions]="courseFilterOptions"
+      [select]="matSelect"
+      (selectedFilterOption)="onSelectedOption($event, 'courses')"
+    >
+    </filter-molecule>
+    <filter-molecule
+      [selectLabel]="'Ordre alphabétique'"
+      [filterOptions]="alphaOrderFilterOptions"
+      [select]="matSelect"
+      (selectedFilterOption)="onSelectedOption($event, 'alphaOrder')"
+    >
+    </filter-molecule>
+  </div>
   <ul class="data-table__container">
     <li class="data-table__item data-table__item__header">
       <div>Nom</div>
@@ -15,18 +41,24 @@
       <div>Email</div>
       <div>Cours</div>
       <!-- <div>Stages</div> -->
-      <div>Inscrit 2019/2020</div>
-      <div>Cours 2019/2020</div>
       <div>Moyen de paiement</div>
       <div>Réglement reçu</div>
       <div>Encaissement chèques</div>
+      <div>Inscrit 2019/2020</div>
+      <div>Cours 2019/2020</div>
       <div></div>
+    </li>
+    <li
+      class="data-table__item data-table__item-no-result"
+      *ngIf="!currentMembersData.length"
+    >
+      No results...
     </li>
     <li
       class="data-table__item"
       [ngClass]="{ odd: odd, even: even }"
       *ngFor="
-        let member of membersData;
+        let member of currentMembersData;
         let even = even;
         let odd = odd;
         let i = index
@@ -47,12 +79,6 @@
           >{{ workshop }}{{ last ? '' : ' , ' }}
         </span>
       </div> -->
-      <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
-        {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
-      </div>
-      <div>
-        {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
-      </div>
       <div>{{ member.paymentMethod }}</div>
       <div>
         <button
@@ -77,6 +103,12 @@
           ></mat-checkbox>
         </div>
         <ng-template #noContentBlock><div>-</div></ng-template>
+      </div>
+      <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
+        {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
+      </div>
+      <div>
+        {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
       </div>
       <div class="lastchild">
         <button
