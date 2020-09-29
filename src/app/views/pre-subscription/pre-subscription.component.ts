@@ -41,7 +41,7 @@ export class PreSubscriptionView implements OnInit {
     },
     {
       id: '3',
-      detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
+      detail: 'Mardi 18h30-20h30 : Danse contemporaine et improvisation avec Côme Tanguy',
       name: 'mardi 18h30'
     },
     {
