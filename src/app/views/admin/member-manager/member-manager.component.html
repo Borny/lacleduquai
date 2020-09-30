@@ -77,7 +77,7 @@
           >Veuillez renseigner un email</mat-error
         >
       </mat-form-field>
-      <div>
+      <div class="courses-container">
         <p>Cours:</p>
         <ul>
           <li *ngFor="let course of member.courses">- {{ course }}</li>
@@ -102,7 +102,10 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div *ngIf="checkList.length" class="check-tab">
+      <div
+        *ngIf="checkList.length && member.paymentMethod === paymentMethods[1]"
+        class="check-tab"
+      >
         <div>
           <p class="check-tab__title">Chèques ({{ checkList.length }}):</p>
           <div
@@ -150,7 +153,7 @@
     <button mat-button color="warn" (click)="onCancel()">Annuler</button>
     <button
       mat-button
-      [disabled]="memberEditionForm.invalid"
+      [disabled]="memberEditionForm.invalid || memberEditionForm.pristine"
       color="accent"
       [mat-dialog-close]="{ member: member, action: CONFIRM }"
       (click)="onSubmit()"

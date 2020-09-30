@@ -1,0 +1,124 @@
+<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+<p class="text-center" *ngIf="isLoading">{{ LOADING_TEXT }}</p>
+
+<p *ngIf="memberError">
+  Impossible de récupérer les données, veuillez réessayer
+</p>
+
+<div *ngIf="!isLoading">
+  <h2>Inscriptions 2020/2021</h2>
+  <div class="filter__container">
+    <button mat-flat-button color="accent" (click)="onResetFilters()">
+      Réinitialiser
+    </button>
+    <filter-molecule
+      [selectLabel]="'Paiement'"
+      [filterOptions]="paymentFilterOptions"
+      [select]="matSelect"
+      (selectedFilterOption)="onSelectedOption($event, 'paymentMethod')"
+    ></filter-molecule>
+    <filter-molecule
+      [selectLabel]="'Cours'"
+      [filterOptions]="courseFilterOptions"
+      [select]="matSelect"
+      (selectedFilterOption)="onSelectedOption($event, 'courses')"
+    >
+    </filter-molecule>
+    <filter-molecule
+      [selectLabel]="'Ordre alphabétique'"
+      [filterOptions]="alphaOrderFilterOptions"
+      [select]="matSelect"
+      (selectedFilterOption)="onSelectedOption($event, 'alphaOrder')"
+    >
+    </filter-molecule>
+  </div>
+  <ul class="data-table__container">
+    <li class="data-table__item data-table__item__header">
+      <div>Nom</div>
+      <div>Prénom</div>
+      <div>Téléphone</div>
+      <div>Email</div>
+      <div>Cours</div>
+      <!-- <div>Stages</div> -->
+      <div>Moyen de paiement</div>
+      <div>Réglement reçu</div>
+      <div>Encaissement chèques</div>
+      <div>Inscrit 2019/2020</div>
+      <div>Cours 2019/2020</div>
+      <div></div>
+    </li>
+    <li
+      class="data-table__item data-table__item-no-result"
+      *ngIf="!currentMembersData.length"
+    >
+      No results...
+    </li>
+    <li
+      class="data-table__item"
+      [ngClass]="{ odd: odd, even: even }"
+      *ngFor="
+        let member of currentMembersData;
+        let even = even;
+        let odd = odd;
+        let i = index
+      "
+    >
+      <div>{{ member.lastName }}</div>
+      <div>{{ member.firstName }}</div>
+      <div>{{ member.phone }}</div>
+      <div>{{ member.email }}</div>
+      <div class="data-table__item-course">
+        <span *ngFor="let course of member.courses; let last = last">
+          {{ course }}
+          {{ last ? '' : ' / ' }}
+        </span>
+      </div>
+      <!-- <div>
+  <span *ngFor="let workshop of member.workshops; let last = last"
+    >{{ workshop }}{{ last ? '' : ' , ' }}
+  </span>
+</div> -->
+      <div>{{ member.paymentMethod }}</div>
+      <div>
+        <button
+          mat-flat-button
+          [color]="member.paymentReceived ? 'primary' : 'accent'"
+          (click)="onOpenPaymentReceived(member)"
+        >
+          {{ member.paymentReceived ? 'Oui' : 'Non' }}
+        </button>
+      </div>
+      <div>
+        <div
+          *ngIf="
+            member.paymentMethod === paymentMethods[1];
+            else noContentBlock
+          "
+        >
+          <mat-checkbox
+            *ngFor="let check of member.checks"
+            [checked]="check.depositMade"
+            disabled
+          ></mat-checkbox>
+        </div>
+        <ng-template #noContentBlock><div>-</div></ng-template>
+      </div>
+      <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
+        {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
+      </div>
+      <div>
+        {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
+      </div>
+      <div class="lastchild">
+        <button
+          mat-flat-button
+          type="button"
+          color="primary"
+          (click)="onOpenMemberManager(member, i)"
+        >
+          <mat-icon>create</mat-icon>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

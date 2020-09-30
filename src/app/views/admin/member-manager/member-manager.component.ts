@@ -1,4 +1,4 @@
-import { Inject, NgModule, OnInit, ViewChild } from '@angular/core';
+import { Inject, NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
@@ -90,7 +90,6 @@ export class MemberManagerDialog implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.memberEditionForm.get('courses').value)
     if (this.checkForm.value.length) {
       this.checkForm.value.forEach((value: Check, index: number) => {
         this.member.checks[index].depositMade = value.depositMade;
@@ -152,7 +151,7 @@ export class MemberManagerDialog implements OnInit {
           this.memberEditionForm.addControl('lastName', new FormControl(this.member.lastName, Validators.required));
           this.memberEditionForm.addControl('email', new FormControl(this.member.email, Validators.required));
           this.memberEditionForm.addControl('phone', new FormControl(this.member.phone, Validators.required));
-          this.memberEditionForm.addControl('courses', new FormControl([this.member.courses]));
+          this.memberEditionForm.addControl('courses', new FormControl(this.member.courses));
           this.memberEditionForm.addControl('paymentMethod', new FormControl(this.member.paymentMethod, Validators.required));
           this.memberEditionForm.addControl('checks', this.checkForm);
         },
