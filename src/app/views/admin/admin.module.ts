@@ -5,7 +5,7 @@ import { MaterialModule } from '../../angular-material/angular-material.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminView } from './admin.component';
 import { SharedModule } from '../../shared/shared.module';
-import { FilterModule } from '../../molecules/filter/filter.module';
+import { SubscriptionsModule } from '../../organisms/subscriptions/subscriptions.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { FilterModule } from '../../molecules/filter/filter.module';
     AdminRoutingModule,
     MaterialModule,
     SharedModule,
-    FilterModule
+    SubscriptionsModule
   ]
 })
 export class AdminViewModule { }
