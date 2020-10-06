@@ -1,0 +1,84 @@
+<h1 mat-dialog-title>
+  {{ !isPaymentReceived ? payment_received_title : payment_not_received_title }}
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="memberPaymentForm" (ngSubmit)="onSubmit()">
+    <ng-container
+      *ngIf="
+        member.paymentMethod === paymentMethods.SECOND && !isPaymentReceived
+      "
+    >
+      <div class="check-form">
+        <mat-form-field
+          *ngFor="let check of checkArray.controls; let i = index"
+        >
+          <mat-label>Chèque {{ i + 1 }}</mat-label>
+          <input
+            matInput
+            type="text"
+            name="i"
+            [formControl]="checkArray.controls[i]"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="btn-container">
+        <button
+          *ngIf="checkArray.controls.length > 1"
+          mat-flat-button
+          class="btn"
+          color="accent"
+          (click)="onRemoveLastCheck(checkArray.controls.length - 1)"
+        >
+          Supprimer le dernier chèque
+        </button>
+        <button
+          class="btn"
+          mat-flat-button
+          color="primary"
+          (click)="onAddCheck()"
+        >
+          Ajouter un chèque
+        </button>
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="
+        member.paymentMethod !== paymentMethods.SECOND && !isPaymentReceived
+      "
+    >
+      <div class="payment-form">
+        <mat-form-field>
+          <mat-label>Montant</mat-label>
+          <input
+            matInput
+            type="text"
+            name="amount"
+            formControlName="amount"
+            required
+          /> </mat-form-field
+        >€
+      </div>
+    </ng-container>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCancel()">Annuler</button>
+  <button
+    mat-button
+    color="accent"
+    [mat-dialog-close]="{
+      isPaymentReceived: !isPaymentReceived,
+      member: member,
+      action: CONFIRM
+    }"
+    (click)="onSubmit()"
+    [disabled]="
+      member.paymentMethod === paymentMethods.SECOND && !isPaymentReceived
+        ? checkArray.invalid
+        : false
+    "
+  >
+    Confirmer
+  </button>
+</div>

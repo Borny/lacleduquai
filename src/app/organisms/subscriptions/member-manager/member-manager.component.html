@@ -4,7 +4,9 @@
   <button mat-button color="warn" (click)="onClose()">Fermer</button>
 </div>
 <div *ngIf="showDialog">
-  <h1 mat-dialog-title>{{ member.firstName }} {{ member.lastName }}</h1>
+  <h2 class="color-primary" mat-dialog-title>
+    {{ member.firstName }} {{ member.lastName }}
+  </h2>
   <div mat-dialog-content>
     <form
       class="member-edition-form"
@@ -102,8 +104,19 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field *ngIf="member.paymentAmount">
+        <mat-label>Montant du réglement</mat-label>
+        <input
+          matInput
+          type="text"
+          name="paymentAmount"
+          formControlName="paymentAmount"
+        />
+      </mat-form-field>
       <div
-        *ngIf="checkList.length && member.paymentMethod === paymentMethods[1]"
+        *ngIf="
+          checkList.length && member.paymentMethod === paymentMethods.SECOND
+        "
         class="check-tab"
       >
         <div>
@@ -147,6 +160,15 @@
           </div>
         </div>
       </div>
+      <mat-form-field>
+        <mat-label>Extra info</mat-label>
+        <textarea
+          matInput
+          placeholder="Extra info"
+          name="extraInfo"
+          formControlName="extraInfo"
+        ></textarea>
+      </mat-form-field>
     </form>
   </div>
   <div mat-dialog-actions align="end">
