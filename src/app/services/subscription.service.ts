@@ -27,9 +27,6 @@ export class SubscriptionService {
     return this.http.post<any>(`${this.API_URL}${this.PRE_SUBSCRIPTION_URL}`, formValue);
   }
 
-  public updateMember(memberInfo: Member): Observable<any> {
-    return this.http.put<any>(`${this.API_URL}${this.PRE_SUBSCRIPTION_URL}/${memberInfo._id}`, memberInfo);
-  }
 
   public getMembersData(): Observable<{ message: string, data: Member[] }> {
     return this.http.get<{ message: string, data: Member[] }>(`${this.API_URL}${this.GET_MEMBERS_URL}`);
@@ -37,5 +34,13 @@ export class SubscriptionService {
 
   public getMemberData(memberId: string): Observable<{ member: Member }> {
     return this.http.get<{ member: Member }>(`${this.API_URL}${this.GET_MEMBERS_URL}/${memberId}`);
+  }
+
+  public updateMember(memberInfo: Member): Observable<any> {
+    return this.http.put<any>(`${this.API_URL}${this.PRE_SUBSCRIPTION_URL}/${memberInfo._id}`, memberInfo);
+  }
+
+  public deleteMember(member: Member): Observable<any> {
+    return this.http.delete<any>(`${this.API_URL}${this.GET_MEMBERS_URL}/${member._id}`);
   }
 }
