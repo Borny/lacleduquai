@@ -1,7 +1,7 @@
 import { Inject, NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, NgForm, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
@@ -17,14 +17,11 @@ export class PaymentReceivedDialog implements OnInit {
 
   public isPaymentReceived: boolean;
   public member: Member;
+  public memberPaymentForm: FormGroup = new FormGroup({});
   public checkArray: FormArray = new FormArray([], Validators.required);
   public checks: Check[] = [];
 
-  public paymentMethods: PaymentMethods[] = [
-    PaymentMethods.FIRST,
-    PaymentMethods.SECOND,
-    PaymentMethods.THIRD
-  ];
+  public paymentMethods = PaymentMethods;
 
   public payment_received_title = `Vous confirmez avoir reçu le paiement : `
   public payment_not_received_title = `Attention, vous indiquez que vous n'avez pas reçu de paiement : `
@@ -43,14 +40,27 @@ export class PaymentReceivedDialog implements OnInit {
     this.payment_received_title += this.member.paymentMethod;
     this.payment_not_received_title += this.member.paymentMethod;
     this.dialogRef.disableClose = true;
+
+    this.member.paymentMethod === this.paymentMethods.SECOND
+      ? this.memberPaymentForm.addControl('checks', this.checkArray)
+      : this.memberPaymentForm.addControl('amount', new FormControl('', Validators.required));
   }
 
   public onSubmit(): void {
-    this.member.checks = [];
-    this.checkArray.value.forEach((value: string) => this.member.checks.push({
-      amount: value,
-      depositMade: false
-    }));
+    if (this.member.paymentMethod === this.paymentMethods.SECOND) {
+      this.member.checks = [];
+      let checkSum: number = 0;
+      this.checkArray.value.forEach((value: string) => {
+        this.member.checks.push({
+          amount: value,
+          depositMade: false
+        })
+        checkSum += +value;
+      });
+      this.member.paymentAmount = checkSum.toString();
+    } else {
+      this.member.paymentAmount = this.memberPaymentForm.get('amount').value;
+    }
   }
 
   public onCancel(): void {

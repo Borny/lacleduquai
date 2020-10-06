@@ -2,9 +2,9 @@ import { Inject, NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Check, Member } from '../../../models/member.model';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { PaymentMethods } from '../../../models/paymentMethods.enum';
@@ -102,6 +102,8 @@ export class MemberManagerDialog implements OnInit {
     this.member.email = this.memberEditionForm.get('email').value;
     this.member.courses = this.memberEditionForm.get('courses').value;
     this.member.paymentMethod = this.memberEditionForm.get('paymentMethod').value;
+    this.member.paymentAmount = this.memberEditionForm.get('paymentAmount').value;
+    this.member.extraInfo = this.memberEditionForm.get('extraInfo').value;
   }
 
   public onCancel(): void {
@@ -149,11 +151,15 @@ export class MemberManagerDialog implements OnInit {
 
           this.memberEditionForm.addControl('firstName', new FormControl(this.member.firstName, Validators.required));
           this.memberEditionForm.addControl('lastName', new FormControl(this.member.lastName, Validators.required));
-          this.memberEditionForm.addControl('email', new FormControl(this.member.email, Validators.required));
+          this.memberEditionForm.addControl('email', new FormControl(this.member.email, [Validators.required, Validators.email]));
           this.memberEditionForm.addControl('phone', new FormControl(this.member.phone, Validators.required));
           this.memberEditionForm.addControl('courses', new FormControl(this.member.courses));
           this.memberEditionForm.addControl('paymentMethod', new FormControl(this.member.paymentMethod, Validators.required));
           this.memberEditionForm.addControl('checks', this.checkForm);
+          this.memberEditionForm.addControl('paymentAmount', new FormControl(this.member.paymentAmount));
+          this.memberEditionForm.addControl('extraInfo', new FormControl(this.member.extraInfo));
+
+          // console.log(this.member);
         },
         err => {
           this.isLoading = false;
