@@ -18,17 +18,20 @@ import { PaymentReceivedDialog } from './payment-received-dialog/payment-receive
 export class SubscriptionsOrganism {
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
-  public previousMembersData: Member[] = [];
+  // public previousMembersData: Member[] = []; // Keep this one to work on the filters
   public isLoading = false;
   public memberError = false;
 
   public matSelect: any;
 
   public readonly CONFIRM = `confirm`;
+  public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = `cancel`;
   public readonly PAYMENT_UPDATED_SUCCESS = `Paiement mis à jour`;
-  public readonly DEPOSIT_MADE_UPDATED_SUCCESS = `Infos adhérent mises à jour`;
+  public readonly MEMBER_UPDATED_SUCCESS = `Infos adhérent mises à jour`;
   public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
+  public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimer`;
+  public readonly MEMBER_DELETED_FAIL = `Erreur suppression adhérent`;
   public readonly LOADING_TEXT = 'Chargement des données...';
 
   public paymentMethods: PaymentMethods[] = [
@@ -145,18 +148,35 @@ export class SubscriptionsOrganism {
     });
     dialogRef.afterClosed()
       .subscribe(result => {
+        let updatedMember = result.member;
         if (result.action === this.CONFIRM) {
           this.currentMembersData[index] = result.member;
-          this.subscriptionService.updateMember(result.member)
+          this.subscriptionService.updateMember(updatedMember)
             .subscribe(
               result => {
                 // show snack bar
-                this._snackBar.open(this.DEPOSIT_MADE_UPDATED_SUCCESS, null, {
+                this._snackBar.open(this.MEMBER_UPDATED_SUCCESS, null, {
                   duration: 3000,
                 });
               },
               err => {
                 this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
+                  duration: 3000,
+                });
+              });
+        } else if (result.action === this.CONFIRM_DELETE) {
+          this.subscriptionService.deleteMember(result.member)
+            .subscribe(
+              result => {
+                this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
+                this.currentMembersData = this.originalMembersData;
+                // show snack bar
+                this._snackBar.open(this.MEMBER_DELETED_SUCCESS, null, {
+                  duration: 3000,
+                });
+              },
+              err => {
+                this._snackBar.open(this.MEMBER_DELETED_FAIL, null, {
                   duration: 3000,
                 });
               });
@@ -187,7 +207,9 @@ export class SubscriptionsOrganism {
     this.matSelect = null;
   }
 
+  ////////////
   // PRIVATE
+  ////////////
   private _getMembersInfo(): void {
     this.isLoading = true;
     // console.log('fetching data...')

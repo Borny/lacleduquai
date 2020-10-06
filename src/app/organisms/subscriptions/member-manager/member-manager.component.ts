@@ -2,13 +2,15 @@ import { Inject, NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 import { Check, Member } from '../../../models/member.model';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { PaymentMethods } from '../../../models/paymentMethods.enum';
 import { Course } from '../../../models/courses.model';
+import { DeleteMemberDialog } from '../delete-member-dialog/delete-member-dialog.component';
+
 
 @Component({
   selector: 'member-manager',
@@ -29,6 +31,7 @@ export class MemberManagerDialog implements OnInit {
   public paymentMethods = PaymentMethods;
 
   public readonly CONFIRM = 'confirm';
+  public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = 'cancel';
 
   public courseList: Course[] = [
@@ -77,7 +80,8 @@ export class MemberManagerDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MemberManagerDialog>,
     private subscriptionService: SubscriptionService,
-    @Inject(MAT_DIALOG_DATA) public data: string
+    @Inject(MAT_DIALOG_DATA) public data: string,
+    public dialog: MatDialog,
   ) {
     this.dialogRef.disableClose = true;
     this.memberId = data;
@@ -117,11 +121,22 @@ export class MemberManagerDialog implements OnInit {
     }
   }
 
-  public onClose(): void {
-    this.dialogRef.close();
+  public onOpenDeleteModal(): void {
+    const dialogRef = this.dialog.open(DeleteMemberDialog, {
+      minWidth: '500px',
+      data: this.member
+    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (result.action === this.CONFIRM_DELETE) {
+          this.dialogRef.close({ member: this.member, action: this.CONFIRM_DELETE });
+        }
+      });
   }
 
+  ////////////
   // PRIVATE
+  ////////////
   private _getMemberData(): void {
     this.subscriptionService.getMemberData(this.memberId)
       .subscribe(
