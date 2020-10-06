@@ -12,9 +12,11 @@ export interface Member {
   email: string;
   courses: string[];
   workshops: string[];
-  previouslyEnrolled: boolean;
-  previousCourseInfo?: string;
   paymentMethod: string;
   checks?: Check[];
   paymentReceived: boolean;
+  paymentAmount?: string;
+  previouslyEnrolled: boolean;
+  previousCourseInfo?: string;
+  extraInfo?: string;
 }
