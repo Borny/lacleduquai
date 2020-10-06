@@ -187,7 +187,9 @@ export class SubscriptionsOrganism {
     this.matSelect = null;
   }
 
+  ////////////
   // PRIVATE
+  ////////////
   private _getMembersInfo(): void {
     this.isLoading = true;
     // console.log('fetching data...')

@@ -43,6 +43,11 @@
       white-space: normal;
     }
 
+    &.first-column {
+      flex: initial;
+      width: 40px;
+    }
+
     &:not(:last-child) {
       border-right: 1px solid $grey-light;
     }

@@ -34,6 +34,7 @@
   </div>
   <ul class="data-table__container">
     <li class="data-table__item data-table__item__header">
+      <div class="first-column"></div>
       <div>Nom</div>
       <div>Prénom</div>
       <div>Téléphone</div>
@@ -65,6 +66,7 @@
         let i = index
       "
     >
+      <div class="first-column">{{ i + 1 }}</div>
       <div>{{ member.lastName }}</div>
       <div>{{ member.firstName }}</div>
       <div>{{ member.phone }}</div>
@@ -115,7 +117,7 @@
       <div>
         {{ member.extraInfo ? member.extraInfo : '-' }}
       </div>
-      <div class="lastchild">
+      <div>
         <button
           mat-flat-button
           type="button"
