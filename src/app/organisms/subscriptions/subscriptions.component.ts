@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
-=======
 import { Component } from '@angular/core';
->>>>>>> admin
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Course } from '../../models/courses.model';
@@ -10,13 +6,8 @@ import { Course } from '../../models/courses.model';
 import { Member } from '../../models/member.model';
 import { PaymentMethods } from '../../models/paymentMethods.enum';
 import { SubscriptionService } from '../../services/subscription.service';
-<<<<<<< HEAD
-import { MemberManagerDialog } from '../../views/admin/member-manager/member-manager.component';
-import { PaymentReceivedDialog } from '../../views/admin/payment-received-dialog/payment-received-dialog.component';
-=======
 import { MemberManagerDialog } from './member-manager/member-manager.component';
 import { PaymentReceivedDialog } from './payment-received-dialog/payment-received-dialog.component';
->>>>>>> admin
 
 @Component({
   selector: 'subscriptions-organism',
