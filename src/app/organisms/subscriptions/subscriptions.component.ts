@@ -18,11 +18,10 @@ import { PaymentReceivedDialog } from './payment-received-dialog/payment-receive
 export class SubscriptionsOrganism {
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
-  // public previousMembersData: Member[] = []; // Keep this one to work on the filters
   public isLoading = false;
   public memberError = false;
-
   public matSelect: any;
+  public emailList: string;
 
   public readonly CONFIRM = `confirm`;
   public readonly CONFIRM_DELETE = 'confirm-delete';
@@ -112,7 +111,6 @@ export class SubscriptionsOrganism {
     this._getMembersInfo();
   }
 
-
   public onOpenPaymentReceived(member: Member): void {
     const dialogRef = this.dialog.open(PaymentReceivedDialog, {
       minWidth: '300px',
@@ -200,11 +198,13 @@ export class SubscriptionsOrganism {
         this.currentMembersData = this.originalMembersData;
         break;
     }
+    this._generateEmailList();
   }
 
   public onResetFilters(): void {
     this.currentMembersData = this.originalMembersData;
     this.matSelect = null;
+    this._generateEmailList();
   }
 
   ////////////
@@ -219,6 +219,9 @@ export class SubscriptionsOrganism {
           this.isLoading = false;
           this.originalMembersData = response.data;
           this.currentMembersData = [...this.originalMembersData];
+
+          this._generateEmailList();
+
           // console.log(this.currentMembersData)
         },
         err => {
@@ -275,6 +278,11 @@ export class SubscriptionsOrganism {
     } else {
       this.currentMembersData = this.originalMembersData;
     }
+  }
+
+  private _generateEmailList(): void {
+    // The email list will depend on the members displayed in the main table
+    this.emailList = this.currentMembersData.map(member => member.email.toString()).toString();
   }
 
 }

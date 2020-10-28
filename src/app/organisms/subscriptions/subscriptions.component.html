@@ -32,6 +32,12 @@
     >
     </filter-molecule>
   </div>
+  <div class="clipboard__container">
+    <p>Copier les emails dans le press papier</p>
+    <button mat-stroked-button color="primary" [cdkCopyToClipboard]="emailList">
+      Copier
+    </button>
+  </div>
   <ul class="data-table__container">
     <li class="data-table__item data-table__item__header">
       <div class="first-column"></div>
@@ -40,16 +46,17 @@
       <div>Téléphone</div>
       <div>Email</div>
       <div>Cours</div>
-      <!-- <div>Stages</div> -->
       <div>Moyen de paiement</div>
       <div>Réglement reçu</div>
       <div>Montant du réglement</div>
       <div>Encaissement chèques</div>
+      <div>Remboursement</div>
       <div>Inscrit 2019/2020</div>
       <div>Cours 2019/2020</div>
       <div>Extra info</div>
       <div></div>
     </li>
+
     <li
       class="data-table__item data-table__item-no-result"
       *ngIf="!currentMembersData.length"
@@ -77,11 +84,6 @@
           {{ last ? '' : ' / ' }}
         </span>
       </div>
-      <!-- <div>
-  <span *ngFor="let workshop of member.workshops; let last = last"
-    >{{ workshop }}{{ last ? '' : ' , ' }}
-  </span>
-</div> -->
       <div>{{ member.paymentMethod }}</div>
       <div>
         <button
@@ -108,6 +110,7 @@
         </div>
         <ng-template #noContentBlock><div>-</div></ng-template>
       </div>
+      <div>-</div>
       <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
         {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
       </div>
