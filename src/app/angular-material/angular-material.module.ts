@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   exports: [
@@ -38,7 +39,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatNativeDateModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    ClipboardModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
