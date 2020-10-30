@@ -32,6 +32,7 @@ export class SubscriptionsOrganism {
   public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimer`;
   public readonly MEMBER_DELETED_FAIL = `Erreur suppression adhérent`;
   public readonly LOADING_TEXT = 'Chargement des données...';
+  public readonly EMAIL_LIST_COPIED = 'Emails copiés';
 
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
@@ -205,6 +206,12 @@ export class SubscriptionsOrganism {
     this.currentMembersData = this.originalMembersData;
     this.matSelect = null;
     this._generateEmailList();
+  }
+
+  public onCopyToClipBoard():void{
+    this._snackBar.open(this.EMAIL_LIST_COPIED, null, {
+      duration: 3000,
+    });
   }
 
   ////////////

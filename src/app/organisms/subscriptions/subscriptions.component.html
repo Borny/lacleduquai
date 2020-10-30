@@ -34,7 +34,12 @@
   </div>
   <div class="clipboard__container">
     <p>Copier les emails dans le press papier</p>
-    <button mat-stroked-button color="primary" [cdkCopyToClipboard]="emailList">
+    <button 
+    mat-stroked-button 
+    color="primary" 
+    [cdkCopyToClipboard]="emailList"
+    (click)="onCopyToClipBoard()"
+    >
       Copier
     </button>
   </div>
