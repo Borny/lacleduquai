@@ -203,9 +203,8 @@ export class SubscriptionsOrganism {
   }
 
   public onResetFilters(): void {
-    this.currentMembersData = this.originalMembersData;
+    this._getMembersInfo();
     this.matSelect = null;
-    this._generateEmailList();
   }
 
   public onCopyToClipBoard():void{
@@ -219,7 +218,6 @@ export class SubscriptionsOrganism {
   ////////////
   private _getMembersInfo(): void {
     this.isLoading = true;
-    // console.log('fetching data...')
     this.subscriptionService.getMembersData()
       .subscribe(
         response => {
@@ -228,8 +226,6 @@ export class SubscriptionsOrganism {
           this.currentMembersData = [...this.originalMembersData];
 
           this._generateEmailList();
-
-          // console.log(this.currentMembersData)
         },
         err => {
           this.isLoading = false;
@@ -288,8 +284,8 @@ export class SubscriptionsOrganism {
   }
 
   private _generateEmailList(): void {
-    // The email list will depend on the members displayed in the main table
-    this.emailList = this.currentMembersData.map(member => member.email.toString()).toString();
+    // The email list will reflect the members displayed in the main table
+    this.emailList = this.currentMembersData.map(member => member.email).toString();
   }
 
 }
