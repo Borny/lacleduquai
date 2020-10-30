@@ -40,67 +40,74 @@ export class SubscriptionsOrganism {
     PaymentMethods.THIRD
   ];
 
-  public paymentFilterOptions: string[] = [
-    'Paiement dû',
-    'Paiement effectué',
-  ];
+  public filterOptions = [
+    {
+      filterName: 'payment',
+      filterLabel: 'Paiement',
+      values: [
+        'Paiement dû',
+        'Paiement effectué'
+      ]
+    },
+    {
+      filterName: 'course',
+      filterLabel: 'Cours',
+      values: [
+        'lundi 18h30', 'lundi 20h30', 'mardi 18h30', 'mardi 20h30', 'mercredi 18h30', 'mercredi 20h30', 'jeudi 18h30', 'jeudi 20h30'
+      ],
+    },
+    {
+      filterName: 'alphabeticalOrder',
+      filterLabel: 'Ordre alphabétique',
+      values: [
+        'A - Z',
+        'Z - A'
+      ]
+    }
+  ]
 
-  public randomOptions: string[] = [
-    'option 1 ',
-    'option 2',
-  ];
-
-  public courseFilterOptionss: Course[] = [
-    {
-      id: '1',
-      detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
-      name: 'lundi 18h30'
-    },
-    {
-      id: '2',
-      detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
-      name: 'lundi 20h30'
-    },
-    {
-      id: '3',
-      detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
-      name: 'mardi 18h30'
-    },
-    {
-      id: '4',
-      detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
-      name: 'mardi 20h30'
-    },
-    {
-      id: '5',
-      detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
-      name: 'mercredi 18h30'
-    },
-    {
-      id: '6',
-      detail: 'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
-      name: 'mercredi 20h30'
-    },
-    {
-      id: '7',
-      detail: 'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
-      name: 'jeudi 18h30'
-    },
-    {
-      id: '8',
-      detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
-      name: 'jeudi 20h30'
-    },
-  ];
-
-  public courseFilterOptions: string[] = [
-    'lundi 18h30', 'lundi 20h30', 'mardi 18h30', 'mardi 20h30', 'mercredi 18h30', 'mercredi 20h30', 'jeudi 18h30', 'jeudi 20h30'
-  ];
-
-  public alphaOrderFilterOptions: string[] = [
-    'A - Z',
-    'Z - A'
-  ];
+  // public courseFilterOptionss: Course[] = [
+  //   {
+  //     id: '1',
+  //     detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
+  //     name: 'lundi 18h30'
+  //   },
+  //   {
+  //     id: '2',
+  //     detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
+  //     name: 'lundi 20h30'
+  //   },
+  //   {
+  //     id: '3',
+  //     detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
+  //     name: 'mardi 18h30'
+  //   },
+  //   {
+  //     id: '4',
+  //     detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
+  //     name: 'mardi 20h30'
+  //   },
+  //   {
+  //     id: '5',
+  //     detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
+  //     name: 'mercredi 18h30'
+  //   },
+  //   {
+  //     id: '6',
+  //     detail: 'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
+  //     name: 'mercredi 20h30'
+  //   },
+  //   {
+  //     id: '7',
+  //     detail: 'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
+  //     name: 'jeudi 18h30'
+  //   },
+  //   {
+  //     id: '8',
+  //     detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
+  //     name: 'jeudi 20h30'
+  //   },
+  // ];
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -183,16 +190,17 @@ export class SubscriptionsOrganism {
       });
   }
 
-  public onSelectedOption(value: string, filter?: string): void {
+  public onSelectedOption( filter: string, value?: string): void {
+
     this.matSelect = value;
     switch (filter) {
-      case 'paymentMethod':
+      case 'payment':
         this.filterPayment(value);
         break;
-      case 'courses':
+      case 'course':
         this.filterCourses(value);
         break;
-      case 'alphaOrder':
+      case 'alphabeticalOrder':
         this.filterAlphaOrder(value);
         break;
       default:
@@ -207,7 +215,7 @@ export class SubscriptionsOrganism {
     this.matSelect = null;
   }
 
-  public onCopyToClipBoard():void{
+  public onCopyToClipBoard(): void {
     this._snackBar.open(this.EMAIL_LIST_COPIED, null, {
       duration: 3000,
     });
@@ -235,9 +243,9 @@ export class SubscriptionsOrganism {
   }
 
   private filterPayment(selectValue: string): void {
-    if (selectValue === this.paymentFilterOptions[0]) {
+    if (selectValue === this.filterOptions[0].values[0]) {
       this.currentMembersData = this.originalMembersData.filter(member => member.paymentReceived === false)
-    } else if (selectValue === this.paymentFilterOptions[1]) {
+    } else if (selectValue === this.filterOptions[0].values[1]) {
       this.currentMembersData = this.originalMembersData.filter(member => member.paymentReceived === true)
     } else {
       this.currentMembersData = this.originalMembersData;
@@ -252,7 +260,7 @@ export class SubscriptionsOrganism {
   }
 
   private filterAlphaOrder(selectValue: string): void {
-    if (selectValue === this.alphaOrderFilterOptions[0]) {
+    if (selectValue === this.filterOptions[2].values[0]) {
       this.currentMembersData = this.currentMembersData.sort(function (a, b) {
         const nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.lastName.toUpperCase(); // ignore upper and lowercase
@@ -265,7 +273,7 @@ export class SubscriptionsOrganism {
         // names must be equal
         return 0;
       });
-    } else if (selectValue === this.alphaOrderFilterOptions[1]) {
+    } else if (selectValue === this.filterOptions[2].values[1]) {
       this.currentMembersData = this.currentMembersData.sort((a, b) => {
         const nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.lastName.toUpperCase(); // ignore upper and lowercase

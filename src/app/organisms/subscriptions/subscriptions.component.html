@@ -12,33 +12,21 @@
       Réinitialiser
     </button>
     <filter-molecule
-      [selectLabel]="'Paiement'"
-      [filterOptions]="paymentFilterOptions"
+      *ngFor="let filter of filterOptions"
+      [selectLabel]="filter.filterLabel"
+      [filterOptions]="filter.values"
       [select]="matSelect"
-      (selectedFilterOption)="onSelectedOption($event, 'paymentMethod')"
-    ></filter-molecule>
-    <filter-molecule
-      [selectLabel]="'Cours'"
-      [filterOptions]="courseFilterOptions"
-      [select]="matSelect"
-      (selectedFilterOption)="onSelectedOption($event, 'courses')"
-    >
-    </filter-molecule>
-    <filter-molecule
-      [selectLabel]="'Ordre alphabétique'"
-      [filterOptions]="alphaOrderFilterOptions"
-      [select]="matSelect"
-      (selectedFilterOption)="onSelectedOption($event, 'alphaOrder')"
+      (selectedFilterOption)="onSelectedOption( filter.filterName, $event)"
     >
     </filter-molecule>
   </div>
   <div class="clipboard__container">
     <p>Copier les emails dans le press papier</p>
-    <button 
-    mat-stroked-button 
-    color="primary" 
-    [cdkCopyToClipboard]="emailList"
-    (click)="onCopyToClipBoard()"
+    <button
+      mat-stroked-button
+      color="primary"
+      [cdkCopyToClipboard]="emailList"
+      (click)="onCopyToClipBoard()"
     >
       Copier
     </button>
@@ -86,7 +74,7 @@
       <div class="data-table__item-course">
         <span *ngFor="let course of member.courses; let last = last">
           {{ course }}
-          {{ last ? '' : ' / ' }}
+          {{ last ? "" : " / " }}
         </span>
       </div>
       <div>{{ member.paymentMethod }}</div>
@@ -96,10 +84,10 @@
           [color]="member.paymentReceived ? 'primary' : 'accent'"
           (click)="onOpenPaymentReceived(member)"
         >
-          {{ member.paymentReceived ? 'Oui' : 'Non' }}
+          {{ member.paymentReceived ? "Oui" : "Non" }}
         </button>
       </div>
-      <div>{{ member.paymentAmount ? member.paymentAmount : '-' }}</div>
+      <div>{{ member.paymentAmount ? member.paymentAmount : "-" }}</div>
       <div>
         <div
           *ngIf="
@@ -117,13 +105,13 @@
       </div>
       <div>-</div>
       <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
-        {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
+        {{ member.previouslyEnrolled ? "Oui" : "Non" }}
       </div>
       <div>
-        {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
+        {{ member.previousCourseInfo ? member.previousCourseInfo : "-" }}
       </div>
       <div>
-        {{ member.extraInfo ? member.extraInfo : '-' }}
+        {{ member.extraInfo ? member.extraInfo : "-" }}
       </div>
       <div>
         <button
