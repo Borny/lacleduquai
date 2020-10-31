@@ -2,10 +2,16 @@
 
 <section class="main-section">
   <mat-tab-group>
-    <mat-tab label="Inscriptions">
+    <mat-tab label="Cours">
+      <ng-template matTabContent>
       <subscriptions-organism></subscriptions-organism>
+      </ng-template>
     </mat-tab>
-    <mat-tab label="Adhésions"> </mat-tab>
-    <mat-tab label="Cours"> </mat-tab>
+    <mat-tab label="Café Adhésions"> 
+      <ng-template matTabContent>
+      <cafe-subscriptions-organism></cafe-subscriptions-organism>
+    </ng-template>
+    </mat-tab>
+    <mat-tab label="Stages"> </mat-tab>
   </mat-tab-group>
 </section>

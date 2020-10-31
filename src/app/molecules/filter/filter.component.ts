@@ -1,5 +1,4 @@
-import { AfterContentInit, AfterViewChecked, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {  Component, EventEmitter, Input, OnChanges,Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
 
 @Component({

@@ -5,7 +5,8 @@ import { MaterialModule } from '../../angular-material/angular-material.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminView } from './admin.component';
 import { SharedModule } from '../../shared/shared.module';
-import { SubscriptionsModule } from '../../organisms/subscriptions/subscriptions.module';
+import { CoursesModule } from '../../organisms/courses/courses.module';
+import { CafeSubscriptionsModule } from '../../organisms/cafe-subscriptions/cafe-subscriptions.module'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SubscriptionsModule } from '../../organisms/subscriptions/subscriptions
     AdminRoutingModule,
     MaterialModule,
     SharedModule,
-    SubscriptionsModule
+    CoursesModule,
+    CafeSubscriptionsModule
   ]
 })
 export class AdminViewModule { }
