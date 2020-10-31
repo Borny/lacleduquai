@@ -134,6 +134,10 @@ export class MemberManagerDialog implements OnInit {
       });
   }
 
+  public onClose():void {
+    this.dialogRef.close()
+  }
+
   ////////////
   // PRIVATE
   ////////////
@@ -174,12 +178,10 @@ export class MemberManagerDialog implements OnInit {
           this.memberEditionForm.addControl('paymentAmount', new FormControl(this.member.paymentAmount));
           this.memberEditionForm.addControl('extraInfo', new FormControl(this.member.extraInfo));
 
-          // console.log(this.member);
         },
         err => {
           this.isLoading = false;
           this.memberError = true;
-          console.log('fetching user err :', err)
         }
       )
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { SubscriptionService } from '../../services/subscription.service';
+import { CafeSubscriptionService } from '../../services/cafeSubscription.service';
 
 @Component({
   selector: 'cafe-view',
@@ -16,7 +16,7 @@ export class CafeView implements OnInit {
   public hideForm = false;
   public subscriptionForm: FormGroup = new FormGroup({});
 
-  constructor(private subscriptionService: SubscriptionService) { }
+  constructor(private cafeSubscriptionService: CafeSubscriptionService) { }
 
   ngOnInit() {
     this.subscriptionForm.addControl('lastName', new FormControl(null, Validators.required));
@@ -28,7 +28,7 @@ export class CafeView implements OnInit {
   public onSubmit(): void {
     this.isLoading = true;
     this.hideForm = true;
-    this.subscriptionService.postCafeSubscriptionForm(this.subscriptionForm.value).subscribe(
+    this.cafeSubscriptionService.postCafeSubscriptionForm(this.subscriptionForm.value).subscribe(
       response => {
         this.isLoading = false;
         this.formSentSuccess = true;

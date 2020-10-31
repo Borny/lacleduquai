@@ -1,0 +1,103 @@
+<mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+<div *ngIf="memberError">
+  <p>Impossible de récupérer les données de l'adhérent</p>
+  <button mat-button color="warn" (click)="onClose()">Fermer</button>
+</div>
+<div *ngIf="showDialog">
+  <h2 class="color-primary" mat-dialog-title>
+    {{ member.firstName }} {{ member.lastName }}
+  </h2>
+  <div mat-dialog-content>
+    <form
+      class="member-edition-form"
+      [formGroup]="memberEditionForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input
+          matInput
+          type="text"
+          name="firstName"
+          formControlName="firstName"
+          required
+        />
+        <mat-error
+          *ngIf="
+            memberEditionForm.get('firstName').invalid &&
+            memberEditionForm.touched
+          "
+          >Veuillez renseigner un prénom</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input
+          matInput
+          type="text"
+          name="lastName"
+          formControlName="lastName"
+          required
+        />
+        <mat-error
+          *ngIf="
+            memberEditionForm.get('lastName').invalid &&
+            memberEditionForm.touched
+          "
+          >Veuillez renseigner un nom</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          formControlName="email"
+          required
+        />
+        <mat-error
+          *ngIf="
+            memberEditionForm.get('email').invalid && memberEditionForm.touched
+          "
+          >Veuillez renseigner un email</mat-error
+        >
+      </mat-form-field>
+      <div>
+        <p>Inscription à la newsletter </p>
+        <mat-radio-group
+          class="radio-group"
+          aria-label="Inscription à la newsletter"
+          formControlName="newsletterSubscription"
+        >
+          <mat-radio-button
+            *ngFor="let newsletterSubscriptionOption of newsletterSubscriptionOptions"
+            class="radio-button"
+            [value]="newsletterSubscriptionOption.value"
+            [selected]="member.newsletterSubscription.value"
+          >
+            {{ newsletterSubscriptionOption.label }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </form>
+    
+  </div>
+  <div mat-dialog-actions align="end">
+    <div>
+      <button mat-flat-button color="warn" (click)="onOpenDeleteModal()">
+        Supprimer
+      </button>
+    </div>
+    <button mat-button color="warn" (click)="onCancel()">Annuler</button>
+    <button
+      mat-button
+      [disabled]="memberEditionForm.invalid || memberEditionForm.pristine"
+      color="accent"
+      [mat-dialog-close]="{ member: member, action: CONFIRM }"
+      (click)="onSubmit()"
+    >
+      Valider
+    </button>
+  </div>
+</div>
