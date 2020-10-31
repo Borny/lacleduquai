@@ -16,21 +16,14 @@
       [selectLabel]="filter.filterLabel"
       [filterOptions]="filter.values"
       [select]="matSelect"
-      (selectedFilterOption)="onSelectedOption( filter.filterName, $event)"
+      (selectedFilterOption)="onSelectedOption(filter.filterName, $event)"
     >
     </filter-molecule>
   </div>
-  <div class="clipboard__container">
-    <p>Copier les emails dans le press papier</p>
-    <button
-      mat-stroked-button
-      color="primary"
-      [cdkCopyToClipboard]="emailList"
-      (click)="onCopyToClipBoard()"
-    >
-      Copier
-    </button>
-  </div>
+  <copy-to-clipboard-molecule
+    [list]="emailList"
+    (copySuccessMessage)="onCopyToClipBoard()"
+  ></copy-to-clipboard-molecule>
   <ul class="data-table__container">
     <li class="data-table__item data-table__item__header">
       <div class="first-column"></div>

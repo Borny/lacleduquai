@@ -11,11 +11,11 @@ import { PaymentReceivedDialog } from './payment-received-dialog/payment-receive
 
 @Component({
   selector: 'subscriptions-organism',
-  templateUrl: './subscriptions.component.html',
-  styleUrls: ['./subscriptions.component.scss']
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.scss']
 })
 
-export class SubscriptionsOrganism {
+export class CoursesOrganism {
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
   public isLoading = false;
@@ -38,6 +38,22 @@ export class SubscriptionsOrganism {
     PaymentMethods.FIRST,
     PaymentMethods.SECOND,
     PaymentMethods.THIRD
+  ];
+
+  public tableHeaderSubscriptionCells: string[] = [
+    'Nom',
+    'Prénom',
+    'Téléphone',
+    'Email',
+    'Cours',
+    'Moyen de paiement',
+    'Réglement reçu',
+    'Montant du réglement',
+    'Encaissement chèques',
+    'Remboursement',
+    'Inscrit 2019/2020',
+    'Cours 2019/2020',
+    'Extra info'
   ];
 
   public filterOptions = [
@@ -154,6 +170,9 @@ export class SubscriptionsOrganism {
     });
     dialogRef.afterClosed()
       .subscribe(result => {
+        if(!result){
+          return;
+        }
         let updatedMember = result.member;
         if (result.action === this.CONFIRM) {
           this.currentMembersData[index] = result.member;
@@ -190,7 +209,7 @@ export class SubscriptionsOrganism {
       });
   }
 
-  public onSelectedOption( filter: string, value?: string): void {
+  public onSelectedOption(filter: string, value?: string): void {
 
     this.matSelect = value;
     switch (filter) {
