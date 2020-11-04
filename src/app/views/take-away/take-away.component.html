@@ -1,0 +1,142 @@
+<h1>Tchai à emporter !</h1>
+<div class="take-away__content">
+  <p>Bonjour !</p>
+  <p>
+    Sur ce second temps de confinement, La Clé du Quai – le Tchaï vous propose
+    sa spécialité à emporter : un délicieux Chaï au lait végétal et aux épices.
+  </p>
+  <p>
+    Vous le connaissez déjà bien… Et s’il vous manque, à vous de venir le
+    chercher sur place – 49 rue du Mirail – le mardi ou le jeudi, entre 16h30 et
+    18h30.
+  </p>
+  <p>
+    Disponible aux formats que vous connaissez - petit (20cl) ou grand (40cl) -
+    ou 1L pour avoir un petit stock pour le matin ou le goûter.
+  </p>
+  <p>
+    Attention, pour le format d’un litre, commandez ! Pour être sûr d’avoir
+    votre dose! Vous pouvez amener votre propre contenant. Sinon, nous vous en
+    proposons avec une consigne de 3€ (bouteille d’1L).
+  </p>
+  <p>Ça se congèle aussi très bien.</p>
+
+  <p>Tarifs :</p>
+  <ul>
+    <li>- Un petit Chaï à emporter (20cl) : 2,50€</li>
+    <li>- Un grand Chaï à emporter (40cl) : 4,50€</li>
+    <li>- Le litre de Chaï à emporter (1L) : 8€ (à commander)</li>
+  </ul>
+  <button mat-flat-button color="primary" (click)="onToggleForm()">
+    Passer commande
+  </button>
+</div>
+
+<!-- <mat-card class="form__container" *ngIf="showForm"> -->
+<mat-card class="form__container">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div class="form__response" *ngIf="formSentSuccess">
+    <p>Merci beaucoup !</p>
+    <p>
+      Vous pourrez venir récupérer votre commande le {{ pickUpDay }}
+      {{ pickUpDate }}, entre 16h30 et 18h30, Au 49 rue du Mirail (entre la
+      Victoire et la Grosse Cloche).
+    </p>
+    <p>D’ici là, portez-vous bien !</p>
+    <p>A très vite,</p>
+    <p>La Clé du Quai.</p>
+  </div>
+  <div *ngIf="formSentFail" class="form__response">
+    <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="onReload()"
+    >
+      S'inscrire
+    </button>
+  </div>
+  <form
+    *ngIf="!isLoading && !hideForm"
+    class="take-away-form"
+    [formGroup]="tchaiTakeAwayForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field class="form-control">
+      <mat-label>Nom</mat-label>
+      <input
+        matInput
+        type="text"
+        name="lastName"
+        formControlName="lastName"
+        required
+      />
+      <mat-error
+        *ngIf="
+          tchaiTakeAwayForm.get('lastName').invalid && tchaiTakeAwayForm.touched
+        "
+        >Veuillez renseigner votre nom</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="form-control">
+      <mat-label>Prénom</mat-label>
+      <input
+        matInput
+        type="text"
+        name="firstName"
+        formControlName="firstName"
+        required
+      />
+      <mat-error
+        *ngIf="
+          tchaiTakeAwayForm.get('firstName').invalid &&
+          tchaiTakeAwayForm.touched
+        "
+        >Veuillez renseigner votre prénom</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="form-control">
+      <mat-label>Téléphone</mat-label>
+      <input
+        matInput
+        type="text"
+        name="phone"
+        formControlName="phone"
+        required
+      />
+      <mat-error
+        *ngIf="
+          tchaiTakeAwayForm.get('phone').invalid && tchaiTakeAwayForm.touched
+        "
+        >Veuillez renseigner votre numéro de téléphone</mat-error
+      >
+    </mat-form-field>
+    <div class="radio-container">
+      <mat-label>Quantité</mat-label>
+      <mat-radio-group
+        class="radio-group"
+        aria-label="Inscription à la newsletter"
+        formControlName="quantity"
+      >
+        <mat-radio-button
+          class="radio-button"
+          *ngFor="let quantity of quantities; let i = index"
+          [value]="quantity"
+          [selected]="quantity === 0"
+        >
+          {{ i + 1 }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <button
+      mat-raised-button
+      class="submit-btn"
+      type="submit"
+      color="primary"
+      [disabled]="tchaiTakeAwayForm.invalid"
+    >
+      Valider
+    </button>
+  </form>
+</mat-card>

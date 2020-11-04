@@ -64,14 +64,16 @@
         >
       </mat-form-field>
       <div>
-        <p>Inscription à la newsletter </p>
+        <p>Inscription à la newsletter</p>
         <mat-radio-group
           class="radio-group"
           aria-label="Inscription à la newsletter"
           formControlName="newsletterSubscription"
         >
           <mat-radio-button
-            *ngFor="let newsletterSubscriptionOption of newsletterSubscriptionOptions"
+            *ngFor="
+              let newsletterSubscriptionOption of newsletterSubscriptionOptions
+            "
             class="radio-button"
             [value]="newsletterSubscriptionOption.value"
             [selected]="member.newsletterSubscription.value"
@@ -81,7 +83,6 @@
         </mat-radio-group>
       </div>
     </form>
-    
   </div>
   <div mat-dialog-actions align="end">
     <div>
