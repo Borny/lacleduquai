@@ -1,4 +1,4 @@
-export interface TchaiTakeAway {
+export interface ChaiTakeAway {
   lastName: string;
   firstName: string;
   phone: string;

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { TchaiTakeAway } from '../models/tchai-take-away.model';
+import { ChaiTakeAway } from '../models/tchai-take-away.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class TakeAwayService {
   constructor(private http: HttpClient) { }
 
   // TCHAI
-  public createTchaiTakeAway(formValue: TchaiTakeAway): Observable<any> {
+  public createTchaiTakeAway(formValue: ChaiTakeAway): Observable<any> {
     return this.http.post<any>(`${this.API_URL}${this.TAKE_AWAY_URL}`, formValue);
   }
 
