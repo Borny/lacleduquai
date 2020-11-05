@@ -1,34 +1,19 @@
-@import "../../../../styles/tools/variables";
-@import "../../../../styles/tools/mixins";
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
 
-h1 {
-  padding: 1rem;
-  text-align: center;
+:host {
+  display: block;
   background: $color-primary;
-  color: $white;
-  font-family: $fontPoppins;
-  margin: 0;
-
-  @include screen-sm {
-    padding: 2rem;
-  }
+  padding: 1rem;
 }
 
-.take-away__content {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  max-width: $screen-sm;
-  margin: 0 auto;
-  padding: 1rem;
-
-  button {
-    margin: 1rem auto;
-  }
+.heading {
+  color: $color-secondary;
+  text-align: center;
 }
 
 .form__container {
-  max-width: $screen-sm;
+  max-width: $screen-xs;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -40,8 +25,7 @@ h1 {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  p,
-  ul {
+  p {
     margin: 0 auto 2rem;
   }
 }
@@ -54,48 +38,6 @@ h1 {
   max-width: 300px;
 }
 
-.form-section {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto 1rem;
-
-  &__title {
-    width: 100%;
-    padding: 0.5rem 0 0.5rem 1rem;
-    background: $color-primary;
-    color: $cod-gray;
-  }
-
-  &__content {
-    padding: 0;
-    display: flex;
-    flex-flow: column;
-
-    @include screen-sm {
-      padding: 0 0 0 3rem;
-    }
-
-    &-price {
-      @include screen-sm {
-        padding: 0 3rem;
-      }
-
-      mat-card {
-        margin: 0 0 1rem;
-      }
-      .previous-course-toggle {
-        margin: 0 0 0 1rem;
-      }
-      .previous-course-detail {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
-  }
-}
-
 .form-control {
   width: 100%;
   max-width: 300px;
@@ -104,6 +46,7 @@ h1 {
 .radio-container {
   width: 100%;
   max-width: 300px;
+  margin: 0 0 1rem;
   .radio-group {
     display: flex;
     flex-flow: column;

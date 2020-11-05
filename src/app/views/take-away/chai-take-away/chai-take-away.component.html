@@ -1,121 +1,144 @@
-<!-- <mat-card class="form__container" *ngIf="showForm"> -->
-  <mat-card class="form__container">
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <!-- Response -->
-    <div class="form__response" *ngIf="formSentSuccess">
-      <p>Merci beaucoup !</p>
-      <p>
-        Vous pourrez venir récupérer votre commande le {{ pickUpDay }}
-        {{ pickUpDate }}, entre 16h30 et 18h30, Au 49 rue du Mirail (entre la
-        Victoire et la Grosse Cloche).
-      </p>
-      <p>D’ici là, portez-vous bien !</p>
-      <p>A très vite,</p>
-      <p>La Clé du Quai.</p>
-    </div>
-    <div *ngIf="formSentFail" class="form__response">
-      <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
-      <button
-        mat-raised-button
-        type="button"
-        color="primary"
-        (click)="onReload()"
-      >
-        Passer commande
-      </button>
-    </div>
-    <!-- Form -->
-    <form
-      *ngIf="!isLoading && !hideForm"
-      class="take-away-form"
-      [formGroup]="chaiTakeAwayForm"
-      (ngSubmit)="onSubmit()"
+<h2 class="heading">Commande de Tchaï au litre</h2>
+<mat-card class="form__container">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <!-- Response -->
+  <div *ngIf="formSentSuccess" class="form__response">
+    <p>Merci beaucoup !</p>
+    <p>
+      Vous pourrez venir récupérer votre commande le {{ pickUpDay }}
+      {{ pickUpMonth }}, entre 16h30 et 18h30, Au 49 rue du Mirail (entre la
+      Victoire et la Grosse Cloche).
+    </p>
+    <p>D’ici là, portez-vous bien !</p>
+    <p>A très vite,</p>
+    <p>La Clé du Quai.</p>
+  </div>
+  <div *ngIf="formSentFail" class="form__response">
+    <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="onReload()"
     >
-      <mat-form-field class="form-control">
-        <mat-label>Nom</mat-label>
-        <input
-          matInput
-          type="text"
-          name="lastName"
-          formControlName="lastName"
-          required
-        />
-        <mat-error
-          *ngIf="
-            chaiTakeAwayForm.get('lastName').invalid && chaiTakeAwayForm.touched
-          "
-          >Veuillez renseigner votre nom</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="form-control">
-        <mat-label>Prénom</mat-label>
-        <input
-          matInput
-          type="text"
-          name="firstName"
-          formControlName="firstName"
-          required
-        />
-        <mat-error
-          *ngIf="
-            chaiTakeAwayForm.get('firstName').invalid &&
-            chaiTakeAwayForm.touched
-          "
-          >Veuillez renseigner votre prénom</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="form-control">
-        <mat-label>Téléphone</mat-label>
-        <input
-          matInput
-          type="text"
-          name="phone"
-          formControlName="phone"
-          required
-        />
-        <mat-error
-          *ngIf="
-            chaiTakeAwayForm.get('phone').invalid && chaiTakeAwayForm.touched
-          "
-          >Veuillez renseigner votre numéro de téléphone</mat-error
-        >
-      </mat-form-field>
-      <div class="radio-container">
-        <mat-label>Quantité</mat-label>
-        <mat-radio-group
-          class="radio-group"
-          aria-label="Inscription à la newsletter"
-          formControlName="quantity"
-        >
-          <mat-radio-button
-            class="radio-button"
-            *ngFor="let quantity of quantities; let i = index"
-            [value]="quantity"
-            [checked]="i === 0"
-          >
-            {{ i + 1 }}
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
-      <div class="slide-toggle__section">
-        <mat-label>Avez-vous votre propre contenant ?</mat-label>
-        <mat-slide-toggle
-          class="slide-toggle"
-          formControlName="hasOwnContainer"
-          [checked]="hasContainer"
-          (change)="toggleHasContainer()"
-          >{{ hasContainer ? "Oui" : "Non" }}</mat-slide-toggle
-        >
-      </div>
-      <button
-        mat-raised-button
-        class="submit-btn"
-        type="submit"
-        color="primary"
-        [disabled]="chaiTakeAwayForm.invalid"
+      Passer commande
+    </button>
+  </div>
+  <!-- Form -->
+  <form
+    *ngIf="!isLoading && !hideForm"
+    class="take-away-form"
+    [formGroup]="chaiTakeAwayForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field class="form-control">
+      <mat-label>Nom</mat-label>
+      <input
+        matInput
+        type="text"
+        name="lastName"
+        formControlName="lastName"
+        required
+      />
+      <mat-error
+        *ngIf="
+          chaiTakeAwayForm.get('lastName').invalid && chaiTakeAwayForm.touched
+        "
+        >Veuillez renseigner votre nom</mat-error
       >
-        Commander
-      </button>
-    </form>
-  </mat-card>
-  
+    </mat-form-field>
+    <mat-form-field class="form-control">
+      <mat-label>Prénom</mat-label>
+      <input
+        matInput
+        type="text"
+        name="firstName"
+        formControlName="firstName"
+        required
+      />
+      <mat-error
+        *ngIf="
+          chaiTakeAwayForm.get('firstName').invalid && chaiTakeAwayForm.touched
+        "
+        >Veuillez renseigner votre prénom</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="form-control">
+      <mat-label>Téléphone</mat-label>
+      <input
+        matInput
+        type="text"
+        name="phone"
+        formControlName="phone"
+        required
+      />
+      <mat-error
+        *ngIf="
+          chaiTakeAwayForm.get('phone').invalid && chaiTakeAwayForm.touched
+        "
+        >Veuillez renseigner votre numéro de téléphone</mat-error
+      >
+    </mat-form-field>
+    <div class="form-control radio-container">
+      <mat-label>Quantité (par bouteille de 1 litre):</mat-label>
+      <mat-radio-group
+        class="radio-group"
+        aria-label="Quantité"
+        formControlName="quantity"
+      >
+        <mat-radio-button
+          class="radio-button"
+          *ngFor="let quantity of quantities; let i = index"
+          [value]="i + 1"
+          [checked]="i === 0"
+          (change)="onQuantityChange($event)"
+        >
+          {{ quantity }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form-control">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de retrait :</mat-label>
+        <input
+          matInput
+          [min]="minDateFilter"
+          [max]="maxDateFilter"
+          [matDatepickerFilter]="dateFilter"
+          [matDatepicker]="picker"
+          formControlName="pickUpDate"
+          disabled
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="slide-toggle__section">
+      <mat-label>Avez-vous votre propre contenant ?</mat-label>
+      <mat-slide-toggle
+        class="slide-toggle"
+        formControlName="hasOwnContainer"
+        [checked]="hasContainer"
+        (change)="toggleHasContainer($event)"
+        >{{ hasContainer ? 'Oui' : 'Non' }}</mat-slide-toggle
+      >
+    </div>
+    <p>
+      Total: {{ totalPrice }}€
+      <span *ngIf="!hasContainer">(dont {{ totalDeposit }}€ de consigne)</span>
+    </p>
+    <p class="italic font-sm">
+      Le paiement se fait sur place, au moment de récupérer votre commande.
+    </p>
+    <button
+      mat-raised-button
+      class="submit-btn"
+      type="submit"
+      color="primary"
+      [disabled]="chaiTakeAwayForm.invalid"
+    >
+      Passer ma commande
+    </button>
+  </form>
+</mat-card>

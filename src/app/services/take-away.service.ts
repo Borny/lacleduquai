@@ -11,13 +11,14 @@ import { ChaiTakeAway } from '../models/tchai-take-away.model';
 export class TakeAwayService {
 
   private readonly API_URL = `${environment.apiUrl}`;
-  private readonly TAKE_AWAY_URL = `/take-away/tchai`;
+  private readonly TAKE_AWAY_URL = `/take-away`;
+  private readonly TCHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/tchai`;
 
   constructor(private http: HttpClient) { }
 
   // TCHAI
-  public createTchaiTakeAway(formValue: ChaiTakeAway): Observable<any> {
-    return this.http.post<any>(`${this.API_URL}${this.TAKE_AWAY_URL}`, formValue);
+  public createTchaiTakeAwayOrder(tchaiOrderData: ChaiTakeAway): Observable<string> {
+    return this.http.post<string>(`${this.API_URL}${this.TCHAI_TAKE_AWAY_URL}`, tchaiOrderData);
   }
 
   // public getMembersData(): Observable<{ message: string, data: Member[] }> {

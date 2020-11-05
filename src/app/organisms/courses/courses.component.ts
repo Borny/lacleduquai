@@ -10,7 +10,7 @@ import { MemberManagerDialog } from './member-manager/member-manager.component';
 import { PaymentReceivedDialog } from './payment-received-dialog/payment-received-dialog.component';
 
 @Component({
-  selector: 'subscriptions-organism',
+  selector: 'courses-organism',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
@@ -170,7 +170,7 @@ export class CoursesOrganism {
     });
     dialogRef.afterClosed()
       .subscribe(result => {
-        if(!result){
+        if (!result) {
           return;
         }
         let updatedMember = result.member;

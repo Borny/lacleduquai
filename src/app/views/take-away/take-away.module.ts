@@ -5,8 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TakeAwayView } from './take-away.component';
 import { TakeAwayRoutingModule } from './take-away-routing.module';
 import { MaterialModule } from '../../angular-material/angular-material.module';
-import { ChaiTakeAwayViewModule } from './chai-take-away/chai-take-away.module';
-
+import { ChaiTakeAwayModule } from './chai-take-away/chai-take-away.module';
 
 @NgModule({
   declarations: [TakeAwayView],
@@ -14,9 +13,9 @@ import { ChaiTakeAwayViewModule } from './chai-take-away/chai-take-away.module';
     CommonModule,
     ReactiveFormsModule,
     TakeAwayRoutingModule,
-    ChaiTakeAwayViewModule,
+    ChaiTakeAwayModule,
     MaterialModule
-  ],
+  ]
 })
 
 export class TakeAwayViewModule { }

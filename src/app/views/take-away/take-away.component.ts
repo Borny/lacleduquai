@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'take-away',
@@ -9,10 +8,6 @@ import { Router } from '@angular/router';
 export class TakeAwayView {
 
   constructor(
-    private router: Router) { }
-
-  public onNavigateToTchai(): void {
-    this.router.navigateByUrl('/a-emporter/chai')
-  }
+  ) { }
 
 }
