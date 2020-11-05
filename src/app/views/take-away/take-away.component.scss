@@ -6,11 +6,12 @@ h1 {
   text-align: center;
   background: $color-primary;
   color: $white;
-  font-family: $fontPoppins;
   margin: 0;
+  font: 2rem $fontOswald;
 
   @include screen-sm {
-    padding: 2rem;
+    padding: 1rem;
+    font: 3.5rem $fontOswald;
   }
 }
 

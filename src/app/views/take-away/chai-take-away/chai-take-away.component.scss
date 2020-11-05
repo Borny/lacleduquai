@@ -3,7 +3,7 @@
 
 :host {
   display: block;
-  background: $color-primary;
+  background: url('../../../../assets/img/cafe-lcdq-inside.jpg') center center;
   padding: 1rem;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .form__container {
-  max-width: $screen-xs;
+  max-width: 360px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -25,8 +25,9 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   p {
-    margin: 0 auto 2rem;
+    margin: 0 auto 0.5rem;
   }
 }
 
@@ -43,10 +44,18 @@
   max-width: 300px;
 }
 
+.form__calendar {
+  width: 100%;
+}
+
 .radio-container {
   width: 100%;
   max-width: 300px;
-  margin: 0 0 1rem;
+  margin: 1rem 0;
+  .label {
+    display: block;
+    margin: 0 0 0.5rem;
+  }
   .radio-group {
     display: flex;
     flex-flow: column;
@@ -64,9 +73,22 @@
 }
 
 .slide-toggle__section {
-  margin: 1rem 0;
+  display: flex;
+  flex-flow: column;
+  margin: 0 0 1rem;
+  align-items: center;
 }
 
 .slide-toggle {
   margin: 0.5rem 0;
+}
+
+.price {
+  display: block;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 2px solid $color-primary;
+  border-top: 2px solid $color-primary;
+  padding: 0.5rem;
+  color: $color-primary;
 }

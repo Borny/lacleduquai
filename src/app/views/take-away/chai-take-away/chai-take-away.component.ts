@@ -5,7 +5,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { TakeAwayService } from '../../../services/take-away.service';
-import { ChaiTakeAway } from '../../../models/tchai-take-away.model';
+import { ChaiTakeAway } from '../../../models/chai-take-away.model';
 
 @Component({
   selector: 'chai-take-away',
@@ -58,7 +58,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
     this.pickUpDay = formData.pickUpDate.getDate();
     this.pickUpMonth = new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(formData.pickUpDate);
 
-    this.takeAwayService.createTchaiTakeAwayOrder(tchaiOrderData)
+    this.takeAwayService.createChaiTakeAwayOrder(tchaiOrderData)
       .subscribe(
         response => {
           this.isLoading = false;

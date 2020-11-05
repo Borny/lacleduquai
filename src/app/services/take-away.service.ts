@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { ChaiTakeAway } from '../models/tchai-take-away.model';
+import { ChaiTakeAway } from '../models/chai-take-away.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,17 @@ export class TakeAwayService {
 
   private readonly API_URL = `${environment.apiUrl}`;
   private readonly TAKE_AWAY_URL = `/take-away`;
-  private readonly TCHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/tchai`;
+  private readonly TCHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/chai`;
 
   constructor(private http: HttpClient) { }
 
   // TCHAI
-  public createTchaiTakeAwayOrder(tchaiOrderData: ChaiTakeAway): Observable<string> {
+  public createChaiTakeAwayOrder(tchaiOrderData: ChaiTakeAway): Observable<string> {
     return this.http.post<string>(`${this.API_URL}${this.TCHAI_TAKE_AWAY_URL}`, tchaiOrderData);
+  }
+
+  public getChaiTakeAwayOrder(): Observable<{ message: string, data: ChaiTakeAway[] }> {
+    return this.http.get<{ message: string, data: ChaiTakeAway[] }>(`${this.API_URL}${this.TCHAI_TAKE_AWAY_URL}`);
   }
 
   // public getMembersData(): Observable<{ message: string, data: Member[] }> {

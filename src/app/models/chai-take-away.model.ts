@@ -5,7 +5,8 @@ export interface ChaiTakeAway {
   quantity: number;
   pickUpDate: Date;
   totalPrice: number,
-  state?: TakeAwayState
+  state?: TakeAwayState,
+  extraInfo?: string
 }
 
 enum TakeAwayState {

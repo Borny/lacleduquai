@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Course } from '../../models/courses.model';
@@ -15,7 +15,7 @@ import { PaymentReceivedDialog } from './payment-received-dialog/payment-receive
   styleUrls: ['./courses.component.scss']
 })
 
-export class CoursesOrganism {
+export class CoursesOrganism implements OnInit {
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
   public isLoading = false;

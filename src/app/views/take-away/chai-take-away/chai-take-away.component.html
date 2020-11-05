@@ -1,4 +1,4 @@
-<h2 class="heading">Commande de Tchaï au litre</h2>
+<h2 class="heading">...ici !</h2>
 <mat-card class="form__container">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <!-- Response -->
@@ -6,12 +6,13 @@
     <p>Merci beaucoup !</p>
     <p>
       Vous pourrez venir récupérer votre commande le {{ pickUpDay }}
-      {{ pickUpMonth }}, entre 16h30 et 18h30, Au 49 rue du Mirail (entre la
-      Victoire et la Grosse Cloche).
+      {{ pickUpMonth }}, entre 16h30 et 18h30, au 49 rue du Mirail.
     </p>
-    <p>D’ici là, portez-vous bien !</p>
-    <p>A très vite,</p>
-    <p>La Clé du Quai.</p>
+    <p>
+      D’ici là, portez-vous bien !<br />
+      A très vite,<br />
+      La Clé du Quai.
+    </p>
   </div>
   <div *ngIf="formSentFail" class="form__response">
     <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
@@ -80,7 +81,7 @@
       >
     </mat-form-field>
     <div class="form-control radio-container">
-      <mat-label>Quantité (par bouteille de 1 litre):</mat-label>
+      <mat-label class="label">Quantité (par bouteille de 1 litre):</mat-label>
       <mat-radio-group
         class="radio-group"
         aria-label="Quantité"
@@ -98,7 +99,7 @@
       </mat-radio-group>
     </div>
     <div class="form-control">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="form__calendar">
         <mat-label>Date de retrait :</mat-label>
         <input
           matInput
@@ -115,7 +116,7 @@
       </mat-form-field>
     </div>
     <div class="slide-toggle__section">
-      <mat-label>Avez-vous votre propre contenant ?</mat-label>
+      <mat-label>J'ai mon propre contenant</mat-label>
       <mat-slide-toggle
         class="slide-toggle"
         formControlName="hasOwnContainer"
@@ -124,21 +125,21 @@
         >{{ hasContainer ? 'Oui' : 'Non' }}</mat-slide-toggle
       >
     </div>
-    <p>
-      Total: {{ totalPrice }}€
-      <span *ngIf="!hasContainer">(dont {{ totalDeposit }}€ de consigne)</span>
+    <p class="text-center price">Total: {{ totalPrice }}€</p>
+    <p class="text-center" *ngIf="!hasContainer">
+      (dont {{ totalDeposit }}€ de consigne)
     </p>
-    <p class="italic font-sm">
+    <p class="italic text-center font-sm">
       Le paiement se fait sur place, au moment de récupérer votre commande.
     </p>
     <button
-      mat-raised-button
+      mat-flat-button
       class="submit-btn"
       type="submit"
       color="primary"
       [disabled]="chaiTakeAwayForm.invalid"
     >
-      Passer ma commande
+      Commandez !
     </button>
   </form>
 </mat-card>
