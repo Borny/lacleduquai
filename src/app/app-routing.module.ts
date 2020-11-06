@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/pre-subscription/pre-subscription.module').then(m => m.PreSubscriptionViewModule)
   },
   {
+    path: 'a-emporter',
+    loadChildren: () => import('./views/take-away/take-away.module').then(m => m.TakeAwayViewModule)
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminViewModule),
     canActivate: [AuthGuard]

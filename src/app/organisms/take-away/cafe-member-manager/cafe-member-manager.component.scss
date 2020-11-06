@@ -1,0 +1,23 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+.spinner {
+  margin: auto;
+}
+
+.member-edition-form {
+  display: flex;
+  flex-flow: column;
+}
+
+.radio-group {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+
+  .radio-button {
+    margin: 0.5rem 0;
+  }
+}

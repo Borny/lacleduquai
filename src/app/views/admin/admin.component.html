@@ -2,15 +2,20 @@
 
 <section class="main-section">
   <mat-tab-group>
-    <mat-tab label="Cours">
+    <mat-tab label="Take Away">
       <ng-template matTabContent>
-      <subscriptions-organism></subscriptions-organism>
+        <take-away-admin-organism></take-away-admin-organism>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Café Adhésions"> 
+    <mat-tab label="Cours">
       <ng-template matTabContent>
-      <cafe-subscriptions-organism></cafe-subscriptions-organism>
-    </ng-template>
+        <courses-organism></courses-organism>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Café Adhésions">
+      <ng-template matTabContent>
+        <cafe-subscriptions-organism></cafe-subscriptions-organism>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Stages"> </mat-tab>
   </mat-tab-group>

@@ -7,6 +7,7 @@ import { AdminView } from './admin.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CoursesModule } from '../../organisms/courses/courses.module';
 import { CafeSubscriptionsModule } from '../../organisms/cafe-subscriptions/cafe-subscriptions.module'
+import { TakeAwayAdminModule } from '../../organisms/take-away/take-away-admin.module'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CafeSubscriptionsModule } from '../../organisms/cafe-subscriptions/cafe
     MaterialModule,
     SharedModule,
     CoursesModule,
-    CafeSubscriptionsModule
+    CafeSubscriptionsModule,
+    TakeAwayAdminModule
   ]
 })
 export class AdminViewModule { }

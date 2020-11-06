@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   exports: [
@@ -40,7 +41,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatSnackBarModule,
     MatSelectModule,
     MatTabsModule,
-    ClipboardModule
+    ClipboardModule,
+    MatButtonToggleModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
