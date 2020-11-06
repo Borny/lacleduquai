@@ -68,7 +68,7 @@
       <mat-label>Téléphone</mat-label>
       <input
         matInput
-        type="text"
+        type="number"
         name="phone"
         formControlName="phone"
         required
@@ -113,6 +113,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker">
         </mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
+        <p class="font-sm">(entre 16h30 et 18h30)</p>
       </mat-form-field>
     </div>
     <div class="slide-toggle__section">
