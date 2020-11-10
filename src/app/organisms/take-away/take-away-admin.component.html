@@ -26,6 +26,7 @@
       <div>Prénom</div>
       <div>Téléphone</div>
       <div>Quantité</div>
+      <div>Possède un contenant</div>
       <div>Prix</div>
       <div>Date de retrait</div>
       <div>Etat</div>
@@ -54,6 +55,9 @@
       <div>{{ order.firstName }}</div>
       <div>{{ order.phone }}</div>
       <div>{{ order.quantity }}</div>
+      <div [ngClass]="order.hasOwnContainer ? 'color-primary' : ''">
+        {{ order.hasOwnContainer ? 'Oui' : 'Non' }}
+      </div>
       <div>{{ order.totalPrice }}</div>
       <div>{{ order.pickUpDate | date: 'd MMMM':'fr-FR' }}</div>
       <div>{{ order.state }}</div>
