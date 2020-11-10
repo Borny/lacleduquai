@@ -1,4 +1,5 @@
 export interface ChaiTakeAway {
+  _id: string;
   lastName: string;
   firstName: string;
   phone: number;
@@ -10,7 +11,7 @@ export interface ChaiTakeAway {
   extraInfo?: string
 }
 
-enum TakeAwayState {
+export enum TakeAwayState {
   PENDING = 'En attente',
   DELIVERED = 'Livré',
   DELAYED = 'Reporté',
