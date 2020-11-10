@@ -4,9 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { map, tap } from 'rxjs/operators';
 
+import { StateDialog } from './state-dialog/state-dialog.component';
 import { TakeAwayService } from '../../services/take-away.service';
-import { CafeSubscription } from '../../models/cafeSubscription.model';
-import { CafeMemberManagerDialog } from './cafe-member-manager/cafe-member-manager.component';
 import { ChaiTakeAway } from '../../models/chai-take-away.model';
 
 @Component({
@@ -20,38 +19,13 @@ export class TakeAwayAdminOrganism implements OnInit {
   public currentOrdersData: ChaiTakeAway[] = [];
   public isLoading = false;
 
-  public memberError = false;
-  // public matSelect: any;
-  // public emailList: string;
+  public orderError = false;
 
-  // public readonly CONFIRM = `confirm`;
-  // public readonly CONFIRM_DELETE = 'confirm-delete';
-  // public readonly CANCEL = `cancel`;
-  // public readonly MEMBER_UPDATED_SUCCESS = `Infos adhérent mises à jour`;
-  // public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
-  // public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimer`;
-  // public readonly MEMBER_DELETED_FAIL = `Erreur suppression adhérent`;
-  // public readonly LOADING_TEXT = 'Chargement des données...';
-  // public readonly EMAIL_LIST_COPIED = 'Emails copiés';
+  public readonly CONFIRM = 'confirm';
+  public readonly CANCEL = 'cancel';
+  public readonly STATE_UPDATED_SUCCESS = `L'état de la commande a été mis à jour`;
+  public readonly STATE_UPDATED_FAIL = `L'état de la commande n'a pas été mis à jour`;
 
-  // public filterOptions = [
-  //   {
-  //     filterName: 'newsletter',
-  //     filterLabel: 'Inscription Newsletter',
-  //     values: [
-  //       'Oui',
-  //       'Non'
-  //     ]
-  //   },
-  //   {
-  //     filterName: 'alphabeticalOrder',
-  //     filterLabel: 'Ordre alphabétique',
-  //     values: [
-  //       'A - Z',
-  //       'Z - A'
-  //     ]
-  //   }
-  // ]
 
   constructor(
     private takeAwayService: TakeAwayService,
@@ -63,6 +37,39 @@ export class TakeAwayAdminOrganism implements OnInit {
     this._getOrdersInfo();
   }
 
+  public onOpenState(order: ChaiTakeAway): void {
+    const dialogRef = this.dialog.open(StateDialog, {
+      minWidth: '300px',
+      data: order
+    });
+    dialogRef.beforeClosed()
+      .subscribe(result => {
+        order.state = result.order.state;
+        if (result.action === this.CONFIRM) {
+          this.takeAwayService.updateOrder(order)
+            .subscribe(
+              result => {
+                // show snack bar
+                this._snackBar.open(this.STATE_UPDATED_SUCCESS, null, {
+                  duration: 3000,
+                });
+              },
+              err => {
+                this._snackBar.open(this.STATE_UPDATED_FAIL, null, {
+                  duration: 3000,
+                });
+              });
+        }
+      });
+  }
+
+
+//  public get stateBtnColor(): string{
+//    console.log('state')
+//    if(state === 'En attente'){
+//      return 'primary';
+//     }
+//  } 
   // // public onOpenMemberManager(memb: CafeSubscription, index: number): void {
   // //   const id = memb._id;
   // //   const dialogRef = this.dialog.open(CafeMemberManagerDialog, {
@@ -158,7 +165,7 @@ export class TakeAwayAdminOrganism implements OnInit {
         },
         err => {
           this.isLoading = false;
-          this.memberError = true;
+          this.orderError = true;
         }
       );
   }
