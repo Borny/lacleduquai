@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>
+  Changement de status de la commande
+</h2>
+
+<form [formGroup]="stateForm" (ngSubmit)="onSubmit()">
+  <mat-radio-group
+          class="radio-group"
+          aria-label="changement de status"
+          formControlName="state"
+        >
+          <mat-radio-button
+            *ngFor="
+              let stateOption of stateOptions
+            "
+            class="radio-button"
+            [value]="stateOption"
+            [selected]="order.state"
+          >
+            {{ stateOption }}
+          </mat-radio-button>
+        </mat-radio-group>
+</form>
+
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="onCancel()">Annuler</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="{ order: order, action: CONFIRM }"
+    (click)="onSubmit()"
+  >
+    Valider
+  </button>
+</div>
