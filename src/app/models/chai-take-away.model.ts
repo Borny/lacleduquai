@@ -6,7 +6,9 @@ export interface ChaiTakeAway {
   quantity: number;
   pickUpDate: Date;
   hasOwnContainer: boolean,
+  price: number,
   totalPrice: number,
+  totalDeposit: number,
   state?: TakeAwayState,
   extraInfo?: string
 }

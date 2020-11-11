@@ -25,7 +25,7 @@ export class CafeSubscriptionsOrganism {
   public readonly CANCEL = `cancel`;
   public readonly MEMBER_UPDATED_SUCCESS = `Infos adhérent mises à jour`;
   public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
-  public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimer`;
+  public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimé`;
   public readonly MEMBER_DELETED_FAIL = `Erreur suppression adhérent`;
   public readonly LOADING_TEXT = 'Chargement des données...';
   public readonly EMAIL_LIST_COPIED = 'Emails copiés';

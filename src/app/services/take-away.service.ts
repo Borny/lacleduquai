@@ -12,29 +12,31 @@ export class TakeAwayService {
 
   private readonly API_URL = `${environment.apiUrl}`;
   private readonly TAKE_AWAY_URL = `${this.API_URL}/take-away`;
-  private readonly TCHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/chai`;
-  private readonly UPDATE_TCHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/update-chai`;
+  private readonly CHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/chai`;
+  private readonly SINGLE_CHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/single-chai`;
+  private readonly UPDATE_CHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/update-chai`;
+  private readonly DELETE_CHAI_TAKE_AWAY_URL = `${this.TAKE_AWAY_URL}/delete-chai`;
 
   constructor(private http: HttpClient) { }
 
-  // TCHAI
+  // CHAI
   public createChaiTakeAwayOrder(tchaiOrderData: ChaiTakeAway): Observable<string> {
-    return this.http.post<string>(`${this.TCHAI_TAKE_AWAY_URL}`, tchaiOrderData);
+    return this.http.post<string>(`${this.CHAI_TAKE_AWAY_URL}`, tchaiOrderData);
   }
 
-  public getChaiTakeAwayOrder(): Observable<{ message: string, data: ChaiTakeAway[] }> {
-    return this.http.get<{ message: string, data: ChaiTakeAway[] }>(`${this.TCHAI_TAKE_AWAY_URL}`);
+  public getChaiTakeAwayOrders(): Observable<{ message: string, data: ChaiTakeAway[] }> {
+    return this.http.get<{ message: string, data: ChaiTakeAway[] }>(`${this.CHAI_TAKE_AWAY_URL}`);
   }
 
-  // public getMembersData(): Observable<{ message: string, data: Member[] }> {
-  //   return this.http.get<{ message: string, data: Member[] }>(`${this.API_URL}${this.GET_MEMBERS_URL}`);
-  // }
-
-  public updateOrder(orderInfo: ChaiTakeAway): Observable<any> {
-    return this.http.put<any>(`${this.UPDATE_TCHAI_TAKE_AWAY_URL}/${orderInfo._id}`, orderInfo);
+  public getChaiTakeAwayOrder(orderId: string): Observable<{ message: string, data: ChaiTakeAway }> {
+    return this.http.get<{ message: string, data: ChaiTakeAway }>(`${this.SINGLE_CHAI_TAKE_AWAY_URL}/${orderId}`);
   }
 
-  // public deleteMember(member: Member): Observable<any> {
-  //   return this.http.delete<any>(`${this.API_URL}${this.GET_MEMBERS_URL}/${member._id}`);
-  // }
+  public updateOrder(orderInfo: ChaiTakeAway): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(`${this.UPDATE_CHAI_TAKE_AWAY_URL}/${orderInfo._id}`, orderInfo);
+  }
+
+  public deleteOrder(order: ChaiTakeAway): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.DELETE_CHAI_TAKE_AWAY_URL}/${order._id}`);
+  }
 }

@@ -1,0 +1,156 @@
+<mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+<div *ngIf="orderError">
+  <p>Impossible de récupérer les données de la commande</p>
+  <button mat-button color="warn" (click)="onClose()">Fermer</button>
+</div>
+<div *ngIf="showDialog">
+  <h2 class="color-primary" mat-dialog-title>
+    {{ order.firstName }} {{ order.lastName }}
+  </h2>
+  <div mat-dialog-content>
+    <form
+      class="order-edition-form"
+      [formGroup]="orderEditionForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input
+          matInput
+          type="text"
+          name="firstName"
+          formControlName="firstName"
+          required
+        />
+        <mat-error
+          *ngIf="
+            orderEditionForm.get('firstName').invalid &&
+            orderEditionForm.touched
+          "
+          >Veuillez renseigner un prénom</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input
+          matInput
+          type="text"
+          name="lastName"
+          formControlName="lastName"
+          required
+        />
+        <mat-error
+          *ngIf="
+            orderEditionForm.get('lastName').invalid && orderEditionForm.touched
+          "
+          >Veuillez renseigner un nom</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Téléphone</mat-label>
+        <input
+          matInput
+          type="text"
+          name="phone"
+          formControlName="phone"
+          required
+        />
+        <mat-error
+          *ngIf="
+            orderEditionForm.get('phone').invalid && orderEditionForm.touched
+          "
+          >Veuillez renseigner un numéro de téléphone</mat-error
+        >
+      </mat-form-field>
+      <div class="form-control radio-container">
+        <mat-label class="label bold"
+          >Quantité (par bouteille de 1 litre):</mat-label
+        >
+        <mat-radio-group
+          class="radio-group"
+          aria-label="Quantité"
+          formControlName="quantity"
+        >
+          <mat-radio-button
+            class="radio-button"
+            *ngFor="let quantity of quantities; let i = index"
+            [value]="i + 1"
+            [checked]="i + 1 === order.quantity"
+            (change)="onQuantityChange($event)"
+          >
+            {{ quantity }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <p><span class="bold">Prix total:</span> {{ totalPrice }}€</p>
+      <p><span class="bold">Consigne:</span> {{ totalDeposit }}€</p>
+      <div class="slide-toggle__section">
+        <mat-label class="bold">Possède un contenant </mat-label>
+        <mat-slide-toggle
+          class="slide-toggle"
+          formControlName="hasOwnContainer"
+          [checked]="hasOwnContainer"
+          (change)="toggleHasContainer($event.checked)"
+        >
+          {{ hasContainer ? 'Oui' : 'Non' }}
+        </mat-slide-toggle>
+      </div>
+
+      <p><span class="bold">Status de la commande:</span> {{ order.state }}</p>
+      <p>
+        <span class="bold">Date de retrait:</span>
+        {{
+          orderEditionForm.get('pickUpDate').value
+            | date: 'd MMMM':undefined:'fr-FR'
+        }}
+      </p>
+      <div class="form-control">
+        <mat-form-field appearance="fill" class="form__calendar">
+          <mat-label>Modifier la date de retrait :</mat-label>
+          <input
+            matInput
+            [min]="minDateFilter"
+            [max]="maxDateFilter"
+            [matDatepickerFilter]="dateFilter"
+            [matDatepicker]="picker"
+            (dateChange)="onDateChange($event)"
+            formControlName="pickUpDate"
+            disabled
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-label class="bold">Extra info</mat-label>
+        <textarea
+          matInput
+          placeholder="Extra info"
+          name="extraInfo"
+          formControlName="extraInfo"
+          >{{ order.extraInfo }}</textarea
+        >
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions align="end">
+    <div>
+      <button mat-flat-button color="warn" (click)="onOpenDeleteModal()">
+        Supprimer
+      </button>
+    </div>
+    <button mat-button color="warn" (click)="onCancel()">Annuler</button>
+    <button
+      mat-button
+      [disabled]="orderEditionForm.invalid || orderEditionForm.pristine"
+      color="accent"
+      [mat-dialog-close]="{ order: order, action: CONFIRM }"
+      (click)="onSubmit()"
+    >
+      Valider
+    </button>
+  </div>
+</div>
