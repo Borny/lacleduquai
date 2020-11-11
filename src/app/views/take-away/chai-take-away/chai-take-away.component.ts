@@ -28,12 +28,10 @@ export class ChaiTakeAwayOrganism implements OnInit {
   public totalDeposit: number = 3;
   public orderQuantity: number = 1;
   public chaiTakeAwayForm: FormGroup = new FormGroup({});
+  public hasContainer = false;
 
   public pickUpDates: Date[] = [];
   public quantities: string[] = ['1 litre', '2 litres', '3 litres', '4 litres']
-  public hasContainerOptions: string[] = ['Non', 'Oui']
-
-  public hasContainer = false;
 
   public minDateFilter: Date;
   public maxDateFilter: Date;
@@ -41,7 +39,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
   constructor(private takeAwayService: TakeAwayService) { }
 
   ngOnInit() {
-    this._initTchaiForm();
+    this._initChaiForm();
     this._setMinMaxDates();
     this._getTotalPrice();
   }
@@ -52,13 +50,13 @@ export class ChaiTakeAwayOrganism implements OnInit {
 
     // Retrieving the form data
     const formData = this.chaiTakeAwayForm.value;
-    const tchaiOrderData: ChaiTakeAway = { ...formData, totalPrice: this.totalPrice }
+    const chaiOrderData: ChaiTakeAway = { ...formData, price: this.price, totalPrice: this.totalPrice, totalDeposit: this.totalDeposit }
 
     // Transforming the date values
     this.pickUpDay = formData.pickUpDate.getDate();
     this.pickUpMonth = new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(formData.pickUpDate);
 
-    this.takeAwayService.createChaiTakeAwayOrder(tchaiOrderData)
+    this.takeAwayService.createChaiTakeAwayOrder(chaiOrderData)
       .subscribe(
         response => {
           this.isLoading = false;
@@ -100,7 +98,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
   ////////////
   // PRIVATE 
   ////////////
-  private _initTchaiForm(): void {
+  private _initChaiForm(): void {
     this.chaiTakeAwayForm.addControl('lastName', new FormControl(null, Validators.required));
     this.chaiTakeAwayForm.addControl('firstName', new FormControl(null, Validators.required));
     this.chaiTakeAwayForm.addControl('phone', new FormControl(null, Validators.required));
@@ -118,6 +116,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
   private _getTotalPrice(): void {
     if (this.hasContainer) {
       this.totalPrice = this.price;
+      this.totalDeposit = 0;
     } else {
       this.totalDeposit = this.depositAmount * this.orderQuantity;
       this.totalPrice = this.price + this.totalDeposit;

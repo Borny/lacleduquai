@@ -3,26 +3,26 @@ import { CommonModule } from '@angular/common';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaterialModule } from '../../../angular-material/angular-material.module';
-import { CafeSubscription } from '../../../models/cafeSubscription.model';
+import { ChaiTakeAway } from '../../../models/chai-take-away.model';
 
 @Component({
-  selector: 'delete-member',
-  templateUrl: './delete-cafe-member-dialog.component.html'
+  selector: 'delete-order-dialog',
+  templateUrl: './delete-order-dialog.component.html'
 })
-export class DeleteCafeMemberDialog {
-  public member: CafeSubscription;
+export class DeleteOrderDialog {
+  public order: ChaiTakeAway;
 
   public readonly CONFIRM = 'confirm';
   public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = 'cancel';
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteCafeMemberDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: CafeSubscription,
+    public dialogRef: MatDialogRef<DeleteOrderDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: ChaiTakeAway,
     public dialog: MatDialog,
   ) {
     this.dialogRef.disableClose = true;
-    this.member = data;
+    this.order = data;
   }
 
   public onCancel(): void {
@@ -31,9 +31,9 @@ export class DeleteCafeMemberDialog {
 }
 
 @NgModule({
-  declarations: [DeleteCafeMemberDialog],
+  declarations: [DeleteOrderDialog],
   imports: [CommonModule, MaterialModule],
   exports: [],
   providers: [],
 })
-class DeleteMemberModule { }
+class DeleteOrderModule { }

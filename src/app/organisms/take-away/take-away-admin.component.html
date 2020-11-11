@@ -6,19 +6,6 @@
 
 <div *ngIf="!isLoading">
   <h2>Take Away</h2>
-  <!-- <div class="filter__container">
-    <button mat-flat-button color="accent" (click)="onResetFilters()">
-      Réinitialiser
-    </button>
-    <filter-molecule
-      *ngFor="let filter of filterOptions"
-      [selectLabel]="filter.filterLabel"
-      [filterOptions]="filter.values"
-      [select]="matSelect"
-      (selectedFilterOption)="onSelectedOption(filter.filterName, $event)"
-    >
-    </filter-molecule>
-  </div> -->
   <ul class="data-table__container">
     <!-- Table header -->
     <li class="data-table__item data-table__item__header">
@@ -63,26 +50,26 @@
         {{ order.hasOwnContainer ? 'Oui' : 'Non' }}
       </div>
       <div>{{ order.totalPrice }}</div>
-      <div>{{ order.pickUpDate | date: 'd MMMM':undefined: 'fr-FR' }}</div>
+      <div>{{ order.pickUpDate | date: 'd MMMM':undefined:'fr-FR' }}</div>
       <div>
         <button
           mat-flat-button
           [color]="order.state === 'En attente' ? 'primary' : 'accent'"
           (click)="onOpenState(order)"
         >
-        {{ order.state }}
+          {{ order.state }}
         </button>
       </div>
       <div>{{ order.extraInfo }}</div>
       <div>
-        <!-- <button
-          mat-flat-button
+        <button
+          mat-stroked-button
           type="button"
           color="primary"
           (click)="onOpenOrderManager(order, i)"
         >
           <mat-icon>create</mat-icon>
-        </button> -->
+        </button>
       </div>
     </li>
   </ul>
