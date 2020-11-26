@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Adhésion au Café</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title color="secondary">Adhésion au Café</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,16 +12,21 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="6" offset="3">
+      <ion-col size="12" size-sm="6" offset-sm="3">
         <ion-card class="form__container">
           <ion-card-content>
+            <!-- Loader -->
             <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+            <!-- Response success -->
             <div class="form__response" *ngIf="formSentSuccess">
               <p>Merci, votre adhésion a bien été prise en compte.</p>
               <ion-button color="primary" type="button" (click)="onReload()">
                 Terminé !
               </ion-button>
             </div>
+
+            <!-- Response error -->
             <div *ngIf="formSentFail" class="form__response">
               <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
               <ion-button type="button" color="primary" (click)="onReload()">

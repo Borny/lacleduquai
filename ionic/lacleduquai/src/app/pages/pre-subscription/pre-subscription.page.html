@@ -18,7 +18,6 @@
   <ion-row
     ><ion-col>
       <ion-card class="form__container">
-
         <!-- Loader -->
         <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
 
@@ -43,6 +42,7 @@
           <p>A très bientôt !</p>
           <p>L’équipe de La Clé du Quai</p>
         </div>
+
         <!-- Sending Error -->
         <div *ngIf="formSentFail" class="form__response">
           <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>

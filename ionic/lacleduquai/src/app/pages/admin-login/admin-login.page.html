@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Admin login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row> </ion-row>
+  </ion-grid>
+  <div class="form__container">
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <ion-card>
+          <!-- Loader -->
+          <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+          <!-- Login error -->
+          <div
+            class="error-message__container"
+            *ngIf="!isLoading && loginFailed"
+          >
+            <p class="error-message__content">
+              Une erreur est survenue, veuillez réessayer...
+            </p>
+          </div>
+          <!-- Form -->
+          <form
+            *ngIf="!isLoading && !loginFailed"
+            class="login-form"
+            (submit)="onLogin(loginForm)"
+            #loginForm="ngForm"
+          >
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input
+                type="email"
+                name="loginEmail"
+                ngModel
+                #loginEmail="ngModel"
+                required
+                email
+              ></ion-input>
+            </ion-item>
+            <p
+              class="error-message"
+              [ngClass]="loginEmail.invalid && loginEmail.touched ? 'show-error': ''"
+            >
+              Veuillez renseigner votre email
+            </p>
+            <ion-item>
+              <ion-label position="floating">Mot de passe</ion-label>
+              <ion-input
+                type="password"
+                name="loginPassword"
+                ngModel
+                #loginPassword="ngModel"
+                required
+                minlength="6"
+              ></ion-input>
+            </ion-item>
+            <p
+              class="error-message"
+              [ngClass]="loginPassword.invalid && loginPassword.touched ? 'show-error': ''"
+            >
+              Veuillez renseigner un mot de passe
+            </p>
+            <ion-button
+              class="submit-btn"
+              type="submit"
+              color="primary"
+              [disabled]="loginForm.invalid"
+            >
+              {{ CONNECT_BTN_TEXT }}
+            </ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

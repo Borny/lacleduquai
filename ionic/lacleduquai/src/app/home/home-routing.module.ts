@@ -24,10 +24,10 @@ const routes: Routes = [
       //   loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminViewModule),
       //   canActivate: [AuthGuard]
       // },
-      // {
-      //   path: 'admin-login',
-      //   loadChildren: () => import('./views/admin-login/admin-login.module').then(m => m.AdminLoginViewModule)
-      // },
+      {
+        path: 'admin-login',
+        loadChildren: () => import('../pages/admin-login/admin-login.module').then(m => m.AdminLoginPageModule)
+      },
       {
         path: '',
         redirectTo: '/lcdq/cafe-adhesion',

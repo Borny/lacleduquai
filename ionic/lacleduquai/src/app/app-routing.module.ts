@@ -15,11 +15,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'lcdq/cafe-adhesion',
     pathMatch: 'full'
-  },
-  {
-    path: 'take-away',
-    loadChildren: () => import('./pages/take-away/take-away.module').then( m => m.TakeAwayPageModule)
-  },
+  }
 ];
 
 @NgModule({

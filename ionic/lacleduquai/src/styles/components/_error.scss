@@ -1,0 +1,9 @@
+.error-message {
+  font-size: 0 !important;
+  color: var(--ion-color-danger);
+  transition: 0.2s ease-in;
+
+  &.show-error {
+    font-size: 75% !important;
+  }
+}
