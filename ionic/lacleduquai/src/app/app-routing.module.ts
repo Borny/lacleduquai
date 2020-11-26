@@ -17,10 +17,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'pre-subscription',
-    loadChildren: () => import('./pages/pre-subscription/pre-subscription.module').then( m => m.PreSubscriptionPageModule)
+    path: 'take-away',
+    loadChildren: () => import('./pages/take-away/take-away.module').then( m => m.TakeAwayPageModule)
   },
-
 ];
 
 @NgModule({

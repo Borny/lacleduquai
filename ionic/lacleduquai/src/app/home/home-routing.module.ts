@@ -16,6 +16,19 @@ const routes: Routes = [
         loadChildren: () => import('../pages/pre-subscription/pre-subscription.module').then(m => m.PreSubscriptionPageModule)
       },
       {
+        path: 'a-emporter',
+        loadChildren: () => import('../pages/take-away/take-away.module').then(m => m.TakeAwayPageModule)
+      },
+      // {
+      //   path: 'admin',
+      //   loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminViewModule),
+      //   canActivate: [AuthGuard]
+      // },
+      // {
+      //   path: 'admin-login',
+      //   loadChildren: () => import('./views/admin-login/admin-login.module').then(m => m.AdminLoginViewModule)
+      // },
+      {
         path: '',
         redirectTo: '/lcdq/cafe-adhesion',
         pathMatch: 'full'
