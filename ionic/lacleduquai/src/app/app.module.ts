@@ -11,6 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './interceptors/auth-interceptors';
 
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
@@ -30,9 +31,9 @@ registerLocaleData(localeFr);
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'fr-FR' },
-    // {
-    //   provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

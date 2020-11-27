@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { AuthGuard } from '../guards/auth.guards';
+
 import { HomePage } from './home.page';
 
 const routes: Routes = [
@@ -19,14 +22,14 @@ const routes: Routes = [
         path: 'a-emporter',
         loadChildren: () => import('../pages/take-away/take-away.module').then(m => m.TakeAwayPageModule)
       },
-      // {
-      //   path: 'admin',
-      //   loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminViewModule),
-      //   canActivate: [AuthGuard]
-      // },
       {
         path: 'admin-login',
         loadChildren: () => import('../pages/admin-login/admin-login.module').then(m => m.AdminLoginPageModule)
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('../pages/admin/admin.module').then(m => m.AdminPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: '',
@@ -39,6 +42,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class HomePageRoutingModule { }

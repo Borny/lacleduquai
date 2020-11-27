@@ -1,0 +1,31 @@
+<ion-header-component [headerTitle]="'Admin'">
+  <!-- <ion-buttons *ngIf="isUserAuthenticated" (click)="onLogout()" slot="primary">
+    <ion-buttons color="secondary">
+      <ion-icon slot="start" name="star"></ion-icon>
+      Log out
+    </ion-buttons>
+  </ion-buttons> -->
+</ion-header-component>
+
+<ion-content>
+  <section class="main-section">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="Take Away">
+        <ng-template matTabContent>
+          <take-away-admin-organism></take-away-admin-organism>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Cours">
+        <ng-template matTabContent>
+          <!-- <courses-organism></courses-organism> -->
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Café Adhésions">
+        <ng-template matTabContent>
+          <!-- <cafe-subscriptions-organism></cafe-subscriptions-organism> -->
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Stages"> </mat-tab>
+    </mat-tab-group>
+  </section>
+</ion-content>

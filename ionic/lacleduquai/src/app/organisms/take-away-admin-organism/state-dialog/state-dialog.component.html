@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Changement de status de la commande</h2>
+
+<form [formGroup]="stateForm" (ngSubmit)="onSubmit()">
+  <ion-radio-group
+    class="radio-group"
+    aria-label="changement de status"
+    formControlName="state"
+    [value]="order.state"
+  >
+    <ion-item *ngFor="let stateOption of stateOptions" lines="none">
+      <ion-radio [value]="stateOption"></ion-radio>
+      <ion-label> {{ stateOption }}</ion-label>
+    </ion-item>
+  </ion-radio-group>
+</form>
+
+<div mat-dialog-actions align="end">
+  <ion-button color="warning" fill="clear" (click)="onCancel()"
+    >Annuler</ion-button
+  >
+  <ion-button
+    color="primary"
+    [mat-dialog-close]="{ order: order, action: CONFIRM }"
+    (click)="onSubmit()"
+  >
+    Valider
+  </ion-button>
+</div>

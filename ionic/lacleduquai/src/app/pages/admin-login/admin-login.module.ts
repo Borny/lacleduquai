@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AdminLoginPageRoutingModule } from './admin-login-routing.module';
-
+import { SharedModule } from '../../shared/shared.module';
 import { AdminLoginPage } from './admin-login.page';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { AdminLoginPage } from './admin-login.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AdminLoginPageRoutingModule
+    AdminLoginPageRoutingModule,
+    SharedModule
   ],
   declarations: [AdminLoginPage]
 })

@@ -1,8 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Admin login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header-component [headerTitle]="'Admin Login'">
+  <!-- <ion-buttons *ngIf="isUserAuthenticated" (click)="onLogout()" slot="primary">
+    <ion-buttons color="secondary">
+      <ion-icon slot="start" name="star"></ion-icon>
+      Log out
+    </ion-buttons>
+  </ion-buttons> -->
+</ion-header-component>
 
 <ion-content>
   <ion-grid>

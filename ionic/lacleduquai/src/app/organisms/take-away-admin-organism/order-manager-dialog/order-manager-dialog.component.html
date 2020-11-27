@@ -1,0 +1,165 @@
+<!-- Loader -->
+<ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+<!-- Order error -->
+<div *ngIf="orderError">
+  <p>Impossible de récupérer les données de la commande</p>
+  <ion-button color="warning" (click)="onClose()">Fermer</ion-button>
+</div>
+
+<!-- Order info -->
+<div *ngIf="showDialog">
+  <h2 class="color-primary" mat-dialog-title>
+    {{ order.firstName }} {{ order.lastName }}
+  </h2>
+  <div mat-dialog-content>
+    <form
+      class="order-edition-form"
+      [formGroup]="orderEditionForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <ion-item>
+        <ion-label>Prénom</ion-label>
+        <ion-input
+          matInput
+          type="text"
+          name="firstName"
+          formControlName="firstName"
+          required
+        ></ion-input>
+        <mat-error
+          *ngIf="
+            orderEditionForm.get('firstName').invalid &&
+            orderEditionForm.touched
+          "
+          >Veuillez renseigner un prénom</mat-error
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input
+          matInput
+          type="text"
+          name="lastName"
+          formControlName="lastName"
+          required
+        ></ion-input>
+        <mat-error
+          *ngIf="
+            orderEditionForm.get('lastName').invalid && orderEditionForm.touched
+          "
+          >Veuillez renseigner un nom</mat-error
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label>Téléphone</ion-label>
+        <ion-input
+          matInput
+          type="text"
+          name="phone"
+          formControlName="phone"
+          required
+        ></ion-input>
+        <mat-error
+          *ngIf="
+            orderEditionForm.get('phone').invalid && orderEditionForm.touched
+          "
+          >Veuillez renseigner un numéro de téléphone</mat-error
+        >
+      </ion-item>
+      <div class="form-control radio-container">
+        <ion-label class="label bold"
+          >Quantité (par bouteille de 1 litre):</ion-label
+        >
+        <ion-radio-group
+          class="radio-group"
+          aria-label="Quantité"
+          formControlName="quantity"
+          [value]="order.quantity"
+          (ionChange)="onQuantityChange($event)"
+        >
+          <ion-item>
+            <ion-radio
+              class="radio-button"
+              *ngFor="let quantity of quantities; let i = index"
+              [value]="i + 1"
+            >
+            </ion-radio>
+            <ion-label>
+              {{ quantity }}
+            </ion-label>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <p><span class="bold">Prix total:</span> {{ totalPrice }}€</p>
+      <p><span class="bold">Consigne:</span> {{ totalDeposit }}€</p>
+      <div class="slide-toggle__section">
+        <ion-label class="bold">Possède un contenant </ion-label>
+        <ion-toggle
+          class="slide-toggle"
+          formControlName="hasOwnContainer"
+          [checked]="hasOwnContainer"
+          (ionChange)="toggleHasContainer($event.checked)"
+        >
+          {{ hasContainer ? 'Oui' : 'Non' }}
+        </ion-toggle>
+      </div>
+
+      <p><span class="bold">Status de la commande:</span> {{ order.state }}</p>
+      <p>
+        <span class="bold">Date de retrait:</span>
+        {{
+          orderEditionForm.get('pickUpDate').value
+            | date: 'd MMMM':undefined:'fr-FR'
+        }}
+      </p>
+      <div class="form-control">
+        <mat-form-field appearance="fill" class="form__calendar">
+          <mat-label>Modifier la date de retrait :</mat-label>
+          <input
+            matInput
+            [min]="minDateFilter"
+            [max]="maxDateFilter"
+            [matDatepickerFilter]="dateFilter"
+            [matDatepicker]="picker"
+            (dateChange)="onDateChange($event)"
+            formControlName="pickUpDate"
+            disabled
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <ion-item>
+        <ion-label class="bold">Extra info</ion-label>
+        <ion-textarea
+          placeholder="Extra info"
+          name="extraInfo"
+          formControlName="extraInfo"
+          >{{ order.extraInfo }}</ion-textarea
+        >
+      </ion-item>
+    </form>
+  </div>
+
+  <!-- CTAs -->
+  <div mat-dialog-actions align="end">
+    <div>
+      <ion-button color="warn" (click)="onOpenDeleteModal()">
+        Supprimer
+      </ion-button>
+    </div>
+    <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+    <ion-button
+      [disabled]="orderEditionForm.invalid || orderEditionForm.pristine"
+      color="accent"
+      [mat-dialog-close]="{ order: order, action: CONFIRM }"
+      (click)="onSubmit()"
+    >
+      Valider
+    </ion-button>
+  </div>
+</div>
