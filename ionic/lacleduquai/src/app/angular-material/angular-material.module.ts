@@ -10,16 +10,16 @@ import { MatIconModule } from '@angular/material/icon';
 // import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 // import { MatCheckboxModule } from '@angular/material/checkbox';
-// import { MatRadioModule } from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatCardModule } from '@angular/material/card';
 // import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-// import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
-// import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 // import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
@@ -30,7 +30,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatIconModule,
     // MatListModule,
     MatInputModule,
-    // MatRadioModule,
+    MatRadioModule,
     // MatCheckboxModule,
     MatProgressSpinnerModule,
     // MatCardModule,
@@ -39,9 +39,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    // MatSelectModule,
+    MatSelectModule,
     MatTabsModule,
-    // ClipboardModule,
+    ClipboardModule,
     // MatButtonToggleModule
   ],
   providers: [

@@ -11,7 +11,7 @@ import { AdminPage } from './admin.page';
 import { MaterialModule } from '../../angular-material/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
 // import { CoursesModule } from '../../organisms/courses/courses.module';
-// import { CafeSubscriptionsModule } from '../../organisms/cafe-subscriptions/cafe-subscriptions.module'
+import { CafeSubscriptionAdminOrganismModule } from '../../organisms/cafe-subscription-admin-organism/cafe-subscription-admin-organism.module';
 import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-organism/take-away-admin-organism.module';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-org
     AdminPageRoutingModule,
     MaterialModule,
     SharedModule,
-    TakeAwayAdminOrganismModule
+    TakeAwayAdminOrganismModule,
+    CafeSubscriptionAdminOrganismModule
   ],
   declarations: [AdminPage]
 })
