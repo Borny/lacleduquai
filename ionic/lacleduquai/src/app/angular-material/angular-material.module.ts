@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 // import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
-// import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     // MatListModule,
     MatInputModule,
     MatRadioModule,
-    // MatCheckboxModule,
+    MatCheckboxModule,
     MatProgressSpinnerModule,
     // MatCardModule,
     // MatSlideToggleModule,

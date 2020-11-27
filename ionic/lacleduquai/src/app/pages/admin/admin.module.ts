@@ -10,7 +10,8 @@ import { AdminPage } from './admin.page';
 
 import { MaterialModule } from '../../angular-material/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
-// import { CoursesModule } from '../../organisms/courses/courses.module';
+
+import { CoursesAdminOrganismModule } from '../../organisms/courses-admin-organism/courses-admin-organism.module';
 import { CafeSubscriptionAdminOrganismModule } from '../../organisms/cafe-subscription-admin-organism/cafe-subscription-admin-organism.module';
 import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-organism/take-away-admin-organism.module';
 
@@ -23,7 +24,8 @@ import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-org
     MaterialModule,
     SharedModule,
     TakeAwayAdminOrganismModule,
-    CafeSubscriptionAdminOrganismModule
+    CafeSubscriptionAdminOrganismModule,
+    CoursesAdminOrganismModule
   ],
   declarations: [AdminPage]
 })
