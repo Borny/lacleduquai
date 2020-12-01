@@ -1,0 +1,160 @@
+<h2 class="heading">...ici !</h2>
+<ion-card class="form__container">
+  <ion-card-content>
+    <!-- Loader -->
+    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+    <!-- Response -->
+    <div *ngIf="formSentSuccess" class="form__response">
+      <p>Merci beaucoup !</p>
+      <p>
+        Vous pourrez venir récupérer votre commande le {{ pickUpDay }}
+        {{ pickUpMonth }}, entre 16h30 et 18h30, au 49 rue du Mirail.
+      </p>
+      <p>
+        D’ici là, portez-vous bien !<br />
+        A très vite,<br />
+        La Clé du Quai.
+      </p>
+    </div>
+
+    <!-- Order failed -->
+    <div *ngIf="formSentFail" class="form__response">
+      <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
+      <ion-button type="button" color="primary" (click)="onReload()">
+        Passer commande
+      </ion-button>
+    </div>
+    <!-- Form -->
+    <form
+      *ngIf="!isLoading && !hideForm"
+      class="take-away-form"
+      [formGroup]="chaiTakeAwayForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <ion-item class="form-control">
+        <ion-label>Nom</ion-label>
+        <ion-input
+          type="text"
+          name="lastName"
+          formControlName="lastName"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        class="error-message"
+        [ngClass]="
+          chaiTakeAwayForm.get('lastName').invalid &&
+          chaiTakeAwayForm.get('lastName').touched
+            ? 'show-error'
+            : ''
+        "
+      >
+        Veuillez renseigner votre nom
+      </p>
+      <ion-item class="form-control">
+        <ion-label>Prénom</ion-label>
+        <ion-input
+          type="text"
+          name="firstName"
+          formControlName="firstName"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        class="error-message"
+        [ngClass]="
+          chaiTakeAwayForm.get('firstName').invalid &&
+          chaiTakeAwayForm.get('firstName').touched
+            ? 'show-error'
+            : ''
+        "
+      >
+        Veuillez renseigner votre prénom
+      </p>
+      <ion-item class="form-control">
+        <ion-label>Téléphone</ion-label>
+        <ion-input
+          type="text"
+          name="phone"
+          formControlName="phone"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        class="error-message"
+        [ngClass]="
+          chaiTakeAwayForm.get('phone').invalid &&
+          chaiTakeAwayForm.get('phone').touched
+            ? 'show-error'
+            : ''
+        "
+      >
+        Veuillez renseigner votre numéro de téléphone
+      </p>
+      <p class="italic text-center font-sm">
+        Vos informations seront effacées une fois la transaction réalisée.
+      </p>
+      <div class="form-control radio-container">
+        <ion-label class="label"
+          >Quantité (par bouteille de 1 litre):</ion-label
+        >
+        <ion-radio-group
+          class="radio-group"
+          aria-label="Quantité"
+          formControlName="quantity"
+          [value]="quantities[0]"
+          (ionChange)="onQuantityChange($event)"
+        >
+          <ion-item *ngFor="let quantity of quantities; let i = index">
+            <ion-radio class="radio-button" [value]="i + 1"> </ion-radio>
+            <ion-label>{{ quantity }}</ion-label>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+      <div class="form-control">
+        <mat-form-field appearance="fill" class="form__calendar">
+          <mat-label>Date de retrait :</mat-label>
+          <input
+            matInput
+            [min]="minDateFilter"
+            [max]="maxDateFilter"
+            [matDatepickerFilter]="dateFilter"
+            [matDatepicker]="picker"
+            formControlName="pickUpDate"
+            disabled
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+          <p class="font-sm">(entre 16h30 et 18h30)</p>
+        </mat-form-field>
+      </div>
+      <div class="slide-toggle__section">
+        <ion-label>J'ai mon propre contenant</ion-label>
+        <ion-toggle
+          class="slide-toggle"
+          formControlName="hasOwnContainer"
+          [checked]="hasContainer"
+          (ionChange)="toggleHasContainer($event)"
+          >{{ hasContainer ? 'Oui' : 'Non' }}</ion-toggle
+        >
+      </div>
+      <p class="text-center price">Total: {{ totalPrice }}€</p>
+      <p class="text-center" *ngIf="!hasContainer">
+        (dont {{ totalDeposit }}€ de consigne)
+      </p>
+      <p class="italic text-center font-sm">
+        Le paiement se fait sur place, au moment de récupérer votre commande.
+      </p>
+      <ion-button
+        class="submit-btn"
+        type="submit"
+        color="primary"
+        [disabled]="chaiTakeAwayForm.invalid"
+      >
+        Commandez !
+      </ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>

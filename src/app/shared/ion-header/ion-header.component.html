@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="secondary">{{ headerTitle }}</ion-title>
+    <!-- <button
+      *ngIf="isUserAuthenticated"
+      mat-flat-button
+      (click)="onLogout()"
+      type="button"
+      color="accent"
+    >
+      {{ LOGOUT_BTN_TEXT }}
+    </button> -->
+    <ion-buttons
+      *ngIf="isUserAuthenticated"
+      (click)="onLogout()"
+      slot="primary"
+    >
+      <ion-button color="secondary">
+        <ion-icon slot="start" name="power"></ion-icon>
+        Log out
+      </ion-button>
+    </ion-buttons>
+
+    <ng-content></ng-content>
+  </ion-toolbar>
+</ion-header>

@@ -5,7 +5,7 @@ import { Subject, Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
-import { AdminAuth } from '../models/adminLogin.model';
+import { AdminAuth } from '../models/admin-login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +51,7 @@ export class AuthService {
             this._saveAuthData(token, expirationDate);
             this._isAuth = true;
             this._authStatusListener.next(true);
-            this.router.navigateByUrl('/admin');
+            this.router.navigateByUrl('/lcdq/admin');
           }
         },
         error => {
@@ -67,7 +67,7 @@ export class AuthService {
     this._authStatusListener.next(false);
     this._clearAuthData();
     this._isAuth = false;
-    this.router.navigateByUrl('/admin-login');
+    this.router.navigateByUrl('/lcdq/admin-login');
   }
 
   public autoAuthUser(): void {

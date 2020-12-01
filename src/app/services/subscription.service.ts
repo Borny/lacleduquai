@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { PreSubscription } from '../models/preSubscription.model';
+import { PreSubscription } from '../models/pre-subscription.model';
 import { Member } from '../models/member.model';
 
 @Injectable({

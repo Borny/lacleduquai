@@ -1,45 +1,31 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, PreloadAllModules, Routes } from '@angular/router';
-
-import { AuthGuard } from './guards/auth.guards';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'lcdq',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
     path: 'cafe-adhesion',
-    loadChildren: () => import('./views/cafe/cafe.module').then(m => m.CafeViewModule)
-  },
-  {
-    path: 'pre-inscription',
-    loadChildren: () => import('./views/pre-subscription/pre-subscription.module').then(m => m.PreSubscriptionViewModule)
-  },
-  {
-    path: 'a-emporter',
-    loadChildren: () => import('./views/take-away/take-away.module').then(m => m.TakeAwayViewModule)
-  },
-  {
-    path: 'admin',
-    loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminViewModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin-login',
-    loadChildren: () => import('./views/admin-login/admin-login.module').then(m => m.AdminLoginViewModule)
+    loadChildren: () => import('./pages/cafe/cafe.module').then(m => m.CafePageModule)
   },
   {
     path: '',
-    redirectTo: 'cafe-adhesion',
+    redirectTo: 'lcdq/cafe-adhesion',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'cafe-adhesion',
+    redirectTo: 'lcdq/cafe-adhesion',
     pathMatch: 'full'
   }
-]
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-  exports: [RouterModule],
-  providers: [AuthGuard]
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' })
+  ],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

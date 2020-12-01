@@ -1,4 +1,4 @@
-import {  Component, EventEmitter, Input, OnChanges,Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
 
 @Component({
