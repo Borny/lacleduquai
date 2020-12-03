@@ -51,7 +51,7 @@ export class AuthService {
             this._saveAuthData(token, expirationDate);
             this._isAuth = true;
             this._authStatusListener.next(true);
-            this.router.navigateByUrl('/lcdq/admin');
+            this.router.navigateByUrl('/admin');
           }
         },
         error => {

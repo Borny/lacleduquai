@@ -142,7 +142,7 @@ export class PreSubscriptionPage implements OnInit {
       .map((checked: boolean, i: number) => checked ? this.workshops[i].date : null)
       .filter(v => v !== null);
 
-    let formData: PreSubscription = this.subscriptionForm.value;
+    const formData: PreSubscription = this.subscriptionForm.value;
     formData.courses = selectedCourseNames;
     formData.workshops = selectedWorkshopDates;
 

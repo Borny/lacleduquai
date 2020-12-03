@@ -78,13 +78,8 @@
           [value]="order.quantity"
           (ionChange)="onQuantityChange($event)"
         >
-          <ion-item>
-            <ion-radio
-              class="radio-button"
-              *ngFor="let quantity of quantities; let i = index"
-              [value]="i + 1"
-            >
-            </ion-radio>
+          <ion-item *ngFor="let quantity of quantities; let i = index">
+            <ion-radio class="radio-button" [value]="i + 1"> </ion-radio>
             <ion-label>
               {{ quantity }}
             </ion-label>
@@ -99,7 +94,6 @@
         <ion-toggle
           class="slide-toggle"
           formControlName="hasOwnContainer"
-          [checked]="hasOwnContainer"
           (ionChange)="toggleHasContainer($event.checked)"
         >
           {{ hasContainer ? 'Oui' : 'Non' }}
@@ -125,7 +119,6 @@
             [matDatepicker]="picker"
             (dateChange)="onDateChange($event)"
             formControlName="pickUpDate"
-            disabled
           />
           <mat-datepicker-toggle matSuffix [for]="picker">
           </mat-datepicker-toggle>

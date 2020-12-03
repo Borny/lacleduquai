@@ -147,7 +147,7 @@ export class OrderManagerDialog implements OnInit {
     this.orderEditionForm.addControl('phone', new FormControl(this.order.phone, Validators.required));
     this.orderEditionForm.addControl('quantity', new FormControl(this.order.quantity, Validators.required));
     this.orderEditionForm.addControl('hasOwnContainer', new FormControl(this.order.hasOwnContainer, Validators.required));
-    this.orderEditionForm.addControl('pickUpDate', new FormControl(this.order.pickUpDate, Validators.required));
+    this.orderEditionForm.addControl('pickUpDate', new FormControl({ value: this.order.pickUpDate, disabled: true }, Validators.required));
     this.orderEditionForm.addControl('extraInfo', new FormControl(this.order.extraInfo));
 
 
