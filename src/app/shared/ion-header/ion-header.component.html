@@ -4,16 +4,5 @@
       <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
     <ion-title color="secondary">{{ headerTitle }}</ion-title>
-    <ion-buttons
-      *ngIf="isUserAuthenticated"
-      (click)="onLogout()"
-      slot="primary"
-    >
-      <ion-button color="secondary">
-        <ion-icon slot="start" name="power"></ion-icon>
-        Log out
-      </ion-button>
-    </ion-buttons>
-    <ng-content></ng-content>
   </ion-toolbar>
 </ion-header>

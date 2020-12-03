@@ -85,4 +85,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.splashScreen.hide();
     });
   }
+
+  public onLogout(): void {
+    this.authService.logout();
+  }
 }
