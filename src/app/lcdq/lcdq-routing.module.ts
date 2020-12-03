@@ -18,15 +18,43 @@ const routes: Routes = [
       },
       {
         path: 'reservation-salles',
-        loadChildren: () => import('../pages/booking-rooms/booking-rooms.module').then(m => m.BookingRoomsPageModule)
+        loadChildren: () => import('../pages/booking-studios/booking-studios.module').then(m => m.BookingStudiosPageModule)
       },
       {
         path: 'a-emporter',
         loadChildren: () => import('../pages/take-away/take-away.module').then(m => m.TakeAwayPageModule)
       },
       {
+        path: 'reservation-salles',
+        loadChildren: () => import('../pages/booking-studios/booking-studios.module').then(m => m.BookingStudiosPageModule)
+      },
+      {
         path: 'galerie',
         loadChildren: () => import('../pages/gallery/gallery.module').then(m => m.GalleryPageModule)
+      },
+      {
+        path: 'residence',
+        loadChildren: () => import('../pages/residence/residence.module').then(m => m.ResidencePageModule)
+      },
+      {
+        path: 'belaetcome',
+        loadChildren: () => import('../pages/belaetcome/belaetcome.module').then(m => m.BelaetcomePageModule)
+      },
+      {
+        path: 'cours-stages',
+        loadChildren: () => import('../pages/courses-workshops/courses-workshops.module').then(m => m.CoursesWorkshopsPageModule)
+      },
+      {
+        path: 'coworking',
+        loadChildren: () => import('../pages/coworking/coworking.module').then(m => m.CoworkingPageModule)
+      },
+      {
+        path: 'infos',
+        loadChildren: () => import('../pages/infos/infos.module').then(m => m.InfosPageModule)
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('../pages/contact/contact.module').then(m => m.ContactPageModule)
       },
       {
         path: '',

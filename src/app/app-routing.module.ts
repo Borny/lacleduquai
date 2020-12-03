@@ -30,14 +30,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'lcdq/accueil',
     pathMatch: 'full'
-  },
-  {
-    path: 'booking-rooms',
-    loadChildren: () => import('./pages/booking-rooms/booking-rooms.module').then(m => m.BookingRoomsPageModule)
-  },
-  {
-    path: 'gallery',
-    loadChildren: () => import('./pages/gallery/gallery.module').then(m => m.GalleryPageModule)
   }
 ];
 

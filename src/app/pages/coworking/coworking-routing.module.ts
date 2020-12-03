@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BookingRoomsPage } from './booking-rooms.page';
+import { CoworkingPage } from './coworking.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: BookingRoomsPage
+    component: CoworkingPage
   },
   {
-    path: 'reservation-salles',
+    path: 'coworking',
     redirectTo: '',
     pathMatch: 'full'
   }
@@ -19,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BookingRoomsPageRoutingModule { }
+export class CoworkingPageRoutingModule { }

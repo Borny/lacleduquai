@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from './services/auth.service';
+import { SecondaryNavLink } from './models/secondary-nav.model';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,39 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit, OnDestroy {
 
   public isUserAuthenticated = false;
+
+  public secondaryNavLinks: SecondaryNavLink[] = [
+    {
+      icon: 'business',
+      label: 'Accueil en résidence',
+      link: '/lcdq/residence'
+    },
+    {
+      icon: 'business',
+      label: 'Bela et Côme',
+      link: '/lcdq/belaetcome'
+    },
+    {
+      icon: 'business',
+      label: 'Cours et Stages',
+      link: '/lcdq/cours-stages'
+    },
+    {
+      icon: 'business',
+      label: 'Coworking',
+      link: '/lcdq/coworking'
+    },
+    {
+      icon: 'business',
+      label: 'Informations',
+      link: '/lcdq/infos'
+    },
+    {
+      icon: 'business',
+      label: 'Contact',
+      link: '/lcdq/contact'
+    }
+  ];
 
   public readonly LOGOUT_BTN_TEXT = 'Log out';
   public readonly LOGO_COLOR = 'white';
