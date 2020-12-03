@@ -1,66 +1,30 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
-:host {
-  display: block;
-  background: url('../../../assets/img/et-rien-ne-bouge.jpg') center center;
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+ion-content {
+  background-image: url('../../../assets/img/cafe-lcdq-inside.jpg');
+  background-size: cover;
 }
 
-h1 {
-  padding: 1rem;
-  text-align: center;
-  background: $color-primary;
-  color: $white;
-  font-family: $fontPoppins;
-
-  @include screen-sm {
-    padding: 3rem;
-  }
-}
-
-.form__container {
-  max-width: $screen-sm;
+.menu-du-jour {
+  color: white;
+  height: 500px;
+  display: flex;
+  width: 400px;
   margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 450px;
-}
-
-.form__response {
-  display: flex;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.7);
   flex-flow: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  background-image: url(../../../assets/img/ChalkboardPaperPlainPortrait.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transform: rotate(-3deg);
   p {
-    margin: 0 auto 2rem;
+    font-family: 'Indie Flower', cursive;
+    font-size: 2rem;
   }
-}
-
-.subscription-form {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.checkbox__container {
-  margin: 2rem auto;
-  display: flex;
-  width: 100%;
-}
-
-.form-control {
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto 1rem;
-}
-
-.price {
-  color: $color-primary;
-  font-weight: $fontWeightBold;
-}
-
-.submit-btn {
-  margin: 1rem auto 2rem;
 }

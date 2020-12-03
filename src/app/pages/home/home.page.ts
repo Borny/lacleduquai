@@ -27,15 +27,15 @@ export class HomePage {
     // 'Festival / Le Bruit des Corps'
   ];
 
-  public cardEvents: CardEvent[] = [
+  // public cardEvents: CardEvent[] = [
 
-  ]
+  // ]
 
   public readonly HEADER_TITLE = 'Accueil';
 
   constructor(public popoverController: PopoverController) { }
 
-
+  // Popover
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
