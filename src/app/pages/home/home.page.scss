@@ -1,0 +1,108 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+.logo-container {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.word-carousel {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 100;
+  color: $color-gray;
+  width: 100%;
+  display: flex;
+  // flex-flow: column;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 0 0 1rem;
+    margin: 0;
+  }
+  div {
+    // padding: 0;
+    overflow: hidden;
+    position: relative;
+    height: 65px;
+    // padding-top: 10px;
+    margin-top: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ul {
+      padding: 0;
+      li {
+        text-align: center;
+        font-family: Montserrat;
+        color: $color-primary;
+        font-weight: 700;
+        padding: 0 10px;
+        height: 45px;
+        margin-top: 45px;
+        display: block;
+
+        @media (min-width: $screen-xs) {
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+.word-switch {
+  animation: switch 6s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+}
+
+@keyframes switch {
+  0% {
+    margin-top: -340px;
+  }
+  5% {
+    margin-top: -280px;
+  }
+  25% {
+    margin-top: -280px;
+  }
+  30% {
+    margin-top: -100px;
+  }
+  50% {
+    margin-top: -100px;
+  }
+  55% {
+    margin-top: 80px;
+  }
+  75% {
+    margin-top: 80px;
+  }
+  80% {
+    margin-top: 260px;
+  }
+  99.99% {
+    margin-top: 260px;
+  }
+  100% {
+    margin-top: -340px;
+  }
+}
+
+// Flash Info
+.flash-info {
+  background: $color-secondary;
+}
+
+// Events
+.ion-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

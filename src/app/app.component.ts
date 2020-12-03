@@ -20,32 +20,27 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public secondaryNavLinks: SecondaryNavLink[] = [
     {
-      icon: 'business',
+      icon: 'flower-outline',
       label: 'Accueil en résidence',
       link: '/lcdq/residence'
     },
     {
-      icon: 'business',
-      label: 'Bela et Côme',
-      link: '/lcdq/belaetcome'
-    },
-    {
-      icon: 'business',
-      label: 'Cours et Stages',
-      link: '/lcdq/cours-stages'
-    },
-    {
-      icon: 'business',
+      icon: 'bulb-outline',
       label: 'Coworking',
       link: '/lcdq/coworking'
     },
     {
-      icon: 'business',
-      label: 'Informations',
+      icon: 'accessibility-outline',
+      label: 'Cours et Stages',
+      link: '/lcdq/cours-stages'
+    },
+    {
+      icon: 'people-outline',
+      label: 'L\'Equipe',
       link: '/lcdq/infos'
     },
     {
-      icon: 'business',
+      icon: 'mail-outline',
       label: 'Contact',
       link: '/lcdq/contact'
     }

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./belaetcome.page.scss'],
 })
 export class BelaetcomePage implements OnInit {
-  public HEADER_TITLE = 'Bela et Côme';
+  public HEADER_TITLE = 'Cie Bela & Côme';
 
   constructor() { }
 

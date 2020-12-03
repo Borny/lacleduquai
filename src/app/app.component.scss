@@ -1,0 +1,14 @@
+@import '../styles/tools/variables';
+@import '../styles/tools/mixins';
+
+.link {
+  &.active,
+  &:active {
+    color: $color-primary;
+  }
+
+  .ion-avatar {
+    margin: 0 17px 0 0;
+    width: 30px;
+  }
+}
