@@ -105,7 +105,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
     this.chaiTakeAwayForm.addControl('phone', new FormControl(null, Validators.required));
     this.chaiTakeAwayForm.addControl('quantity', new FormControl(1, Validators.required));
     this.chaiTakeAwayForm.addControl('hasOwnContainer', new FormControl(false, Validators.required));
-    this.chaiTakeAwayForm.addControl('pickUpDate', new FormControl(null, Validators.required));
+    this.chaiTakeAwayForm.addControl('pickUpDate', new FormControl({ value: null, disabled: true }, Validators.required));
   }
 
   private _setMinMaxDates(): void {
