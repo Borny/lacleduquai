@@ -7,13 +7,15 @@ import { TakeAwayPageRoutingModule } from './take-away-routing.module';
 
 import { TakeAwayPage } from './take-away.page';
 import { ChaiTakeAwayModule } from '../../organisms/chai-take-away/chai-take-away.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
     TakeAwayPageRoutingModule,
-    ChaiTakeAwayModule
+    ChaiTakeAwayModule,
+    SharedModule
   ],
   declarations: [TakeAwayPage]
 })

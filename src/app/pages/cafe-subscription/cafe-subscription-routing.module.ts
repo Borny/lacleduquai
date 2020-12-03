@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CafePage } from './cafe.page';
+import { CafeSubscriptionPage } from './cafe-subscription.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CafePage
+    component: CafeSubscriptionPage
   },
   {
-    path: 'cafe',
+    path: 'cafe-inscription',
     redirectTo: '',
     pathMatch: 'full'
   }
@@ -19,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CafePageRoutingModule { }
+export class CafeSubscriptionPageRoutingModule { }

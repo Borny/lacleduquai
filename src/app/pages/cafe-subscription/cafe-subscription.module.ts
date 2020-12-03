@@ -4,19 +4,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CafePageRoutingModule } from './cafe-routing.module';
+import { CafeSubscriptionPageRoutingModule } from './cafe-subscription-routing.module';
 
-import { CafePage } from './cafe.page';
-import { SharedModule } from '../../shared/shared.module';
+import { CafeSubscriptionPage } from './cafe-subscription.page';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    CafePageRoutingModule,
-    SharedModule
+    CafeSubscriptionPageRoutingModule
   ],
-  declarations: [CafePage]
+  declarations: [CafeSubscriptionPage]
 })
-export class CafePageModule { }
+export class CafeSubscriptionPageModule { }

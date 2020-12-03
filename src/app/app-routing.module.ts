@@ -1,24 +1,43 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './guards/auth.guards';
+
 const routes: Routes = [
   {
     path: 'lcdq',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./lcdq/lcdq.module').then(m => m.LcdqPageModule)
   },
   {
     path: 'cafe-adhesion',
-    loadChildren: () => import('./pages/cafe/cafe.module').then(m => m.CafePageModule)
+    loadChildren: () => import('./pages/cafe-subscription/cafe-subscription.module').then(m => m.CafeSubscriptionPageModule)
+  },
+  {
+    path: 'admin-login',
+    loadChildren: () => import('./pages/admin-login/admin-login.module').then(m => m.AdminLoginPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: 'lcdq/cafe-adhesion',
+    redirectTo: 'lcdq/accueil',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'lcdq/cafe-adhesion',
+    redirectTo: 'lcdq/accueil',
     pathMatch: 'full'
+  },
+  {
+    path: 'booking-rooms',
+    loadChildren: () => import('./pages/booking-rooms/booking-rooms.module').then(m => m.BookingRoomsPageModule)
+  },
+  {
+    path: 'gallery',
+    loadChildren: () => import('./pages/gallery/gallery.module').then(m => m.GalleryPageModule)
   }
 ];
 
@@ -26,6 +45,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

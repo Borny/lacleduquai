@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  public readonly HEADER_TITLE = 'Accueil';
+
+  constructor() { }
 
 }
