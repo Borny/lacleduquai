@@ -46,6 +46,20 @@
 
 .form__calendar {
   width: 100%;
+
+  .mat-input-element {
+    // changes the label color
+    color: $color-primary;
+  }
+
+  mat-datepicker-toggle {
+    // changes the calendar icon color
+    color: $color-primary;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
 }
 
 .radio-container {

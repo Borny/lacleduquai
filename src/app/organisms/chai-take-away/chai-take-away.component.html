@@ -106,9 +106,12 @@
           [value]="quantities[0]"
           (ionChange)="onQuantityChange($event)"
         >
-          <ion-item *ngFor="let quantity of quantities; let i = index">
-            <ion-radio class="radio-button" [value]="i + 1"> </ion-radio>
+          <ion-item
+            lines="none"
+            *ngFor="let quantity of quantities; let i = index"
+          >
             <ion-label>{{ quantity }}</ion-label>
+            <ion-radio slot="start" [value]="i + 1"> </ion-radio>
           </ion-item>
         </ion-radio-group>
       </div>
