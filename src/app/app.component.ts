@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       icon: 'people-outline',
       label: 'L\'Equipe',
-      link: '/lcdq/infos'
+      link: '/lcdq/notre-equipe'
     },
     {
       icon: 'mail-outline',

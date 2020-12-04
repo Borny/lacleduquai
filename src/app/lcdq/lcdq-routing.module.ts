@@ -49,8 +49,8 @@ const routes: Routes = [
         loadChildren: () => import('../pages/coworking/coworking.module').then(m => m.CoworkingPageModule)
       },
       {
-        path: 'infos',
-        loadChildren: () => import('../pages/infos/infos.module').then(m => m.InfosPageModule)
+        path: 'notre-equipe',
+        loadChildren: () => import('../pages/team/team.module').then(m => m.TeamPageModule)
       },
       {
         path: 'contact',
