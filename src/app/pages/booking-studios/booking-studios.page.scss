@@ -1,0 +1,15 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+.ion-col {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.ion-card {
+  --background: var(--color-primary, #5dbeba);
+  img {
+    height: 300px;
+  }
+}
