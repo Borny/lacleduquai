@@ -1,15 +1,6 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
-.take-away__content {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  max-width: $screen-sm;
-  margin: 0 auto;
-  padding: 1rem;
-
-  button {
-    margin: 1rem auto;
-  }
+ion-content {
+  --background: url('../../../assets/img/come-outside.jpg') center center;
 }

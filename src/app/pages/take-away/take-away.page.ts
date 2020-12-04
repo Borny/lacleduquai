@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TakeAwayPage implements OnInit {
 
-  public readonly HEADER_TITLE = 'A emporter';
+  public readonly HEADER_TITLE = 'A Emporter';
 
   constructor() { }
 

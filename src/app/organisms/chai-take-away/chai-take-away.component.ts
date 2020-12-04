@@ -21,13 +21,13 @@ export class ChaiTakeAwayOrganism implements OnInit {
   public showForm = false;
   public pickUpDay: number;
   public pickUpMonth: string;
-  public price: number = 8;
-  public totalPrice: number = 8;
-  public oneLiterPrice: number = 8;
+  public price = 8;
+  public totalPrice = 8;
+  public oneLiterPrice = 8;
   public depositAmount = 3;
-  public totalDeposit: number = 3;
-  public orderQuantity: number = 1;
-  public chaiTakeAwayForm: FormGroup = new FormGroup({});
+  public totalDeposit = 3;
+  public orderQuantity = 1;
+  public chaiTakeAwayForm: FormGroup;
   public hasContainer = false;
 
   public pickUpDates: Date[] = [];
@@ -50,9 +50,10 @@ export class ChaiTakeAwayOrganism implements OnInit {
 
     // Retrieving the form data
     const formData = this.chaiTakeAwayForm.value;
-    const chaiOrderData: ChaiTakeAway = { ...formData, price: this.price, totalPrice: this.totalPrice, totalDeposit: this.totalDeposit }
+    const chaiOrderData: ChaiTakeAway = { ...formData, price: this.price, totalPrice: this.totalPrice, totalDeposit: this.totalDeposit };
 
     // Transforming the date values
+
     this.pickUpDay = formData.pickUpDate.getDate();
     this.pickUpMonth = new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(formData.pickUpDate);
 
@@ -67,11 +68,11 @@ export class ChaiTakeAwayOrganism implements OnInit {
           this.isLoading = false;
           this.formSentFail = true;
         }
-      )
+      );
   }
 
   public onToggleForm(): void {
-    this.showForm = !this.showForm
+    this.showForm = !this.showForm;
   }
 
   public onReload(): void {
@@ -90,7 +91,6 @@ export class ChaiTakeAwayOrganism implements OnInit {
   }
 
   public onQuantityChange(event: CustomEvent): void {
-    console.log('onQuantityChange', event.detail.value)
     this.price = this.oneLiterPrice * event.detail.value;
     this.orderQuantity = event.detail.value;
     this._getTotalPrice();
@@ -100,12 +100,14 @@ export class ChaiTakeAwayOrganism implements OnInit {
   // PRIVATE
   ////////////
   private _initChaiForm(): void {
-    this.chaiTakeAwayForm.addControl('lastName', new FormControl(null, Validators.required));
-    this.chaiTakeAwayForm.addControl('firstName', new FormControl(null, Validators.required));
-    this.chaiTakeAwayForm.addControl('phone', new FormControl(null, Validators.required));
-    this.chaiTakeAwayForm.addControl('quantity', new FormControl(1, Validators.required));
-    this.chaiTakeAwayForm.addControl('hasOwnContainer', new FormControl(false, Validators.required));
-    this.chaiTakeAwayForm.addControl('pickUpDate', new FormControl({ value: null, disabled: true }, Validators.required));
+    this.chaiTakeAwayForm = new FormGroup({
+      lastName: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, Validators.required),
+      phone: new FormControl(null, Validators.required),
+      quantity: new FormControl(1, Validators.required),
+      hasOwnContainer: new FormControl(false, Validators.required),
+      pickUpDate: new FormControl(null, Validators.required)
+    });
   }
 
   private _setMinMaxDates(): void {
