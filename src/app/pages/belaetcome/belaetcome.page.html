@@ -1,17 +1,40 @@
 <ion-header-component [headerTitle]="HEADER_TITLE"></ion-header-component>
 
 <ion-content>
-  <ion-text>
-    <h1>Compagnie Bela & Côme</h1>
-  </ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1 class="hidden">Compagnie Bela & Côme</h1>
+        <belaetcome-logo class="belaetcome-logo"></belaetcome-logo>
+      </ion-col>
+    </ion-row>
 
-  <p>
-    Créée en 2013, son mode d’expression emprunte à la danse contemporaine et au
-    théâtre pour, dans chaque projet, mettre la parole en mouvement et faire
-    parler les corps. Elle développe actuellement sa sixième création, FURIOSA.
-    Ce que nous recherchons avant tout, c’est la qualité d’un mouvement plutôt
-    que sa forme. Et cette qualité, la force de ce que ce mouvement pourra
-    transmettre, peut se construire soit dans le geste dansé technique, soit
-    dans l’approche sensible du personnage incarné.
-  </p>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <p>
+          Créée en 2013, son mode d’expression emprunte à la danse contemporaine
+          et au théâtre pour, dans chaque projet, mettre la parole en mouvement
+          et faire parler les corps. Elle développe actuellement sa sixième
+          création, FURIOSA. Ce que nous recherchons avant tout, c’est la
+          qualité d’un mouvement plutôt que sa forme. Et cette qualité, la force
+          de ce que ce mouvement pourra transmettre, peut se construire soit
+          dans le geste dansé technique, soit dans l’approche sensible du
+          personnage incarné.
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <p>
+          Visitez le site web de
+          <ion-text color="primary">
+            <a [href]="BELA_ET_COME_WEBSITE_LINK" target="_blank"
+              >la Compagnie Bela & Côme</a
+            >
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

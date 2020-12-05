@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth-interceptors';
+import { SharedModule } from './shared/shared.module';
 
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
@@ -24,7 +25,8 @@ registerLocaleData(localeFr);
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [
     StatusBar,
