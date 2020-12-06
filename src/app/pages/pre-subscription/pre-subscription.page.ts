@@ -125,7 +125,6 @@ export class PreSubscriptionPage implements OnInit {
     this.subscriptionForm.addControl('paymentMethod', new FormControl(null, Validators.required));
     this._addControl('courses', this.courses, false);
     this._addControl('workshops', this.workshops, false);
-
   }
 
   public onSubmit(): void {

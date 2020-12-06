@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { ResidencePageRoutingModule } from './residence-routing.module';
 
 import { ResidencePage } from './residence.page';
+import { IonInputModule } from '../../molecules/ion-input/ion-input.module';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     ResidencePageRoutingModule,
-    SharedModule
+    SharedModule,
+    IonInputModule
   ],
   declarations: [ResidencePage]
 })

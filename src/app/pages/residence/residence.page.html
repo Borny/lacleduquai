@@ -1,18 +1,390 @@
 <ion-header-component [headerTitle]="HEADER_TITLE"></ion-header-component>
 
 <ion-content>
-  <div>
-    Pour les artistes et compagnies du spectacle vivant, plus spécifiquement en
-    danse contemporaine et en théâtre, en priorité aux compagnies et artistes
-    installés dans la région bordelaise.<br />
-    Accueil en résidence pendant 5 jours, du lundi au vendredi, 9h à 16h.<br />
-    Possibilité d’accompagnement artistique avec les membres de la Cie Bela &
-    Côme - Bela Balsa et Côme Tanguy. <br />
-    Présentation en fin de semaine auprès d’un public restreint d’une étape de
-    travail, extrait, lecture, selon l’envie des artistes.<br />
-    L’espace de travail est de 50m2 et ne permet pas d’accueillir de grands
-    groupes.<br />
-    Pas de technique lumière. Possibilité de stocker, le temps de la résidence,
-    une très petite quantité de matériel.
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <ion-text color="primary heading">
+          <h1>Demande de résidence artisitique</h1>
+        </ion-text>
+        <p>
+          Pour les artistes et compagnies du spectacle vivant, plus
+          spécifiquement en danse contemporaine et en théâtre, en priorité aux
+          compagnies et artistes installés dans la région bordelaise.<br />
+          Accueil en résidence pendant 5 jours, du lundi au vendredi, 9h à
+          16h.<br />
+          Possibilité d’accompagnement artistique avec les membres de la Cie
+          Bela & Côme - Bela Balsa et Côme Tanguy. <br />
+          Présentation en fin de semaine auprès d’un public restreint d’une
+          étape de travail, extrait, lecture, selon l’envie des artistes.<br />
+          L’espace de travail est de 50m2 et ne permet pas d’accueillir de
+          grands groupes.<br />
+          Pas de technique lumière. Possibilité de stocker, le temps de la
+          résidence, une très petite quantité de matériel.
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <div>
+          Merci de compléter le formulaire pour que nous commencions à faire
+          connaissance. Si vous ne disposez pas de certains éléments ou si nos
+          questions ne correspondent pas du tout à ce que vous faites, pas de
+          soucis, adaptez... Rien n'est définitif ni exhaustif.
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3" class="ion-no-padding">
+        <ion-card class="ion-no-margin">
+          <ion-card-content>
+            <!-- Loader -->
+            <loader *ngIf="isLoading"></loader>
+            <!-- Message fail -->
+            <div
+              *ngIf="!isLoading && isFormFailed && !isFormSent"
+              class="message-sent--fail"
+            >
+              <p>Votre message n'a pas pu être envoyé. Veuillez réessayer.</p>
+              <!-- <div class="btn__container">
+                <ion-button (click)="onReload()">{{RELOAD}}</ion-button>
+              </div> -->
+            </div>
+            <!-- Message success -->
+            <div *ngIf="!isLoading && isFormSent" class="message-sent--success">
+              <p>
+                Merci, votre demande a bien été envoyée. Nous vous répondrons le
+                plus tôt possible.
+              </p>
+              <div class="btn__container">
+                <ion-button (click)="onNavigateHome()"
+                  >{{HOME_BTN_TEXT}}</ion-button
+                >
+              </div>
+            </div>
+
+            <!-- Residence Form -->
+            <form
+              *ngIf="!isLoading && !hideForm"
+              class="residence-form"
+              [formGroup]="residenceForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <!--  Project Name -->
+              <ion-item>
+                <ion-label position="floating">Nom du projet</ion-label>
+                <ion-input
+                  type="text"
+                  name="projectName"
+                  formControlName="projectName"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+  residenceForm.get('projectName').invalid &&
+  residenceForm.get('projectName').touched
+    ? 'show-error'
+    : ''
+"
+              >
+                Veuillez renseigner un nom de projet
+              </p>
+
+              <!-- Company Name -->
+              <ion-item>
+                <ion-label position="floating">Nom de la compagnie</ion-label>
+                <ion-input
+                  type="text"
+                  name="companyName"
+                  formControlName="companyName"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+residenceForm.get('companyName').invalid &&
+residenceForm.get('companyName').touched
+  ? 'show-error'
+  : ''"
+              >
+                Veuillez renseigner le nom de la compagnie
+              </p>
+
+              <!-- Manager Name -->
+              <ion-item>
+                <ion-label position="floating"
+                  >Nom de la personne qui gère cette candidature</ion-label
+                >
+                <ion-input
+                  type="text"
+                  name="managerName"
+                  formControlName="managerName"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+residenceForm.get('managerName').invalid &&
+residenceForm.get('managerName').touched
+  ? 'show-error'
+  : ''"
+              >
+                Veuillez renseigner votre nom
+              </p>
+
+              <!-- Email -->
+              <ion-item>
+                <ion-label position="floating">E-mail</ion-label>
+                <ion-input
+                  type="email"
+                  name="email"
+                  formControlName="email"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+                          residenceForm.get('email').invalid &&
+                          residenceForm.get('email').touched
+                            ? 'show-error'
+                            : ''
+                          "
+              >
+                Veuillez renseigner votre email
+              </p>
+
+              <!-- Phone -->
+              <ion-item>
+                <ion-label position="floating">Téléphone</ion-label>
+                <ion-input
+                  type="text"
+                  name="phone"
+                  formControlName="phone"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+residenceForm.get('phone').invalid &&
+residenceForm.get('phone').touched
+  ? 'show-error'
+  : ''"
+              >
+                Veuillez renseigner un numéro de téléphone
+              </p>
+
+              <!-- Address -->
+              <ion-item>
+                <ion-label position="floating"
+                  >Adresse de gestion de la structure</ion-label
+                >
+                <ion-input
+                  type="text"
+                  name="address"
+                  formControlName="address"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+              residenceForm.get('address').invalid &&
+residenceForm.get('address').touched
+  ? 'show-error'
+  : ''"
+              >
+                Veuillez renseigner une adresse
+              </p>
+
+              <!-- Location -->
+              <div class="form-control radio-container">
+                <ion-list>
+                  <ion-radio-group
+                    class="radio-group"
+                    aria-label="Région"
+                    formControlName="location"
+                    [value]="locations[0]"
+                  >
+                    <ion-list-header>
+                      <ion-label>Vous êtes installé dans quel coin ?</ion-label>
+                    </ion-list-header>
+                    <ion-item lines="none" *ngFor="let location of locations">
+                      <ion-label>{{ location }}</ion-label>
+                      <ion-radio slot="start" [value]="location"> </ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+              </div>
+
+              <!-- Artistic Pratice -->
+              <div class="form-control radio-container">
+                <ion-list formArrayName="artisticPractice">
+                  <ion-list-header>
+                    <ion-label>Votre pratique artistique</ion-label>
+                  </ion-list-header>
+                  <ion-item
+                    lines="none"
+                    *ngFor="let practice of artisticPracticeFormArray.controls; let i = index"
+                  >
+                    <ion-label>{{artisticPractices[i]}}</ion-label>
+                    <ion-checkbox
+                      slot="start"
+                      [formControlName]="i"
+                    ></ion-checkbox>
+                  </ion-item>
+                </ion-list>
+              </div>
+
+              <!-- Project Description -->
+              <ion-item>
+                <ion-label position="floating"
+                  >Quelques mots sur votre projet ?</ion-label
+                >
+                <ion-input
+                  type="text"
+                  name="projectDescription"
+                  formControlName="projectDescription"
+                  required
+                ></ion-input>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="residenceForm.get('projectDescription').invalid && residenceForm.get('projectDescription').touched
+                ? 'show-error'
+                : ''"
+              >
+                Veuillez renseigner une description
+              </p>
+
+              <!-- Project Team -->
+              <ion-label>De qui l'équipe sera-t-elle constituée?</ion-label>
+              <div formArrayName="projectTeam">
+                <div
+                  *ngFor="let teamMember of projectTeamFormArray.controls; let i = index"
+                >
+                  <ion-item>
+                    <ion-label position="floating"
+                      >Nom, prénom et fonction
+                    </ion-label>
+                    <ion-input
+                      type="text"
+                      name="projectTeam"
+                      [formControlName]="i"
+                      required
+                    ></ion-input>
+                  </ion-item>
+                  <p
+                    class="error-message"
+                    [ngClass]="
+                    teamMember.invalid &&
+                    teamMember.touched
+                  ? 'show-error'
+                  : ''"
+                  >
+                    Veuillez renseigner les informations
+                  </p>
+                  <ion-button
+                    *ngIf="projectTeamFormArray.controls.length > 1"
+                    fill="clear"
+                    size="small"
+                    (click)="onRemoveTeamMember($event, i)"
+                  >
+                    <ion-label>Supprimer</ion-label>
+                    <ion-icon name="close-outline"></ion-icon>
+                  </ion-button>
+                </div>
+                <ion-button size="small" (click)="onAddTeamMember()">
+                  <ion-label>Ajouter un membre d'équipe</ion-label>
+                  <ion-icon slot="start" name="add-outline"></ion-icon>
+                </ion-button>
+              </div>
+
+              <!-- Availability -->
+              <div class="form-control radio-container">
+                <ion-list formArrayName="availability">
+                  <ion-list-header>
+                    <ion-label class="label"
+                      >Sur quelles périodes êtes-vous disponibles pour
+                      travailler chez nous ? A partir de Août 2020</ion-label
+                    >
+                  </ion-list-header>
+                  <ion-item
+                    lines="none"
+                    *ngFor="let availability of availabilityFormArray.controls; let i = index"
+                  >
+                    <ion-label>{{ availabilities[i] }}</ion-label>
+                    <ion-checkbox
+                      slot="start"
+                      [formControlName]="i"
+                    ></ion-checkbox>
+                  </ion-item>
+                </ion-list>
+                <p
+                  class="error-message"
+                  [ngClass]="
+residenceForm.get('availability').invalid &&
+residenceForm.get('availability').touched
+  ? 'show-error'
+  : ''"
+                >
+                  Veuillez renseigner une disponibilité
+                </p>
+              </div>
+
+              <!-- Extra Info -->
+              <ion-item>
+                <ion-label position="floating">
+                  Un lien vidéo vers un projet actuel ou passé que vous pouvez
+                  nous partager ?<br />
+                  Vous avez un site internet qu'on peut visiter ?<br />
+                  Et des partenaires ou soutiens (institutionnels ou autres...)
+                  ?
+                </ion-label>
+                <ion-textarea
+                  name="extraInfo"
+                  formControlName="extraInfo"
+                  required
+                ></ion-textarea>
+              </ion-item>
+              <p
+                class="error-message"
+                [ngClass]="
+residenceForm.get('extraInfo').invalid &&
+residenceForm.get('extraInfo').touched
+? 'show-error'
+: ''"
+              >
+                Veuillez renseigner des informations
+              </p>
+
+              <!-- Submit -->
+              <div class="btn__container">
+                <ion-button
+                  class="ion-margin-vertical"
+                  type="submit"
+                  color="primary"
+                  [disabled]="residenceForm.invalid || isLoading"
+                >
+                  <ion-icon
+                    *ngIf="!isLoading"
+                    slot="start"
+                    name="paper-plane-outline"
+                  ></ion-icon>
+                  <loader *ngIf="isLoading"></loader>
+                  {{SEND_BUTTON_TEXT}}
+                </ion-button>
+              </div>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
