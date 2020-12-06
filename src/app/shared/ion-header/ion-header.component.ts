@@ -11,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
 export class IonHeaderComponent implements OnInit, OnDestroy {
 
   @Input() headerTitle: string;
+  @Input() showBackButton: boolean;
+  @Input() defaultTarget: string;
 
   constructor(
     // private authService: AuthService

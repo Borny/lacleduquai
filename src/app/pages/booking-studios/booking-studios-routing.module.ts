@@ -9,6 +9,18 @@ const routes: Routes = [
     component: BookingStudiosPage
   },
   {
+    path: 'studio',
+    loadChildren: () => import('./studio/studio.module').then(m => m.StudioPageModule)
+  },
+  {
+    path: 'petite-salle',
+    loadChildren: () => import('./small-studio/small-studio.module').then(m => m.SmallStudioPageModule)
+  },
+  {
+    path: 'autres-espaces',
+    loadChildren: () => import('./other-spaces/other-spaces.module').then(m => m.OtherSpacesPageModule)
+  },
+  {
     path: 'reservation-salles',
     redirectTo: '',
     pathMatch: 'full'

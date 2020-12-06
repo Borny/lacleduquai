@@ -1,0 +1,9 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+.activities__container {
+  background: $color-primary;
+  .activity {
+    text-align: center;
+  }
+}

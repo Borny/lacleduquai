@@ -3,23 +3,66 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="8" offset-md="2" class="ion-col">
-        <ion-card class="ion-card">
-          <img src="./assets/img/studio.jpg" />
-          <ion-card-header>
+      <ion-col>
+        <ion-text color="primary">
+          <h1>{{'Nos différents espaces' | uppercase}}</h1>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <!-- <ion-col size="12" size-md="4" offset-md="0" class="ion-col"> -->
+      <ion-col size="12" size-md="4" offset-md="0" class="ion-col">
+        <ion-card
+          class="ion-card"
+          [routerLink]="['/', 'lcdq', 'reservation-salles', 'studio']"
+        >
+          <img src="./assets/img/studio-color.jpg" />
+          <!-- <ion-card-header>
             <ion-card-title color="light">Studio - 50m2</ion-card-title>
-          </ion-card-header>
+            <div>
+              <ion-button><ion-icon name="plus"></ion-icon></ion-button>
+            </div>
+          </ion-card-header> -->
+          <ion-item lines="none">
+            <ion-label color="light">Studio - 50m2</ion-label>
+            <ion-button color="light" fill="outline" slot="end">
+              <ion-icon name="add-outline" color="light"></ion-icon>
+            </ion-button>
+          </ion-item>
         </ion-card>
-        <ion-card class="ion-card">
+      </ion-col>
+      <ion-col size="12" size-md="4" offset-md="0" class="ion-col">
+        <ion-card
+          class="ion-card"
+          [routerLink]="['/', 'lcdq', 'reservation-salles', 'petite-salle']"
+        >
           <img src="./assets/img/studio.jpg" />
           <ion-card-header>
-            <ion-card-title color="light">Petite salle - 20m2</ion-card-title>
+            <ion-card-title class="ion-text-center" color="light"
+              >Petite salle - 20m2</ion-card-title
+            >
           </ion-card-header>
         </ion-card>
-        <ion-card class="ion-card">
-          <img src="./assets/img/studio.jpg" />
+      </ion-col>
+      <ion-col size="12" size-md="4" offset-md="0" class="ion-col">
+        <ion-card
+          class="ion-card"
+          routerLink="/lcdq/reservation-salles/autres-espaces"
+        >
+          <div class="other">
+            <div>
+              <img src="./assets/img/front-autumn.jpg" />
+              <img src="./assets/img/banquettes.jpg" />
+            </div>
+            <div>
+              <img src="./assets/img/library.jpg" />
+              <img src="./assets/img/espace-zen.jpg" />
+            </div>
+          </div>
           <ion-card-header>
-            <ion-card-title color="light">Autres espaces</ion-card-title>
+            <ion-card-title class="ion-text-center" color="light">
+              Autres espaces</ion-card-title
+            >
           </ion-card-header>
         </ion-card>
       </ion-col>

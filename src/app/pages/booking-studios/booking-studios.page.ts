@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingStudiosPage implements OnInit {
 
-  public HEADER_TITLE = 'Réserver une salle';
+  public readonly HEADER_TITLE = 'Réserver une salle';
 
   constructor() { }
 

@@ -10,6 +10,26 @@
 .ion-card {
   --background: var(--color-primary, #5dbeba);
   img {
+    width: 100%;
     height: 300px;
+    object-fit: cover;
+  }
+
+  ion-item {
+    --background: var(--color-primary, #5dbeba);
+  }
+}
+
+.other {
+  display: flex;
+  flex-flow: column;
+  div {
+    display: flex;
+    img {
+      flex: 1;
+      object-fit: cover;
+      width: 50%;
+      height: 150px;
+    }
   }
 }
