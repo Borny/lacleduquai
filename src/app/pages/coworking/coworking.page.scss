@@ -1,0 +1,42 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+// CALENDAR
+.mat-input-element {
+  // changes the label color
+  color: $color-primary;
+}
+
+mat-datepicker-toggle {
+  // changes the calendar icon color
+  color: $color-primary;
+}
+
+::ng-deep mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-calendar-body-cell.selected > .mat-calendar-body-cell-content,
+::ng-deep .mat-calendar-body-cell.selected:hover > .mat-calendar-body-cell-content,
+::ng-deep .mat-calendar-body-cell.selected > .mat-calendar-body-cell-content:hover {
+  background-color: $color-primary !important;
+  color: $white !important;
+}
+
+// PRICE
+.price {
+  display: block;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 2px solid $color-primary;
+  border-top: 2px solid $color-primary;
+  padding: 0.5rem;
+  margin: 1rem 0 0;
+  color: $color-primary;
+}
+
+// BUTTON CONTAINER
+.btn__container {
+  display: flex;
+  justify-content: center;
+}

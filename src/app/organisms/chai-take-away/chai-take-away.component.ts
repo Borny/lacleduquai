@@ -30,7 +30,6 @@ export class ChaiTakeAwayOrganism implements OnInit {
   public chaiTakeAwayForm: FormGroup;
   public hasContainer = false;
 
-  public pickUpDates: Date[] = [];
   public quantities: string[] = ['1 litre', '2 litres', '3 litres', '4 litres']
 
   public minDateFilter: Date;
@@ -84,6 +83,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
     this._getTotalPrice();
   }
 
+  // Setting a filter on the datepicker
   public dateFilter(d: Date | null): boolean {
     const day = (d || new Date()).getDay();
     // Only allows Tuesday and Thursday to be selected.

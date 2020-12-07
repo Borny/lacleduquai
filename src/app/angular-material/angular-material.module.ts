@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatChipsModule } from '@angular/material/chips';
 // import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatSelectModule,
     MatTabsModule,
     ClipboardModule,
+    MatChipsModule
     // MatButtonToggleModule
   ],
   providers: [
