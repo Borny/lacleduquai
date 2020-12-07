@@ -22,7 +22,7 @@ export class CoworkingPage implements OnInit {
   public isFormSent = false;
   public isFormFailed = false;
   public coworkingForm: FormGroup;
-  public maxPersonsAllowed: Number = 10;
+  public maxPersonsAllowed: number = 10;
   public minDateFilter: Date;
   public maxDateFilter: Date;
   public totalPrice = 0;
