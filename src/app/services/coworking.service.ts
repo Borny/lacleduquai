@@ -15,6 +15,12 @@ export class CoworkingService {
   constructor(private http: HttpClient) { }
 
   public postCoworking(formValues: Coworking): Observable<{ message: string }> {
+    console.log('coworking service:', formValues)
     return this.http.post<{ message: string }>(`${this.COWORKING_URL}`, formValues);
+  }
+
+  public stripe(formValues): Observable<any> {
+    console.log('coworking service:', formValues)
+    return this.http.post<any>(`${this.COWORKING_URL}/stripe`, formValues);
   }
 }

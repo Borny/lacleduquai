@@ -36,7 +36,13 @@ mat-datepicker-toggle {
 }
 
 // BUTTON CONTAINER
+
 .btn__container {
-  display: flex;
-  justify-content: center;
+  &--flex {
+    display: flex;
+    justify-content: center;
+  }
+  &--block {
+    display: block;
+  }
 }

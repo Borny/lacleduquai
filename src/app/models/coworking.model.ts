@@ -2,9 +2,9 @@ export interface Coworking {
   name: string;
   phone: string;
   email: string;
-  memberCount: number;
+  personCount: number;
   bookingDate: Date[];
-  totalPrice: number;
+  token: any; // StripeCheckoutOptions;
 }
 
 export interface CoworkingBookedDay {

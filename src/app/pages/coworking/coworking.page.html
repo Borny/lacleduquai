@@ -17,6 +17,7 @@
       </ion-col>
     </ion-row>
 
+    <!-- Card container -->
     <ion-row>
       <ion-col size="12" size-md="6" offset-md="3">
         <ion-card>
@@ -25,15 +26,17 @@
             <loader *ngIf="isLoading"></loader>
             <!-- Message fail -->
             <div *ngIf="!isLoading && isFormFailed" class="message-sent--fail">
-              <p>Votre demande n'a pas pu être envoyée. Veuillez réessayer.</p>
-              <div class="btn__container">
+              <p>
+                Votre réservation n'a pas pu être effectuée. Veuillez réessayer.
+              </p>
+              <div class="btn__container--flex">
                 <ion-button (click)="onReload()">{{RELOAD}}</ion-button>
               </div>
             </div>
             <!-- Message success -->
             <div *ngIf="!isLoading && isFormSent" class="message-sent--success">
-              <p>Merci, votre réservation a bien été envoyée.</p>
-              <div class="btn__container">
+              <p>Merci, votre réservation a bien été effectuée.</p>
+              <div class="btn__container--flex">
                 <ion-button (click)="onNavigateHome()"
                   >{{HOME_BTN_TEXT}}</ion-button
                 >
@@ -67,6 +70,7 @@
                 </div>
 
                 <!-- Booking Date -->
+
                 <div>
                   <mat-form-field appearance="fill">
                     <mat-label>Sélectionnez une/des date(s) :</mat-label>
@@ -175,18 +179,34 @@
                   Veuillez renseigner votre email
                 </p>
 
+                <!-- Credit Card  -->
+                <ion-item lines="none">
+                  <ion-label>Informations de carte </ion-label>
+                </ion-item>
+                <div #creditCardElement></div>
+
                 <!-- Total Price -->
                 <p class="text-center price">Total: {{ totalPrice }}€</p>
 
                 <!-- Submit button -->
-                <div class="btn__container">
+                <div class="btn__container btn__container--block">
                   <ion-button
                     class="ion-margin-vertical"
                     type="submit"
-                    color="primary"
-                    [disabled]="coworkingForm.invalid || totalPrice === 0 || coworkingForm.get('bookingDateList').value.length === 0"
+                    color="secondary"
+                    expand="block"
+                    [disabled]="coworkingForm.invalid || totalPrice === 0 || coworkingForm.get('bookingDateList').value.length === 0 || !isCardValid"
                   >
                     {{VALIDATE_BUTTON_TEXT}}
+                  </ion-button>
+
+                  <!-- Loading button -->
+                  <ion-button
+                    *ngIf="isLoading"
+                    type="button"
+                    color="secondary"
+                    expand="block"
+                    ><loader></loader>
                   </ion-button>
                 </div>
               </ion-list>

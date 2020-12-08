@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import { CoworkingService } from '../../services/coworking.service';
 import { Coworking, CoworkingBookedDay } from '../../models/coworking.model';
+
+// declare var Stripe: any; // : stripe.StripeStatic;
 
 @Component({
   selector: 'app-coworking',
@@ -13,7 +15,9 @@ import { Coworking, CoworkingBookedDay } from '../../models/coworking.model';
 })
 export class CoworkingPage implements OnInit {
   @ViewChild('picker') _picker: MatDatepicker<Date>;
+  @ViewChild('creditCardElement') creditCardElement: ElementRef;
 
+  public cardErrors: any;
   public init = new Date();
   public resetModel = new Date(0);
   public model: Date[] = [];
@@ -26,6 +30,7 @@ export class CoworkingPage implements OnInit {
   public minDateFilter: Date;
   public maxDateFilter: Date;
   public totalPrice = 0;
+  public isCardValid = false;
 
   // TODO: get the real data form the server
   public bookedDays: any[] = [
@@ -62,6 +67,9 @@ export class CoworkingPage implements OnInit {
 
   private _close_on_selected = false;
 
+  private stripe: any; // : stripe.Stripe;
+  private creditCardContainer: any;
+
   constructor(private router: Router, private coworkingService: CoworkingService) { }
 
   // LYFE CYCLE HOOKS
@@ -70,9 +78,14 @@ export class CoworkingPage implements OnInit {
     this._setMinMaxDates();
   }
 
+  ionViewDidEnter(): void {
+    this._initStripe();
+  }
+
   ionViewDidLeave(): void {
     // Reseting the form on page leave
     this.coworkingForm.reset();
+    this.model = [];
     this.isLoading = false;
     this.hideForm = false;
     this.isFormSent = false;
@@ -127,30 +140,36 @@ export class CoworkingPage implements OnInit {
   }
 
   // Submitting the form
-  public onSubmit(): void {
+  public async onSubmit(): Promise<void> {
     if (this.coworkingForm.invalid) {
       return;
     }
 
-    console.log(this.coworkingForm.value);
-    this.isLoading = true;
+    const result = await this.stripe.createToken(this.creditCardContainer);
     const formValues: Coworking = this.coworkingForm.value;
-    formValues.totalPrice = this.totalPrice;
+    formValues.token = result.token;
+
+    if (result.error) {
+      // this.cardErrors = result.error.message;
+    } else {
+      this.isLoading = true;
+      this.coworkingService.postCoworking(formValues)
+        .subscribe(
+          (response) => {
+            this.isLoading = false;
+            this.isFormSent = true;
+            this.hideForm = true;
+            this.coworkingForm.reset();
+          },
+          (error) => {
+            console.log(error)
+            this.isLoading = false;
+            this.isFormFailed = true;
+          });
+    }
+
 
     // Sending the form
-    this.coworkingService.postCoworking(formValues)
-      .subscribe(
-        (response) => {
-          this.isLoading = false;
-          this.isFormSent = true;
-          this.hideForm = true;
-          this.coworkingForm.reset();
-        },
-        (error) => {
-          console.log(error)
-          this.isLoading = false;
-          this.isFormFailed = true;
-        });
   }
 
   // On select change
@@ -200,6 +219,27 @@ export class CoworkingPage implements OnInit {
   ////////////
   // PRIVATE
   ////////////
+
+  // Calling stripe and creating the card input element
+  private _initStripe(): void {
+
+    // Importing the key
+    this.stripe = Stripe('pk_test_51HuFU7H5cEg8n0QAB1Y3OMIH5H6T3o4rs7q8pBLsLzQ3w01hNGmPjuipe4R8G1zn9AAp4IHCzMm0K1erufpLAcjU00ISs2mBZX');
+
+    // Creating the element
+    const elements = this.stripe.elements({ locale: 'fr' });
+
+    this.creditCardContainer = elements.create('card');
+    this.creditCardContainer.mount(this.creditCardElement.nativeElement);
+
+    this.creditCardContainer.addEventListener('change', (callback) => {
+      console.log(callback);
+
+      this.cardErrors = callback.error && callback.error.message;
+      this.isCardValid = callback.complete;
+    });
+
+  }
 
   // Builds the coworking form
   private _initCoworkingForm(): void {
