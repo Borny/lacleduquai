@@ -162,22 +162,27 @@ textarea {
 }
 
 .title-xl {
-  font-family: $fontOswald;
-  font-size: 3rem;
-  text-align: center;
-  color: $color-primary;
+  margin: 2rem auto !important;
+  font-family: $fontOswald !important;
+  font-size: 3rem !important;
+  text-align: center !important;
+  color: $color-primary-dark !important;
 
   @include screen-sm {
-    font-size: 4rem;
+    font-size: 3rem !important;
   }
 }
 
 .font-xs {
-  font-size: $font-size-xs;
+  font-size: $font-size-xs !important;
 }
 
 .font-sm {
-  font-size: $font-size-sm;
+  font-size: $font-size-sm !important;
+}
+
+.font-oswald {
+  font-family: $fontOswald;
 }
 
 // .mat-expansion-panel-body {

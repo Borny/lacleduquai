@@ -5,68 +5,117 @@
     <ion-row>
       <ion-col>
         <ion-text color="primary">
-          <h1>{{'Nos différents espaces' | uppercase}}</h1>
+          <h1 class="title-xl">Nos Différents Espaces</h1>
         </ion-text>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <!-- <ion-col size="12" size-md="4" offset-md="0" class="ion-col"> -->
-      <ion-col size="12" size-md="4" offset-md="0" class="ion-col">
+    <ion-row class="ion-justify-content-center">
+      <!-- <ion-col size="12" size-lg="4" offset-md="0" class="ion-col"> -->
+      <ion-col size="12" size-sm="6" size-lg="3" offset-sm="" class="ion-col">
         <ion-card
           class="ion-card"
-          [routerLink]="['/', 'lcdq', 'reservation-salles', 'studio']"
+          [routerLink]="['/lcdq/reservation-salles/studio']"
         >
-          <div class="img__container">
-            <img src="./assets/img/studio.jpg" />
+          <div class="card__img__container single-image">
+            <img
+              class="card__img"
+              alt="studio 50m2"
+              src="./assets/img/studio.jpg"
+            />
           </div>
-          <!-- <ion-card-header>
-            <ion-card-title color="light">Studio - 50m2</ion-card-title>
-            <div>
-              <ion-button><ion-icon name="plus"></ion-icon></ion-button>
-            </div>
-          </ion-card-header> -->
-          <ion-item lines="none">
-            <ion-label color="light">Studio - 50m2</ion-label>
-            <ion-button color="light" fill="outline" slot="end">
-              <ion-icon name="add-outline" color="light"></ion-icon>
-            </ion-button>
-          </ion-item>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center ion-card-title"
+              >Studio - 50m2</ion-card-title
+            >
+          </ion-card-header>
         </ion-card>
       </ion-col>
-      <ion-col size="12" size-md="4" offset-md="0" class="ion-col">
+      <ion-col size="12" size-sm="6" size-lg="3" offset-md="0" class="ion-col">
         <ion-card
           class="ion-card"
-          [routerLink]="['/', 'lcdq', 'reservation-salles', 'petite-salle']"
+          [routerLink]="['/lcdq/reservation-salles/petite-salle']"
         >
-          <!-- <img src="./assets/img/petite-salle-table.jpg" /> -->
-          <img src="./assets/img/petite-salle-wall.jpg" />
+          <div class="card__img__container single-image">
+            <img
+              class="card__img"
+              alt="petite salle 20m2"
+              src="./assets/img/petite-salle-wall.jpg"
+            />
+          </div>
           <ion-card-header>
-            <ion-card-title class="ion-text-center" color="light"
+            <ion-card-title class="ion-text-center ion-card-title"
               >Petite salle - 20m2</ion-card-title
             >
           </ion-card-header>
         </ion-card>
       </ion-col>
-      <ion-col size="12" size-md="4" offset-md="0" class="ion-col">
+      <ion-col size="12" size-sm="6" size-lg="3" offset-md="0" class="ion-col">
         <ion-card
           class="ion-card"
-          routerLink="/lcdq/reservation-salles/autres-espaces"
+          [routerLink]="['/lcdq/reservation-salles/autres-espaces']"
         >
-          <div class="other">
-            <div>
-              <img src="./assets/img/front-autumn.jpg" />
-              <img src="./assets/img/banquettes.jpg" />
+          <div class="card__img__container multi-image">
+            <div class="card__img__container__row">
+              <img
+                class="card__img"
+                alt="café avant"
+                src="./assets/img/front-autumn.jpg"
+              />
+              <img
+                class="card__img"
+                alt="banquettes"
+                src="./assets/img/banquettes.jpg"
+              />
             </div>
-            <div>
-              <img src="./assets/img/library.jpg" />
-              <img src="./assets/img/espace-zen.jpg" />
+            <div class="card__img__container__row">
+              <img
+                class="card__img"
+                alt="bibliothèque"
+                src="./assets/img/library.jpg"
+              />
+              <img
+                class="card__img"
+                alt="espace zen"
+                src="./assets/img/espace-zen.jpg"
+              />
             </div>
           </div>
           <ion-card-header>
-            <ion-card-title class="ion-text-center" color="light">
+            <ion-card-title class="ion-text-center ion-card-title">
               Autres espaces</ion-card-title
             >
           </ion-card-header>
+          <!-- // Inner card // -->
+          <ion-card class="inner-card">
+            <ion-card-content>
+              <p>
+                Les espaces du café sont faits pour vous accueillir. Soit pour
+                venir déguster un chaï, manger un morceau ou boire un verre,
+                soit pour réunir votre association, retrouver vos adhérents,
+                organiser des projets... Fêter un anniversaire ! Et pourquoi pas
+                exposer sur nos murs ? Donner un concert ? Organiser une
+                après-midi tricot... Toutes les activités sont les bienvenues.
+                Selon votre projet, nous pouvons privatiser l'un de nos espaces,
+                ou simplement vous réserver une table. Quoiqu'il en soit,
+                parlez-en nous ! Soit en passant au café, soit en nous
+                contactant par ici :
+              </p>
+              <ion-nav-link
+                class="text-center"
+                [routerLink]="'/lcdq/contact'"
+                routerDirection="forward"
+              >
+                <ion-button
+                  class="btn btn--nav"
+                  size="small"
+                  expand="block"
+                  color="primary"
+                >
+                  Contact
+                </ion-button>
+              </ion-nav-link>
+            </ion-card-content>
+          </ion-card>
         </ion-card>
       </ion-col>
     </ion-row>

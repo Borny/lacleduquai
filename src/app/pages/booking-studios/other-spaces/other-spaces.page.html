@@ -18,8 +18,25 @@
           privatiser l'un de nos espaces, ou simplement vous réserver une table.
           Quoiqu'il en soit, parlez-en nous ! Soit en passant au café, soit en
           nous contactant par ici :
-          <ion-button> Contact </ion-button>
         </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-justify-content-center">
+        <ion-nav-link
+          class="text-center"
+          [routerLink]="'/lcdq/contact'"
+          routerDirection="forward"
+        >
+          <ion-button
+            class="btn btn--nav"
+            size="small"
+            expand="block"
+            color="primary"
+          >
+            Contact
+          </ion-button>
+        </ion-nav-link>
       </ion-col>
     </ion-row>
   </ion-grid>

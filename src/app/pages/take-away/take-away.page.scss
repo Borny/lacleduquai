@@ -2,5 +2,8 @@
 @import '../../../styles/tools/mixins';
 
 ion-content {
-  --background: url('../../../assets/img/come-outside.jpg') center center;
+  --background: var(--color-primary, $color-primary-light);
+  @include screen-sm {
+    --background: url('../../../assets/img/come-outside.jpg') center center;
+  }
 }

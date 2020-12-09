@@ -8,12 +8,12 @@ ion-content {
   background-size: cover;
 }
 
-.menu-du-jour {
-  color: white;
-  height: 500px;
+.todays-special {
   display: flex;
-  width: 400px;
+  height: 400px;
+  width: calc(100% - 2rem);
   margin: 0 auto;
+  color: $white;
   border-radius: 8px;
   box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.7);
   flex-flow: column;
@@ -23,6 +23,16 @@ ion-content {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   transform: rotate(-3deg);
+  @include screen-sm {
+    width: 400px;
+    height: 500px;
+  }
+
+  &__main-course {
+    p {
+      line-height: 1;
+    }
+  }
   p {
     font-family: 'Indie Flower', cursive;
     font-size: 2rem;

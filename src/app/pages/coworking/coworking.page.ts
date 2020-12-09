@@ -31,6 +31,7 @@ export class CoworkingPage implements OnInit {
   public maxDateFilter: Date;
   public totalPrice = 0;
   public isCardValid = false;
+  public pricePerHour = 6.5;
 
   // TODO: get the real data form the server
   public bookedDays: any[] = [
@@ -63,6 +64,7 @@ export class CoworkingPage implements OnInit {
   public readonly HEADER_TITLE = 'Coworking';
   public readonly HOME_BTN_TEXT = 'Accueil';
   public readonly VALIDATE_BUTTON_TEXT = 'Valider';
+  public readonly PAY_BUTTON_TEXT = 'Régler';
   public readonly RELOAD = 'Réessayer';
 
   private _close_on_selected = false;
@@ -124,7 +126,7 @@ export class CoworkingPage implements OnInit {
         });
       }
 
-      this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * 5;
+      this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * pricePerHour;
     }
   }
 
@@ -136,7 +138,7 @@ export class CoworkingPage implements OnInit {
     const bookingDateFormArray = this.coworkingForm.get('bookingDateList') as FormArray;
     bookingDateFormArray.removeAt(index);
 
-    this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * 5;
+    this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * pricePerHour;
   }
 
   // Submitting the form
@@ -175,7 +177,7 @@ export class CoworkingPage implements OnInit {
   // On select change
   public onSelectChange(event: CustomEvent): void {
     if (this.totalPrice !== 0) {
-      this.totalPrice = (event.detail.value * this.model.length) * 5;
+      this.totalPrice = (event.detail.value * this.model.length) * pricePerHour;
     }
   }
 

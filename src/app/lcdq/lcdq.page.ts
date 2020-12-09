@@ -1,10 +1,28 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  animateChild,
+  query,
+  group,
+} from '@angular/animations';
+
+// import { slideInAnimation } from '../animations';
+import { RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'lcdq',
   templateUrl: 'lcdq.page.html',
   styleUrls: ['lcdq.page.scss'],
+  animations: [
+    // slideInAnimation
+  ]
+
 })
 export class LcdqPage implements OnInit {
 
@@ -22,6 +40,10 @@ export class LcdqPage implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
 }

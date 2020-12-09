@@ -1,3 +1,4 @@
+import { animation } from '@angular/animations';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -6,7 +7,8 @@ import { AuthGuard } from './guards/auth.guards';
 const routes: Routes = [
   {
     path: 'lcdq',
-    loadChildren: () => import('./lcdq/lcdq.module').then(m => m.LcdqPageModule)
+    loadChildren: () => import('./lcdq/lcdq.module').then(m => m.LcdqPageModule),
+    data: { animation: 'lcdqPage' }
   },
   {
     path: 'cafe-adhesion',

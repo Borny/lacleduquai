@@ -3,14 +3,14 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-text>
-          <h1>Coworking artistique et culturel</h1>
+        <ion-text color="primary">
+          <h1 class="title-xl">Coworking artistique et culturel</h1>
         </ion-text>
         <p>
           Du lundi au vendredi de 10h à 13h. Espace de travail à destination
           d'artistes, freelances, associations ou compagnies pour leurs projets
           artistiques, réunions, démarches administratives et développement
-          culturel. Forfait unique à 5€ par personne pour la matinée.<br />
+          culturel. Forfait unique à 6.50€ par personne pour la matinée.<br />
           Places limitées.<br />
           Thé et café en libre service.
         </p>
@@ -197,7 +197,7 @@
                     expand="block"
                     [disabled]="coworkingForm.invalid || totalPrice === 0 || coworkingForm.get('bookingDateList').value.length === 0 || !isCardValid"
                   >
-                    {{VALIDATE_BUTTON_TEXT}}
+                    {{PAY_BUTTON_TEXT}} {{totalPrice}}€
                   </ion-button>
 
                   <!-- Loading button -->

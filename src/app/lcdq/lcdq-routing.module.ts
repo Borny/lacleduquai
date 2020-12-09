@@ -10,11 +10,11 @@ const routes: Routes = [
     children: [
       {
         path: 'accueil',
-        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule),
       },
       {
         path: 'cafe',
-        loadChildren: () => import('../pages/cafe/cafe.module').then(m => m.CafePageModule)
+        loadChildren: () => import('../pages/cafe/cafe.module').then(m => m.CafePageModule),
       },
       {
         path: 'reservation-salles',

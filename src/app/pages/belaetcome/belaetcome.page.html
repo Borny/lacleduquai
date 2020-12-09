@@ -2,6 +2,7 @@
 
 <ion-content>
   <ion-grid class="ion-no-padding">
+    <!-- HERO -->
     <ion-row class="hero">
       <ion-col>
         <h1 class="hidden">Compagnie Bela & Côme</h1>
@@ -9,7 +10,8 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <!-- MAIN TEXT -->
+    <ion-row class="ion-padding">
       <ion-col size="12" size-sm="6" offset-sm="3">
         <p>
           Créée en 2013, son mode d’expression emprunte à la danse contemporaine
@@ -24,16 +26,17 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <!-- WEBSITE BUTTON -->
+    <ion-row class="ion-padding-horizontal ion-margin-bottom">
       <ion-col size="12" size-sm="6" offset-sm="3">
-        <p>
-          Visitez le site web de
-          <ion-text color="primary">
-            <a [href]="BELA_ET_COME_WEBSITE_LINK" target="_blank"
-              >la Compagnie Bela & Côme</a
-            >
-          </ion-text>
-        </p>
+        <ion-button size="small" color="primary" expand="block"
+          ><a
+            [href]="'https://belaetcome.com'"
+            target="_blank"
+            class="btn__text"
+            >{{'Vers le site' | uppercase }}</a
+          ></ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-grid>

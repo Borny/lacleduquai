@@ -1,15 +1,37 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
 .hero {
   ion-col {
     background-image: url('../../../assets/img/belaetcome-laughing-black-white.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: left -110px;
+    background-position: left -10px;
+    @include screen-sm {
+      background-position: left -40px;
+    }
+    @include screen-md {
+      background-position: left -70px;
+    }
   }
 }
 
 .belaetcome-logo {
   display: block;
   width: 100px;
-  height: 170px;
-  margin: 3rem auto;
+  height: 100px;
+  margin: 1rem auto 2rem;
+  @include screen-sm {
+    width: 200px;
+    height: 220px;
+    margin: 4rem auto 8rem;
+  }
+  @include screen-md {
+    margin: 4rem auto 12rem;
+  }
 }
+
+// BUTTON
+// .btn__text {
+//   color: $color-primary-dark;
+// }

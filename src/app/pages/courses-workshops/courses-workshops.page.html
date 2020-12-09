@@ -3,15 +3,27 @@
 <ion-content>
   <ion-grid class="ion-no-padding">
     <ion-row>
-      <ion-col size="12" size-md="4" offset-md="1">
-        <ion-card>
-          <img src="./assets/img/legs.jpg" />
+      <ion-col>
+        <ion-text color="primary">
+          <h1 class="title-xl">Cours et Stages à Bordeaux</h1>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="4">
+        <ion-card class="ion-card">
+          <!-- // Inner card // -->
+          <div class="card__img__container single-image">
+            <img class="card__img" alt="jambes" src="./assets/img/legs.jpg" />
+          </div>
           <ion-card-header>
-            <ion-card-title>Cours</ion-card-title>
+            <ion-card-title class="ion-text-center ion-card-title"
+              >Cours</ion-card-title
+            >
           </ion-card-header>
-          <ion-card-content>
-            <!-- Cours de Théâtre, Danse-Théâtre et Danse contemporaine Il y en a
-            pour les goûts et les univers de chacun ! Les cours que nous
+          <!-- <ion-card-content> -->
+          <!-- Cours de Théâtre, Danse-Théâtre et Danse contemporaine Il y en a
+              pour les goûts et les univers de chacun ! Les cours que nous
             proposons toute l'année visent à développer et enrichir les outils
             d'expression propres à chaque discipline et à faire transparaître
             les liens qui les unissent, afin d'offrir un large panel de ce que
@@ -32,17 +44,32 @@
             cours et 16€ le cours Un cours d’essai gratuit jusqu’à fin octobre.
             Inscriptions sur place / au 06.88.02.81.99 / ou par mail :
             lacleduquai@gmail.com -->
-          </ion-card-content>
+          <!-- </ion-card-content> -->
+          <ion-card class="inner-card">
+            <ion-card-header>
+              <ion-card-title class="ion-text-center ion-card-title"
+                >Informations a venir</ion-card-title
+              >
+            </ion-card-header>
+          </ion-card>
         </ion-card>
       </ion-col>
-      <ion-col size="12" size-md="4" offset-md="1">
-        <ion-card>
-          <img src="./assets/img/barefoot.jpg" />
+      <ion-col size="12" size-md="4">
+        <ion-card class="ion-card">
+          <div class="card__img__container single-image">
+            <img
+              class="card__img"
+              alt="pieds"
+              src="./assets/img/barefoot.jpg"
+            />
+          </div>
           <ion-card-header>
-            <ion-card-title>Stages</ion-card-title>
+            <ion-card-title class="ion-text-center ion-card-title">
+              Stages</ion-card-title
+            >
           </ion-card-header>
-          <ion-card-content>
-            <!-- Les stages Pour ceux qui n'ont pas la possibilité de suivre les
+          <!-- <ion-card-content> -->
+          <!-- Les stages Pour ceux qui n'ont pas la possibilité de suivre les
             cours hebdomadaires de l'association ou pour les élèves désireux
             d'approfondir le travail fait en cours, l'association propose des
             stages tous les mois. Les thématiques des stages sont en relation
@@ -53,12 +80,29 @@
             contenu précis de ces prochains stages sera communiqué
             prochainement. Inscriptions sur place / au 06.88.02.81.99 / ou par
             mail : lacleduquai@gmail.com -->
-          </ion-card-content>
+          <!-- </ion-card-content> -->
+          <ion-card class="inner-card">
+            <ion-card-header>
+              <ion-card-title class="ion-text-center ion-card-title"
+                >Informations a venir</ion-card-title
+              >
+              <!-- <ion-card-subtitle class="ion-text-center ion-card-title"
+                >A venir</ion-card-subtitle
+              > -->
+            </ion-card-header>
+          </ion-card>
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row class="activities__container">
-      <ion-col size="12" size-md="4" class="activity">
+    <ion-row class="ion-justify-content-center activities__container">
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        offset-md="0"
+        class="ion-col activity"
+      >
         <ion-card>
           <ion-card-header>
             <ion-card-title> Théâtre </ion-card-title>
@@ -74,7 +118,14 @@
         </ion-card>
       </ion-col>
 
-      <ion-col size="12" size-md="4" class="activity">
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        offset-md="0"
+        class="ion-col activity"
+      >
         <ion-card>
           <ion-card-header>
             <ion-card-title> Danse-Théâtre </ion-card-title>
@@ -90,7 +141,14 @@
           </ion-card-content></ion-card
         >
       </ion-col>
-      <ion-col size="12" size-md="4" class="activity">
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        offset-md="0"
+        class="ion-col activity"
+      >
         <ion-card>
           <ion-card-header>
             <ion-card-title> Danse Contemporaine </ion-card-title>
