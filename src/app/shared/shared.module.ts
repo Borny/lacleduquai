@@ -6,6 +6,8 @@ import { IonHeaderComponent } from './ion-header/ion-header.component';
 import { LoaderComponent } from './loader/loader.component';
 import { BelaetcomeLogoComponent } from './belaetcome-logo/belaetcome-logo.component';
 import { LacleduquaiLogoComponent } from './lacleduquai-logo/lacleduquai-logo.component';
+import { TwoTriangleComponent } from './two-triangle/two-triangle.component';
+import { SquaredShapesComponent } from './squared-shapes/squared-shapes.component';
 import { MaterialModule } from '../angular-material/angular-material.module';
 
 @NgModule({
@@ -13,7 +15,9 @@ import { MaterialModule } from '../angular-material/angular-material.module';
     IonHeaderComponent,
     LoaderComponent,
     BelaetcomeLogoComponent,
-    LacleduquaiLogoComponent
+    LacleduquaiLogoComponent,
+    TwoTriangleComponent,
+    SquaredShapesComponent
   ],
   imports: [
     MaterialModule,
@@ -24,7 +28,9 @@ import { MaterialModule } from '../angular-material/angular-material.module';
     IonHeaderComponent,
     LoaderComponent,
     BelaetcomeLogoComponent,
-    LacleduquaiLogoComponent
+    LacleduquaiLogoComponent,
+    TwoTriangleComponent,
+    SquaredShapesComponent
   ]
 
 })
