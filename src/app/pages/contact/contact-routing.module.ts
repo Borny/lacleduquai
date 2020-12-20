@@ -9,6 +9,10 @@ const routes: Routes = [
     component: ContactPage
   },
   {
+    path: 'mentions-legales',
+    loadChildren: () => import('./legal/legal.module').then(m => m.LegalPageModule)
+  },
+  {
     path: 'contact',
     redirectTo: '',
     pathMatch: 'full'
