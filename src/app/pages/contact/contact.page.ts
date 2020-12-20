@@ -18,6 +18,7 @@ export class ContactPage implements OnInit {
   public contactForm: FormGroup = new FormGroup({});
 
   public readonly HEADER_TITLE = 'Contact';
+  public readonly TITLE = 'La Clé Du Quai Bordeaux Centre';
   public readonly HOME_BTN_TEXT = 'Accueil';
   public readonly SEND_BUTTON_TEXT = 'Envoyer';
   public readonly RELOAD = 'Réessayer';
