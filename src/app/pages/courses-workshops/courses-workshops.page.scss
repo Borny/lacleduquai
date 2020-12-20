@@ -1,6 +1,45 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
+.ion-grid {
+  overflow: hidden;
+}
+
+// CARDS
+.cours-card {
+  position: relative;
+  .icon-triangle-blue,
+  .icon-triangle-yellow {
+    position: absolute;
+    z-index: -1;
+  }
+  .icon-triangle-blue {
+    width: 75px;
+    height: 140px;
+    top: -20px;
+    left: -30px;
+    @include screen-sm {
+      width: 140px;
+      height: 270px;
+      top: -70px;
+      left: -70px;
+    }
+  }
+  .icon-triangle-yellow {
+    width: 723px;
+    height: 176px;
+    bottom: 30px;
+    right: -290px;
+
+    @include screen-sm {
+      width: 590px;
+      height: 460px;
+      bottom: -100px;
+      right: -590px;
+    }
+  }
+}
+
 .ion-card {
   background: $color-primary-light;
   transition: 0.2s ease-in;
@@ -25,7 +64,7 @@
     }
 
     .card__img__container,
-    .ion-card-title {
+    > .ion-card-title {
       opacity: 0.5;
     }
     .inner-card {
@@ -40,19 +79,6 @@
   transition: 0.2s ease-in;
 }
 
-// ACTIVITIES
-.activities__container {
-  background: $color-secondary;
-  margin: 3rem auto 0;
-  // padding: 0rem 5rem 3rem;
-  .activity {
-    @include screen-sm {
-      margin-top: -2.3rem;
-    }
-    text-align: center;
-  }
-}
-
 .inner-card {
   position: absolute;
   top: 370px;
@@ -60,4 +86,18 @@
   right: 0;
   z-index: 5;
   transition: 0.2s ease-in;
+}
+
+// ACTIVITIES
+.activities__container {
+  background: var(--color-primary, #fff4b0);
+  margin: 7rem auto 0;
+  padding: 0 0 4rem;
+  .activity {
+    display: flex;
+    @include screen-sm {
+      margin-top: -2.3rem;
+    }
+    text-align: center;
+  }
 }

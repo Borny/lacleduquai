@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesWorkshopsPage implements OnInit {
   public readonly HEADER_TITLE = 'Cours et stages';
+  public readonly TITLE = 'Cours et stages à Bordeaux';
 
   constructor() { }
 
