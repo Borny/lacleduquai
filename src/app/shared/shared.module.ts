@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
+import { MaterialModule } from '../angular-material/angular-material.module';
 import { IonHeaderComponent } from './ion-header/ion-header.component';
 import { LoaderComponent } from './loader/loader.component';
-import { BelaetcomeLogoComponent } from './belaetcome-logo/belaetcome-logo.component';
-import { LacleduquaiLogoComponent } from './lacleduquai-logo/lacleduquai-logo.component';
-import { TwoTriangleComponent } from './two-triangle/two-triangle.component';
-import { SquaredShapesComponent } from './squared-shapes/squared-shapes.component';
-import { MaterialModule } from '../angular-material/angular-material.module';
+import { BelaetcomeLogoComponent } from './svg/belaetcome-logo/belaetcome-logo.component';
+import { LacleduquaiLogoComponent } from './svg/lacleduquai-logo/lacleduquai-logo.component';
+import { TwoTriangleComponent } from './svg/two-triangle/two-triangle.component';
+import { SquaredShapesComponent } from './svg/squared-shapes/squared-shapes.component';
+import { TriangleBlueComponent } from './svg/triangle-blue/triangle-blue.component';
+import { TriangleYellowComponent } from './svg/triangle-yellow/triangle-yellow.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { MaterialModule } from '../angular-material/angular-material.module';
     BelaetcomeLogoComponent,
     LacleduquaiLogoComponent,
     TwoTriangleComponent,
-    SquaredShapesComponent
+    SquaredShapesComponent,
+    TriangleBlueComponent,
+    TriangleYellowComponent
   ],
   imports: [
     MaterialModule,
@@ -30,8 +34,9 @@ import { MaterialModule } from '../angular-material/angular-material.module';
     BelaetcomeLogoComponent,
     LacleduquaiLogoComponent,
     TwoTriangleComponent,
-    SquaredShapesComponent
+    SquaredShapesComponent,
+    TriangleBlueComponent,
+    TriangleYellowComponent
   ]
-
 })
 export class SharedModule { }

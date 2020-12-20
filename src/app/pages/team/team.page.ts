@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team.page.scss'],
 })
 export class TeamPage implements OnInit {
-  public readonly HEADER_TITLE = 'L\'Equipe';
+  public readonly HEADER_TITLE = 'L\'Association La Clé Du Quai';
 
   constructor() { }
 

@@ -11,24 +11,31 @@ $black: #000000;
 
 $fountainblue: #5dbeba;
 $oracle: #3d827f;
+
+$butterMilk: #fff4b0;
 $schoolbusyellow: #ffde00;
+$corn: #eacd00;
 
 $cod-gray: #191919;
 
 $red: #f44336;
 
+// PRIMARY
 $color-primary: $fountainblue;
-$color-secondary: $schoolbusyellow;
-$color-gray: $cod-gray;
-
-$color-warning: $red;
-
 $color-primary-light: color.scale($fountainblue, $lightness: 70%);
 $color-primary-dark: $oracle;
 
+// SECONDARY
+$color-secondary: $schoolbusyellow;
+$color-secondary-light: $butterMilk;
+$color-secondary-dark: $corn;
+
+// GRAY
+$color-gray: $cod-gray;
 $grey-light: color.scale($cod-gray, $lightness: 70%);
 $grey-dark: darken($cod-gray, 0.5);
 
+$color-warning: $red;
 //////////
 // FONTS
 //////////
