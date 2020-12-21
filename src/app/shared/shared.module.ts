@@ -11,6 +11,7 @@ import { TwoTriangleComponent } from './svg/two-triangle/two-triangle.component'
 import { SquaredShapesComponent } from './svg/squared-shapes/squared-shapes.component';
 import { TriangleBlueComponent } from './svg/triangle-blue/triangle-blue.component';
 import { TriangleYellowComponent } from './svg/triangle-yellow/triangle-yellow.component';
+import { MultiTriangleComponent } from './svg/multi-triangle/multi-triangle.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TriangleYellowComponent } from './svg/triangle-yellow/triangle-yellow.c
     TwoTriangleComponent,
     SquaredShapesComponent,
     TriangleBlueComponent,
-    TriangleYellowComponent
+    TriangleYellowComponent,
+    MultiTriangleComponent
   ],
   imports: [
     MaterialModule,
@@ -36,7 +38,8 @@ import { TriangleYellowComponent } from './svg/triangle-yellow/triangle-yellow.c
     TwoTriangleComponent,
     SquaredShapesComponent,
     TriangleBlueComponent,
-    TriangleYellowComponent
+    TriangleYellowComponent,
+    MultiTriangleComponent
   ]
 })
 export class SharedModule { }

@@ -9,6 +9,7 @@
 $white: #ffffff;
 $black: #000000;
 
+$jaggedIce: #ceecea;
 $fountainblue: #5dbeba;
 $oracle: #3d827f;
 
@@ -22,7 +23,7 @@ $red: #f44336;
 
 // PRIMARY
 $color-primary: $fountainblue;
-$color-primary-light: color.scale($fountainblue, $lightness: 70%);
+$color-primary-light: $jaggedIce;
 $color-primary-dark: $oracle;
 
 // SECONDARY
