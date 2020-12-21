@@ -1,6 +1,41 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
+// CARDS
+.cards__container {
+  position: relative;
+  .icon-triangle-blue,
+  .icon-triangle-yellow {
+    position: absolute;
+    z-index: -1;
+  }
+  .icon-triangle-blue {
+    width: 180px;
+    height: 350px;
+    top: 650px;
+    left: 170px;
+    @include screen-sm {
+      width: 570px;
+      height: 300px;
+      top: -30px;
+      left: 580px;
+    }
+  }
+  .icon-triangle-yellow {
+    top: 310px;
+    left: -30px;
+    width: 350px;
+    height: 270px;
+
+    @include screen-sm {
+      width: 620px;
+      height: 500px;
+      top: 0;
+      left: 150px;
+    }
+  }
+}
+
 .ion-card {
   background: $color-primary-light;
   transition: 0.2s ease-in;
