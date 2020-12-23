@@ -7,7 +7,7 @@
 }
 
 .form__container {
-  max-width: 360px;
+  // max-width: 360px;
   margin: 0 auto;
   display: flex;
   flex-flow: column;
@@ -31,12 +31,12 @@
   flex-flow: column;
   justify-content: center;
   width: 100%;
-  max-width: 300px;
+  // max-width: 300px;
 }
 
 .form-control {
   width: 100%;
-  max-width: 300px;
+  // max-width: 300px;
 }
 
 .form__calendar {
@@ -57,39 +57,41 @@
   }
 }
 
-.radio-container {
-  width: 100%;
-  max-width: 300px;
-  margin: 1rem 0;
-  .label {
-    display: block;
-    margin: 0 0 0.5rem;
-  }
-  .radio-group {
-    display: flex;
-    flex-flow: column;
+// QUANTITY
+.quantity {
+  &__container {
     width: 100%;
-    max-width: 300px;
-
-    .radio-button {
-      margin: 0.5rem 0;
+    // max-width: 300px;
+    margin: 1rem 0;
+    .label {
+      display: block;
+      margin: 0 0 0.5rem;
+    }
+  }
+  &__form {
+    display: flex;
+    align-items: center;
+    .input {
+      text-align: center;
     }
   }
 }
 
-.submit-btn {
-  margin: 1rem auto 2rem;
-}
-
-.slide-toggle__section {
-  display: flex;
-  flex-flow: column;
-  margin: 0 0 1rem;
-  align-items: center;
-}
-
 .slide-toggle {
-  margin: 0.5rem 0;
+  &__section {
+    display: flex;
+    flex-flow: column;
+    margin: 0 0 1rem;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__input {
+    margin: 0.5rem 0;
+  }
 }
 
 .price {
@@ -100,4 +102,8 @@
   border-top: 2px solid $color-primary;
   padding: 0.5rem;
   color: $color-primary;
+}
+
+.submit-btn {
+  margin: 1rem auto 2rem;
 }

@@ -1,9 +1,50 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
-ion-content {
-  --background: var(--color-primary, $color-primary-light);
+.title-xl {
+  margin: 0 auto 2rem !important;
+}
+
+.main-container {
   @include screen-sm {
-    --background: url('../../../assets/img/come-outside.jpg') center center;
+    display: flex;
   }
+}
+
+// CHAI CARD
+.chai-card {
+  flex: 1;
+  margin: 0;
+  background: $color-primary;
+  color: $white;
+
+  h2 {
+    margin: 0 0 1rem;
+    font-weight: bold;
+  }
+
+  &__content {
+    margin: 0 0 1rem;
+  }
+}
+
+// CHAI FORM COMPONENT
+.chai-form {
+  display: block;
+  flex: 1;
+  margin: 2rem 0 0;
+
+  @include screen-sm {
+    margin: 0;
+    padding: 0 1rem;
+  }
+}
+
+.take-away__image {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/img/come-outside.jpg');
+  background-repeat: no-repeat;
+  background-position: -340px center;
+  background-size: auto 100%;
 }

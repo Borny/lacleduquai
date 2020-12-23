@@ -62,6 +62,7 @@ export class CoworkingPage implements OnInit {
   ];
 
   public readonly HEADER_TITLE = 'Coworking';
+  public readonly TITLE = 'Coworking Artisitique et Culturel';
   public readonly HOME_BTN_TEXT = 'Accueil';
   public readonly VALIDATE_BUTTON_TEXT = 'Valider';
   public readonly PAY_BUTTON_TEXT = 'Régler';
@@ -126,7 +127,7 @@ export class CoworkingPage implements OnInit {
         });
       }
 
-      this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * pricePerHour;
+      this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * this.pricePerHour;
     }
   }
 
@@ -138,7 +139,7 @@ export class CoworkingPage implements OnInit {
     const bookingDateFormArray = this.coworkingForm.get('bookingDateList') as FormArray;
     bookingDateFormArray.removeAt(index);
 
-    this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * pricePerHour;
+    this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * this.pricePerHour;
   }
 
   // Submitting the form
@@ -177,7 +178,7 @@ export class CoworkingPage implements OnInit {
   // On select change
   public onSelectChange(event: CustomEvent): void {
     if (this.totalPrice !== 0) {
-      this.totalPrice = (event.detail.value * this.model.length) * pricePerHour;
+      this.totalPrice = (event.detail.value * this.model.length) * this.pricePerHour;
     }
   }
 

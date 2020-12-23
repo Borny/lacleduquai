@@ -193,7 +193,8 @@ export class CafePage implements OnInit {
     },
   ]
 
-  public readonly HEADER_TITLE = 'Notre Café Associatif';
+  public readonly HEADER_TITLE = 'Le Café';
+  public readonly TITLE = 'Notre Café Associatif';
 
   constructor() { }
 

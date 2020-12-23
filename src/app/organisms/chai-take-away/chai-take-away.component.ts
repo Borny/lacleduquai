@@ -29,6 +29,7 @@ export class ChaiTakeAwayOrganism implements OnInit {
   public orderQuantity = 1;
   public chaiTakeAwayForm: FormGroup;
   public hasContainer = false;
+  public quantity: number = 1;
 
   public quantities: string[] = ['1 litre', '2 litres', '3 litres', '4 litres']
 
@@ -94,6 +95,13 @@ export class ChaiTakeAwayOrganism implements OnInit {
     this.price = this.oneLiterPrice * event.detail.value;
     this.orderQuantity = event.detail.value;
     this._getTotalPrice();
+  }
+
+  public removeQuantity(event: Event): void {
+    this.quantity--;
+  }
+  public addQuantity(event: Event): void {
+    this.quantity++;
   }
 
   ////////////
