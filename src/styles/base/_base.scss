@@ -208,6 +208,18 @@ textarea {
   font-family: $fontOswald;
 }
 
+/////////////////////
+// IONIC
+/////////////////////
+ion-card:focus {
+  outline: 0;
+  border: 0;
+}
+
+/////////////////////
+// ANGULAR MATERIAL
+/////////////////////
+
 // .mat-expansion-panel-body {
 //   padding: 0 !important;
 // }

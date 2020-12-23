@@ -14,148 +14,165 @@ import {
 
 import { fadeInAnimationView } from '../../animations';
 
-import { IonSlides, PopoverController } from '@ionic/angular';
-import { PopoverComponent } from './popover/popover.component';
+interface News {
+  link: string;
+  label: string;
+}
+
+interface DailyEvent {
+  date: Date | number;
+  events: Event[];
+}
+
+interface Event {
+  label: string;
+  intervenant: string;
+  schedule: string;
+  price: string;
+  phone: string;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  animations: [
-    // fadeInAnimationView
-    trigger('openClose', [
-      // ...
-      state('open', style({
-        height: '200px',
-        opacity: 1,
-        backgroundColor: 'blue'
-      })),
-      state('closed', style({
-        height: '100px',
-        opacity: 0.5,
-        backgroundColor: 'green'
-      })),
-      transition('* => open', [
-        animate('2s')
-      ]),
-      transition('open <=> closed', [
-        animate('5s')
-      ]),
-      // transition('* => open', [
-      //   animate('0.5s')
-      // ]),
-    ]),
-
-    trigger('fadeInAnimationView', [
-      state('open', style({
-        opacity: 1,
-        top: 0
-      })),
-      state('closed', style({
-        top: '20px',
-        opacity: 0
-      })),
-      // transition(':enter', [
-      //   style({ opacity: 0, top: '5%' }),
-      //   animate('1000ms', style({ opacity: 1, top: 0 })),
-      // ]),
-      transition('* => open', [
-        animate('2s')
-      ]),
-      transition('closed => open', [
-        animate('2s')
-      ]),
-      transition('open => *', [
-        animate('2s')
-      ]),
-      // transition(':enter', [
-      //   style({ opacity: 0, top: '5px' }),
-      //   animate('200ms',
-      //     style({ opacity: 1, top: 0 })),
-      // ]),
-      // transition(':leave', [
-      //   style({ opacity: 1 }),
-      //   animate('200ms',
-      //     style({ opacity: 0 })),
-      // ]),
-    ])
-  ],
   // host: { '[@fadeInAnimation]': '' }
 })
 export class HomePage implements OnInit {
 
-  @ViewChild('ionSlides') ionSlides: IonSlides;
-
-  isOpen: boolean = false;
-
-  public slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  };
+  public newsList: News[] = [
+    {
+      link: '/lcdq/coworking',
+      label: 'Coworking de 10h à 13h'
+    },
+    {
+      link: '/lcdq/a-emporter',
+      label: 'Faites votre stock de Chaï !'
+    }
+  ];
 
   public descriptionWords: string[] = [
-    // 'Mettre en mouvement',
+    'Mettre en mouvement',
     'Café',
     'Danse',
     'Théâtre',
-    'Communauté',
-    // 'Cours',
-    // 'Ateliers',
-    // 'Rencontres',
-    // 'Partage',
-    // 'Cie Bela & Côme',
-    // 'Accueil en résidence',
-    // 'Coworking',
-    // 'Festival / Le Bruit des Corps'
+    'Cours',
+    'Ateliers',
+    'Rencontres',
+    'Partage',
+    'Cie Bela & Côme',
+    'Accueil en résidence',
+    'Coworking',
+    'Le Bruit des Corps'
   ];
 
-  public readonly HEADER_TITLE = 'Accueil';
+  today = new Date();
 
-  constructor(public popoverController: PopoverController) { }
+  public dailyEvents: DailyEvent[] = [
+    {
+      date: new Date(),
+      events: [
+        {
+          label: 'Yoga',
+          intervenant: 'Jean-Luc',
+          schedule: '12h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        },
+        {
+          label: 'Yoga',
+          intervenant: 'Jean-Luc',
+          schedule: '12h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        }
+      ]
+
+    },
+    {
+      date: new Date(),
+      events: [
+        {
+          label: 'Yoga',
+          intervenant: 'Jean-Luc',
+          schedule: '12h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        },
+        {
+          label: 'Yoga',
+          intervenant: 'Jean-Luc',
+          schedule: '12h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        },
+        {
+          label: 'Yoga',
+          intervenant: 'Jean-Luc',
+          schedule: '12h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        }
+      ]
+
+    },
+    {
+      date: new Date(),
+      events: [
+        {
+          label: 'Danse contemporaine',
+          intervenant: 'Côme',
+          schedule: '18h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        },
+        {
+          label: 'Danse contemporaine',
+          intervenant: 'Côme',
+          schedule: '18h30 / 13h30',
+          price: '15',
+          phone: '0789765434'
+        }
+      ]
+
+    }
+  ]
+
+  public readonly HEADER_TITLE = 'Accueil';
+  public readonly TITLE = 'La Clé Du Quai';
+
+  constructor() { }
 
   ngOnInit(
   ): void {
-
-    // this.isOpen = true;
+    console.log(this.eventLabel(new Date()))
   }
 
   ionViewWillEnter(): void {
-    this.isOpen = false;
-    this.isOpen = true;
-    console.log(this.isOpen)
+
   }
 
   ionViewWillLeave(): void {
-    this.isOpen = false;
-    console.log(this.isOpen)
+
   }
 
   ionViewDidLeave(): void {
-    this.isOpen = false;
-    console.log(this.isOpen)
+
   }
 
-  onAnimate() {
-    this.isOpen = !this.isOpen;
-  }
+  eventLabel(date: Date): string {
+    console.log('date:', new Date())
 
-  public onTap(event): void {
-    this.ionSlides.startAutoplay();
-  }
-
-  // Popover
-  async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      cssClass: 'my-custom-class',
-      event: ev,
-      mode: 'md'
-    });
-    return await popover.present();
-  }
-
-  public onOpenPopover(event) {
-    this.presentPopover(event);
+    if (date.getDate() === new Date().getDate()) {
+      console.log('if')
+      return 'Aujourd\'hui';
+    } else if (date.getDate() === new Date().getDate() + 1) {
+      console.log('else if')
+      return 'Demain';
+    } else {
+      console.log('else')
+      return date.toLocaleString();
+    }
   }
 
 }

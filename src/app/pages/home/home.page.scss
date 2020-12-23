@@ -1,6 +1,14 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
+// MAIN GRID
+// .home-page-grid {
+//   @include screen-sm {
+//     overflow: hidden;
+//     height: calc(100vh - 56px - 57px); // viewport height - header - footer
+//   }
+// }
+
 .logo-container {
   width: 200px;
   height: 200px;
@@ -10,6 +18,46 @@
   animation: fadeInLogo 1s ease-in;
 }
 
+// TITLE AND LOGO
+.title__container {
+  position: relative;
+
+  .triangle-blue--small {
+    position: absolute;
+    top: -250px;
+    left: -20%;
+    z-index: -1;
+    width: 180px;
+    height: 340px;
+
+    @include screen-sm {
+      top: -250px;
+      left: 20%;
+    }
+  }
+  .triangle-yellow--small {
+    position: absolute;
+    top: 50px;
+    left: 60%;
+    z-index: -1;
+    width: 250px;
+    height: 190px;
+
+    @include screen-sm {
+      top: 50px;
+      left: 60%;
+    }
+  }
+}
+
+.main-title {
+  color: #737373;
+  font-family: $fontOswald;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+}
+
 .word-carousel--vertical {
   margin: 0;
   font-size: 36px;
@@ -17,144 +65,206 @@
   color: $color-gray;
   width: 100%;
   display: flex;
-  // flex-flow: column;
-  flex-flow: row wrap;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 
-  animation: slideInTitle 1s ease-in;
+  // animation: slideInTitle 1s ease-in;
   p {
     margin: 0 0 1rem;
     margin: 0;
   }
   div {
-    // padding: 0;
     overflow: hidden;
     position: relative;
     height: 65px;
-    // padding-top: 10px;
     margin-top: -10px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    ul {
+    .word-switch {
+      animation: switch 15s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+      margin-top: -30px;
       padding: 0;
-      li {
+      .word {
+        display: block;
         text-align: center;
-        font-family: Montserrat;
+        font-family: $fontPoppins;
         color: $color-primary;
         font-weight: 700;
         padding: 0 10px;
         height: 45px;
         margin-top: 45px;
-        display: block;
+        font-size: 1.6rem;
 
-        @media (min-width: $screen-xs) {
-          text-align: left;
+        @include screen-sm {
+          font-size: inherit;
         }
       }
     }
   }
 }
 
-.word-switch {
-  animation: switch 6s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
-}
-
 @keyframes switch {
   0% {
-    margin-top: -340px;
+    margin-top: -1020px;
   }
-  5% {
-    margin-top: -280px;
+  8.3% {
+    margin-top: -930px;
   }
-  25% {
-    margin-top: -280px;
+  16.6% {
+    margin-top: -840px;
   }
-  30% {
-    margin-top: -100px;
+  24.9% {
+    margin-top: -750px;
   }
-  50% {
-    margin-top: -100px;
+  33.2% {
+    margin-top: -660px;
   }
-  55% {
-    margin-top: 80px;
+  41.5% {
+    margin-top: -570px;
   }
-  75% {
-    margin-top: 80px;
+  49.8% {
+    margin-top: -480px;
   }
-  80% {
-    margin-top: 260px;
+  58.1% {
+    margin-top: -390px;
+  }
+  66.4% {
+    margin-top: -300px;
+  }
+  74.7% {
+    margin-top: -210px;
+  }
+  85% {
+    margin-top: -120px;
+  }
+  93.3% {
+    margin-top: -30px;
   }
   99.99% {
-    margin-top: 260px;
+    margin-top: -30px;
   }
   100% {
-    margin-top: -340px;
+    margin-top: -1020px;
   }
 }
 
-@keyframes fadeInLogo {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
+// @keyframes fadeInLogo {
+//   0% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+
+// @keyframes slideInTitle {
+//   0% {
+//     opacity: 0;
+//     transform: translateY(-10%);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateY(0%);
+//   }
+// }
+
+// LOGO SVG
+.lcdq-svg {
+  width: 36px;
+  height: 76px;
+  margin: 1rem auto;
+
+  @include screen-sm {
+    // width: 300px;
+    height: 100px;
+    margin: 0 auto 4rem;
   }
 }
 
-@keyframes slideInTitle {
-  0% {
-    opacity: 0;
-    transform: translateY(-10%);
+// NEWS
+.news__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  h2 {
+    color: $color-secondary-dark;
+    font-weight: bold;
+    margin: 0 1rem 0 0;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0%);
+  &__line {
+    background: $color-secondary;
+    height: 3px;
+    flex: 1;
+    display: block;
+    border-radius: 10px;
   }
 }
 
-.card-title {
-  /* text-transform: uppercase; */
-  font-size: 1.4rem;
-  font-weight: bold;
-  &.primary {
-    color: $color-primary-dark;
-  }
-  &.secondary {
-    color: #eacd00;
+.news__list {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.news__label {
+}
+
+.news__card {
+  background: $color-secondary-light;
+  &__title {
+    // color: $grey-light;
   }
 }
 
-// Flash Info
-.flash-info {
-  .ion-card--first {
-    background: #a1dad8;
-    background: $color-primary-light;
-    // --background: var(--background, #7efffb);
+// TODAYS SPECIAL
+.todays-special__card {
+  background: $color-primary-dark;
+  margin-top: 2rem;
+  &__title {
+    color: $white;
   }
-  .ion-card--second {
-    --background: var(--color-primary, #fff4b0);
-    // --background: var(--background, #7efffb);
-  }
-  // .ion-card-header {
-  //   --color: var(--color-primary);
+}
+
+// EVENTS
+.events {
+  margin: 1rem auto;
+
+  // @include screen-sm {
+  //   height: 490px;
+  //   overflow-y: scroll;
+  //   margin-right: -20px;
+  //   transform: translateX(17px);
   // }
 }
 
-ion-slides {
-  height: 100%;
+.event-day {
+  margin: 0 auto 2rem;
 }
-
-// Events
-.ion-card-content {
+.events__label {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  h2 {
+    color: $color-primary-dark;
+    font-weight: bold;
+    margin: 0 1rem 0 0;
+  }
+  &__line {
+    background: $color-primary-dark;
+    height: 3px;
+    flex: 1;
+    display: block;
+    border-radius: 10px;
+  }
 }
 
-.square {
-  width: 200px;
-  height: 200px;
-  background: red;
+.events__card {
+  background: $color-primary-light;
+  &__title {
+    color: $color-primary-dark;
+  }
 }

@@ -1,116 +1,117 @@
 <ion-header-component [headerTitle]="HEADER_TITLE"></ion-header-component>
-<ion-content [@fadeInAnimationView]="isOpen ? 'open' : 'closed'">
-  <ion-content>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <div class="logo-container">
-            <lacleduquai-logo-svg></lacleduquai-logo-svg>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <div class="word-carousel--vertical">
-            <p class="font-oswald">La Clé Du Quai</p>
-            <div>
-              <ul class="word-switch">
-                <li *ngFor="let word of descriptionWords">{{word}}</li>
-              </ul>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-      <!-- <ion-row>
-      <ion-col>
-        <div [@openClose]="isOpen ? 'open' : 'closed'" class="square"></div>
-      </ion-col>
+<!-- <ion-content [@fadeInAnimationView]="isOpen ? 'open' : 'closed'"> -->
+<ion-content>
+	<ion-grid class="ion-no-padding home-page-grid">
+		<!-- SQUARED TITLE -->
+		<ion-row class="ion-hide-md-down">
+			<ion-col>
+				<squared-shapes-svg
+					[title]="TITLE"
+					class="squared-shapes"
+				></squared-shapes-svg>
+			</ion-col>
+		</ion-row>
 
-    </ion-row> -->
-      <ion-button (click)="onAnimate()">Click</ion-button>
-      <ion-row>
-        <!-- <ion-col @flashInfoAnimation> -->
-        <ion-col size="12" size-sm="6" offset-sm="3">
-          <div class="flash-info">
-            <ion-card class="ion-card--first">
-              <ion-card-content>
-                <!-- pager="true" -->
-                <ion-slides #ionSlides [options]="slideOpts">
-                  <!-- [options]="slideOpts" -->
-                  <ion-slide>
-                    <ion-text
-                      ><p class="card-title primary">
-                        Bienvenue sur notre application !
-                      </p>
-                    </ion-text>
-                  </ion-slide>
-                  <ion-slide>
-                    <p>
-                      Retrouvez les différents axes de développement et
-                      différents événements de l'association.
-                    </p>
-                  </ion-slide>
-                  <ion-slide>
-                    <p>
-                      Accédez au calendrier et faites vos demandes de
-                      réservations directement via nos formulaires.
-                    </p>
-                  </ion-slide>
-                </ion-slides>
-              </ion-card-content>
-            </ion-card>
-            <!-- <ion-card color="primary">
-            <ion-card-content>
-              <span class="bold"> Reprise des cours cette semaine.</span><br />
-            </ion-card-content>
-          </ion-card> -->
-            <ion-card class="ion-card--second">
-              <ion-card-header class="ion-card-header">
-                <ion-text class="card-title secondary">Nouveauté</ion-text>
-              </ion-card-header>
-              <ion-card-content>
-                <span class="bold">Coworking</span> de 10h à 13h.<br />
-              </ion-card-content>
-            </ion-card>
-          </div>
-          <ion-card color="secondary"></ion-card>
-        </ion-col>
-      </ion-row>
-      <!-- <ion-row>
-      <ion-col size="12" size-md="6" offset-md="3">
-        <div>Evénements</div>
+		<!-- LA CLE DU QUAI -->
+		<ion-row>
+			<ion-col size="12" class="title__container">
+				<triangle-blue-svg
+					[fill]="'primary-light'"
+					class="triangle-blue--small"
+				></triangle-blue-svg>
+				<triangle-yellow-svg
+					[fill]="'secondary-light'"
+					class="triangle-yellow--small"
+				></triangle-yellow-svg>
+				<lacleduquai-logo-svg
+					class="lcdq-svg ion-hide-md-up"
+				></lacleduquai-logo-svg>
+				<h2 class="main-title ion-hide-md-up">{{TITLE}}</h2>
+				<div class="word-carousel--vertical">
+					<div>
+						<ul class="word-switch">
+							<li class="word" *ngFor="let word of descriptionWords">
+								{{word}}
+							</li>
+						</ul>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
 
-        <ul>
-          <p>Aujourd'hui</p>
-          <li *ngFor="let card of cardEvents">
-            <ion-card class="ion-no-margin">
-              <ion-card-header
-                class="ion-no-padding ion-padding-horizontal ion-padding-top"
-              >
-                <ion-card-subtitle>Danse contemporaine</ion-card-subtitle>
-                <!-- <ion-card-title>Card Title</ion-card-title> -->
-      <!-- </ion-card-header>
-              <ion-card-content class="ion-card-content">
-                <ion-text>avec Jean-Luc - 12h30-13h40</ion-text>
-                <ion-button
-                  size="small"
-                  fill="outline"
-                  (click)="onOpenPopover($event)"
-                >
-                  <ion-icon
-                    color="primary"
-                    slot="icon-only"
-                    name="add-outline"
-                  ></ion-icon>
-                </ion-button>
-              </ion-card-content>
-            </ion-card>
-          </li>
-        </ul>
-      </ion-col>
-    </ion-row> -->
-    </ion-grid>
+		<!-- MAIN -->
+		<ion-row>
+			<!-- NEWS -->
+			<ion-col class="news" size="12" size-md="4">
+				<div class="news__label">
+					<h2>Nouveautés</h2>
+					<span class="news__label__line"></span>
+				</div>
+				<div class="news__list">
+					<ion-card
+						[routerLink]="news.link"
+						*ngFor="let news of newsList"
+						class="news__card"
+					>
+						<ion-card-header>
+							<ion-card-title
+								color="medium"
+								class="ion-text-center news__card__title"
+							>
+								{{news.label}}</ion-card-title
+							>
+						</ion-card-header>
+					</ion-card>
 
-    <div></div>
-  </ion-content>
+					<!-- MENU DU JOUR -->
+					<ion-card routerLink="/lcdq/cafe" class="todays-special__card">
+						<ion-card-header>
+							<ion-card-title
+								class="ion-text-center todays-special__card__title"
+								>Menu du jour</ion-card-title
+							>
+						</ion-card-header>
+					</ion-card>
+				</div>
+			</ion-col>
+
+			<!-- EVENTS -->
+			<ion-col
+				class="events"
+				size="12"
+				size-sm="8"
+				offset-sm="2"
+				size-md="4"
+				offset-md="0"
+			>
+				<lacleduquai-logo-svg
+					class="lcdq-svg ion-hide-md-down"
+				></lacleduquai-logo-svg>
+				<div class="event-day" *ngFor="let day of dailyEvents">
+					<div class="events__label">
+						<h2>{{eventLabel(day.date)}}</h2>
+						<span class="events__label__line"></span>
+					</div>
+					<div class="events__list">
+						<ion-card *ngFor="let event of day.events" class="events__card">
+							<ion-card-header>
+								<ion-card-title
+									color="medium"
+									class="ion-text-center events__card__title"
+								>
+									{{event.label}} - {{event.intervenant}}
+									<small class="display-block"
+										>{{event.schedule}}
+										<ion-text color="light">|</ion-text> {{event.price |
+										currency}}
+										<ion-text color="light">|</ion-text> {{event.phone}}</small
+									>
+								</ion-card-title>
+							</ion-card-header>
+						</ion-card>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 </ion-content>
