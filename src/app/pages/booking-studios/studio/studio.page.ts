@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class StudioPage implements OnInit {
 
   public readonly HEADER_TITLE = 'Studio - 50m2';
+  public readonly TITLE = 'Notre Cave Créative';
 
   constructor() { }
 

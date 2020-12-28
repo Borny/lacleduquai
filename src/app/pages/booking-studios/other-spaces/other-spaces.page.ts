@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class OtherSpacesPage implements OnInit {
 
   public readonly HEADER_TITLE = 'Autres espaces';
-
+  public readonly TITLE = 'Nos Autres Espaces';
 
   constructor() { }
 
