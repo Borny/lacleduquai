@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Chalkboard } from '../../models/chalkboard.model';
+import { CafeService } from '../../services/cafe.service';
+
 @Component({
   selector: 'app-cafe',
   templateUrl: './cafe.page.html',
@@ -7,15 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CafePage implements OnInit {
 
-  public todaysMainCourse = {
-    title: 'Hâte de pouvoir vous proposer de nouveaux petits plats!',
-    price: '',
-  }
-
-  public todaysDessert = {
-    title: '',
-    price: '',
-  }
+  public chalkboard: Chalkboard;
+  public isLoading: boolean;
+  public chalkboardError: boolean;
 
   public drinks = [
     {
@@ -196,10 +193,28 @@ export class CafePage implements OnInit {
   public readonly HEADER_TITLE = 'Le Café';
   public readonly TITLE = 'Notre Café Associatif';
 
-  constructor() { }
+  constructor(private cafeService: CafeService) { }
 
   ngOnInit() {
+    this.isLoading = true;
+    this._getChalkboard();
+  }
 
+  ////////////
+  // PRIVATE
+  ////////////
+  private _getChalkboard(): void {
+    this.cafeService.getChalkboardData()
+      .subscribe(
+        result => {
+          this.isLoading = false;
+          this.chalkboard = result.data[0];
+        },
+        error => {
+          this.isLoading = false;
+          this.chalkboardError = true;
+        }
+      )
   }
 
 }

@@ -6,36 +6,41 @@
 		</ion-col>
 	</ion-row>
 
-	<!-- <p *ngIf="homeError">
-    Impossible de récupérer les données, veuillez réessayer
-  </p> -->
+	<!-- <p *ngIf="chalkboardError">
+		Impossible de récupérer les données, veuillez réessayer
+	</p> -->
 
 	<ion-row>
 		<ion-col>
 			<div *ngIf="!isLoading">
-				<h2>Accueil / Home Page</h2>
+				<h2>Café</h2>
 			</div>
 		</ion-col>
 	</ion-row>
+
 	<ion-row>
 		<ion-col>
 			<!-- NEWS -->
 			<div class="news__label">
-				<h3>Nouveautés</h3>
+				<h3>Ardoise</h3>
 				<span class="news__label__line"></span>
 			</div>
 			<ul class="data-table__container">
+				<!-- Table header -->
 				<li class="data-table__item data-table__item__header">
 					<div class="first-column"></div>
-					<div>Nouveauté</div>
-					<div>Lien</div>
+					<div>Plat du jour</div>
+					<div>Complément</div>
+					<div>Prix plat du jour</div>
+					<div>Dessert</div>
+					<div>Prix dessert</div>
 					<div></div>
 				</li>
 
 				<!-- No results -->
 				<li
 					class="data-table__item data-table__item-no-result"
-					*ngIf="!currentNewsData.length"
+					*ngIf="!currentChalkboardData.length"
 				>
 					No results...
 				</li>
@@ -45,30 +50,25 @@
 					class="data-table__item"
 					[ngClass]="{ odd: odd, even: even }"
 					*ngFor="
-						let news of currentNewsData;
+						let chalkboard of currentChalkboardData;
 						let even = even;
 						let odd = odd;
 						let i = index
 					"
 				>
 					<div class="first-column">{{ i + 1 }}</div>
-					<div>{{ news.label }}</div>
-					<div>{{ news.link }}</div>
+					<div>{{ chalkboard.mainCourse }}</div>
+					<div>{{ chalkboard.mainCourseSide }}</div>
+					<div>{{ chalkboard.mainCoursePrice }}</div>
+					<div>{{ chalkboard.dessert }}</div>
+					<div>{{ chalkboard.dessertPrice }}</div>
 					<div>
-						<ion-button (click)="onOpenNewsManager(news, i)">
+						<ion-button (click)="onOpenChalkboardManager(chalkboard, i)">
 							<ion-icon name="create-outline"></ion-icon>
 						</ion-button>
 					</div>
 				</li>
 			</ul>
-		</ion-col>
-	</ion-row>
-	<!-- News Form -->
-	<ion-row>
-		<ion-col>
-			<ion-button color="primary" (click)="onOpenCreateNewsDialog()"
-				>Ajouter une news</ion-button
-			>
 		</ion-col>
 	</ion-row>
 </ion-grid>

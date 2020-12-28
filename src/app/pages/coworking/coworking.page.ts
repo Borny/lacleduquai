@@ -62,7 +62,7 @@ export class CoworkingPage implements OnInit {
   ];
 
   public readonly HEADER_TITLE = 'Coworking';
-  public readonly TITLE = 'Coworking Artisitique et Culturel';
+  public readonly TITLE = 'Coworking Artistique et Culturel';
   public readonly HOME_BTN_TEXT = 'Accueil';
   public readonly VALIDATE_BUTTON_TEXT = 'Valider';
   public readonly PAY_BUTTON_TEXT = 'Régler';

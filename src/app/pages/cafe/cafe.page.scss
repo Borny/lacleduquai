@@ -100,7 +100,7 @@
   color: $white;
   border-radius: 8px;
   flex-flow: column;
-  // justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -132,7 +132,6 @@
   }
 
   &__main-course {
-    flex: 1;
     display: flex;
     flex-flow: column;
     justify-content: center;

@@ -13,6 +13,7 @@ import { MaterialModule } from '../../angular-material/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
 
 import { HomeAdminOrganismModule } from '../../organisms/home-admin-organism/home-admin-organism.module';
+import { CafeAdminOrganismModule } from '../../organisms/cafe-admin-organism/cafe-admin-organism.module';
 import { CoursesAdminOrganismModule } from '../../organisms/courses-admin-organism/courses-admin-organism.module';
 import { CafeSubscriptionAdminOrganismModule } from '../../organisms/cafe-subscription-admin-organism/cafe-subscription-admin-organism.module';
 import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-organism/take-away-admin-organism.module';
@@ -27,6 +28,7 @@ import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-org
     MaterialModule,
     SharedModule,
     HomeAdminOrganismModule,
+    CafeAdminOrganismModule,
     TakeAwayAdminOrganismModule,
     CafeSubscriptionAdminOrganismModule,
     CoursesAdminOrganismModule
