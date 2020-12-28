@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>
+	Attention, vous êtes sur le point de supprimer une nouveauté:
+	<br />
+	{{ news.label }}
+</h2>
+<div mat-dialog-actions align="end">
+	<ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+	<ion-button color="danger" [mat-dialog-close]="{ action: CONFIRM_DELETE }">
+		Supprimer
+	</ion-button>
+</div>

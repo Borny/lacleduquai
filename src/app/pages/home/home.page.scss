@@ -58,6 +58,7 @@
   font-size: 2rem;
 }
 
+// WORD CAROUSSEL
 .word-carousel--vertical {
   margin: 0;
   font-size: 36px;
@@ -169,7 +170,7 @@
 //   }
 // }
 
-// LOGO SVG
+// LCDQ LOGO SVG
 .lcdq-svg {
   width: 36px;
   height: 76px;
@@ -225,6 +226,15 @@
   margin-top: 2rem;
   &__title {
     color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: $white;
+    margin: 0 0 0 1rem;
   }
 }
 
@@ -243,6 +253,7 @@
 .event-day {
   margin: 0 auto 2rem;
 }
+
 .events__label {
   display: flex;
   justify-content: space-between;
@@ -267,4 +278,12 @@
   &__title {
     color: $color-primary-dark;
   }
+}
+
+// SOCIAL ICONS
+
+.triangle-blue--large {
+  display: block;
+  transform: rotate(185deg);
+  padding: 0rem 0 15rem;
 }

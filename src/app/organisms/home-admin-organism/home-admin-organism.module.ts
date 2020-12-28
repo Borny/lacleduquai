@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { TakeAwayAdminOrganismComponent } from './take-away-admin-organism.component'
 import { MaterialModule } from '../../angular-material/angular-material.module';
 
+import { HomeAdminOrganismComponent } from './home-admin-organism.component';
+
 @NgModule({
-  declarations: [TakeAwayAdminOrganismComponent],
+  declarations: [HomeAdminOrganismComponent],
   imports: [
     CommonModule,
     IonicModule,
+    ReactiveFormsModule,
     MaterialModule
   ],
-  exports: [TakeAwayAdminOrganismComponent]
+  exports: [HomeAdminOrganismComponent]
 })
-export class TakeAwayAdminOrganismModule { }
+export class HomeAdminOrganismModule { }

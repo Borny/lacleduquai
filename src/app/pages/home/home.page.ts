@@ -14,23 +14,10 @@ import {
 
 import { fadeInAnimationView } from '../../animations';
 
-interface News {
-  link: string;
-  label: string;
-}
+import { HomeService } from '../../services/home.service';
 
-interface DailyEvent {
-  date: Date | number;
-  events: Event[];
-}
-
-interface Event {
-  label: string;
-  intervenant: string;
-  schedule: string;
-  price: string;
-  phone: string;
-}
+import { News } from '../../models/news.model';
+import { DailyEvents } from '../../models/daily-events.model';
 
 @Component({
   selector: 'app-home',
@@ -40,16 +27,7 @@ interface Event {
 })
 export class HomePage implements OnInit {
 
-  public newsList: News[] = [
-    {
-      link: '/lcdq/coworking',
-      label: 'Coworking de 10h à 13h'
-    },
-    {
-      link: '/lcdq/a-emporter',
-      label: 'Faites votre stock de Chaï !'
-    }
-  ];
+  public newsList: News[] = [];
 
   public descriptionWords: string[] = [
     'Mettre en mouvement',
@@ -68,99 +46,19 @@ export class HomePage implements OnInit {
 
   today = new Date();
 
-  public dailyEvents: DailyEvent[] = [
-    {
-      date: new Date(),
-      events: [
-        {
-          label: 'Yoga',
-          intervenant: 'Jean-Luc',
-          schedule: '12h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        },
-        {
-          label: 'Yoga',
-          intervenant: 'Jean-Luc',
-          schedule: '12h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        }
-      ]
-
-    },
-    {
-      date: new Date(),
-      events: [
-        {
-          label: 'Yoga',
-          intervenant: 'Jean-Luc',
-          schedule: '12h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        },
-        {
-          label: 'Yoga',
-          intervenant: 'Jean-Luc',
-          schedule: '12h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        },
-        {
-          label: 'Yoga',
-          intervenant: 'Jean-Luc',
-          schedule: '12h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        }
-      ]
-
-    },
-    {
-      date: new Date(),
-      events: [
-        {
-          label: 'Danse contemporaine',
-          intervenant: 'Côme',
-          schedule: '18h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        },
-        {
-          label: 'Danse contemporaine',
-          intervenant: 'Côme',
-          schedule: '18h30 / 13h30',
-          price: '15',
-          phone: '0789765434'
-        }
-      ]
-
-    }
-  ]
+  public dailyEvents: DailyEvents[] = []
 
   public readonly HEADER_TITLE = 'Accueil';
   public readonly TITLE = 'La Clé Du Quai';
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
-  ngOnInit(
-  ): void {
-    console.log(this.eventLabel(new Date()))
+  ngOnInit(): void {
+    this._getNews();
+    this._getDaysEvents();
   }
 
-  ionViewWillEnter(): void {
-
-  }
-
-  ionViewWillLeave(): void {
-
-  }
-
-  ionViewDidLeave(): void {
-
-  }
-
-  eventLabel(date: Date): string {
+  public dayEventLabel(date: Date): string {
     console.log('date:', new Date())
 
     if (date.getDate() === new Date().getDate()) {
@@ -175,4 +73,22 @@ export class HomePage implements OnInit {
     }
   }
 
+  // PRIVATE
+  private _getNews(): void {
+    this.homeService.getNews().subscribe(
+      response => {
+        this.newsList = response.data;
+      },
+      error => console.log('news error:', error)
+    )
+  }
+
+  private _getDaysEvents(): void {
+    this.homeService.getDaysEvents().subscribe(
+      response => {
+        this.dailyEvents = response.data;
+      },
+      error => console.log('news error:', error)
+    )
+  }
 }
