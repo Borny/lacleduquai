@@ -1,7 +1,7 @@
 <ion-grid>
+	<!-- Loader -->
 	<ion-row *ngIf="isLoading">
 		<ion-col>
-			<!-- Loader -->
 			<ion-spinner color="primary"></ion-spinner>
 		</ion-col>
 	</ion-row>
@@ -10,18 +10,22 @@
     Impossible de récupérer les données, veuillez réessayer
   </p> -->
 
-	<ion-row>
+	<!-- TITLE -->
+	<ion-row *ngIf="!isLoading">
 		<ion-col>
-			<div *ngIf="!isLoading">
-				<h2>Accueil / Home Page</h2>
+			<div>
+				<h2 class="ion-text-center">Home Page</h2>
 			</div>
 		</ion-col>
 	</ion-row>
-	<ion-row>
+
+	<!-- NEWS -->
+	<ion-row *ngIf="!isLoading">
 		<ion-col>
-			<!-- NEWS -->
 			<div class="news__label">
-				<h3>Nouveautés</h3>
+				<ion-text color="primary">
+					<h3 class="ion-margin-vertical">Nouveautés</h3>
+				</ion-text>
 				<span class="news__label__line"></span>
 			</div>
 			<ul class="data-table__container">
@@ -61,14 +65,11 @@
 					</div>
 				</li>
 			</ul>
-		</ion-col>
-	</ion-row>
-	<!-- News Form -->
-	<ion-row>
-		<ion-col>
-			<ion-button color="primary" (click)="onOpenCreateNewsDialog()"
-				>Ajouter une news</ion-button
-			>
+
+			<!-- ADD NEWS -->
+			<ion-button color="primary" (click)="onOpenCreateNewsDialog()">
+				Ajouter une news
+			</ion-button>
 		</ion-col>
 	</ion-row>
 </ion-grid>

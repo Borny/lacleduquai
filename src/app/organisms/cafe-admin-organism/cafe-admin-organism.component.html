@@ -1,29 +1,32 @@
 <ion-grid>
+	<!-- Loader -->
 	<ion-row *ngIf="isLoading">
 		<ion-col>
-			<!-- Loader -->
 			<ion-spinner color="primary"></ion-spinner>
 		</ion-col>
 	</ion-row>
 
-	<!-- <p *ngIf="chalkboardError">
-		Impossible de récupérer les données, veuillez réessayer
-	</p> -->
+	<!-- <p *ngIf="homeError">
+    Impossible de récupérer les données, veuillez réessayer
+  </p> -->
 
-	<ion-row>
+  <!-- TITLE -->
+	<ion-row *ngIf="!isLoading">
 		<ion-col>
-			<div *ngIf="!isLoading">
-				<h2>Café</h2>
+			<div>
+				<h2 class="ion-text-center">Café</h2>
 			</div>
 		</ion-col>
 	</ion-row>
 
+	<!-- CHALKBOARD -->
 	<ion-row>
 		<ion-col>
-			<!-- NEWS -->
 			<div class="news__label">
-				<h3>Ardoise</h3>
-				<span class="news__label__line"></span>
+				<ion-text color="primary">
+					<h3 class="ion-margin-vertical">Ardoise</h3>
+					<span class="news__label__line"></span>
+				</ion-text>
 			</div>
 			<ul class="data-table__container">
 				<!-- Table header -->

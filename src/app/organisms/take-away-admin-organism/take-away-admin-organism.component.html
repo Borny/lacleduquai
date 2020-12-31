@@ -1,76 +1,91 @@
-<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+<ion-grid>
+	<!-- Loader -->
+	<ion-row *ngIf="isLoading">
+		<ion-col>
+			<ion-spinner color="primary"></ion-spinner>
+		</ion-col>
+	</ion-row>
 
-<p *ngIf="orderError">
-  Impossible de récupérer les données, veuillez réessayer
-</p>
+	<ion-row *ngIf="orderError">
+		<ion-col>
+			<ion-spinner color="primary"></ion-spinner>
+			<p>Impossible de récupérer les données, veuillez réessayer</p>
+		</ion-col>
+	</ion-row>
 
-<div *ngIf="!isLoading">
-  <h2>Take Away</h2>
-  <ul class="data-table__container">
-    <!-- Table header -->
-    <li class="data-table__item data-table__item__header">
-      <div class="first-column"></div>
-      <div>Nom</div>
-      <div>Prénom</div>
-      <div>Téléphone</div>
-      <div>Quantité</div>
-      <div>Possède un contenant</div>
-      <div>Prix</div>
-      <div>Date de retrait</div>
-      <div>Status</div>
-      <div>Extra Info</div>
-      <div></div>
-    </li>
+	<ion-row *ngIf="!isLoading">
+		<ion-col>
+			<div>
+				<h2 class="ion-text-center">Take Away</h2>
+			</div>
+		</ion-col>
+	</ion-row>
 
-    <!-- No results -->
-    <li
-      class="data-table__item data-table__item-no-result"
-      *ngIf="!currentOrdersData.length"
-    >
-      No results...
-    </li>
+	<!-- ORDER -->
+	<ion-row *ngIf="!isLoading">
+		<ion-col>
+			<ul class="data-table__container">
+				<!-- Table header -->
+				<li class="data-table__item data-table__item__header">
+					<div class="first-column"></div>
+					<div>Nom</div>
+					<div>Prénom</div>
+					<div>Téléphone</div>
+					<div>Quantité</div>
+					<div>Possède un contenant</div>
+					<div>Prix</div>
+					<div>Date de retrait</div>
+					<div>Status</div>
+					<div>Extra Info</div>
+					<div></div>
+				</li>
 
-    <!-- Table body -->
-    <li
-      class="data-table__item"
-      [ngClass]="{ odd: odd, even: even }"
-      *ngFor="
-        let order of currentOrdersData;
-        let even = even;
-        let odd = odd;
-        let i = index
-      "
-    >
-      <div class="first-column">{{ i + 1 }}</div>
-      <div>{{ order.lastName }}</div>
-      <div>{{ order.firstName }}</div>
-      <div>{{ order.phone }}</div>
-      <div>{{ order.quantity }}</div>
-      <div [ngClass]="order.hasOwnContainer ? 'color-primary' : ''">
-        {{ order.hasOwnContainer ? 'Oui' : 'Non' }}
-      </div>
-      <div>{{ order.totalPrice }}</div>
-      <div>{{ order.pickUpDate | date: 'd MMMM':undefined:'fr-FR' }}</div>
-      <div>
-        <button
-          mat-flat-button
-          [color]="order.state === 'En attente' ? 'primary' : 'accent'"
-          (click)="onOpenState(order)"
-        >
-          {{ order.state }}
-        </button>
-      </div>
-      <div>{{ order.extraInfo }}</div>
-      <div>
-        <button
-          mat-stroked-button
-          type="button"
-          color="primary"
-          (click)="onOpenOrderManager(order, i)"
-        >
-          <mat-icon>create</mat-icon>
-        </button>
-      </div>
-    </li>
-  </ul>
-</div>
+				<!-- No results -->
+				<li
+					class="data-table__item data-table__item-no-result"
+					*ngIf="!currentOrdersData.length"
+				>
+					No results...
+				</li>
+
+				<!-- Table body -->
+				<li
+					class="data-table__item"
+					[ngClass]="{ odd: odd, even: even }"
+					*ngFor="
+						let order of currentOrdersData;
+						let even = even;
+						let odd = odd;
+						let i = index
+					"
+				>
+					<div class="first-column">{{ i + 1 }}</div>
+					<div>{{ order.lastName }}</div>
+					<div>{{ order.firstName }}</div>
+					<div>{{ order.phone }}</div>
+					<div>{{ order.quantity }}</div>
+					<div [ngClass]="order.hasOwnContainer ? 'color-primary' : ''">
+						{{ order.hasOwnContainer ? 'Oui' : 'Non' }}
+					</div>
+					<div>{{ order.totalPrice }}</div>
+					<div>{{ order.pickUpDate | date: 'd MMMM':undefined:'fr-FR' }}</div>
+					<div>
+						<ion-button
+							size="small"
+							[color]="order.state === 'En attente' ? 'primary' : 'secondary'"
+							(click)="onOpenState(order)"
+						>
+							{{ order.state }}
+						</ion-button>
+					</div>
+					<div>{{ order.extraInfo }}</div>
+					<div>
+						<ion-button (click)="onOpenOrderManager(order, i)">
+							<ion-icon name="create-outline"></ion-icon>
+						</ion-button>
+					</div>
+				</li>
+			</ul>
+		</ion-col>
+	</ion-row>
+</ion-grid>
