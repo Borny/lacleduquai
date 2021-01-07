@@ -7,6 +7,7 @@ import { PaymentMethods } from '../../models/payment-methods.enum';
 import { SubscriptionService } from '../../services/subscription.service';
 import { MemberManagerDialog } from './member-manager/member-manager.component';
 import { PaymentReceivedDialog } from './payment-received-dialog/payment-received-dialog.component';
+import { RefundDialog } from './refund-dialog/refund-dialog.component';
 
 @Component({
   selector: 'courses-admin-organism',
@@ -26,6 +27,7 @@ export class CoursesAdminOrganismComponent implements OnInit {
   public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = `cancel`;
   public readonly PAYMENT_UPDATED_SUCCESS = `Paiement mis à jour`;
+  public readonly REFUND_UPDATED_SUCCESS = `Remboursement mis à jour`;
   public readonly MEMBER_UPDATED_SUCCESS = `Infos adhérent mises à jour`;
   public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
   public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimer`;
@@ -88,7 +90,32 @@ export class CoursesAdminOrganismComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._getMembersInfo();
+    this._getMembersData();
+  }
+
+  public onOpenRefundDialog(member: Member, index: number): void {
+    const dialogRef = this.dialog.open(RefundDialog, {
+      minWidth: '300px',
+      data: member
+    });
+    dialogRef.beforeClosed()
+      .subscribe(result => {
+        if (result.action === this.CONFIRM) {
+          this.subscriptionService.updateMember(member)
+            .subscribe(
+              result => {
+                // show snack bar
+                this._snackBar.open(this.REFUND_UPDATED_SUCCESS, null, {
+                  duration: 3000,
+                });
+              },
+              err => {
+                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
+                  duration: 3000,
+                });
+              });
+        }
+      });
   }
 
   public onOpenPaymentReceived(member: Member): void {
@@ -166,7 +193,6 @@ export class CoursesAdminOrganismComponent implements OnInit {
   }
 
   public onSelectedOption(filter: string, value?: string): void {
-
     this.matSelect = value;
     switch (filter) {
       case 'payment':
@@ -186,7 +212,7 @@ export class CoursesAdminOrganismComponent implements OnInit {
   }
 
   public onResetFilters(): void {
-    this._getMembersInfo();
+    this._getMembersData();
     this.matSelect = null;
   }
 
@@ -196,10 +222,19 @@ export class CoursesAdminOrganismComponent implements OnInit {
     });
   }
 
+  // public get getTotalRefund(member: Member): number {
+  //   let total = 0;
+  //   member.refunds.forEach(refund => {
+  //     total += refund.amount
+  //   })
+  //   return total;
+
+  // }
+
   ////////////
   // PRIVATE
   ////////////
-  private _getMembersInfo(): void {
+  private _getMembersData(): void {
     this.isLoading = true;
     this.subscriptionService.getMembersData()
       .subscribe(

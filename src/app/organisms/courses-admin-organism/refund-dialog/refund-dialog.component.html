@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>
+	{{ REFUND_TITLE }}: {{ member.firstName }} {{ member.lastName }}
+</h1>
+<div mat-dialog-content>
+	<div *ngIf="member.refunds.length" class="existing-refund__container">
+		<p class="existing-refund__title">Remboursements effectués</p>
+		<div class="existing-refund__header">
+			<p>Montant</p>
+			<p>Date</p>
+		</div>
+		<div class="existing-refund__content" *ngFor="let refund of member.refunds">
+			<p>{{ refund.amount }}€</p>
+			<p>
+				{{ refund.date | date }}
+			</p>
+		</div>
+	</div>
+	<form [formGroup]="refundForm" (ngSubmit)="onSubmit()">
+		<!-- CONTROLS -->
+		<ng-container formArrayName="refunds">
+			<div
+				class="controls__container"
+				*ngFor="let refund of refunds.controls; let i = index"
+			>
+				<ng-container [formGroup]="refund">
+					<!-- Amount -->
+					<mat-form-field class="amount-control">
+						<mat-label>Montant</mat-label>
+						<input matInput type="number" formControlName="amount" required />
+					</mat-form-field>
+					<!-- Date -->
+					<div class="form-control">
+						<mat-form-field appearance="fill" class="form__calendar">
+							<mat-label>Date</mat-label>
+							<input
+								matInput
+								[matDatepicker]="picker"
+								formControlName="date"
+								disabled
+							/>
+							<mat-datepicker-toggle matSuffix [for]="picker">
+							</mat-datepicker-toggle>
+							<mat-datepicker #picker disabled="false"></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</ng-container>
+			</div>
+		</ng-container>
+
+		<!-- ADD / REMOVE REFUNDS CONTROLS -->
+		<div class="btn__container">
+			<div>
+				<ion-button
+					*ngIf="refundArray.controls.length > 1"
+					color="secondary"
+					size="small"
+					(click)="onRemoveLastRefund(refundArray.controls.length - 1)"
+				>
+					Supprimer le dernier
+				</ion-button>
+			</div>
+			<ion-button color="primary" size="small" (click)="onAddRefund()">
+				Ajouter
+			</ion-button>
+		</div>
+	</form>
+</div>
+<div mat-dialog-actions align="end">
+	<ion-button color="secondary" (click)="onCancel()">Annuler</ion-button>
+	<ion-button (click)="onSubmit()" [disabled]="refundForm.invalid">
+		Confirmer
+	</ion-button>
+</div>

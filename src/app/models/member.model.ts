@@ -1,3 +1,8 @@
+export interface Refund {
+  amount: number;
+  date: Date;
+}
+
 export interface Check {
   amount: string;
   depositMade: boolean;
@@ -12,6 +17,8 @@ export interface Member {
   email: string;
   courses: string[];
   workshops: string[];
+  refunds?: Refund[];
+  totalRefund?: number;
   paymentMethod: string;
   checks?: Check[];
   paymentReceived: boolean;

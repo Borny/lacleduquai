@@ -1,7 +1,7 @@
 <ion-grid>
 	<!-- Loader -->
 	<ion-row *ngIf="isLoading">
-		<ion-col>
+		<ion-col class="ion-text-center spinner">
 			<ion-spinner color="primary"></ion-spinner>
 		</ion-col>
 	</ion-row>
@@ -47,6 +47,7 @@
 	<ion-row *ngIf="!isLoading">
 		<ion-col>
 			<ul class="data-table__container">
+				<!-- TABLE HEADER -->
 				<li class="data-table__item data-table__item__header">
 					<div class="first-column"></div>
 					<div>Nom</div>
@@ -65,12 +66,15 @@
 					<div></div>
 				</li>
 
+				<!-- NO RESULTS -->
 				<li
 					class="data-table__item data-table__item-no-result"
 					*ngIf="!currentMembersData.length"
 				>
 					No results...
 				</li>
+
+				<!-- DATA -->
 				<li
 					class="data-table__item"
 					[ngClass]="{ odd: odd, even: even }"
@@ -118,7 +122,15 @@
 						</div>
 						<ng-template #noContentBlock><div>-</div></ng-template>
 					</div>
-					<div>-</div>
+
+					<!-- Refund -->
+					<div>
+						<ion-button
+							[color]="member.totalRefund ? 'primary' : 'secondary'"
+							(click)="onOpenRefundDialog(member, i)"
+							>{{ member.totalRefund }}€</ion-button
+						>
+					</div>
 					<div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
 						{{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
 					</div>

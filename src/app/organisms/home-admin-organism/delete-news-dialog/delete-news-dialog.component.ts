@@ -1,5 +1,6 @@
 import { Component, Inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaterialModule } from '../../../angular-material/angular-material.module';
@@ -32,7 +33,7 @@ export class DeleteNewsDialog {
 
 @NgModule({
   declarations: [DeleteNewsDialog],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, IonicModule],
   exports: [],
   providers: [],
 })

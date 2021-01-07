@@ -46,6 +46,32 @@
   }
 }
 
+// REFUNDS
+.existing-refund__container {
+  border-radius: 4px;
+  background: $color-primary-light;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.existing-refund__title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.existing-refund__header {
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-weight: bold;
+  }
+}
+
+.existing-refund__content {
+  display: flex;
+  justify-content: space-between;
+}
+
 .courses-container {
   margin: 0 0 1rem;
 }

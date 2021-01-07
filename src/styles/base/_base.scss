@@ -249,6 +249,12 @@ ion-card:focus {
   margin: 0 auto;
 }
 
+// Mat Dialog
+.mat-dialog__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
 //////////
 // HACKS
 //////////

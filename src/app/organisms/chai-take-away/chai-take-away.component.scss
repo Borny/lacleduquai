@@ -1,6 +1,11 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
+// LOADER
+.spinner {
+  padding: 5rem 0;
+}
+
 .heading {
   color: $color-secondary;
   text-align: center;

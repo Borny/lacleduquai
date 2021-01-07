@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IonicModule } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 import { Member, Check } from '../../../models/member.model';
@@ -82,7 +83,7 @@ export class PaymentReceivedDialog implements OnInit {
 
 @NgModule({
   declarations: [PaymentReceivedDialog],
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule, FormsModule, IonicModule],
   exports: [],
   providers: [],
 })
