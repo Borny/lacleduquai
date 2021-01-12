@@ -1,13 +1,11 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
-// MAIN GRID
-// .home-page-grid {
-//   @include screen-sm {
-//     overflow: hidden;
-//     height: calc(100vh - 56px - 57px); // viewport height - header - footer
-//   }
-// }
+// LOADER
+.loader {
+  display: block;
+  margin: 3rem auto;
+}
 
 .logo-container {
   width: 200px;
@@ -51,10 +49,8 @@
 }
 
 .main-title {
-  color: #737373;
   font-family: $fontOswald;
   font-weight: bold;
-  text-align: center;
   font-size: 2rem;
 }
 
@@ -179,11 +175,20 @@
   @include screen-sm {
     // width: 300px;
     height: 100px;
-    margin: 0 auto 4rem;
+    height: 200px;
+    width: 66px;
+    margin: 0 auto 2rem;
   }
 }
 
 // NEWS
+.news__container {
+  @include screen-sm {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
 .news__label {
   display: flex;
   justify-content: space-between;
@@ -210,14 +215,8 @@
   margin: 0 auto;
 }
 
-.news__label {
-}
-
 .news__card {
   background: $color-secondary-light;
-  &__title {
-    // color: $grey-light;
-  }
 }
 
 // TODAYS SPECIAL
@@ -241,13 +240,20 @@
 // EVENTS
 .events {
   margin: 1rem auto;
+  &__container-label {
+    color: $white;
+    font-weight: bold;
+    background: $color-primary;
+    padding: 1rem 0;
+    margin: 0 0 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
 
-  // @include screen-sm {
-  //   height: 490px;
-  //   overflow-y: scroll;
-  //   margin-right: -20px;
-  //   transform: translateX(17px);
-  // }
+    @include screen-sm {
+      border-radius: 4px;
+    }
+  }
 }
 
 .event-day {
@@ -255,10 +261,18 @@
 }
 
 .events__label {
+  position: sticky;
+  top: 0;
+  z-index: $zindex-events-label;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  background-color: $white;
+  padding: 0.4rem 1rem;
+
+  @include screen-sm {
+    top: 1rem;
+  }
   h2 {
     color: $color-primary-dark;
     font-weight: bold;
@@ -277,10 +291,18 @@
   background: $color-primary-light;
   &__title {
     color: $color-primary-dark;
+
+    small {
+      margin-top: 0.2rem;
+    }
   }
 }
 
 // SOCIAL ICONS
+.social__container {
+  position: sticky;
+  top: -100px;
+}
 
 .triangle-blue--large {
   display: block;

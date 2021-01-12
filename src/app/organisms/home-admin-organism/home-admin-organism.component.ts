@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HomeService } from '../../services/home.service';
 
 import { News } from '../../models/news.model';
-import { DailyEvents } from '../../models/daily-events.model';
+import { DayEvents } from '../../models/events.model';
 import { NewsManagerDialog } from './news-manager-dialog/news-manager-dialog.component';
 import { NewsCreateDialog } from './news-create-dialog/news-create-dialog.component';
 
@@ -22,7 +22,7 @@ export class HomeAdminOrganismComponent implements OnInit {
   public isLoading = false;
   public newsForm: FormGroup = new FormGroup({});
 
-  public dailyEvents: DailyEvents[] = [];
+  public events: DayEvents[] = [];
 
   public readonly CREATE_BTN_TEXT = 'Valider';
   public readonly NEWS_CREATED_SUCCESS = 'News created';
@@ -43,7 +43,7 @@ export class HomeAdminOrganismComponent implements OnInit {
 
   ngOnInit() {
     this._getNews();
-    this._getDaysEvents();
+    this._getDaysDayEvents();
     this._initNewsForm();
   }
 
@@ -153,10 +153,10 @@ export class HomeAdminOrganismComponent implements OnInit {
     )
   }
 
-  private _getDaysEvents(): void {
-    this.homeService.getDaysEvents().subscribe(
+  private _getDaysDayEvents(): void {
+    this.homeService.getDaysDayEvents().subscribe(
       response => {
-        this.dailyEvents = response.data;
+        this.events = response.daysList;
       },
       error => console.log('news error:', error)
     )
