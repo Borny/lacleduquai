@@ -129,12 +129,16 @@ textarea {
   }
 }
 
+.display-block {
+  display: block;
+}
+
 .display-flex {
   display: flex;
 }
 
-.display-block {
-  display: block;
+.flex-column {
+  flex-direction: column;
 }
 
 .full-height {
@@ -214,6 +218,14 @@ textarea {
 ion-card:focus {
   outline: 0;
   border: 0;
+}
+
+.modal-delete {
+  --max-height: 200px;
+  .btn__container {
+    display: flex;
+    justify-content: space-evenly;
+  }
 }
 
 /////////////////////

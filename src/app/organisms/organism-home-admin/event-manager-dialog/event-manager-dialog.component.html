@@ -1,0 +1,196 @@
+<!-- Loader -->
+<ion-spinner
+	*ngIf="isLoading"
+	class="loader"
+	name="crescent"
+	color="primary"
+></ion-spinner>
+
+<!-- Event error -->
+<div *ngIf="eventError">
+	<p>Impossible de récupérer l'évènement</p>
+	<ion-button color="warning" (click)="onClose()">Fermer</ion-button>
+</div>
+
+<!-- Event info -->
+<div *ngIf="showDialog">
+	<h2 class="color-primary" mat-dialog-title>
+		{{ event.name }}
+	</h2>
+	<div mat-dialog-content>
+		<form
+			class="event-edition-form"
+			[formGroup]="eventEditionForm"
+			(ngSubmit)="onSubmit()"
+		>
+			<ion-list>
+				<!-- Name -->
+				<ion-item>
+					<ion-label position="floating">Nom</ion-label>
+					<ion-input
+						type="text"
+						name="name"
+						formControlName="name"
+						required
+					></ion-input>
+				</ion-item>
+				<p
+					class="error-message"
+					[ngClass]="
+						eventEditionForm.get('name').invalid &&
+						eventEditionForm.get('name').touched
+							? 'show-error'
+							: ''
+					"
+				>
+					Veuillez renseigner un intervenant
+				</p>
+
+				<!-- Prof -->
+				<ion-item>
+					<ion-label position="floating">Intervenant</ion-label>
+					<ion-input
+						type="text"
+						name="prof"
+						formControlName="prof"
+						required
+					></ion-input>
+				</ion-item>
+				<p
+					class="error-message"
+					[ngClass]="
+						eventEditionForm.get('prof').invalid &&
+						eventEditionForm.get('prof').touched
+							? 'show-error'
+							: ''
+					"
+				>
+					Veuillez renseigner un prof
+				</p>
+
+				<!-- Schedule -->
+				<ion-item>
+					<ion-label position="floating">Horaire</ion-label>
+					<ion-input
+						type="text"
+						name="schedule"
+						formControlName="schedule"
+						required
+					></ion-input>
+				</ion-item>
+				<p
+					class="error-message"
+					[ngClass]="
+						eventEditionForm.get('schedule').invalid &&
+						eventEditionForm.get('schedule').touched
+							? 'show-error'
+							: ''
+					"
+				>
+					Veuillez renseigner un horaire
+				</p>
+
+				<!-- Price -->
+				<ion-item>
+					<ion-label position="floating">Prix</ion-label>
+					<ion-input
+						type="number"
+						name="price"
+						formControlName="price"
+						required
+					></ion-input>
+				</ion-item>
+				<p
+					class="error-message"
+					[ngClass]="
+						eventEditionForm.get('price').invalid &&
+						eventEditionForm.get('price').touched
+							? 'show-error'
+							: ''
+					"
+				>
+					Veuillez renseigner un prix
+				</p>
+
+				<!-- Phone -->
+				<ion-item>
+					<ion-label position="floating">Téléphone</ion-label>
+					<ion-input
+						type="number"
+						name="phone"
+						formControlName="phone"
+						required
+					></ion-input>
+				</ion-item>
+				<p
+					class="error-message"
+					[ngClass]="
+						eventEditionForm.get('phone').invalid &&
+						eventEditionForm.get('phone').touched
+							? 'show-error'
+							: ''
+					"
+				>
+					Veuillez renseigner un numéro de téléphone
+				</p>
+
+				<!-- Event Dates -->
+				<mat-form-field appearance="fill" class="form__calendar">
+					<mat-label>Sélectionnez une/des date(s) :</mat-label>
+					<mat-chip-list
+						#chipList
+						aria-label="Choisir une date"
+						(click)="picker.open()"
+					>
+						<mat-chip
+							*ngFor="let value of dates"
+							[selectable]="false"
+							[removable]="true"
+							(removed)="remove(value)"
+						>
+							{{ value | date }}
+							<mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+						</mat-chip>
+						<input
+							matInput
+							placeholder="Choisir une date"
+							[value]="resetModel"
+							[matDatepicker]="picker"
+							[min]="minDate"
+							[max]="maxDate"
+							[matChipInputFor]="chipList"
+							(dateChange)="dateChanged($event)"
+							required
+							hidden
+						/>
+					</mat-chip-list>
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="picker"
+					></mat-datepicker-toggle>
+					<mat-datepicker
+						#picker
+						[startAt]="init"
+						[dateClass]="dateClass"
+					></mat-datepicker>
+				</mat-form-field>
+			</ion-list>
+		</form>
+		<p *ngFor="let item of eventEditionForm.value.dates">{{ item }}</p>
+	</div>
+
+	<!-- CTAs -->
+	<div mat-dialog-actions align="end">
+		<ion-button color="danger" (click)="onOpenDeleteModal()">
+			Supprimer
+		</ion-button>
+		<ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+		<ion-button
+			[disabled]="eventEditionForm.invalid"
+			color="primary"
+			(click)="onSubmit()"
+		>
+			Modifier
+		</ion-button>
+	</div>
+</div>

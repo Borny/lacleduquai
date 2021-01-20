@@ -84,21 +84,23 @@ export class HomePage implements OnInit {
     this.homeService.getDaysDayEvents()
       .pipe(
         map(response => {
-          response.daysList = response.daysList
-            // Adding a label to the day
+          response.daysListFiltered = response.daysListFiltered
             .map(day => {
+              // Sorting the events by ascending time
+              day.events.sort((a, b) => new Date(a.timeStart).getTime() - new Date(b.timeStart).getTime());
+              // Adding a label to the day
               day.label = this._setDayEventLabel(day.date);
               return day;
             })
             // Sorting the days list to ascending order
             .sort((a, b) => a.dayOfYear - b.dayOfYear);
-          return response
+          return response;
         })
       )
       .subscribe(
         response => {
           this.isDayEventsLoading = false;
-          this.daysList = response.daysList;
+          this.daysList = response.daysListFiltered;
         },
         error => {
           this.isDayEventsLoading = false;

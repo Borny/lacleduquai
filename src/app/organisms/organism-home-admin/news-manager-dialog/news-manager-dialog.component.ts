@@ -3,13 +3,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatRadioChange } from '@angular/material/radio';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
-import { ChaiTakeAway, TakeAwayState } from '../../../models/chai-take-away.model';
-import { TakeAwayService } from '../../../services/take-away.service';
 import { DeleteNewsDialog } from '../delete-news-dialog/delete-news-dialog.component';
 import { IonicModule } from '@ionic/angular';
 import { HomeService } from '../../../services/home.service';

@@ -58,6 +58,14 @@ export class CoworkingPage implements OnInit {
     {
       date: new Date('12/9/2020'),
       bookedPeople: 7
+    },
+    {
+      date: new Date('1/20/2021'),
+      bookedPeople: 7
+    },
+    {
+      date: new Date('1/25/2021'),
+      bookedPeople: 7
     }
   ];
 
@@ -259,9 +267,8 @@ export class CoworkingPage implements OnInit {
   private _setMinMaxDates(): void {
     this.minDateFilter = new Date();
 
-    // TODO: uncomment from 01/01/2021
-    // const currentYear = new Date().getFullYear();
-    // this.maxDateFilter = new Date(currentYear + 0, 5, 30);
+    const currentYear = new Date().getFullYear();
+    this.maxDateFilter = new Date(currentYear + 0, 5, 30);
   }
 
   private _findDate(date: Date): number {
@@ -275,6 +282,7 @@ export class CoworkingPage implements OnInit {
     const unAvailableDays = bookedDays
       .filter((day) => day.bookedPeople + peopleCount > this.maxPersonsAllowed)
       .map(day => day.date.toLocaleDateString());
+    console.log(unAvailableDays)
     return unAvailableDays;
   }
 }

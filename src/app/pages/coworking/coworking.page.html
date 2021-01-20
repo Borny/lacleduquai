@@ -75,7 +75,7 @@
 							</div>
 						</div>
 
-						<!-- Contact Form -->
+						<!-- Coworking Form -->
 						<form
 							*ngIf="!isLoading && !isFormSent && !isFormFailed"
 							class="form"
@@ -126,6 +126,7 @@
 												[value]="resetModel"
 												[matDatepicker]="picker"
 												[min]="minDateFilter"
+												[max]="maxDateFilter"
 												[matDatepickerFilter]="dateFilter"
 												[matChipInputFor]="chipList"
 												(dateChange)="dateChanged($event)"

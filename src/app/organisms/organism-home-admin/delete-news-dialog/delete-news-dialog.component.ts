@@ -37,4 +37,4 @@ export class DeleteNewsDialog {
   exports: [],
   providers: [],
 })
-class DeleteMemberModule { }
+class DeleteNewsModule { }

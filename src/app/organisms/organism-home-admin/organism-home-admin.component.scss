@@ -30,7 +30,6 @@
 
     flex: 1;
     width: 170px;
-    // text-align: center;
     font-size: 0.8rem;
     padding: 0.3rem;
 
@@ -43,6 +42,7 @@
     &:hover {
       text-overflow: clip;
       white-space: normal;
+      flex-direction: column;
     }
 
     &.first-column {

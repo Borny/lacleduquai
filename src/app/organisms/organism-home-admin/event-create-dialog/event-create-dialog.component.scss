@@ -1,0 +1,39 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+.loader {
+  display: block;
+  margin: 3rem auto;
+}
+
+.event-create-form {
+  display: flex;
+  flex-flow: column;
+}
+
+// CALENDAR
+.form__calendar {
+  width: 100%;
+  margin: 1rem auto;
+
+  .mat-input-element {
+    // changes the label color
+    color: $color-primary;
+  }
+
+  mat-datepicker-toggle {
+    // changes the calendar icon color
+    color: $color-primary;
+  }
+}
+
+::ng-deep mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-calendar-body-cell.selected > .mat-calendar-body-cell-content,
+::ng-deep .mat-calendar-body-cell.selected:hover > .mat-calendar-body-cell-content,
+::ng-deep .mat-calendar-body-cell.selected > .mat-calendar-body-cell-content:hover {
+  background-color: $color-primary !important;
+  color: $white !important;
+}

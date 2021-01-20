@@ -6,10 +6,13 @@ export interface DayEvents {
 }
 
 export interface Event {
-  date: Date[];
+  _id: string;
+  dates: Date[];
   name: string;
   prof: string;
+  timeStart: Date;
+  timeEnd: Date;
   schedule: string;
-  price: string;
+  price: number;
   phone: number;
 }

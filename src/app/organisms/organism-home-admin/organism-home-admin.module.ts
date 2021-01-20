@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../../angular-material/angular-material.module';
 
-import { HomeAdminOrganismComponent } from './home-admin-organism.component';
+import { HomeAdminOrganismComponent } from './organism-home-admin.component';
 
 @NgModule({
   declarations: [HomeAdminOrganismComponent],

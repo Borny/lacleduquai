@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 
@@ -18,8 +18,12 @@ export class HomeService {
   private readonly DELETE_NEWS_URL = this.HOME_URL + '/delete-news';
   private readonly UPDATE_NEWS_URL = this.HOME_URL + '/update-news';
 
-  private readonly HOME_EVENTS_URL = this.HOME_URL + '/events';
-  private readonly HOME_EVENT_URL = this.HOME_URL + '/event';
+  private readonly HOME_DAYS_EVENTS_URL = `${this.HOME_URL}/days-events`;
+  private readonly SINGLE_EVENT_URL = `${this.HOME_URL}/single-event`;
+  private readonly HOME_EVENTS_URL = `${this.HOME_URL}/events`;
+  private readonly HOME_EVENT_URL = `${this.HOME_URL}/event`;
+  private readonly DELETE_EVENT_URL = `${this.HOME_URL}/delete-event`;
+  private readonly UPDATE_EVENT_URL = `${this.HOME_URL}/update-event`;
 
   constructor(private http: HttpClient) { }
 
@@ -48,15 +52,31 @@ export class HomeService {
     return this.http.delete<{ message: string }>(`${this.DELETE_NEWS_URL}/${news._id}`);
   }
 
-  // DAY EVENTS  
-  public getDaysDayEvents(): Observable<{ daysList: DayEvents[] }> {
-    return this.http.get<{ daysList: DayEvents[] }>(this.HOME_EVENTS_URL);
-  }
-
-  public postDaysDayEvents(data: Event): Observable<{ message: string }> {
+  // EVENTS  
+  public postEvent(data: Event): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       this.HOME_EVENT_URL,
       data
     );
+  }
+
+  public getDaysDayEvents(): Observable<{ daysListFiltered: DayEvents[] }> {
+    return this.http.get<{ daysListFiltered: DayEvents[] }>(this.HOME_DAYS_EVENTS_URL);
+  }
+
+  public getEvents(): Observable<{ events: Event[] }> {
+    return this.http.get<{ events: Event[] }>(this.HOME_EVENTS_URL);
+  }
+
+  public getSingleEvent(eventId: string): Observable<{ data: Event }> {
+    return this.http.get<{ data: Event }>(`${this.SINGLE_EVENT_URL}/${eventId}`);
+  }
+
+  public updateEvent(eventData: Event): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(`${this.UPDATE_EVENT_URL}/${eventData._id}`, eventData);
+  }
+
+  public deleteEvent(Event: Event): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.DELETE_EVENT_URL}/${Event._id}`);
   }
 }

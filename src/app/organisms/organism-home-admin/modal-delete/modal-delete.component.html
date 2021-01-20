@@ -1,0 +1,16 @@
+<div class="ion-page">
+	<ion-header>
+		<ion-toolbar color="danger">
+			<ion-title>
+				Attention, vous êtes sur le point de supprimer cet élément:
+				<br />
+				{{ contentData.name }}
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<div class="btn__container ion-padding">
+		<ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+		<ion-button color="danger" (click)="onConfirm()">Supprimer </ion-button>
+	</div>
+</div>
