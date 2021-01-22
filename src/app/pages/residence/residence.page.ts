@@ -163,13 +163,15 @@ export class ResidencePage implements OnInit {
       address: new FormControl(null, Validators.required),
       location: new FormControl(null, Validators.required),
       projectDescription: new FormControl(null, Validators.required),
-      extraInfo: new FormControl(null, Validators.required),
       projectTeam: new FormArray([
         new FormControl(null, Validators.required)
       ],
         Validators.required),
       artisticPractice: new FormArray([], requireCheckboxesToBeCheckedValidator()),
       availability: new FormArray([], requireCheckboxesToBeCheckedValidator()),
+      videoLink: new FormControl(null),
+      website: new FormControl(null),
+      partners: new FormControl(null)
     });
     this._addControl('artisticPractice', this.artisticPractices);
     this._addControl('availability', this.availabilities);

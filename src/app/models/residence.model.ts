@@ -10,7 +10,9 @@ export interface Residence {
   projectDescription: string;
   projectTeam: string[];
   availability: string[];
-  extraInfo: string;
+  videoLink: string;
+  website: string;
+  partners: string;
 }
 
 interface ProjectMember {

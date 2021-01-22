@@ -12,7 +12,6 @@
 }
 
 .form__container {
-  // max-width: 360px;
   margin: 0 auto;
   display: flex;
   flex-flow: column;
@@ -36,26 +35,14 @@
   flex-flow: column;
   justify-content: center;
   width: 100%;
-  // max-width: 300px;
 }
 
 .form-control {
   width: 100%;
-  // max-width: 300px;
 }
 
 .form__calendar {
   width: 100%;
-
-  .mat-input-element {
-    // changes the label color
-    color: $color-primary;
-  }
-
-  mat-datepicker-toggle {
-    // changes the calendar icon color
-    color: $color-primary;
-  }
 
   p {
     margin: 0.5rem 0;

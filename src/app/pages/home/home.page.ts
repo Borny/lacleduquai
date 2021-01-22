@@ -38,14 +38,14 @@ export class HomePage implements OnInit {
     'Café',
     'Danse',
     'Théâtre',
-    'Cours',
-    'Ateliers',
-    'Rencontres',
-    'Partage',
-    'Cie Bela & Côme',
-    'Accueil en résidence',
-    'Coworking',
-    'Le Bruit des Corps'
+    // 'Cours',
+    // 'Ateliers',
+    // 'Rencontres',
+    // 'Partage',
+    // 'Cie Bela & Côme',
+    // 'Accueil en résidence',
+    // 'Coworking',
+    // 'Le Bruit des Corps'
   ];
   public months: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre']
 

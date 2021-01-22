@@ -20,14 +20,20 @@
   flex: 1;
 }
 
-// FORM
-.residence-form {
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
+// FORM MESSAGES
+.message-sent {
+  display: flex;
+  flex-direction: column;
+  &__content {
+    margin: 1rem 0;
+  }
 }
 
+// BUTTONS
 .btn__container {
   display: flex;
   justify-content: center;
+  &--submit {
+    margin: 2rem 0 0;
+  }
 }

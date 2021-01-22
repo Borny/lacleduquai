@@ -1,7 +1,6 @@
 ////////////////////////////////
 // BOX SIZING FOR ALL ELEMENTS
 ////////////////////////////////
-
 *,
 ::before,
 ::after {
@@ -73,7 +72,9 @@ textarea {
   font-family: $fontOswald;
 }
 
+//////////
 // LINKS
+//////////
 a {
   text-decoration: none;
   border: none;
@@ -87,9 +88,9 @@ li {
   list-style: none;
 }
 
-///////////
-// BUTTON
-///////////
+////////////
+// BUTTONS
+////////////
 button,
 .btn {
   outline: none;
@@ -103,8 +104,9 @@ button,
     font-size: 1em;
   }
 }
-
+//////////////////////////
 // CANCELS OUTLINE INPUT
+//////////////////////////
 input,
 button,
 select,
@@ -212,9 +214,9 @@ textarea {
   font-family: $fontOswald;
 }
 
-/////////////////////
+//////////
 // IONIC
-/////////////////////
+//////////
 ion-card:focus {
   outline: 0;
   border: 0;
@@ -228,16 +230,26 @@ ion-card:focus {
   }
 }
 
+// FORM
+// highlight the ion-item in green when the input has focus for the first time instead of red
+.ion-invalid.ion-untouched.item-has-focus {
+  --highlight-background: #5dbeba;
+}
+
+// ASTERISK
+.label-asterisk {
+  padding: 0 0.3rem;
+  color: $color-primary;
+}
+
 /////////////////////
 // ANGULAR MATERIAL
 /////////////////////
-
 // .mat-expansion-panel-body {
 //   padding: 0 !important;
 // }
 
 // Wraps the text for checkboxes
-
 .mat-checkbox-layout {
   white-space: initial !important;
 }
@@ -256,21 +268,51 @@ ion-card:focus {
   }
 }
 
-// Mat Tabs
+// Mat Tabs //
 .mat-tab-header {
   margin: 0 auto;
 }
 
-// Mat Dialog
+// Mat Dialog //
 .mat-dialog__footer {
   display: flex;
   justify-content: space-between;
 }
 
+// CALENDAR //
+.mat-input-element {
+  // changes the label color
+  color: $color-primary !important;
+}
+
+mat-datepicker-toggle {
+  // changes the calendar icon color
+  color: $color-primary !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent;
+}
+
+.mat-calendar-body-cell.selected > .mat-calendar-body-cell-content,
+.mat-calendar-body-cell.selected:hover > .mat-calendar-body-cell-content,
+.mat-calendar-body-cell.selected > .mat-calendar-body-cell-content:hover {
+  background-color: $color-primary !important;
+  color: $white !important;
+}
+
+// CANCELS THE BOTTOM LINE HOVER EFFECT
+.mat-form-field-ripple {
+  opacity: 0 !important;
+}
+
 //////////
 // HACKS
 //////////
-
 //CANCELS SAFARI INPUT ICON
 input::-webkit-contacts-auto-fill-button {
   visibility: hidden;
