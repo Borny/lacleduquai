@@ -283,7 +283,6 @@
 // TODAYS SPECIAL
 .todays-special__card {
   background: $color-primary-dark;
-  margin-top: 2rem;
   &__title {
     color: $white;
     display: flex;
@@ -302,19 +301,27 @@
 .events {
   margin: 1rem auto;
   &__container-label {
-    color: $white;
+    color: $color-primary;
     font-weight: bold;
-    background: $color-primary;
     padding: 1rem 0;
-    margin: 0 0 1rem;
     text-align: center;
     text-transform: uppercase;
     font-size: 2rem;
-
-    @include screen-sm {
-      border-radius: 4px;
-    }
   }
+}
+
+.event__details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer--round {
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  margin: 0 0.3rem;
+  background: $white;
 }
 
 .event-day {

@@ -76,6 +76,10 @@ export class CoworkingPage implements OnInit {
   public readonly PAY_BUTTON_TEXT = 'Régler';
   public readonly RELOAD = 'Réessayer';
 
+  // Card number
+  private readonly FRENCH_CARD_NUMBER = 4000002500000003;
+
+
   private _close_on_selected = false;
 
   private stripe: any; // : stripe.Stripe;

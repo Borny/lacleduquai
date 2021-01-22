@@ -44,7 +44,7 @@ export class ResidencePage implements OnInit {
   public residenceForm: FormGroup;
 
   public readonly HEADER_TITLE = 'Accueil en résidence';
-  public readonly TITLE = 'Demande de Résidence Artisitique';
+  public readonly TITLE = 'Demande de Résidence Artistique';
   public readonly SEND_BUTTON_TEXT = 'Envoyer';
   public readonly HOME_BTN_TEXT = 'Accueil';
   public readonly RELOAD = 'Réessayer';

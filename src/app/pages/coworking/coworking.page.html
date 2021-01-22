@@ -42,6 +42,12 @@
               Thé et café en libre service
             </p>
           </li>
+          <li class="description-item">
+            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
+            <p class="description-item--content">
+              Possibilité d'utiliser l'imprimante de l'association
+            </p>
+          </li>
         </ul>
       </ion-col>
     </ion-row>
@@ -149,7 +155,7 @@
                 <div class="btn__container btn__container--block btn__container--submit">
                   <ion-button class="ion-margin-vertical" type="submit" color="secondary" expand="block"
                     [disabled]="coworkingForm.invalid || totalPrice === 0 || coworkingForm.get('bookingDateList').value.length === 0 || !isCardValid">
-                    {{PAY_BUTTON_TEXT}} {{totalPrice}}€
+                    {{PAY_BUTTON_TEXT}} {{totalPrice | currency}}
                   </ion-button>
 
                   <!-- Loading button -->

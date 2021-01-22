@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses-workshops.page.scss'],
 })
 export class CoursesWorkshopsPage implements OnInit {
-  public readonly HEADER_TITLE = 'Cours et stages';
-  public readonly TITLE = 'Cours et stages à Bordeaux';
+  public readonly HEADER_TITLE = 'Cours et Stages';
+  public readonly TITLE = 'Cours et Stages à Bordeaux';
 
   constructor() { }
 

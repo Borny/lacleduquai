@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SmallStudioPage implements OnInit {
 
   public readonly HEADER_TITLE = 'Petite salle - 20m2';
-  public readonly TITLE = 'Notre Salle Bien-Être';
+  public readonly TITLE = 'Notre Salle Bien-être';
 
   constructor() { }
 

@@ -63,7 +63,9 @@ export class HomePage implements OnInit {
     return element ? element._id : null;
   }
 
+  ////////////
   // PRIVATE
+  ////////////
   private _getNews(): void {
     this.isNewsLoading = true;
     this.homeService.getNews()

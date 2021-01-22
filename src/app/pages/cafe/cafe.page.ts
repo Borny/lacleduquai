@@ -21,11 +21,11 @@ export class CafePage implements OnInit {
         {
           drinks: [
             {
-              label: 'Nature',
+              label: 'Chaï nature',
               price: '2,50€ / 4,50'
             },
             {
-              label: 'Lait',
+              label: 'Chaï lait / lait végétal',
               price: '2,90€ / 4,90'
             },
             {
@@ -104,7 +104,7 @@ export class CafePage implements OnInit {
       ]
     },
     {
-      title: 'Boissons',
+      title: 'Autres Boissons',
       categories: [
         {
           label: 'Cocktails de fruits',
@@ -157,7 +157,7 @@ export class CafePage implements OnInit {
             },
             {
               label: 'Jus de Fruits',
-              price: '3,2à'
+              price: '3,20'
             },
             {
               label: 'Sirops',
@@ -188,6 +188,19 @@ export class CafePage implements OnInit {
         }
       ]
     },
+    {
+      title: 'Thé et Infusion',
+      categories: [
+        {
+          drinks: [
+            {
+              label: 'La théière',
+              price: '4'
+            }
+          ]
+        }
+      ]
+    }
   ]
 
   public readonly HEADER_TITLE = 'Le Café';
