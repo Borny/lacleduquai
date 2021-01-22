@@ -1,64 +1,52 @@
-<ion-header-component
-	[headerTitle]="HEADER_TITLE"
-	[showBackButton]="true"
-	[defaultTarget]="'/lcdq/reservation-salles'"
-></ion-header-component>
+<ion-header-component [headerTitle]="HEADER_TITLE" [showBackButton]="true" [defaultTarget]="'/lcdq/reservation-salles'">
+</ion-header-component>
 
 <ion-content>
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<h1 class="title-xl">{{TITLE}}</h1>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col size="12" size-md="6" offset-md="3">
-				<ul class="description">
-					<li class="description-item">
-						<two-triangle-svg class="description-item--icon"></two-triangle-svg>
-						<p class="description-item--content">
-							Les espaces du café sont faits pour vous accueillir. Soit pour
-							venir déguster un chaï, manger un morceau ou boire un verre, soit
-							pour réunir votre association, retrouver vos adhérents, organiser
-							des projets... Fêter un anniversaire ! Et pourquoi pas exposer sur
-							nos murs ? Donner un concert ? Organiser une après-midi tricot...
-						</p>
-					</li>
-					<li class="description-item">
-						<two-triangle-svg class="description-item--icon"></two-triangle-svg>
-						<p class="description-item--content">
-							Toutes les activités sont les bienvenues. Selon votre projet, nous
-							pouvons privatiser l'un de nos espaces, ou simplement vous
-							réserver une table.
-						</p>
-					</li>
-					<li class="description-item">
-						<two-triangle-svg class="description-item--icon"></two-triangle-svg>
-						<p class="description-item--content">
-							Quoiqu'il en soit, parlez-en nous ! Soit en passant au café, soit
-							en nous contactant par ici :
-						</p>
-					</li>
-				</ul>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col
-				size="12"
-				size-md="6"
-				offset-md="3"
-				class="ion-justify-content-center ion-margin-vertical"
-			>
-				<ion-nav-link
-					class="text-center"
-					[routerLink]="'/lcdq/contact'"
-					routerDirection="forward"
-				>
-					<ion-button size="small" expand="block" color="primary">
-						Contactez nous
-					</ion-button>
-				</ion-nav-link>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1 class="title-xl">{{TITLE}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="6" offset-md="3">
+        <ul class="description">
+          <li class="description-item">
+            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
+            <p class="description-item--content">
+              Les espaces du café sont faits pour vous accueillir. Soit pour
+              venir déguster un chaï, manger un morceau ou boire un verre, soit
+              pour réunir votre association, retrouver vos adhérents, organiser
+              des projets... Fêter un anniversaire ! Et pourquoi pas exposer sur
+              nos murs ? Donner un concert ? Organiser une après-midi tricot...
+            </p>
+          </li>
+          <li class="description-item">
+            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
+            <p class="description-item--content">
+              Toutes les activités sont les bienvenues. Selon votre projet, nous
+              pouvons privatiser l'un de nos espaces, ou simplement vous
+              réserver une table.
+            </p>
+          </li>
+          <li class="description-item">
+            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
+            <p class="description-item--content">
+              Quoiqu'il en soit, parlez-en nous ! Soit en passant au café, soit
+              en nous contactant par ici :
+            </p>
+          </li>
+        </ul>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="6" offset-md="3" class="ion-justify-content-center ion-margin-vertical">
+        <ion-nav-link class="ion-text-center" [routerLink]="'/lcdq/contact'" routerDirection="forward">
+          <ion-button size="small" expand="block" color="primary">
+            Contactez nous
+          </ion-button>
+        </ion-nav-link>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -89,7 +89,7 @@
             <!-- Loader -->
             <loader *ngIf="isLoading"></loader>
             <!-- Message fail -->
-            <div *ngIf="!isLoading && isFormFailed && !isFormSent" class="message-sent message-sent--fail ">
+            <div *ngIf="!isLoading && isFormFailed && !isFormSent" class="message-sent message-sent--fail">
               <ion-text color="danger">
                 <p class="ion-text-center message-sent__content">Votre message n'a pas pu être envoyé. Veuillez
                   réessayer.</p>
@@ -117,7 +117,8 @@
               <ion-list>
                 <!--  Project Name -->
                 <ion-item>
-                  <ion-label position="floating">Nom du projet<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">Nom du projet<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="text" name="projectName" formControlName="projectName" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -127,7 +128,8 @@
 
                 <!-- Company Name -->
                 <ion-item>
-                  <ion-label position="floating">Nom de la compagnie<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">Nom de la compagnie<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="text" name="companyName" formControlName="companyName" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -148,7 +150,8 @@
 
                 <!-- Email -->
                 <ion-item>
-                  <ion-label position="floating">E-mail<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">E-mail<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="email" name="email" formControlName="email" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -158,7 +161,8 @@
 
                 <!-- Phone -->
                 <ion-item>
-                  <ion-label position="floating">Téléphone<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -168,7 +172,7 @@
 
                 <!-- Address -->
                 <ion-item>
-                  <ion-label position="floating">Adresse de gestion de la structure<span class="label-asterisk">*</span>
+                  <ion-label position="floating">Adresse de gestion de la structure<atom-asterisk></atom-asterisk>
                   </ion-label>
                   <ion-input type="text" name="address" formControlName="address" required></ion-input>
                 </ion-item>
@@ -179,7 +183,7 @@
 
                 <!-- Project Description -->
                 <ion-item>
-                  <ion-label position="floating">Quelques mots sur votre projet<span class="label-asterisk">*</span>
+                  <ion-label position="floating">Quelques mots sur votre projet<atom-asterisk></atom-asterisk>
                   </ion-label>
                   <ion-input type="text" name="projectDescription" formControlName="projectDescription">
                   </ion-input>
@@ -213,7 +217,8 @@
                 <ion-radio-group class="radio-group" aria-label="Région" formControlName="location"
                   [value]="locations[0]">
                   <ion-list-header>
-                    <ion-label>Vous êtes installé dans quel coin ?<span class="label-asterisk">*</span></ion-label>
+                    <ion-label>Vous êtes installé dans quel coin ?<atom-asterisk></atom-asterisk>
+                    </ion-label>
                   </ion-list-header>
                   <ion-item lines="none" *ngFor="let location of locations">
                     <ion-label>{{ location }}</ion-label>
@@ -224,7 +229,8 @@
                 <!-- Artistic Pratice -->
                 <ion-list formArrayName="artisticPractice">
                   <ion-list-header>
-                    <ion-label>Votre pratique artistique<span class="label-asterisk">*</span></ion-label>
+                    <ion-label>Votre pratique artistique<atom-asterisk></atom-asterisk>
+                    </ion-label>
                   </ion-list-header>
                   <ion-item lines="none" *ngFor="let practice of artisticPracticeFormArray.controls; let i = index">
                     <ion-label>{{artisticPractices[i]}}</ion-label>
@@ -236,7 +242,8 @@
                 <ion-list formArrayName="availability">
                   <ion-list-header>
                     <ion-label>Sur quelles périodes êtes-vous disponibles pour
-                      travailler chez nous ?<span class="label-asterisk">*</span></ion-label>
+                      travailler chez nous ?<atom-asterisk></atom-asterisk>
+                    </ion-label>
                   </ion-list-header>
                   <ion-item lines="none" *ngFor="let availability of availabilityFormArray.controls; let i = index">
                     <ion-label>{{ availabilities[i] }}</ion-label>
@@ -255,7 +262,7 @@
                   </ion-list-header>
                   <div *ngFor="let teamMember of projectTeamFormArray.controls; let i = index">
                     <ion-item>
-                      <ion-label position="floating">Nom, prénom et fonction<span class="label-asterisk">*</span>
+                      <ion-label position="floating">Nom, prénom et fonction<atom-asterisk></atom-asterisk>
                       </ion-label>
                       <ion-input type="text" name="projectTeam" [formControlName]="i" required></ion-input>
                     </ion-item>

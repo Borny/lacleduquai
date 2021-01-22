@@ -12,11 +12,9 @@
 }
 
 .form__container {
+  width: 100%;
+  max-width: 430px;
   margin: 0 auto;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .form__response {
@@ -30,72 +28,62 @@
   }
 }
 
-.take-away-form {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  width: 100%;
-}
-
-.form-control {
-  width: 100%;
-}
-
-.form__calendar {
-  width: 100%;
-
-  p {
-    margin: 0.5rem 0;
-  }
+// CLANEDAR
+.calendar {
+  margin: 1rem 0 0;
 }
 
 // QUANTITY
 .quantity {
   &__container {
-    width: 100%;
-    // max-width: 300px;
     margin: 1rem 0;
-    .label {
-      display: block;
-      margin: 0 0 0.5rem;
-    }
   }
   &__form {
     display: flex;
     align-items: center;
-    .input {
-      text-align: center;
-    }
+    padding: 0 4rem;
   }
 }
 
+// HAS CONTAINER
 .slide-toggle {
   &__section {
     display: flex;
     flex-flow: column;
-    margin: 0 0 1rem;
   }
   &__container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
   }
-
-  &__input {
-    margin: 0.5rem 0;
-  }
 }
 
 .price {
-  display: block;
-  font-weight: bold;
-  font-size: 1.1rem;
-  border-bottom: 2px solid $color-primary;
-  border-top: 2px solid $color-primary;
-  padding: 0.5rem;
-  color: $color-primary;
+  &__amount {
+    display: block;
+    margin: 1rem 0 0;
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: $color-primary;
+    border-bottom: 2px solid $color-primary;
+    border-top: 2px solid $color-primary;
+  }
+  &__deposit {
+    margin: 1rem 0 0;
+  }
 }
 
-.submit-btn {
-  margin: 1rem auto 2rem;
+// BUTTON CONTAINER
+.btn__container {
+  &--flex {
+    display: flex;
+    justify-content: center;
+  }
+  &--block {
+    display: block;
+  }
+  &--submit {
+    margin: 3rem 0 1rem;
+  }
 }

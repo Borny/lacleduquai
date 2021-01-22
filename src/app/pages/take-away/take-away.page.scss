@@ -1,10 +1,6 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
-.title-xl {
-  margin: 0 auto 2rem !important;
-}
-
 .main-container {
   @include screen-sm {
     display: flex;
@@ -12,9 +8,14 @@
 }
 
 // CHAI CARD
-.chai-card {
+.chai-card__container {
   flex: 1;
-  margin: 0;
+}
+
+.chai-card {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
   background: $color-primary;
   color: $white;
 
@@ -30,16 +31,11 @@
 
 // CHAI FORM COMPONENT
 .chai-form {
-  display: block;
+  display: flex;
   flex: 1;
-  margin: 2rem 0 0;
-
-  @include screen-sm {
-    margin: 0;
-    padding: 0 1rem;
-  }
 }
 
+// IMAGE RIGHT
 .take-away__image {
   width: 100%;
   height: 100%;

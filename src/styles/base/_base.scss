@@ -147,10 +147,6 @@ textarea {
   height: 100%;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .color-primary {
   color: $color-primary;
 }
@@ -236,12 +232,6 @@ ion-card:focus {
   --highlight-background: #5dbeba;
 }
 
-// ASTERISK
-.label-asterisk {
-  padding: 0 0.3rem;
-  color: $color-primary;
-}
-
 /////////////////////
 // ANGULAR MATERIAL
 /////////////////////
@@ -295,7 +285,7 @@ mat-form-field {
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .mat-calendar-body-cell.selected > .mat-calendar-body-cell-content,

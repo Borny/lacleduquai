@@ -8,9 +8,9 @@ import { TakeAwayService } from '../../services/take-away.service';
 import { ChaiTakeAway } from '../../models/chai-take-away.model';
 
 @Component({
-  selector: 'chai-take-away',
-  templateUrl: './chai-take-away.component.html',
-  styleUrls: ['./chai-take-away.component.scss'],
+  selector: 'organism-chai-take-away',
+  templateUrl: './organism-chai-take-away.component.html',
+  styleUrls: ['./organism-chai-take-away.component.scss'],
 })
 export class ChaiTakeAwayOrganism implements OnInit {
 

@@ -23,7 +23,7 @@ import { MultiTriangleComponent } from './svg/multi-triangle/multi-triangle.comp
     SquaredShapesComponent,
     TriangleBlueComponent,
     TriangleYellowComponent,
-    MultiTriangleComponent
+    MultiTriangleComponent,
   ],
   imports: [
     MaterialModule,
@@ -39,7 +39,7 @@ import { MultiTriangleComponent } from './svg/multi-triangle/multi-triangle.comp
     SquaredShapesComponent,
     TriangleBlueComponent,
     TriangleYellowComponent,
-    MultiTriangleComponent
+    MultiTriangleComponent,
   ]
 })
 export class SharedModule { }

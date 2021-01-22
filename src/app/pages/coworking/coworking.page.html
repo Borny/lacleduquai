@@ -76,7 +76,8 @@
               <ion-list>
                 <!-- People count -->
                 <ion-item>
-                  <ion-label>Personne(s)<span class="label-asterisk">*</span></ion-label>
+                  <ion-label>Personne(s)<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-select formControlName="personsNumber" interface="popover" (ionChange)="onSelectChange($event)">
                     <ion-select-option *ngFor="let number of getCount(maxPersonsAllowed); let i = index"
                       [value]="i + 1">{{i + 1}}</ion-select-option>
@@ -86,7 +87,8 @@
                 <!-- Booking Date -->
                 <div class="calendar">
                   <mat-form-field appearance="fill">
-                    <mat-label>Sélectionnez une/des date(s)<span class="label-asterisk">*</span></mat-label>
+                    <mat-label>Sélectionnez une/des date(s)<atom-asterisk></atom-asterisk>
+                    </mat-label>
                     <mat-chip-list #chipList aria-label="Choisir une date" (click)="picker.open()">
                       <mat-chip *ngFor="let value of model" [selectable]="false" [removable]="true"
                         (removed)="remove(value)">
@@ -105,7 +107,8 @@
 
                 <!-- Name -->
                 <ion-item>
-                  <ion-label position="floating">Nom<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">Nom<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="text" name="name" formControlName="name" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -115,7 +118,8 @@
 
                 <!-- Phone -->
                 <ion-item>
-                  <ion-label position="floating">Téléphone<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -125,7 +129,8 @@
 
                 <!-- Email -->
                 <ion-item>
-                  <ion-label position="floating">E-mail<span class="label-asterisk">*</span></ion-label>
+                  <ion-label position="floating">E-mail<atom-asterisk></atom-asterisk>
+                  </ion-label>
                   <ion-input type="email" name="email" formControlName="email" required></ion-input>
                 </ion-item>
                 <p class="error-message"
@@ -135,7 +140,8 @@
 
                 <!-- Credit Card  -->
                 <ion-item lines="none" class="credit-card__label">
-                  <ion-label>Informations de carte<span class="label-asterisk">*</span></ion-label>
+                  <ion-label>Informations de carte<atom-asterisk></atom-asterisk>
+                  </ion-label>
                 </ion-item>
                 <div class="credit-card__input" #creditCardElement></div>
 

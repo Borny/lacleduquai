@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TakeAwayPageRoutingModule } from './take-away-routing.module';
 
 import { TakeAwayPage } from './take-away.page';
-import { ChaiTakeAwayModule } from '../../organisms/chai-take-away/chai-take-away.module';
+import { ChaiTakeAwayModule } from '../../organisms/organism-chai-take-away/organism-chai-take-away.module';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({

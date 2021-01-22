@@ -9,6 +9,7 @@ import { CoworkingPageRoutingModule } from './coworking-routing.module';
 import { CoworkingPage } from './coworking.page';
 import { MaterialModule } from '../../angular-material/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
+import { AtomAsteriskModule } from '../../atoms/atom-asterisk/atom-asterisk.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SharedModule } from '../../shared/shared.module';
     IonicModule,
     CoworkingPageRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    AtomAsteriskModule
   ],
   declarations: [CoworkingPage]
 })

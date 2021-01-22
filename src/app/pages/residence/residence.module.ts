@@ -9,6 +9,7 @@ import { ResidencePageRoutingModule } from './residence-routing.module';
 import { ResidencePage } from './residence.page';
 import { IonInputModule } from '../../molecules/ion-input/ion-input.module';
 import { SharedModule } from '../../shared/shared.module';
+import { AtomAsteriskModule } from '../../atoms/atom-asterisk/atom-asterisk.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SharedModule } from '../../shared/shared.module';
     IonicModule,
     ResidencePageRoutingModule,
     SharedModule,
-    IonInputModule
+    IonInputModule,
+    AtomAsteriskModule
   ],
   declarations: [ResidencePage]
 })

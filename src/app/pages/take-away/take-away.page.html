@@ -1,36 +1,40 @@
 <ion-header-component [headerTitle]="HEADER_TITLE"></ion-header-component>
 
 <ion-content>
-	<ion-grid class="ion-no-padding">
-		<ion-row>
-			<!-- MAIN BLOCK -->
-			<ion-col class="ion-padding" size="12" size-lg="8">
-				<h1 class="title-xl">{{TITLE}}</h1>
-				<div class="main-container">
-					<ion-card class="chai-card">
-						<img src="./assets/img/chai-ingredients.jpg" />
-						<ion-card-content>
-							<h2>Commandez votre Chaï végétal</h2>
-							<p class="chai-card__content">
-								Nous le préparons avec des épices et du gingembre frais, ce qui
-								lui donne tant de goût!
-							</p>
-							<p class="chai-card__content">
-								Passez le récupérer le mardi ou le jeudi entre 16h30 et 18h30.
-							</p>
-							<p class="chai-card__content">Ça se congèle aussi très bien !</p>
-						</ion-card-content>
-					</ion-card>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <!-- MAIN BLOCK -->
+      <ion-col size="12" size-lg="8">
+        <h1 class="title-xl">{{TITLE}}</h1>
 
-					<!-- CHAI FORM -->
-					<chai-take-away class="chai-form"></chai-take-away>
-				</div>
-			</ion-col>
+        <div class="main-container">
+          <!-- CHAI CARD -->
+          <div class="chai-card__container ion-padding">
+            <ion-card class="chai-card">
+              <img src="./assets/img/chai-ingredients.jpg" />
+              <ion-card-content>
+                <h2>Commandez votre Chaï végétal</h2>
+                <p class="chai-card__content">
+                  Nous le préparons avec des épices et du gingembre frais, ce qui
+                  lui donne tant de goût!
+                </p>
+                <p class="chai-card__content">
+                  Passez le récupérer le mardi ou le jeudi entre 16h30 et 18h30.
+                </p>
+                <p class="chai-card__content">Ça se congèle aussi très bien !</p>
+              </ion-card-content>
+            </ion-card>
+          </div>
 
-			<!-- PICTURE RIGHT -->
-			<ion-col class="ion-no-padding ion-hide-lg-down" size="12" size-lg="4">
-				<div class="take-away__image"></div>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+          <!-- CHAI FORM -->
+          <organism-chai-take-away class="chai-form ion-padding"></organism-chai-take-away>
+        </div>
+      </ion-col>
+
+      <!-- PICTURE RIGHT -->
+      <ion-col class="ion-no-padding ion-hide-lg-down" size="12" size-lg="4">
+        <div class="take-away__image"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
