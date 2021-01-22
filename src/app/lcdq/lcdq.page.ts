@@ -18,7 +18,6 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'lcdq',
   templateUrl: 'lcdq.page.html',
-  styleUrls: ['lcdq.page.scss'],
   animations: [
     // slideInAnimation
   ]

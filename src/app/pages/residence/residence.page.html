@@ -112,7 +112,8 @@
             </div>
 
             <!-- Residence Form -->
-            <form *ngIf="!isLoading && !hideForm" class="residence-form" [formGroup]="residenceForm">
+            <form *ngIf="!isLoading && !hideForm" class="residence-form" [formGroup]="residenceForm"
+              (ngSubmit)="onSubmit()">
               <ion-list>
                 <!--  Project Name -->
                 <ion-item>
