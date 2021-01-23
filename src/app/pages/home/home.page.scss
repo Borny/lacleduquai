@@ -77,134 +77,105 @@
     position: relative;
     height: 65px;
     padding-top: 10px;
-    margin-top: -10px;
+    // margin-top: -10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     .word-switch {
-      animation: switch 6s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+      animation: switch 20s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+
+      @keyframes switch {
+        0% {
+          margin-top: -1495px;
+        }
+        0.6% {
+          margin-top: -1365px;
+        }
+        8.3% {
+          margin-top: -1365px;
+        }
+        8.9% {
+          margin-top: -1235px;
+        }
+        16.6% {
+          margin-top: -1235px;
+        }
+        17.2% {
+          margin-top: -1105px;
+        }
+        24.9% {
+          margin-top: -1105px;
+        }
+        25.5% {
+          margin-top: -975px;
+        }
+        33.2% {
+          margin-top: -975px;
+        }
+        33.8% {
+          margin-top: -845px;
+        }
+        41.5% {
+          margin-top: -845px;
+        }
+        42.1% {
+          margin-top: -715px;
+        }
+        49.8% {
+          margin-top: -715px;
+        }
+        50.4% {
+          margin-top: -585px;
+        }
+        58.1% {
+          margin-top: -585px;
+        }
+        58.7% {
+          margin-top: -455px;
+        }
+        66.4% {
+          margin-top: -455px;
+        }
+        67% {
+          margin-top: -325px;
+        }
+        74.7% {
+          margin-top: -325px;
+        }
+        75.3% {
+          margin-top: -195px;
+        }
+        83% {
+          margin-top: -195px;
+        }
+        83.6% {
+          margin-top: -65px;
+        }
+        99.99% {
+          margin-top: -65px;
+        }
+        100% {
+          margin-top: -1495px;
+        }
+      }
       .word {
         display: block;
         text-align: center;
         font-family: $fontPoppins;
         color: $color-primary;
         font-weight: 700;
-        padding: 0 10px;
-        height: 45px;
-        margin-top: 45px;
+        // padding: 0 10px;
+        height: 65px;
+        margin-top: 65px;
         font-size: 1.6rem;
 
-        // @include screen-sm {
-        //   font-size: inherit;
-        // }
+        @include screen-sm {
+          // font-size: 2rem;
+          font-size: 36px;
+        }
       }
     }
   }
-}
-
-@keyframes switch {
-  0% {
-    margin-top: -340px;
-  }
-  5% {
-    margin-top: -280px;
-  }
-  25% {
-    margin-top: -280px;
-  }
-  30% {
-    margin-top: -100px;
-  }
-  50% {
-    margin-top: -100px;
-  }
-  55% {
-    margin-top: 80px;
-  }
-  75% {
-    margin-top: 80px;
-  }
-  80% {
-    margin-top: 260px;
-  }
-  99.99% {
-    margin-top: 260px;
-  }
-  100% {
-    margin-top: -340px;
-  }
-  // 0% {
-  //   margin-top: -1020px;
-  // }
-  // 0.75% {
-  //   margin-top: -930px;
-  // }
-  // 9.1% {
-  //   margin-top: -930px;
-  // }
-  // 9.83% {
-  //   margin-top: -840px;
-  // }
-  // 18.16% {
-  //   margin-top: -840px;
-  // }
-  // 18.91% {
-  //   margin-top: -750px;
-  // }
-  // 19.66% {
-  //   margin-top: -750px;
-  // }
-  // 27.99% {
-  //   margin-top: -660px;
-  // }
-  // 28.74% {
-  //   margin-top: -660px;
-  // }
-  // 37.07% {
-  //   margin-top: -570px;
-  // }
-  // 37.82% {
-  //   margin-top: -570px;
-  // }
-  // 46.15% {
-  //   margin-top: -480px;
-  // }
-  // 46.09% {
-  //   margin-top: -480px;
-  // }
-  // 55.23% {
-  //   margin-top: -390px;
-  // }
-  // 55.98% {
-  //   margin-top: -390px;
-  // }
-  // 64.31% {
-  //   margin-top: -300px;
-  // }
-  // 65.06% {
-  //   margin-top: -300px;
-  // }
-  // 73.39% {
-  //   margin-top: -210px;
-  // }
-  // 74.14% {
-  //   margin-top: -210px;
-  // }
-  // 82.47% {
-  //   margin-top: -120px;
-  // }
-  // 83.22% {
-  //   margin-top: -120px;
-  // }
-  // 91.55% {
-  //   margin-top: -30px;
-  // }
-  // 99.9% {
-  //   margin-top: -30px;
-  // }
-  // 100% {
-  //   margin-top: -1020px;
-  // }
 }
 
 // @keyframes fadeInLogo {
