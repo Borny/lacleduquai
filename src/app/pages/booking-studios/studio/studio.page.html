@@ -11,40 +11,10 @@
     <ion-row>
       <ion-col size="12" size-md="6" offset-md="3">
         <ul class="description">
-          <li class="description-item">
+          <li *ngFor="let item of descriptionItems" class="description-item">
             <two-triangle-svg class="description-item--icon"></two-triangle-svg>
             <p class="description-item--content">
-              Située au sous-sol, jolie cave bordelaise voutée de 50m2
-            </p>
-          </li>
-          <li class="description-item">
-            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
-            <p class="description-item--content">
-              Parquet souple, idéal pour la danse
-            </p>
-          </li>
-          <li class="description-item">
-            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
-            <p class="description-item--content">
-              Equipée d'une sono - prise mini-jack / CD/ bluetooth
-            </p>
-          </li>
-          <li class="description-item">
-            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
-            <p class="description-item--content">
-              Pas de réseau téléphonique ni internet
-            </p>
-          </li>
-          <li class="description-item">
-            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
-            <p class="description-item--content">
-              5€ de l'heure pour vos répétitions
-            </p>
-          </li>
-          <li class="description-item">
-            <two-triangle-svg class="description-item--icon"></two-triangle-svg>
-            <p class="description-item--content">
-              17.5€ de l'heure pour vos ateliers
+              {{item}}
             </p>
           </li>
         </ul>

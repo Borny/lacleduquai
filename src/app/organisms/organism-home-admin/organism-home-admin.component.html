@@ -1,154 +1,144 @@
 <ion-grid>
-	<!-- <p *ngIf="homeError">
+  <!-- <p *ngIf="homeError">
     Impossible de récupérer les données, veuillez réessayer
   </p> -->
 
-	<!-- TITLE -->
-	<ion-row>
-		<ion-col>
-			<div>
-				<h2 class="ion-text-center">Home Page</h2>
-			</div>
-		</ion-col>
-	</ion-row>
+  <!-- TITLE -->
+  <ion-row>
+    <ion-col>
+      <div>
+        <h2 class="ion-text-center">Home Page</h2>
+      </div>
+    </ion-col>
+  </ion-row>
 
-	<!-- NEWS ROW-->
-	<ion-row>
-		<!-- Loader -->
-		<ion-col *ngIf="isNewsLoading" class="ion-text-center spinner">
-			<ion-spinner color="primary"></ion-spinner>
-		</ion-col>
+  <!-- NEWS ROW-->
+  <ion-row>
+    <!-- Loader -->
+    <ion-col *ngIf="isNewsLoading" class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-col>
 
-		<!-- News -->
-		<ion-col *ngIf="!isNewsLoading">
-			<div class="news__label">
-				<ion-text color="primary">
-					<h3 class="ion-margin-vertical">Nouveautés</h3>
-				</ion-text>
-				<span class="news__label__line"></span>
-			</div>
+    <!-- News -->
+    <ion-col *ngIf="!isNewsLoading">
+      <div class="news__label">
+        <ion-text color="primary">
+          <h3 class="ion-margin-vertical">Nouveautés</h3>
+        </ion-text>
+        <span class="news__label__line"></span>
+      </div>
 
-			<!-- News table -->
-			<ul class="data-table__container">
-				<!-- Table header -->
-				<li class="data-table__item data-table__item__header">
-					<div class="first-column"></div>
-					<div>Nouveauté</div>
-					<div>Lien</div>
-					<div></div>
-				</li>
+      <!-- News table -->
+      <ul class="data-table__container">
+        <!-- Table header -->
+        <li class="data-table__item data-table__item__header">
+          <div class="first-column"></div>
+          <div>Nouveauté</div>
+          <div>Type de lien </div>
+          <div>Lien</div>
+          <div></div>
+        </li>
 
-				<!-- No results -->
-				<li
-					class="data-table__item data-table__item-no-result"
-					*ngIf="!currentNewsData.length"
-				>
-					No results...
-				</li>
+        <!-- No results -->
+        <li class="data-table__item data-table__item-no-result" *ngIf="!currentNewsData.length">
+          No results...
+        </li>
 
-				<!-- Table body -->
-				<li
-					class="data-table__item"
-					[ngClass]="{ odd: odd, even: even }"
-					*ngFor="
+        <!-- Table body -->
+        <li class="data-table__item" [ngClass]="{ odd: odd, even: even }" *ngFor="
 						let news of currentNewsData;
 						let even = even;
 						let odd = odd;
 						let i = index
-					"
-				>
-					<div class="first-column">{{ i + 1 }}</div>
-					<div>{{ news.label }}</div>
-					<div>{{ news.link }}</div>
-					<div>
-						<ion-button (click)="onOpenNewsManager(news, i)">
-							<ion-icon name="create-outline"></ion-icon>
-						</ion-button>
-					</div>
-				</li>
-			</ul>
+					">
+          <div class="first-column">{{ i + 1 }}</div>
+          <div>{{ news.label }}</div>
+          <div>
+            <ion-text [color]="news.linkType === 'interne' ? 'primary' : 'secondary'">{{ news.linkType }}</ion-text>
+          </div>
+          <div>{{ news.link }}</div>
+          <div>
+            <ion-button (click)="onOpenManageNewsModal(news, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </li>
+      </ul>
 
-			<!-- Add news CTA-->
-			<ion-button color="primary" (click)="onOpenCreateNewsDialog()">
-				Ajouter une news
-			</ion-button>
-		</ion-col>
-	</ion-row>
+      <!-- Add news CTA-->
+      <ion-button color="primary" (click)="onOpenCreateNewsModal()">
+        Ajouter une news
+      </ion-button>
+    </ion-col>
+  </ion-row>
 
-	<!-- EVENTS ROW-->
-	<ion-row>
-		<!-- Loader -->
-		<ion-col *ngIf="isEventsLoading" class="ion-text-center spinner">
-			<ion-spinner color="primary"></ion-spinner>
-		</ion-col>
+  <!-- EVENTS ROW-->
+  <ion-row>
+    <!-- Loader -->
+    <ion-col *ngIf="isEventsLoading" class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-col>
 
-		<!-- Events -->
-		<ion-col *ngIf="!isEventsLoading">
-			<div class="news__label">
-				<ion-text color="primary">
-					<h3 class="ion-margin-vertical">Events</h3>
-				</ion-text>
-				<span class="news__label__line"></span>
-			</div>
+    <!-- Events -->
+    <ion-col *ngIf="!isEventsLoading">
+      <div class="news__label">
+        <ion-text color="primary">
+          <h3 class="ion-margin-vertical">Events</h3>
+        </ion-text>
+        <span class="news__label__line"></span>
+      </div>
 
-			<!-- Tabel header -->
-			<ul class="data-table__container">
-				<li class="data-table__item data-table__item__header">
-					<div class="first-column"></div>
-					<div>Name</div>
-					<div>Date</div>
-					<div>Intervenant</div>
-					<div>Horaire</div>
-					<div>Prix</div>
-					<div>Téléphone</div>
-					<div></div>
-				</li>
+      <!-- Tabel header -->
+      <ul class="data-table__container">
+        <li class="data-table__item data-table__item__header">
+          <div class="first-column"></div>
+          <div>Name</div>
+          <div>Date</div>
+          <div>Intervenant</div>
+          <div>Horaire</div>
+          <div>Prix</div>
+          <div>Téléphone</div>
+          <div></div>
+        </li>
 
-				<!-- No results -->
-				<li
-					class="data-table__item data-table__item-no-result"
-					*ngIf="!currentEventsData.length"
-				>
-					No results...
-				</li>
+        <!-- No results -->
+        <li class="data-table__item data-table__item-no-result" *ngIf="!currentEventsData.length">
+          No results...
+        </li>
 
-				<!-- Table body -->
-				<li
-					class="data-table__item"
-					[ngClass]="{ odd: odd, even: even }"
-					*ngFor="
+        <!-- Table body -->
+        <li class="data-table__item" [ngClass]="{ odd: odd, even: even }" *ngFor="
 						let event of currentEventsData;
 						let even = even;
 						let odd = odd;
 						let i = index
-					"
-				>
-					<div class="first-column">{{ i + 1 }}</div>
-					<div>{{ event.name }}</div>
-					<div>
-						<p *ngFor="let date of event.dates">
-							{{ date | date }}
-						</p>
-					</div>
-					<div>{{ event.prof }}</div>
-					<div>
-						{{ event.timeStart | date: 'HH:mm' }} -
-						{{ event.timeEnd | date: 'HH:mm' }}
-					</div>
-					<div>{{ event.price }}€</div>
-					<div>{{ event.phone }}</div>
-					<div>
-						<ion-button (click)="onOpenManageEventModal(event, i)">
-							<ion-icon name="create-outline"></ion-icon>
-						</ion-button>
-					</div>
-				</li>
-			</ul>
+					">
+          <div class="first-column">{{ i + 1 }}</div>
+          <div>{{ event.name }}</div>
+          <div>
+            <p *ngFor="let date of event.dates">
+              {{ date | date }}
+            </p>
+          </div>
+          <div>{{ event.prof }}</div>
+          <div>
+            {{ event.timeStart | date: 'HH:mm' }} -
+            {{ event.timeEnd | date: 'HH:mm' }}
+          </div>
+          <div>{{ event.price }}€</div>
+          <div>{{ event.phone }}</div>
+          <div>
+            <ion-button (click)="onOpenManageEventModal(event, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </li>
+      </ul>
 
-			<!-- Add event CTA -->
-			<ion-button color="primary" (click)="onOpenCreateEventModal()">
-				Ajouter un event
-			</ion-button>
-		</ion-col>
-	</ion-row>
+      <!-- Add event CTA -->
+      <ion-button color="primary" (click)="onOpenCreateEventModal()">
+        Ajouter un event
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-grid>

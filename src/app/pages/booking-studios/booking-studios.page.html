@@ -1,104 +1,60 @@
 <ion-header-component [headerTitle]="HEADER_TITLE"></ion-header-component>
 
 <ion-content>
-	<ion-grid>
-		<!-- TITLE -->
-		<ion-row>
-			<ion-col>
-				<ion-text color="primary">
-					<h1 class="title-xl">Nos Différents Espaces</h1>
-				</ion-text>
-			</ion-col>
-		</ion-row>
+  <ion-grid>
+    <!-- TITLE -->
+    <ion-row>
+      <ion-col>
+        <ion-text color="primary">
+          <h1 class="title-xl">Nos Différents Espaces</h1>
+        </ion-text>
+      </ion-col>
+    </ion-row>
 
-		<!-- CARDS -->
-		<ion-row class="cards__container ion-justify-content-center">
-			<!-- TRIANGLES -->
-			<triangle-blue-svg
-				class="icon-triangle-blue"
-				[fill]="'primary-light'"
-			></triangle-blue-svg>
-			<triangle-yellow-svg
-				class="icon-triangle-yellow"
-				[fill]="'secondary-light'"
-			></triangle-yellow-svg>
+    <!-- CARDS -->
+    <ion-row class="cards__container ion-justify-content-center">
+      <!-- TRIANGLES -->
+      <triangle-blue-svg class="icon-triangle-blue" [fill]="'primary-light'"></triangle-blue-svg>
+      <triangle-yellow-svg class="icon-triangle-yellow" [fill]="'secondary-light'"></triangle-yellow-svg>
 
-			<ion-col size="12" size-sm="6" size-lg="3" offset-sm="" class="ion-col">
-				<ion-card
-					class="ion-card"
-					[routerLink]="['/lcdq/reservation-salles/studio']"
-				>
-					<div class="card__img__container single-image">
-						<img
-							class="card__img"
-							alt="studio 50m2"
-							src="./assets/img/studio.jpg"
-						/>
-					</div>
-					<ion-card-header>
-						<ion-card-title class="ion-text-center ion-card-title"
-							>Studio - 50m2</ion-card-title
-						>
-					</ion-card-header>
-				</ion-card>
-			</ion-col>
-			<ion-col size="12" size-sm="6" size-lg="3" offset-md="0" class="ion-col">
-				<ion-card
-					class="ion-card"
-					[routerLink]="['/lcdq/reservation-salles/petite-salle']"
-				>
-					<div class="card__img__container single-image">
-						<img
-							class="card__img"
-							alt="petite salle 20m2"
-							src="./assets/img/petite-salle-wall.jpg"
-						/>
-					</div>
-					<ion-card-header>
-						<ion-card-title class="ion-text-center ion-card-title"
-							>Petite salle - 20m2</ion-card-title
-						>
-					</ion-card-header>
-				</ion-card>
-			</ion-col>
-			<ion-col size="12" size-sm="6" size-lg="3" offset-md="0" class="ion-col">
-				<ion-card
-					class="ion-card"
-					[routerLink]="['/lcdq/reservation-salles/autres-espaces']"
-				>
-					<div class="card__img__container multi-image">
-						<div class="card__img__container__row">
-							<img
-								class="card__img"
-								alt="café avant"
-								src="./assets/img/front-autumn.jpg"
-							/>
-							<img
-								class="card__img"
-								alt="banquettes"
-								src="./assets/img/banquettes.jpg"
-							/>
-						</div>
-						<div class="card__img__container__row">
-							<img
-								class="card__img"
-								alt="bibliothèque"
-								src="./assets/img/library.jpg"
-							/>
-							<img
-								class="card__img"
-								alt="espace zen"
-								src="./assets/img/espace-zen.jpg"
-							/>
-						</div>
-					</div>
-					<ion-card-header>
-						<ion-card-title class="ion-text-center ion-card-title">
-							Autres espaces</ion-card-title
-						>
-					</ion-card-header>
-				</ion-card>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+      <ion-col size="12" size-sm="6" size-lg="3" offset-sm="" class="ion-col">
+        <ion-card class="ion-card" [routerLink]="['/lcdq/reservation-salles/studio']">
+          <div class="card__img__container single-image">
+            <img class="card__img" alt="studio 50m2" src="./assets/img/studio.jpg" />
+          </div>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center ion-card-title">Studio - 50m2</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-sm="6" size-lg="3" offset-md="0" class="ion-col">
+        <ion-card class="ion-card" [routerLink]="['/lcdq/reservation-salles/petite-salle']">
+          <div class="card__img__container single-image">
+            <img class="card__img" alt="petite salle 20m2" src="./assets/img/petite-salle-wall.jpg" />
+          </div>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center ion-card-title">Petite salle - 20m2</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-sm="6" size-lg="3" offset-md="0" class="ion-col">
+        <ion-card class="ion-card" [routerLink]="['/lcdq/reservation-salles/autres-espaces']">
+          <div class="card__img__container multi-image">
+            <div class="card__img__container__row">
+              <img class="card__img" alt="café avant" src="./assets/img/front-autumn.jpg" />
+              <img class="card__img" alt="banquettes" src="./assets/img/banquettes.jpg" />
+            </div>
+            <div class="card__img__container__row">
+              <img class="card__img" alt="bibliothèque" src="./assets/img/library.jpg" />
+              <img class="card__img" alt="espace zen" src="./assets/img/espace-zen.jpg" />
+            </div>
+          </div>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center ion-card-title">
+              Autres espaces</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

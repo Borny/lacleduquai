@@ -1,0 +1,67 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Créer un nouvel event !</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Event info -->
+  <ion-content class="ion-padding">
+    <form class="news-edition-form" [formGroup]="newsEditionForm" (ngSubmit)="onSubmit()">
+      <ion-list>
+        <!-- Label -->
+        <ion-item>
+          <ion-label position="floating">Nouveauté</ion-label>
+          <ion-input type="text" name="label" formControlName="label" required></ion-input>
+        </ion-item>
+        <p class="error-message" [ngClass]="
+						newsEditionForm.get('label').invalid &&
+						newsEditionForm.get('label').touched
+							? 'show-error'
+							: ''
+					">
+          Veuillez renseigner une nouveauté
+        </p>
+
+        <!-- LINK TYPE -->
+        <ion-item lines="none" class="slide-toggle__section">
+          <ion-label>Type de lien </ion-label>
+        </ion-item>
+        <div class="slide-toggle__container">
+          <ion-text [color]="isExternalLink ? '' : 'primary'">Interne</ion-text>
+          <ion-toggle class="slide-toggle__input" [color]="isExternalLink ? 'secondary' : 'primary'"
+            formControlName="externalLink" (ionChange)="toggleInternalLink($event)">
+          </ion-toggle>
+          <ion-text [color]="isExternalLink ? 'secondary' : ''">Externe</ion-text>
+        </div>
+
+        <!-- INTERNAL LINK -->
+        <ion-item *ngIf="!isExternalLink">
+          <ion-label position="floating">Lien</ion-label>
+          <ion-select formControlName="link" interface="popover">
+            <ion-select-option *ngFor="let link of internalLinks; let i = index">/lcdq/{{link}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- EXTERNAL LINK -->
+        <ion-item *ngIf="isExternalLink">
+          <ion-label position="floating">Lien</ion-label>
+          <ion-input type="text" name="link" formControlName="link" required></ion-input>
+        </ion-item>
+        <p *ngIf="isExternalLink" class="error-message"
+          [ngClass]="newsEditionForm.get('link').invalid && newsEditionForm.get('link').touched ? 'show-error' : ''">
+          Veuillez renseigner un lien
+        </p>
+      </ion-list>
+    </form>
+  </ion-content>
+  <!-- CTAs -->
+  <div class="ion-padding btn__container">
+    <ion-button class="btn--delete" color="danger" (click)="onOpenDeleteModal()">
+      Supprimer
+    </ion-button>
+    <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+    <ion-button [disabled]="newsEditionForm.invalid" color="primary" (click)="onSubmit()">
+      Modifier
+    </ion-button>
+  </div>
+</div>

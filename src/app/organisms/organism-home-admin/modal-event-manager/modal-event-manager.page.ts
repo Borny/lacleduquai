@@ -18,13 +18,10 @@ import { Event } from '../../../models/events.model';
 })
 export class ModalEventManagerPage implements OnInit {
 
+  @Input() event: Event;
   @ViewChild('picker') _picker: MatDatepicker<Date>;
 
-  //TODO:
-  @Input() event: Event;
-
   public eventEditionForm: FormGroup = new FormGroup({});
-  // public event: Event;
   public init = new Date();
   public eventId: string;
   public isLoading: boolean;
@@ -42,26 +39,14 @@ export class ModalEventManagerPage implements OnInit {
   private _close_on_selected = false;
 
   constructor(
-    // public dialogRef: MatDialogRef<EventManagerDialog>,
-    // private homeService: HomeService,
-    // @Inject(MAT_DIALOG_DATA) public data: string,
-    // public dialog: MatDialog,
     public modalCtrl: ModalController
-  ) {
-    // this.dialogRef.disableClose = true;
-    // this.eventId = data;
-  }
+  ) { }
 
   ngOnInit(): void {
     this.showDialog = false;
     this.isLoading = true;
-    // this._getEventData();
-    // TODO:
-    // console.log('event modal:', this.event)
     this._initEventEditForm();
     this._setMinMaxDates();
-
-
   }
 
   public onSubmit(): void {
@@ -130,8 +115,6 @@ export class ModalEventManagerPage implements OnInit {
 
   // On toggle date
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
-    // console.log(this.eventEditionForm.get('dates'));
-
     if (event.value) {
       const date = event.value;
       const index = this._findDate(date);
@@ -167,29 +150,7 @@ export class ModalEventManagerPage implements OnInit {
   ////////////
   // PRIVATE
   ////////////
-  // private _getEventData(): void {
-  //   this.homeService.getSingleEvent(this.eventId)
-  //     .subscribe(
-  //       result => {
-  //         this.isLoading = false;
-  //         this.showDialog = true;
-  //         this.event = result.data;
-  //         // this.eventName = this.event.name;
-  //         // this.eventProf = this.event.prof;
-  //         // this.eventSchedule = this.event.schedule;
-  //         // this.eventPrice = this.event.price;
-  //         // this.eventPhone = this.event.phone;
-  //         this._initEventEditForm();
-  //       },
-  //       err => {
-  //         this.isLoading = false;
-  //         this.eventError = true;
-  //       }
-  //     )
-  // }
-
   private _initEventEditForm(): void {
-    // console.log('event:', this.event)
     this.eventEditionForm.addControl('name', new FormControl(this.event.name, Validators.required));
     this.eventEditionForm.addControl('prof', new FormControl(this.event.prof, Validators.required));
     this.eventEditionForm.addControl('timeStart', new FormControl(this.event.timeStart, Validators.required));

@@ -12,7 +12,7 @@ import { AdminPage } from './admin.page';
 import { MaterialModule } from '../../angular-material/angular-material.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { HomeAdminOrganismModule } from '../../organisms/organism-home-admin/organism-home-admin.module';
+import { OrganismHomeAdminModule } from '../../organisms/organism-home-admin/organism-home-admin.module';
 import { CafeAdminOrganismModule } from '../../organisms/cafe-admin-organism/cafe-admin-organism.module';
 import { CoursesAdminOrganismModule } from '../../organisms/courses-admin-organism/courses-admin-organism.module';
 import { CafeSubscriptionAdminOrganismModule } from '../../organisms/cafe-subscription-admin-organism/cafe-subscription-admin-organism.module';
@@ -27,7 +27,7 @@ import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-org
     AdminPageRoutingModule,
     MaterialModule,
     SharedModule,
-    HomeAdminOrganismModule,
+    OrganismHomeAdminModule,
     CafeAdminOrganismModule,
     TakeAwayAdminOrganismModule,
     CafeSubscriptionAdminOrganismModule,

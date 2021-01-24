@@ -5,16 +5,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../../angular-material/angular-material.module';
 
-import { HomeAdminOrganismComponent } from './organism-home-admin.component';
+import { OrganismHomeAdminComponent } from './organism-home-admin.component';
 
 @NgModule({
-  declarations: [HomeAdminOrganismComponent],
+  declarations: [OrganismHomeAdminComponent],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
     MaterialModule
   ],
-  exports: [HomeAdminOrganismComponent]
+  exports: [OrganismHomeAdminComponent]
 })
-export class HomeAdminOrganismModule { }
+export class OrganismHomeAdminModule { }

@@ -25,10 +25,6 @@ const routes: Routes = [
         loadChildren: () => import('../pages/take-away/take-away.module').then(m => m.TakeAwayPageModule)
       },
       {
-        path: 'reservation-salles',
-        loadChildren: () => import('../pages/booking-studios/booking-studios.module').then(m => m.BookingStudiosPageModule)
-      },
-      {
         path: 'galerie',
         loadChildren: () => import('../pages/gallery/gallery.module').then(m => m.GalleryPageModule)
       },

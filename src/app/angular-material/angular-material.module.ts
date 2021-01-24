@@ -22,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatChipsModule } from '@angular/material/chips';
 // import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   exports: [
@@ -43,8 +44,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatTabsModule,
     ClipboardModule,
-    MatChipsModule
+    MatChipsModule,
     // MatButtonToggleModule
+    MatSidenavModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
