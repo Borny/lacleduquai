@@ -84,6 +84,7 @@ export class OrganismHomeAdminComponent implements OnInit {
             this.currentNewsData.push(createdNews);
             // show snack bar
             this._presentToast(this.NEWS_CREATED_SUCCESS);
+            this._getNews();
           },
           error => {
             this._presentToast(this.NEWS_CREATED_FAIL);
@@ -116,6 +117,7 @@ export class OrganismHomeAdminComponent implements OnInit {
             this.currentNewsData[index] = data.news;
             // show snack bar
             this._presentToast(this.NEWS_UPDATED_SUCCESS);
+            this._getNews();
           },
           err => {
             this._presentToast(this.NEWS_UPDATED_FAIL);
@@ -125,7 +127,7 @@ export class OrganismHomeAdminComponent implements OnInit {
       this.homeService.deleteNews(data.news)
         .subscribe(
           result => {
-            this.originalNewsData = this.originalNewsData.filter(event => event._id !== updatedNews._id);
+            this.originalNewsData = this.originalNewsData.filter(news => news._id !== updatedNews._id);
             this.currentNewsData = this.originalNewsData;
             // show snack bar
             this._presentToast(this.NEWS_DELETED_SUCCESS);
@@ -159,6 +161,7 @@ export class OrganismHomeAdminComponent implements OnInit {
             this.currentEventsData.push(createdEvent);
             // show snack bar
             this._presentToast(this.EVENT_CREATED_SUCCESS);
+            this._getEvents();
           },
           error => {
             this._presentToast(this.EVENT_CREATED_FAIL);
@@ -192,9 +195,11 @@ export class OrganismHomeAdminComponent implements OnInit {
             this.currentEventsData[index] = data.event;
             // show snack bar
             this._presentToast(this.EVENT_UPDATED_SUCCESS);
+            this._getEvents();
           },
           err => {
             this._presentToast(this.EVENT_UPDATED_FAIL);
+            console.log(err)
           });
     } else if (data.dismissed === this.CONFIRM_DELETE) {
       console.log('deleted');

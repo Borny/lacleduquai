@@ -12,7 +12,6 @@ export interface Event {
   prof: string;
   timeStart: Date;
   timeEnd: Date;
-  schedule: string;
   price: number;
   phone: number;
 }

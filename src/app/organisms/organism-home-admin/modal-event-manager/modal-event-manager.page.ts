@@ -55,8 +55,8 @@ export class ModalEventManagerPage implements OnInit {
     }
     this.event.name = this.eventEditionForm.get('name').value;
     this.event.prof = this.eventEditionForm.get('prof').value;
-    this.event.schedule = this.eventEditionForm.get('timeStart').value;
-    this.event.schedule = this.eventEditionForm.get('timeEnd').value;
+    this.event.timeStart = this.eventEditionForm.get('timeStart').value;
+    this.event.timeStart = this.eventEditionForm.get('timeEnd').value;
     this.event.price = this.eventEditionForm.get('price').value;
     this.event.phone = this.eventEditionForm.get('phone').value;
 
