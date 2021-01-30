@@ -26,9 +26,26 @@ export class ModalEventCreatePage implements OnInit {
   public minDate: Date;
   public maxDate: Date;
   public resetDates = new Date(0);
+  public isExternalLink: boolean = false;
+
+  public internalLinks: string[] = [
+    'accueil',
+    'cafe',
+    'reservation-salles',
+    'a-emporter',
+    'galerie',
+    'belaetcome',
+    'residence',
+    'coworking',
+    'cours-stages',
+    'notre-equipe',
+    'contact'
+  ]
 
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
+  public readonly INTERNAL_LINK = 'interne'
+  public readonly EXTERNAL_LINK = 'externe';
 
   private _close_on_selected = false;
 
@@ -45,10 +62,19 @@ export class ModalEventCreatePage implements OnInit {
       return;
     }
     this.event = { ...this.eventCreateForm.value };
+    this.event.linkType = this.eventCreateForm.value.externalLink
+      ? this.EXTERNAL_LINK
+      : this.INTERNAL_LINK;
+
     this.modalCtrl.dismiss({
       'dismissed': this.CONFIRM,
       'event': { ...this.event }
     })
+  }
+
+  // LINK TYPE
+  public toggleLinkType(event: CustomEvent): void {
+    this.isExternalLink = !this.isExternalLink;
   }
 
   // TIME PICKER
@@ -120,6 +146,9 @@ export class ModalEventCreatePage implements OnInit {
       price: new FormControl(null, Validators.required),
       phone: new FormControl(null, Validators.required),
       dates: new FormArray([], Validators.required),
+      description: new FormControl(null, Validators.required),
+      externalLink: new FormControl(false, Validators.required),
+      link: new FormControl(null, Validators.required)
     });
   }
 

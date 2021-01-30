@@ -342,12 +342,29 @@
 
 .events__card {
   background: $color-primary-light;
+
+  &__header {
+    cursor: pointer;
+  }
+
   &__title {
+    position: relative;
     color: $color-primary-dark;
+
+    &__icon {
+      position: absolute;
+      right: 0;
+      transform: translateY(-50%);
+      top: 50%;
+    }
 
     small {
       margin-top: 0.2rem;
     }
+  }
+
+  &__content {
+    padding: 0;
   }
 }
 

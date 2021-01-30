@@ -11,6 +11,19 @@
   flex-flow: column;
 }
 
+// INTERNAL LINK
+ion-toggle {
+  --background: #ceecea;
+  --handle-background: #5dbeba;
+}
+.slide-toggle {
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 1rem;
+  }
+}
+
 // CALENDAR
 .form__calendar {
   width: 100%;

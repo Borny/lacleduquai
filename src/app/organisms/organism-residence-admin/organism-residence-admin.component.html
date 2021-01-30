@@ -1,0 +1,196 @@
+<ion-grid>
+  <!-- <p *ngIf="homeError">
+    Impossible de récupérer les données, veuillez réessayer
+  </p> -->
+
+  <!-- TITLE -->
+  <ion-row>
+    <ion-col>
+      <div>
+        <h2 class="ion-text-center">Home Page</h2>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <!-- Loader -->
+    <ion-col *ngIf="isResidenceLoading" class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-col>
+
+    <!-- CANDIDATES -->
+    <ion-col *ngIf="!isResidenceLoading">
+      <div class="residence__label">
+        <ion-text color="primary">
+          <h3 class="ion-margin-vertical">Candidatures</h3>
+        </ion-text>
+        <span class="residence__label__line"></span>
+      </div>
+
+      <!-- table -->
+      <ul class="data-table__container">
+        <!-- Table header -->
+        <li class="data-table__item data-table__item__header">
+          <div class="first-column"></div>
+          <div></div>
+          <div>Nom du projet</div>
+          <div>Nom de la compagnie</div>
+          <div>Responsable</div>
+          <div>Email</div>
+          <div>Téléphone</div>
+          <div>Adresse</div>
+          <div>Infos</div>
+          <div>Lien vidéos</div>
+          <div>Website</div>
+          <div>Partenaires</div>
+          <div>Lieux</div>
+          <div>Pratique</div>
+          <div>Disponibilitée</div>
+          <div>Equipe</div>
+          <div></div>
+        </li>
+
+        <!-- No results -->
+        <li class="data-table__item data-table__item-no-result" *ngIf="!candidates.length">
+          No results...
+        </li>
+
+        <!-- Table body -->
+        <li class="data-table__item" [ngClass]="{ odd: odd, even: even }" *ngFor="
+						let residence of candidates;
+						let even = even;
+						let odd = odd;
+						let i = index
+					">
+          <div class="first-column">{{ i + 1 }}</div>
+          <div>
+            <ion-button (click)="onOpenManageResidenceModal(residence, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <div>{{ residence.projectName }}</div>
+          <div>{{ residence.companyName }}</div>
+          <div>{{ residence.managerName }}</div>
+          <div>{{ residence.email }}</div>
+          <div>{{ residence.phone }}</div>
+          <div>{{ residence.address }}</div>
+          <div>{{ residence.projectDescription }}</div>
+          <div>{{ residence.videoLink }}</div>
+          <div>{{ residence.website }}</div>
+          <div>{{ residence.partners }}</div>
+          <div>{{ residence.location }}</div>
+          <div>
+            <p *ngFor="let date of residence.artisticPractice">{{ date }}</p>
+          </div>
+          <div>
+            <p *ngFor="let date of residence.availability">
+              {{ date }}
+            </p>
+          </div>
+          <div>
+            <p *ngFor="let member of residence.projectTeam">
+              {{ member }}
+            </p>
+          </div>
+          <div>
+            <ion-button (click)="onOpenManageResidenceModal(residence, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </li>
+      </ul>
+    </ion-col>
+  </ion-row>
+
+  <!-- BOOKED ROW-->
+  <ion-row>
+    <!-- Loader -->
+    <ion-col *ngIf="isResidenceLoading" class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-col>
+
+    <!-- Booked -->
+    <ion-col *ngIf="!isResidenceLoading">
+      <div class="residence__label">
+        <ion-text color="primary">
+          <h3 class="ion-margin-vertical">Réservations</h3>
+        </ion-text>
+        <span class="residence__label__line"></span>
+      </div>
+
+      <!-- table -->
+      <ul class="data-table__container">
+        <!-- Table header -->
+        <li class="data-table__item data-table__item__header">
+          <div class="first-column"></div>
+          <div></div>
+          <div>Nom du projet</div>
+          <div>Nom de la compagnie</div>
+          <div>Responsable</div>
+          <div>Email</div>
+          <div>Téléphone</div>
+          <div>Adresse</div>
+          <div>Infos</div>
+          <div>Lien vidéos</div>
+          <div>Website</div>
+          <div>Partenaires</div>
+          <div>Lieux</div>
+          <div>Pratique</div>
+          <div>Disponibilitée</div>
+          <div>Equipe</div>
+          <div></div>
+        </li>
+
+        <!-- No results -->
+        <li class="data-table__item data-table__item-no-result" *ngIf="!residencesBooked.length">
+          No results...
+        </li>
+
+        <!-- Table body -->
+        <li class="data-table__item" [ngClass]="{ odd: odd, even: even }" *ngFor="
+						let residence of residencesBooked;
+						let even = even;
+						let odd = odd;
+						let i = index
+					">
+          <div class="first-column">{{ i + 1 }}</div>
+          <div>
+            <ion-button (click)="onOpenManageResidenceModal(residence, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <div>{{ residence.projectName }}</div>
+          <div>{{ residence.companyName }}</div>
+          <div>{{ residence.managerName }}</div>
+          <div>{{ residence.email }}</div>
+          <div>{{ residence.phone }}</div>
+          <div>{{ residence.address }}</div>
+          <div>{{ residence.projectDescription }}</div>
+          <div>{{ residence.videoLink }}</div>
+          <div>{{ residence.website }}</div>
+          <div>{{ residence.partners }}</div>
+          <div>{{ residence.location }}</div>
+          <div>
+            <p *ngFor="let date of residence.artisticPractice">{{ date }}</p>
+          </div>
+          <div>
+            <p *ngFor="let date of residence.availability">
+              {{ date }}
+            </p>
+          </div>
+          <div>
+            <p *ngFor="let member of residence.projectTeam">
+              {{ member }}
+            </p>
+          </div>
+          <div>
+            <ion-button (click)="onOpenManageResidenceModal(residence, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </li>
+      </ul>
+    </ion-col>
+  </ion-row>
+
+</ion-grid>

@@ -47,8 +47,8 @@ export class OrganismHomeAdminComponent implements OnInit {
   public readonly EVENT_DELETED_FAIL = `Erreur suppression de l'évènement`;
   public readonly EVENT_CREATED_SUCCESS = 'Event created';
   public readonly EVENT_CREATED_FAIL = 'Event creation failed';
-  public readonly EVENT_UPDATED_SUCCESS = `L'event a été mise à jour`;
-  public readonly EVENT_UPDATED_FAIL = `L'event n'a pas été mise à jour`;
+  public readonly EVENT_UPDATED_SUCCESS = `L'event a été mis à jour`;
+  public readonly EVENT_UPDATED_FAIL = `L'event n'a pas été mis à jour`;
 
   constructor(
     private homeService: HomeService,

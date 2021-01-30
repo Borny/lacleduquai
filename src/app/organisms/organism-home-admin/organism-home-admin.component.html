@@ -92,12 +92,16 @@
       <ul class="data-table__container">
         <li class="data-table__item data-table__item__header">
           <div class="first-column"></div>
+          <div></div>
           <div>Name</div>
           <div>Date</div>
           <div>Intervenant</div>
           <div>Horaire</div>
           <div>Prix</div>
           <div>Téléphone</div>
+          <div>Description</div>
+          <div>Type de lien </div>
+          <div>Lien</div>
           <div></div>
         </li>
 
@@ -114,6 +118,11 @@
 						let i = index
 					">
           <div class="first-column">{{ i + 1 }}</div>
+          <div>
+            <ion-button (click)="onOpenManageEventModal(event, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
           <div>{{ event.name }}</div>
           <div>
             <p *ngFor="let date of event.dates">
@@ -127,6 +136,11 @@
           </div>
           <div>{{ event.price }}€</div>
           <div>{{ event.phone }}</div>
+          <div>{{ event.description }}</div>
+          <div>
+            <ion-text [color]="event.linkType === 'interne' ? 'primary' : 'secondary'">{{ event.linkType }}</ion-text>
+          </div>
+          <div>{{ event.link }}</div>
           <div>
             <ion-button (click)="onOpenManageEventModal(event, i)">
               <ion-icon name="create-outline"></ion-icon>

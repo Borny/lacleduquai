@@ -144,7 +144,6 @@
         <!-- Event lists -->
         <ng-container *ngIf="!isDayEventsLoading">
           <h2 class="events__container-label">Nos Evenements</h2>
-
           <div class="event-day" *ngFor="let day of daysList; trackBy: trackElement">
             <div class="events__label">
               <h2>{{day.label}}</h2>
@@ -152,9 +151,11 @@
             </div>
             <div class="events__list">
               <ion-card *ngFor="let event of day.events" class="events__card">
-                <ion-card-header>
+                <ion-card-header class="events__card__header" (click)="toggleCollapse(event)">
                   <ion-card-title color="medium" class="ion-text-center events__card__title">
                     {{event.name}} - {{event.prof}}
+                    <ion-icon class="events__card__title__icon"
+                      [name]="event.expanded ? 'chevron-up-outline': 'chevron-down-outline'"></ion-icon>
                     <small class="event__details">{{event.timeStart | date:"HH"}}h{{event.timeStart |
                       date:"mm"}} - {{event.timeEnd |
                       date:"HH"}}h{{event.timeEnd | date:"mm"}}
@@ -165,6 +166,11 @@
                     </small>
                   </ion-card-title>
                 </ion-card-header>
+                <ion-card-content class="events__card__content">
+                  <molecule-event-card-content [expandHeight]="EVENT_CARD_CONTENT_MAX_HEIGHT"
+                    [expanded]="event.expanded" [event]="event">
+                  </molecule-event-card-content>
+                </ion-card-content>
               </ion-card>
             </div>
           </div>
