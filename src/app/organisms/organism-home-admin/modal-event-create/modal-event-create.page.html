@@ -49,7 +49,7 @@
         <!-- Price -->
         <ion-item>
           <ion-label position="floating">Prix</ion-label>
-          <ion-input type="number" name="price" formControlName="price" required></ion-input>
+          <ion-input type="number" min="0" name="price" formControlName="price" required></ion-input>
         </ion-item>
         <p class="error-message" [ngClass]="
 						eventCreateForm.get('price').invalid &&
@@ -77,7 +77,8 @@
         <!-- Description -->
         <ion-item>
           <ion-label position="floating">Description</ion-label>
-          <ion-input type="text" name="description" formControlName="description" required></ion-input>
+          <ion-textarea rows="6" cols="20" maxlength="500" formControlName="description" required>
+          </ion-textarea>
         </ion-item>
         <p class="error-message"
           [ngClass]="eventCreateForm.get('description').invalid && eventCreateForm.get('description').touched ? 'show-error' : ''">

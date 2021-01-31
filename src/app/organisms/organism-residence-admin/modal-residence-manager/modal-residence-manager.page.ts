@@ -27,6 +27,10 @@ export class ModalResidenceManagerPage implements OnInit {
   public practiceList: string[] = [];
   public isBooked: boolean;
 
+  public isLoading: boolean;
+  public hideForm: boolean;
+
+
   public locations: string[] = [
     'Bordeaux Métropole',
     'Région Nouvelle-Aquitaine',

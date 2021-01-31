@@ -185,8 +185,8 @@ export class ModalEventManagerPage implements OnInit {
     this.eventEditionForm.addControl('prof', new FormControl(this.event.prof, Validators.required));
     this.eventEditionForm.addControl('timeStart', new FormControl(this.event.timeStart, Validators.required));
     this.eventEditionForm.addControl('timeEnd', new FormControl(this.event.timeEnd, Validators.required));
-    this.eventEditionForm.addControl('price', new FormControl(this.event.price, Validators.required));
-    this.eventEditionForm.addControl('phone', new FormControl(this.event.phone, Validators.required));
+    this.eventEditionForm.addControl('price', new FormControl(this.event.price, Validators.compose([Validators.min(0), Validators.required])));
+    this.eventEditionForm.addControl('phone', new FormControl(this.event.phone, Validators.compose([Validators.required, Validators.minLength(10)])));
     this.eventEditionForm.addControl('description', new FormControl(this.event.description, Validators.required));
     this.eventEditionForm.addControl('externalLink', new FormControl(externalLink, Validators.required));
     this.eventEditionForm.addControl('link', new FormControl(this.event.link, Validators.required));

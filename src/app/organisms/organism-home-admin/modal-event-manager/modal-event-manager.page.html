@@ -25,7 +25,7 @@
         <!-- Prof -->
         <ion-item>
           <ion-label position="floating">Intervenant</ion-label>
-          <ion-input type="text" name="prof" formControlName="prof" required></ion-input>
+          <ion-input clearInput="true" type="text" name="prof" formControlName="prof" required></ion-input>
         </ion-item>
         <p class="error-message"
           [ngClass]="eventEditionForm.get('prof').invalid && eventEditionForm.get('prof').touched ? 'show-error' : ''">
@@ -47,7 +47,7 @@
         <!-- Price -->
         <ion-item>
           <ion-label position="floating">Prix</ion-label>
-          <ion-input type="number" name="price" formControlName="price" required></ion-input>
+          <ion-input type="number" min="0" name="price" formControlName="price" required></ion-input>
         </ion-item>
         <p class="error-message"
           [ngClass]="eventEditionForm.get('price').invalid && eventEditionForm.get('price').touched ? 'show-error' : ''">
@@ -57,7 +57,7 @@
         <!-- Phone -->
         <ion-item>
           <ion-label position="floating">Téléphone</ion-label>
-          <ion-input type="number" name="phone" formControlName="phone" required></ion-input>
+          <ion-input type="number" minlength="10" name="phone" formControlName="phone" required></ion-input>
         </ion-item>
         <p class="error-message"
           [ngClass]="eventEditionForm.get('phone').invalid && eventEditionForm.get('phone').touched ? 'show-error' : '' ">
@@ -67,7 +67,8 @@
         <!-- Description -->
         <ion-item>
           <ion-label position="floating">Description</ion-label>
-          <ion-input type="text" name="description" formControlName="description" required></ion-input>
+          <ion-textarea rows="6" cols="20" maxlength="500" formControlName="description" required>
+          </ion-textarea>
         </ion-item>
         <p class="error-message"
           [ngClass]="eventEditionForm.get('description').invalid && eventEditionForm.get('description').touched ? 'show-error' : ''">

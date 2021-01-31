@@ -9,7 +9,7 @@ const routes: Routes = [
     component: CafeSubscriptionPage
   },
   {
-    path: 'cafe-inscription',
+    path: 'cafe-adhesion',
     redirectTo: '',
     pathMatch: 'full'
   }

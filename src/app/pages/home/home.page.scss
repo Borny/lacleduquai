@@ -345,6 +345,8 @@
 
   &__header {
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
   }
 
   &__title {
