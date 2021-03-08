@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
 
 import { CafeSubscription } from '../../models/cafe-subscription.model';
 import { CafeSubscriptionService } from '../../services/cafe-subscription.service';
-import { CafeMemberManagerDialog } from './cafe-member-manager/cafe-member-manager.component';
+
+import { ModalCafeMemberManagerDialog } from './modal-cafe-member-manager/modal-cafe-member-manager.component';
 
 @Component({
   selector: 'cafe-subscription-admin-organism',
@@ -12,6 +13,7 @@ import { CafeMemberManagerDialog } from './cafe-member-manager/cafe-member-manag
   styleUrls: ['./cafe-subscription-admin-organism.component.scss'],
 })
 export class CafeSubscriptionAdminOrganismComponent implements OnInit {
+
   public originalMembersData: CafeSubscription[] = [];
   public currentMembersData: CafeSubscription[] = [];
   public isLoading = false;
@@ -66,59 +68,56 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
 
   constructor(
     private cafeSubscriptionService: CafeSubscriptionService,
-    private _snackBar: MatSnackBar,
-    public dialog: MatDialog,
+    public modalController: ModalController,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
     this._getMembersInfo();
   }
 
-  public onOpenMemberManager(memb: CafeSubscription, index: number): void {
-    const id = memb._id;
-    const dialogRef = this.dialog.open(CafeMemberManagerDialog, {
-      minWidth: '500px',
-      data: id
+  async onOpenManageCafeSubscriptionModal(
+    memberData: CafeSubscription,
+    index: number
+  ): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalCafeMemberManagerDialog,
+      componentProps: {
+        member: memberData,
+      },
     });
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        if (!result) {
-          return;
-        }
-        let updatedMember = result.member;
-        if (result.action === this.CONFIRM) {
-          this.currentMembersData[index] = result.member;
-          this.cafeSubscriptionService.updateCafeMember(updatedMember)
-            .subscribe(
-              result => {
-                // show snack bar
-                this._snackBar.open(this.MEMBER_UPDATED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        } else if (result.action === this.CONFIRM_DELETE) {
-          this.cafeSubscriptionService.deleteCafeMember(result.member)
-            .subscribe(
-              result => {
-                this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
-                this.currentMembersData = this.originalMembersData;
-                // show snack bar
-                this._snackBar.open(this.MEMBER_DELETED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.MEMBER_DELETED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        }
-      });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (!data) {
+      return;
+    }
+
+    let updatedMember = data.member;
+    if (data.dismissed === this.CONFIRM) {
+      console.log('confirm :', updatedMember)
+      this.currentMembersData[index] = data.member;
+      this.cafeSubscriptionService.updateCafeMember(updatedMember)
+        .subscribe(
+          result => {
+            // show snack bar
+            this._presentToast(this.MEMBER_UPDATED_SUCCESS);
+          },
+          err => {
+            this._presentToast(this.MEMBER_UPDATED_FAIL);
+          });
+    } else if (data.dismissed === this.CONFIRM_DELETE) {
+      this.cafeSubscriptionService.deleteCafeMember(data.member)
+        .subscribe(
+          result => {
+            this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
+            this.currentMembersData = this.originalMembersData;
+            // show snack bar
+            this._presentToast(this.MEMBER_DELETED_SUCCESS);
+          },
+          err => {
+            this._presentToast(this.MEMBER_DELETED_FAIL);
+          });
+    }
   }
 
   public onSelectedOption(filter: string, value?: string): void {
@@ -143,14 +142,20 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
   }
 
   public onCopyToClipBoard(): void {
-    this._snackBar.open(this.EMAIL_LIST_COPIED, null, {
-      duration: 3000,
-    });
+    this._presentToast(this.EMAIL_LIST_COPIED);
   }
 
   ////////////
   // PRIVATE
   ////////////
+  async _presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
   private _getMembersInfo(): void {
     this.isLoading = true;
     this.cafeSubscriptionService.getCafeSubscriptionMembersData()

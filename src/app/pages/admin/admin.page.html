@@ -10,11 +10,6 @@
 <ion-content>
   <section class="main-section">
     <mat-tab-group animationDuration="0ms">
-      <mat-tab label="Résidence">
-        <ng-template matTabContent>
-          <organism-residence-admin></organism-residence-admin>
-        </ng-template>
-      </mat-tab>
       <mat-tab label="Accueil">
         <ng-template matTabContent>
           <organism-home-admin></organism-home-admin>
@@ -38,6 +33,11 @@
       <mat-tab label="Café Adhésions">
         <ng-template matTabContent>
           <cafe-subscription-admin-organism></cafe-subscription-admin-organism>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Résidence">
+        <ng-template matTabContent>
+          <organism-residence-admin></organism-residence-admin>
         </ng-template>
       </mat-tab>
       <!-- <mat-tab label="Stages"> </mat-tab> -->

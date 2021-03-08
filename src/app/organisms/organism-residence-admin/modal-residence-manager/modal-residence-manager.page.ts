@@ -32,8 +32,6 @@ export class ModalResidenceManagerPage implements OnInit {
   public isBooked: boolean;
 
   public isLoading: boolean;
-  public hideForm: boolean;
-
 
   public locations: string[] = [
     'Bordeaux Métropole',

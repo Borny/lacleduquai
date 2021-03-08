@@ -1,26 +1,27 @@
-import { Inject, NgModule, OnInit } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
+import { SharedModule } from '../../../shared/shared.module';
+import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.module';
+
 import { Chalkboard } from '../../../models/chalkboard.model';
 import { CafeService } from '../../../services/cafe.service';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'chalkboard-manager',
-  templateUrl: './chalkboard-manager-dialog.component.html',
-  styleUrls: ['./chalkboard-manager-dialog.component.scss']
+  templateUrl: './modal-chalkboard-manager-dialog.component.html',
+  styleUrls: ['./modal-chalkboard-manager-dialog.component.scss']
 })
-export class ChalkboardManagerDialog implements OnInit {
+export class ModalChalkboardManagerDialog implements OnInit {
 
   public chalkboardEditionForm: FormGroup = new FormGroup({});
   public chalkboard: Chalkboard;
   public chalkboardId: string;
   public isLoading: boolean;
-  public showDialog: boolean;
   public chalkboardError: boolean;
 
   public readonly CHALKBOARD_TITLE = 'Ardoise du jour';
@@ -29,17 +30,12 @@ export class ChalkboardManagerDialog implements OnInit {
   public readonly CANCEL = 'cancel';
 
   constructor(
-    public dialogRef: MatDialogRef<ChalkboardManagerDialog>,
-    private cafeService: CafeService,
-    @Inject(MAT_DIALOG_DATA) public data: string,
-    public dialog: MatDialog,
+    public modalCtrl: ModalController,
+    private cafeService: CafeService
   ) {
-    this.dialogRef.disableClose = true;
-    this.chalkboardId = data;
   }
 
   ngOnInit(): void {
-    this.showDialog = false;
     this.isLoading = true;
     this._getChalkboardData();
   }
@@ -50,14 +46,17 @@ export class ChalkboardManagerDialog implements OnInit {
     this.chalkboard.mainCoursePrice = this.chalkboardEditionForm.get('mainCoursePrice').value;
     this.chalkboard.dessert = this.chalkboardEditionForm.get('dessert').value;
     this.chalkboard.dessertPrice = this.chalkboardEditionForm.get('dessertPrice').value;
+
+    this.modalCtrl.dismiss({
+      'dismissed': this.CONFIRM,
+      'chalkboard': { ...this.chalkboard }
+    })
   }
 
   public onCancel(): void {
-    this.dialogRef.close({ chalkboard: this.chalkboard, action: this.CANCEL });
-  }
-
-  public onClose(): void {
-    this.dialogRef.close()
+    this.modalCtrl.dismiss({
+      'dismissed': this.CANCEL
+    });
   }
 
   ////////////
@@ -67,10 +66,9 @@ export class ChalkboardManagerDialog implements OnInit {
     this.cafeService.getChalkboardData()
       .subscribe(
         result => {
-          this.isLoading = false;
-          this.showDialog = true;
           this.chalkboard = result.data[0];
           this._initChalkboardEditForm();
+          this.isLoading = false;
         },
         err => {
           this.isLoading = false;
@@ -99,8 +97,8 @@ export class ChalkboardManagerDialog implements OnInit {
 }
 
 @NgModule({
-  declarations: [ChalkboardManagerDialog],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule],
+  declarations: [ModalChalkboardManagerDialog],
+  imports: [CommonModule, ReactiveFormsModule, SharedModule, IonicModule, MaterialModule, FormsModule, AtomAsteriskModule,],
   exports: [],
   providers: [],
 })

@@ -1,9 +1,9 @@
-@import '../../../styles/tools/variables';
-@import '../../../styles/tools/mixins';
+@import "../../../styles/tools/variables";
+@import "../../../styles/tools/mixins";
 
 :host {
   display: block;
-  background: url('../../../assets/img/et-rien-ne-bouge.jpg') center center;
+  background: url("../../../assets/img/et-rien-ne-bouge.jpg") center center;
 }
 
 h1 {
@@ -53,7 +53,6 @@ h1 {
 .form-control {
   width: 100%;
   max-width: 300px;
-  margin: 0 auto 1rem;
 }
 
 .price {

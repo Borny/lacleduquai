@@ -9,10 +9,10 @@
       >
     </ion-toolbar>
   </ion-header>
-  <!-- Event info -->
+  <!-- Residence info -->
   <ion-content class="ion-padding">
     <form
-      *ngIf="!isLoading && !hideForm"
+      *ngIf="!isLoading"
       class="residence-form"
       [formGroup]="residenceEditionForm"
       (ngSubmit)="onSubmit()"

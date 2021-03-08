@@ -15,6 +15,7 @@ import { ModalResidenceManagerPage } from "./modal-residence-manager/modal-resid
   styleUrls: ["./organism-residence-admin.component.scss"],
 })
 export class OrganismResidenceAdminComponent implements OnInit {
+
   // RESIDENCE
   public originalResidenceData: Residence[] = [];
   public currentResidenceData: Residence[] = [];

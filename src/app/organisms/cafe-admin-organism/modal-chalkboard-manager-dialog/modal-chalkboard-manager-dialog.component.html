@@ -1,0 +1,96 @@
+<div class="ion-page">
+  <!-- Loader -->
+  <loader class="loader" *ngIf="isLoading"></loader>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Edition de l'ardoise </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding" *ngIf="!isLoading">
+    <form
+      class="chalkboard-edition-form"
+      [formGroup]="chalkboardEditionForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <ion-list>
+        <!-- Main Course -->
+        <ion-item>
+          <ion-label position="floating"
+            >Plat du jour<atom-asterisk></atom-asterisk
+          ></ion-label>
+          <ion-input
+            type="text"
+            name="mainCourse"
+            formControlName="mainCourse"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="
+            chalkboardEditionForm.get('mainCourse').invalid &&
+            chalkboardEditionForm.get('mainCourse').touched
+              ? 'show-error'
+              : ''
+          "
+        >
+          Veuillez renseigner un plat du jour
+        </p>
+
+        <!-- Main Course Side -->
+        <ion-item>
+          <ion-label position="floating">Complément</ion-label>
+          <ion-input
+            type="text"
+            name="mainCourseSide"
+            formControlName="mainCourseSide"
+          ></ion-input>
+        </ion-item>
+
+        <!-- MainCourse Price -->
+        <ion-item>
+          <ion-label position="floating">Prix plat du jour</ion-label>
+          <ion-input
+            type="number"
+            min="0"
+            name="mainCoursePrice"
+            formControlName="mainCoursePrice"
+          ></ion-input>
+        </ion-item>
+
+        <!-- Dessert -->
+        <ion-item>
+          <ion-label position="floating">Dessert</ion-label>
+          <ion-input
+            type="text"
+            name="dessert"
+            formControlName="dessert"
+          ></ion-input>
+        </ion-item>
+
+        <!-- Dessert Price -->
+        <ion-item>
+          <ion-label position="floating">Prix dessert</ion-label>
+          <ion-input
+            type="number"
+            min="0"
+            name="dessertPrice"
+            formControlName="dessertPrice"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
+
+  <!-- CTAs -->
+  <div class="ion-padding btn__container">
+    <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+    <ion-button
+      [disabled]="chalkboardEditionForm.invalid"
+      color="primary"
+      (click)="onSubmit()"
+    >
+      Modifier
+    </ion-button>
+  </div>
+</div>

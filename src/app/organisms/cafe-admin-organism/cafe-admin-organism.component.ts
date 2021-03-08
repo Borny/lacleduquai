@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
 
 import { CafeService } from '../../services/cafe.service';
 
 import { Chalkboard } from '../../models/chalkboard.model';
-import { ChalkboardManagerDialog } from './chalkboard-manager-dialog/chalkboard-manager-dialog.component';
+import { ModalChalkboardManagerDialog } from './modal-chalkboard-manager-dialog/modal-chalkboard-manager-dialog.component';
 
 @Component({
   selector: 'cafe-admin-organism',
@@ -29,48 +28,59 @@ export class CafeAdminOrganismComponent implements OnInit {
 
   constructor(
     private cafeService: CafeService,
-    private _snackBar: MatSnackBar,
-    public dialog: MatDialog,
+    public modalController: ModalController,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
     this._getChalkboard();
   }
 
-  public onOpenChalkboardManager(chalkboardData: Chalkboard, index: number): void {
-    const id = chalkboardData._id;
-    const dialogRef = this.dialog.open(ChalkboardManagerDialog, {
-      minWidth: '500px',
-      data: id
+  async onOpenChalkboardManager(
+    chalkboardData: Chalkboard,
+    index: number
+  ): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalChalkboardManagerDialog,
+      componentProps: {
+        chalkboard: chalkboardData,
+      },
     });
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        if (!result) {
-          return;
-        }
-        let updatedChalkboard = result.chalkboard;
-        if (result.action === this.CONFIRM) {
-          this.cafeService.updateChalkboard(updatedChalkboard)
-            .subscribe(
-              updateResult => {
-                this.currentChalkboardData[index] = result.chalkboard;
-                // show snack bar
-                this._snackBar.open(this.CHALKBOARD_UPDATED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.CHALKBOARD_UPDATED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        }
-      });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (!data) {
+      return;
+    }
+
+    console.log(data)
+    let updatedChalkboard = data.chalkboard;
+    if (data.dismissed === this.CONFIRM) {
+      this.currentChalkboardData[index] = data.chalkboard;
+      this.cafeService.updateChalkboard(updatedChalkboard)
+        .subscribe(
+          updateResult => {
+            this.currentChalkboardData[index] = updatedChalkboard;
+            // show snack bar
+            this._presentToast(this.CHALKBOARD_UPDATED_SUCCESS, 'success');
+          },
+          err => {
+            this._presentToast(this.CHALKBOARD_UPDATED_FAIL, 'warning');
+          });
+    }
   }
 
   ////////////
   // PRIVATE
   ////////////
+  async _presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color
+    });
+    toast.present();
+  }
+
   private _getChalkboard(): void {
     this.cafeService.getChalkboardData()
       .subscribe(
