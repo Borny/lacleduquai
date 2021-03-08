@@ -25,6 +25,10 @@ export class ModalResidenceManagerPage implements OnInit {
   public isExternalLink: boolean;
   public practiceForm: FormArray = new FormArray([]);
   public practiceList: string[] = [];
+  public availabilityForm: FormArray = new FormArray([]);
+  public availabilityList: string[] = [];
+  public teamForm: FormArray = new FormArray([]);
+  public teamList: string[] = [];
   public isBooked: boolean;
 
   public isLoading: boolean;
@@ -63,7 +67,7 @@ export class ModalResidenceManagerPage implements OnInit {
   constructor(public modalCtrl: ModalController) { }
 
   ngOnInit() {
-    // this.isBooked = this.residence.booked;
+    this.isBooked = this.residence.booked;
     this._initResidenceEditionForm();
   }
 
@@ -72,7 +76,39 @@ export class ModalResidenceManagerPage implements OnInit {
     if (this.residenceEditionForm.invalid) {
       return;
     }
-    console.log(this.residenceEditionForm.value)
+
+    // Filtering the choosen course
+    const selectedArtisticPracticeNames =
+      this.residenceEditionForm.value.artisticPractice
+        .map((checked: boolean, index: number) => checked ? this.artisticPractices[index] : null)
+        .filter(value => value !== null);
+
+    // Filtering the choosen availability
+    const selectedAvailability =
+      this.residenceEditionForm.value.availability
+        .map((checked: boolean, index: number) => checked ? this.availabilities[index] : null)
+        .filter(value => value !== null);
+
+    // Updating the form values
+    const formValues: Residence = this.residenceEditionForm.value;
+    formValues.availability = selectedAvailability;
+    formValues.artisticPractice = selectedArtisticPracticeNames;
+
+    this.residence.projectName = this.residenceEditionForm.value.projectName;
+    this.residence.companyName = this.residenceEditionForm.value.companyName;
+    this.residence.managerName = this.residenceEditionForm.value.managerName;
+    this.residence.email = this.residenceEditionForm.value.email;
+    this.residence.phone = this.residenceEditionForm.value.phone;
+    this.residence.address = this.residenceEditionForm.value.address;
+    this.residence.projectDescription = this.residenceEditionForm.value.projectDescription;
+    this.residence.videoLink = this.residenceEditionForm.value.videoLink;
+    this.residence.website = this.residenceEditionForm.value.website;
+    this.residence.partners = this.residenceEditionForm.value.partners;
+    this.residence.location = this.residenceEditionForm.value.location;
+    this.residence.artisticPractice = this.residenceEditionForm.value.artisticPractice;
+    this.residence.availability = this.residenceEditionForm.value.availability;
+    this.residence.projectTeam = this.residenceEditionForm.value.projectTeam;
+    this.residence.booked = this.residenceEditionForm.value.booked;
 
     this.modalCtrl.dismiss({
       'dismissed': this.CONFIRM,
@@ -131,7 +167,7 @@ export class ModalResidenceManagerPage implements OnInit {
     formArray.removeAt(index);
   }
 
-  // Getting the artistic control
+  // Getting the project team control
   get projectTeamFormArray(): FormArray {
     return this.residenceEditionForm.get('projectTeam') as FormArray;
   }
@@ -152,12 +188,31 @@ export class ModalResidenceManagerPage implements OnInit {
   // Builds the residence form
   private _initResidenceEditionForm(): void {
 
+    // Practices
     this.practiceList = this.residence.artisticPractice;
-    console.log('practice list :', this.practiceList)
-    this.practiceList.forEach((practice, i) => {
-      const pract = new FormControl(this.residence.artisticPractice[i])
-      this.practiceForm.push(pract);
-    });
+    this.artisticPractices.forEach(pra => {
+      this.practiceList.find(practice => pra === practice)
+        ?
+        this.practiceForm.push(new FormControl(this.practiceList.find(practice => pra === practice)))
+        :
+        this.practiceForm.push(new FormControl(null))
+    })
+
+    // Availability
+    this.availabilityList = this.residence.availability;
+    this.availabilities.forEach(av => {
+      this.availabilityList.find(avail => av === avail)
+        ?
+        this.availabilityForm.push(new FormControl(this.availabilityList.find(avail => av === avail)))
+        :
+        this.availabilityForm.push(new FormControl(null))
+    })
+
+    // Availability
+    this.teamList = this.residence.projectTeam;
+    this.teamList.forEach(teamMember => {
+      this.teamForm.push(new FormControl(teamMember, Validators.required))
+    })
 
     this.residenceEditionForm = new FormGroup({
 
@@ -167,21 +222,17 @@ export class ModalResidenceManagerPage implements OnInit {
       email: new FormControl(this.residence.email, [Validators.required, Validators.email]),
       phone: new FormControl(this.residence.phone, Validators.required),
       address: new FormControl(this.residence.address, Validators.required),
-      location: new FormControl(this.residence.location, Validators.required),
       projectDescription: new FormControl(this.residence.projectDescription, Validators.required),
-      projectTeam: new FormArray([
-        new FormControl(this.residence.projectTeam, Validators.required)
-      ],
-        Validators.required),
-      artisticPractice: new FormControl(this.practiceForm, requireCheckboxesToBeCheckedValidator()),
-      availability: new FormArray([], requireCheckboxesToBeCheckedValidator()),
       videoLink: new FormControl(this.residence.videoLink),
       website: new FormControl(this.residence.website),
       partners: new FormControl(this.residence.partners),
-      // booked: new FormControl(this.residence.booked)
+      location: new FormControl(this.residence.location, Validators.required),
+      artisticPractice: this.practiceForm,
+      availability: this.availabilityForm,
+      projectTeam: this.teamForm,
+      booked: new FormControl(this.residence.booked)
     });
 
-    console.log('form value', this.residenceEditionForm.value)
   }
 
 }

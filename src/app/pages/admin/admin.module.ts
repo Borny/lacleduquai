@@ -17,6 +17,7 @@ import { CafeAdminOrganismModule } from '../../organisms/cafe-admin-organism/caf
 import { CoursesAdminOrganismModule } from '../../organisms/courses-admin-organism/courses-admin-organism.module';
 import { CafeSubscriptionAdminOrganismModule } from '../../organisms/cafe-subscription-admin-organism/cafe-subscription-admin-organism.module';
 import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-organism/take-away-admin-organism.module';
+import { OrganismResidenceAdminModule} from '../../organisms/organism-residence-admin/organism-residence-admin.module';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { TakeAwayAdminOrganismModule } from '../../organisms/take-away-admin-org
     CafeAdminOrganismModule,
     TakeAwayAdminOrganismModule,
     CafeSubscriptionAdminOrganismModule,
-    CoursesAdminOrganismModule
+    CoursesAdminOrganismModule,
+    OrganismResidenceAdminModule
   ],
   declarations: [AdminPage]
 })

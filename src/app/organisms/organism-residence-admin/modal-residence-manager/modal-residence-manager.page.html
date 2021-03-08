@@ -1,96 +1,162 @@
 <div class="ion-page">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>Edition de la candidature</ion-title>
+      <ion-title
+        >Edition de la candidature de
+        <ion-text color="secondary"
+          >{{residence.companyName}}</ion-text
+        ></ion-title
+      >
     </ion-toolbar>
   </ion-header>
   <!-- Event info -->
   <ion-content class="ion-padding">
-    <form *ngIf="!isLoading && !hideForm" class="residence-form" [formGroup]="residenceEditionForm"
-      (ngSubmit)="onSubmit()">
+    <form
+      *ngIf="!isLoading && !hideForm"
+      class="residence-form"
+      [formGroup]="residenceEditionForm"
+      (ngSubmit)="onSubmit()"
+    >
       <ion-list>
         <!--  Project Name -->
         <ion-item>
-          <ion-label position="floating">Nom du projet<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >Nom du projet<atom-asterisk></atom-asterisk>
           </ion-label>
-          <ion-input type="text" name="projectName" formControlName="projectName" required></ion-input>
+          <ion-input
+            type="text"
+            name="projectName"
+            formControlName="projectName"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('projectName').invalid && residenceEditionForm.get('projectName').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('projectName').invalid && residenceEditionForm.get('projectName').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner un nom de projet
         </p>
 
         <!-- Company Name -->
         <ion-item>
-          <ion-label position="floating">Nom de la compagnie<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >Nom de la compagnie<atom-asterisk></atom-asterisk>
           </ion-label>
-          <ion-input type="text" name="companyName" formControlName="companyName" required></ion-input>
+          <ion-input
+            type="text"
+            name="companyName"
+            formControlName="companyName"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('companyName').invalid && residenceEditionForm.get('companyName').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('companyName').invalid && residenceEditionForm.get('companyName').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner le nom de la compagnie
         </p>
 
         <!-- Manager Name -->
         <ion-item>
-          <ion-label position="floating">Nom de la personne qui gère cette candidature<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >Nom de la personne qui gère cette candidature<atom-asterisk
+            ></atom-asterisk>
           </ion-label>
-          <ion-input type="text" name="managerName" formControlName="managerName" required></ion-input>
+          <ion-input
+            type="text"
+            name="managerName"
+            formControlName="managerName"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('managerName').invalid && residenceEditionForm.get('managerName').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('managerName').invalid && residenceEditionForm.get('managerName').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner votre nom
         </p>
 
         <!-- Email -->
         <ion-item>
-          <ion-label position="floating">E-mail<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >E-mail<atom-asterisk></atom-asterisk>
           </ion-label>
-          <ion-input type="email" name="email" formControlName="email" required></ion-input>
+          <ion-input
+            type="email"
+            name="email"
+            formControlName="email"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('email').invalid && residenceEditionForm.get('email').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('email').invalid && residenceEditionForm.get('email').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner votre email
         </p>
 
         <!-- Phone -->
         <ion-item>
-          <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >Téléphone<atom-asterisk></atom-asterisk>
           </ion-label>
-          <ion-input type="number" name="phone" formControlName="phone" required></ion-input>
+          <ion-input
+            type="number"
+            name="phone"
+            formControlName="phone"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('phone').invalid && residenceEditionForm.get('phone').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('phone').invalid && residenceEditionForm.get('phone').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner un numéro de téléphone
         </p>
 
         <!-- Address -->
         <ion-item>
-          <ion-label position="floating">Adresse de gestion de la structure<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >Adresse de gestion de la structure<atom-asterisk></atom-asterisk>
           </ion-label>
-          <ion-input type="text" name="address" formControlName="address" required></ion-input>
+          <ion-input
+            type="text"
+            name="address"
+            formControlName="address"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('address').invalid && residenceEditionForm.get('address').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('address').invalid && residenceEditionForm.get('address').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner une adresse
         </p>
 
         <!-- Project Description -->
         <ion-item>
-          <ion-label position="floating">Quelques mots sur votre projet<atom-asterisk></atom-asterisk>
+          <ion-label position="floating"
+            >Quelques mots sur votre projet<atom-asterisk></atom-asterisk>
           </ion-label>
-          <ion-input type="text" name="projectDescription" formControlName="projectDescription">
+          <ion-input
+            type="text"
+            name="projectDescription"
+            formControlName="projectDescription"
+          >
           </ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('projectDescription').invalid && residenceEditionForm.get('projectDescription').touched ? 'show-error' : ''">
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('projectDescription').invalid && residenceEditionForm.get('projectDescription').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner une description
         </p>
 
         <!-- VIDEO LINK -->
         <ion-item>
           <ion-label position="floating">
-            Un lien vidéo vers un projet actuel ou passé ?</ion-label>
+            Un lien vidéo vers un projet actuel ou passé ?</ion-label
+          >
           <ion-input name="videoLink" formControlName="videoLink"></ion-input>
         </ion-item>
 
@@ -102,15 +168,22 @@
 
         <!-- PARTNERS -->
         <ion-item>
-          <ion-label position="floating">Des partenaires ou soutiens ?
+          <ion-label position="floating"
+            >Des partenaires ou soutiens ?
           </ion-label>
           <ion-input name="partners" formControlName="partners"></ion-input>
         </ion-item>
 
         <!-- Location -->
-        <ion-radio-group class="radio-group" aria-label="Région" formControlName="location" [value]="locations[0]">
+        <ion-radio-group
+          class="radio-group"
+          aria-label="Région"
+          formControlName="location"
+        >
           <ion-list-header>
-            <ion-label>Vous êtes installé dans quel coin ?<atom-asterisk></atom-asterisk>
+            <ion-label
+              >Vous êtes installé dans quel coin ?<atom-asterisk
+              ></atom-asterisk>
             </ion-label>
           </ion-list-header>
           <ion-item lines="none" *ngFor="let location of locations">
@@ -122,10 +195,14 @@
         <!-- Artistic Pratice -->
         <ion-list formArrayName="artisticPractice">
           <ion-list-header>
-            <ion-label>Votre pratique artistique<atom-asterisk></atom-asterisk>
+            <ion-label
+              >Votre pratique artistique<atom-asterisk></atom-asterisk>
             </ion-label>
           </ion-list-header>
-          <ion-item lines="none" *ngFor="let practice of artisticPracticeFormArray.controls; let i = index">
+          <ion-item
+            lines="none"
+            *ngFor="let practice of artisticPracticeFormArray.controls; let i = index"
+          >
             <ion-label>{{artisticPractices[i]}}</ion-label>
             <ion-checkbox slot="start" [formControlName]="i"></ion-checkbox>
           </ion-item>
@@ -134,36 +211,56 @@
         <!-- Availability -->
         <ion-list formArrayName="availability">
           <ion-list-header>
-            <ion-label>Sur quelles périodes êtes-vous disponibles pour
-              travailler chez nous ?<atom-asterisk></atom-asterisk>
+            <ion-label
+              >Sur quelles périodes êtes-vous disponibles pour travailler chez
+              nous ?<atom-asterisk></atom-asterisk>
             </ion-label>
           </ion-list-header>
-          <ion-item lines="none" *ngFor="let availability of availabilityFormArray.controls; let i = index">
+          <ion-item
+            lines="none"
+            *ngFor="let availability of availabilityFormArray.controls; let i = index"
+          >
             <ion-label>{{ availabilities[i] }}</ion-label>
-            <ion-checkbox slot="start" [formControlName]="i" [disabled]="i === 0 || i === 1"></ion-checkbox>
+            <ion-checkbox
+              slot="start"
+              [formControlName]="i"
+              [disabled]="i === 0 || i === 1 || i === 2"
+            ></ion-checkbox>
           </ion-item>
         </ion-list>
-        <p class="error-message"
-          [ngClass]="residenceEditionForm.get('availability').invalid && residenceEditionForm.get('availability').touched ? 'show-error' : ''">
-          Veuillez renseigner une disponibilité
-        </p>
 
         <!-- Project Team -->
         <ion-list formArrayName="projectTeam">
           <ion-list-header>
             <ion-label>De qui l'équipe sera-t-elle constituée?</ion-label>
           </ion-list-header>
-          <div *ngFor="let teamMember of projectTeamFormArray.controls; let i = index">
+          <div
+            *ngFor="let teamMember of projectTeamFormArray.controls; let i = index"
+          >
             <ion-item>
-              <ion-label position="floating">Nom, prénom et fonction<atom-asterisk></atom-asterisk>
+              <ion-label position="floating"
+                >Nom, prénom et fonction<atom-asterisk></atom-asterisk>
               </ion-label>
-              <ion-input type="text" name="projectTeam" [formControlName]="i" required></ion-input>
+              <ion-input
+                type="text"
+                name="projectTeam"
+                [formControlName]="i"
+                required
+              ></ion-input>
             </ion-item>
-            <p class="error-message" [ngClass]="teamMember.invalid && teamMember.touched ? 'show-error' : ''">
+            <p
+              class="error-message"
+              [ngClass]="teamMember.invalid && teamMember.touched ? 'show-error' : ''"
+            >
               Veuillez renseigner les informations
             </p>
-            <ion-button *ngIf="projectTeamFormArray.controls.length > 1" fill="clear" size="small" color="secondary"
-              (click)="onRemoveTeamMember($event, i)">
+            <ion-button
+              *ngIf="projectTeamFormArray.controls.length > 1"
+              fill="clear"
+              size="small"
+              color="secondary"
+              (click)="onRemoveTeamMember($event, i)"
+            >
               Supprimer
               <ion-icon slot="end" name="close-outline"></ion-icon>
             </ion-button>
@@ -182,22 +279,34 @@
         </ion-item>
         <div class="slide-toggle__container">
           <ion-text [color]="isBooked ? '' : 'primary'">Non</ion-text>
-          <ion-toggle class="slide-toggle__input" [color]="isBooked ? 'secondary' : 'primary'" formControlName="booked"
-            (ionChange)="toggleBooking($event)">
+          <ion-toggle
+            class="slide-toggle__input"
+            [color]="isBooked ? 'secondary' : 'primary'"
+            formControlName="booked"
+            (ionChange)="toggleBooking($event)"
+          >
           </ion-toggle>
           <ion-text [color]="isBooked ? 'secondary' : ''">Oui</ion-text>
         </div>
-
       </ion-list>
     </form>
   </ion-content>
+
   <!-- CTAs -->
   <div class="ion-padding btn__container">
-    <ion-button class="btn--delete" color="danger" (click)="onOpenDeleteModal()">
+    <ion-button
+      class="btn--delete"
+      color="danger"
+      (click)="onOpenDeleteModal()"
+    >
       Supprimer
     </ion-button>
     <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
-    <ion-button [disabled]="residenceEditionForm.invalid" color="primary" (click)="onSubmit()">
+    <ion-button
+      [disabled]="residenceEditionForm.invalid"
+      color="primary"
+      (click)="onSubmit()"
+    >
       Modifier
     </ion-button>
   </div>

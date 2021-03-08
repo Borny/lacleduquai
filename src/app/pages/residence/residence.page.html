@@ -214,8 +214,7 @@
                 </ion-item>
 
                 <!-- Location -->
-                <ion-radio-group class="radio-group" aria-label="Région" formControlName="location"
-                  [value]="locations[0]">
+                <ion-radio-group class="radio-group" aria-label="Région" formControlName="location">
                   <ion-list-header>
                     <ion-label>Vous êtes installé dans quel coin ?<atom-asterisk></atom-asterisk>
                     </ion-label>
@@ -247,7 +246,7 @@
                   </ion-list-header>
                   <ion-item lines="none" *ngFor="let availability of availabilityFormArray.controls; let i = index">
                     <ion-label>{{ availabilities[i] }}</ion-label>
-                    <ion-checkbox slot="start" [formControlName]="i" [disabled]="i === 0 || i === 1"></ion-checkbox>
+                    <ion-checkbox slot="start" [formControlName]="i" [disabled]="i === 0 || i === 1 || i === 2"></ion-checkbox>
                   </ion-item>
                 </ion-list>
                 <p class="error-message"

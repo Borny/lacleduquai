@@ -5,16 +5,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../../angular-material/angular-material.module';
 
-// import { OrganismResidenceAdminComponent } from './organism-residence-admin.component';
+import { OrganismResidenceAdminComponent } from './organism-residence-admin.component';
 
 @NgModule({
-  // declarations: [OrganismResidenceAdminComponent],
+  declarations: [OrganismResidenceAdminComponent],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
     MaterialModule
   ],
-  // exports: [OrganismResidenceAdminComponent]
+  exports: [OrganismResidenceAdminComponent]
 })
 export class OrganismResidenceAdminModule { }

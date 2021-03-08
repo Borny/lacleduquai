@@ -1,4 +1,6 @@
 export interface Residence {
+  _id: string;
+  booked: boolean;
   projectName: string;
   companyName: string;
   managerName: string;
