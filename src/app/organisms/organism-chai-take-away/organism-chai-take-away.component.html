@@ -38,25 +38,33 @@
       <!-- <form *ngIf="false" class="take-away-form" [formGroup]="chaiTakeAwayForm" (ngSubmit)="onSubmit()"> -->
 
       <ion-list>
-        <!-- FIRST NAME -->
+        <!-- LAST NAME -->
         <ion-item>
           <ion-label position="floating">Nom<atom-asterisk></atom-asterisk>
           </ion-label>
           <ion-input type="text" name="lastName" formControlName="lastName" required></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="chaiTakeAwayForm.get('lastName').invalid && chaiTakeAwayForm.get('lastName').touched ? 'show-error' : ''">
+        <p class="error-message" [ngClass]="
+            chaiTakeAwayForm.get('lastName').invalid &&
+            chaiTakeAwayForm.get('lastName').touched
+              ? 'show-error'
+              : ''
+          ">
           Veuillez renseigner votre nom
         </p>
 
-        <!-- LAST NAME -->
+        <!-- FIRST NAME -->
         <ion-item>
           <ion-label position="floating">Prénom<atom-asterisk></atom-asterisk>
           </ion-label>
           <ion-input type="text" name="firstName" formControlName="firstName" required></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="chaiTakeAwayForm.get('firstName').invalid && chaiTakeAwayForm.get('firstName').touched ? 'show-error' : ''">
+        <p class="error-message" [ngClass]="
+            chaiTakeAwayForm.get('firstName').invalid &&
+            chaiTakeAwayForm.get('firstName').touched
+              ? 'show-error'
+              : ''
+          ">
           Veuillez renseigner votre prénom
         </p>
 
@@ -66,8 +74,12 @@
           </ion-label>
           <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="chaiTakeAwayForm.get('phone').invalid && chaiTakeAwayForm.get('phone').touched ? 'show-error' : ''">
+        <p class="error-message" [ngClass]="
+            chaiTakeAwayForm.get('phone').invalid &&
+            chaiTakeAwayForm.get('phone').touched
+              ? 'show-error'
+              : ''
+          ">
           Veuillez renseigner votre numéro de téléphone
         </p>
 
@@ -118,7 +130,7 @@
         <!-- Total -->
         <div class="price">
           <p class="price__amount ion-text-center">Total: {{ totalPrice }}€</p>
-          <p class=" price__deposit ion-text-center" *ngIf="!hasContainer">
+          <p class="price__deposit ion-text-center" *ngIf="!hasContainer">
             (dont {{ totalDeposit }}€ de consigne)
           </p>
         </div>
@@ -135,7 +147,6 @@
             <loader></loader>
           </ion-button>
         </div>
-
       </ion-list>
     </form>
   </ion-card-content>

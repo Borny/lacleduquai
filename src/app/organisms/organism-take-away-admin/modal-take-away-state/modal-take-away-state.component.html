@@ -1,0 +1,26 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Edition de l'état de la commande</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Residence info -->
+  <ion-content class="ion-padding">
+    <form [formGroup]="stateForm" (ngSubmit)="onSubmit()">
+      <ion-radio-group formControlName="state">
+        <ion-item *ngFor="let stateOption of stateOptions" lines="none">
+          <ion-label> {{ stateOption }}</ion-label>
+          <ion-radio slot="start" [value]="stateOption"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </form>
+  </ion-content>
+
+  <!-- CTAs -->
+  <div class="ion-padding btn__container">
+    <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+    <ion-button [disabled]="stateForm.invalid" color="primary" (click)="onSubmit()">
+      Modifier
+    </ion-button>
+  </div>
+</div>

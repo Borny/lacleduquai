@@ -1,24 +1,24 @@
-import { Inject, NgModule, OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatRadioChange } from '@angular/material/radio';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastController } from "@ionic/angular";
+import { IonicModule, ModalController } from '@ionic/angular';
+
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
+import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.module';
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 import { ChaiTakeAway, TakeAwayState } from '../../../models/chai-take-away.model';
 import { TakeAwayService } from '../../../services/take-away.service';
-import { DeleteOrderDialog } from '../delete-order-dialog/delete-order-dialog.component';
-import { IonicModule } from '@ionic/angular';
+
+import { ModalDelete } from '../modal-delete/modal-delete.component';
 
 @Component({
   selector: 'order-manager',
-  templateUrl: './order-manager-dialog.component.html',
-  styleUrls: ['./order-manager-dialog.component.scss']
+  templateUrl: './modal-take-away-manager.component.html',
+  styleUrls: ['./modal-take-away-manager.component.scss']
 })
-export class OrderManagerDialog implements OnInit {
+export class ModalTakeAwayManagerPage implements OnInit {
 
   public orderEditionForm: FormGroup = new FormGroup({});
   public order: ChaiTakeAway;
@@ -45,19 +45,15 @@ export class OrderManagerDialog implements OnInit {
   public readonly CANCEL = 'cancel';
 
   constructor(
-    public dialogRef: MatDialogRef<OrderManagerDialog>,
     private takeAwayService: TakeAwayService,
-    @Inject(MAT_DIALOG_DATA) public data: string,
-    public dialog: MatDialog,
-  ) {
-    this.dialogRef.disableClose = true;
-    this.orderId = data;
-  }
+    public modalController: ModalController,
+    public toastController: ToastController) { }
 
   ngOnInit(): void {
-    this.showDialog = false;
-    this.isLoading = true;
-    this._getOrderData();
+    // this.showDialog = false;
+    // this.isLoading = true;
+    this._initOrderEditForm();
+    // this._getOrderData();
     this._setMinMaxDates();
   }
 
@@ -72,27 +68,41 @@ export class OrderManagerDialog implements OnInit {
     this.order.totalPrice = this.totalPrice;
     this.order.price = this.price;
     this.order.totalDeposit = this.totalDeposit;
+
+    this.modalController.dismiss({
+      'dismissed': this.CONFIRM,
+      'order': { ...this.order }
+    })
   }
 
   public onCancel(): void {
-    this.dialogRef.close({ order: this.order, action: this.CANCEL });
-  }
-
-  public onOpenDeleteModal(): void {
-    const dialogRef = this.dialog.open(DeleteOrderDialog, {
-      minWidth: '500px',
-      data: this.order
+    this.modalController.dismiss({
+      'dismissed': this.CANCEL
     });
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        if (result.action === this.CONFIRM_DELETE) {
-          this.dialogRef.close({ order: this.order, action: this.CONFIRM_DELETE });
-        }
-      });
   }
 
-  public onClose(): void {
-    this.dialogRef.close()
+  async onOpenDeleteModal(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalDelete,
+      cssClass: 'modal-delete',
+      componentProps: {
+        'contentData': this.order
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if (!data) {
+      return;
+    }
+    if (data.dismissed === this.CONFIRM_DELETE) {
+      // !!! Not sure why but the setTimeout is needed, probably asynchronous stuff...
+      setTimeout(() => {
+        this.modalController.dismiss({
+          'dismissed': this.CONFIRM_DELETE,
+          'order': this.order
+        })
+      })
+    }
   }
 
   public toggleHasContainer(event: CustomEvent): void {
@@ -142,6 +152,13 @@ export class OrderManagerDialog implements OnInit {
   }
 
   private _initOrderEditForm(): void {
+    this.price = this.order.price;
+    this.totalPrice = this.order.totalPrice;
+    this.totalDeposit = this.order.totalDeposit;
+    this.orderQuantity = this.order.quantity;
+    this.hasContainer = this.order.hasOwnContainer;
+    this.pickUpDate = this.order.pickUpDate;
+
     this.orderEditionForm.addControl('firstName', new FormControl(this.order.firstName, Validators.required));
     this.orderEditionForm.addControl('lastName', new FormControl(this.order.lastName, Validators.required));
     this.orderEditionForm.addControl('phone', new FormControl(this.order.phone, Validators.required));
@@ -149,9 +166,6 @@ export class OrderManagerDialog implements OnInit {
     this.orderEditionForm.addControl('hasOwnContainer', new FormControl(this.order.hasOwnContainer, Validators.required));
     this.orderEditionForm.addControl('pickUpDate', new FormControl({ value: this.order.pickUpDate, disabled: true }, Validators.required));
     this.orderEditionForm.addControl('extraInfo', new FormControl(this.order.extraInfo));
-
-
-    console.log(this.orderEditionForm.get('pickUpDate'))
   }
 
   private _setMinMaxDates(): void {
@@ -172,9 +186,15 @@ export class OrderManagerDialog implements OnInit {
 }
 
 @NgModule({
-  declarations: [OrderManagerDialog],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule],
+  declarations: [ModalTakeAwayManagerPage],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonicModule,
+    MaterialModule,
+    AtomAsteriskModule
+  ],
   exports: [],
   providers: [],
 })
-class OrderManagerModule { }
+class ModalTakeAwayManagerModule { }

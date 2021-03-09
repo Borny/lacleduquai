@@ -10,7 +10,6 @@ import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.m
 import { ModalDelete } from '../modal-delete/modal-delete.component';
 
 import { Residence } from '../../../models/residence.model';
-import { requireCheckboxesToBeCheckedValidator } from '../../../validators/checkbox';
 
 @Component({
   selector: 'modal-residence-manager-page',
@@ -19,7 +18,9 @@ import { requireCheckboxesToBeCheckedValidator } from '../../../validators/check
 })
 export class ModalResidenceManagerPage implements OnInit {
 
-  @Input() residence: Residence;
+  // @Input() residence: Residence;
+
+  residence;
 
   public residenceEditionForm: FormGroup = new FormGroup({});
   public isExternalLink: boolean;

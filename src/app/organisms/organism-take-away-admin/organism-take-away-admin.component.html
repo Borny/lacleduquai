@@ -62,7 +62,7 @@
         >
           <div class="first-column">{{ i + 1 }}</div>
           <div>
-            <ion-button (click)="onOpenOrderManager(order, i)">
+            <ion-button (click)="onOpenTakeAwayManagerModal(order, i)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
@@ -79,14 +79,14 @@
             <ion-button
               size="small"
               [color]="order.state === 'En attente' ? 'primary' : 'secondary'"
-              (click)="onOpenState(order)"
+              (click)="onOpenTakeAwayStateModal(order, i)"
             >
               {{ order.state }}
             </ion-button>
           </div>
           <div>{{ order.extraInfo }}</div>
           <div>
-            <ion-button (click)="onOpenOrderManager(order, i)">
+            <ion-button (click)="onOpenTakeAwayManagerModal(order, i)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>

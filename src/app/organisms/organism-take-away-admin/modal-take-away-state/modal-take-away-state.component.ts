@@ -1,19 +1,20 @@
-import { Inject, NgModule, OnInit } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IonicModule, ModalController } from '@ionic/angular';
 
+import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.module';
 import { MaterialModule } from '../../../angular-material/angular-material.module';
+
 import { ChaiTakeAway, TakeAwayState } from '../../../models/chai-take-away.model';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'state-dialog',
-  templateUrl: './state-dialog.component.html',
-  styleUrls: ['./state-dialog.component.scss']
+  templateUrl: './modal-take-away-state.component.html',
+  styleUrls: ['./modal-take-away-state.component.scss']
 })
-export class StateDialog implements OnInit {
+export class ModalTakeAwayState implements OnInit {
 
   public stateForm: FormGroup = new FormGroup({});
   public order: ChaiTakeAway;
@@ -22,14 +23,7 @@ export class StateDialog implements OnInit {
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
 
-  constructor(
-    public dialogRef: MatDialogRef<StateDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: ChaiTakeAway,
-    public dialog: MatDialog,
-  ) {
-    this.order = data;
-    this.dialogRef.disableClose = true;
-  }
+  constructor(public modalCtrl: ModalController) { }
 
   ngOnInit(): void {
     this._initFormGroup();
@@ -37,10 +31,17 @@ export class StateDialog implements OnInit {
 
   public onSubmit(): void {
     this.order.state = this.stateForm.get('state').value;
+
+    this.modalCtrl.dismiss({
+      'dismissed': this.CONFIRM,
+      'order': { ...this.order }
+    })
   }
 
   public onCancel(): void {
-    this.dialogRef.close({ order: this.order, action: this.CANCEL });
+    this.modalCtrl.dismiss({
+      'dismissed': this.CANCEL
+    });
   }
 
   ////////////
@@ -52,9 +53,9 @@ export class StateDialog implements OnInit {
 }
 
 @NgModule({
-  declarations: [StateDialog],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule],
+  declarations: [ModalTakeAwayState],
+  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule, AtomAsteriskModule],
   exports: [],
   providers: [],
 })
-class StateDialogModule { }
+class ModalTakeAwayStateModule { }

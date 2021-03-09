@@ -1,0 +1,130 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Edition de la commande</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <form class="order-edition-form" [formGroup]="orderEditionForm" (ngSubmit)="onSubmit()">
+      <!-- FIRST NAME -->
+      <ion-item>
+        <ion-label position="floating">Prénom<atom-asterisk></atom-asterisk>
+        </ion-label>
+        <ion-input type="text" name="firstName" formControlName="firstName" required></ion-input>
+      </ion-item>
+      <p class="error-message" [ngClass]="
+          orderEditionForm.get('firstName').invalid &&
+          orderEditionForm.get('firstName').touched
+            ? 'show-error'
+            : ''
+        ">
+        Veuillez renseigner un prénom
+      </p>
+
+      <!-- LAST NAME -->
+      <ion-item>
+        <ion-label position="floating">Nom<atom-asterisk></atom-asterisk>
+        </ion-label>
+        <ion-input type="text" name="lastName" formControlName="lastName" required></ion-input>
+      </ion-item>
+      <p class="error-message" [ngClass]="
+          orderEditionForm.get('lastName').invalid &&
+          orderEditionForm.get('lastName').touched
+            ? 'show-error'
+            : ''
+        ">
+        Veuillez renseigner votre nom
+      </p>
+
+      <!-- PHONE -->
+      <ion-item>
+        <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
+        </ion-label>
+        <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
+      </ion-item>
+      <p class="error-message" [ngClass]="
+          orderEditionForm.get('phone').invalid &&
+          orderEditionForm.get('phone').touched
+            ? 'show-error'
+            : ''
+        ">
+        Veuillez renseigner votre numéro de téléphone
+      </p>
+
+      <!-- QUANTITY -->
+      <ion-radio-group class="radio-group" aria-label="Quantité" formControlName="quantity"
+        (ionChange)="onQuantityChange($event)">
+        <ion-list-header>
+          <ion-label>Quantité (par bouteille de 1 litre)<atom-asterisk></atom-asterisk>
+          </ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let quantity of quantities; let i = index">
+          <ion-label> {{ quantity }} </ion-label>
+          <ion-radio slot="start" [value]="i + 1"> </ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+      <!-- PRICE -->
+      <p class="ion-padding-start ion-margin-top">Prix total: {{ totalPrice }}€</p>
+
+      <!-- CONSIGNE -->
+      <p class="ion-padding-start ion-margin-top">Consigne: {{ totalDeposit }}€</p>
+
+      <!-- HAS CONTAINER -->
+      <ion-item lines="none" class="slide-toggle__section">
+        <ion-label>Possède un contenant<atom-asterisk></atom-asterisk>
+        </ion-label>
+      </ion-item>
+      <div class="slide-toggle__container">
+        <ion-text>Non</ion-text>
+        <ion-toggle class="slide-toggle__input" formControlName="hasOwnContainer" [checked]="hasContainer"
+          (ionChange)="toggleHasContainer($event)">
+          {{ hasContainer ? "Oui" : "Non" }}
+        </ion-toggle>
+        <ion-text [color]="hasContainer ? 'primary' : ''">Oui</ion-text>
+      </div>
+
+      <!-- STATUS -->
+      <p class="ion-padding-start ion-margin-top">Status de la commande: {{ order.state }}</p>
+
+      <!-- PICK UP DATE -->
+      <p class="ion-padding-start ion-margin-top">
+        Date de retrait:
+        {{
+        orderEditionForm.get("pickUpDate").value
+        | date: "d MMMM":undefined:"fr-FR"
+        }}
+      </p>
+
+      <!-- CALENDAR -->
+      <div class="form-control">
+        <mat-form-field appearance="fill" class="form__calendar">
+          <mat-label>Modifier la date de retrait :</mat-label>
+          <input matInput [min]="minDateFilter" [max]="maxDateFilter" [matDatepickerFilter]="dateFilter"
+            [matDatepicker]="picker" (dateChange)="onDateChange($event)" formControlName="pickUpDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <!-- EXTRA INFO -->
+      <ion-item>
+        <ion-label position="floating">Extra info</ion-label>
+        <ion-textarea placeholder="Extra info" name="extraInfo" formControlName="extraInfo">{{ order.extraInfo }}
+        </ion-textarea>
+      </ion-item>
+    </form>
+  </ion-content>
+
+  <!-- CTAs -->
+  <div class="ion-padding btn__container">
+    <ion-button class="btn--delete" color="danger" (click)="onOpenDeleteModal()">
+      Supprimer
+    </ion-button>
+    <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+    <ion-button [disabled]="orderEditionForm.invalid" color="primary" (click)="onSubmit()">
+      Modifier
+    </ion-button>
+  </div>
+</div>

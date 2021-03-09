@@ -30,12 +30,26 @@
   }
 }
 
-.slide-toggle__section {
-  display: flex;
-  flex-flow: column;
-  margin: 0 0 1rem;
+// HAS CONTAINER
+.slide-toggle {
+  &__section {
+    display: flex;
+    flex-flow: column;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 1rem;
+  }
 }
 
-.slide-toggle {
-  margin: 0.5rem 0;
+
+// CTA
+.btn__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
 }

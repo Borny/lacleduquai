@@ -52,7 +52,6 @@ export class CafeAdminOrganismComponent implements OnInit {
       return;
     }
 
-    console.log(data)
     let updatedChalkboard = data.chalkboard;
     if (data.dismissed === this.CONFIRM) {
       this.currentChalkboardData[index] = data.chalkboard;
