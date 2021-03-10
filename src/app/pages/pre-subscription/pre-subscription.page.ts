@@ -159,7 +159,7 @@ export class PreSubscriptionPage implements OnInit {
       )
   }
 
-  public toggleShowDiscountText(checked: boolean) {
+  public toggleShowDiscountText(checked: boolean): void {
     this.isPreviouslyEnrolled = checked;
     checked
       ? this.subscriptionForm.addControl('previousCourseInfo', new FormControl(null))
@@ -170,6 +170,9 @@ export class PreSubscriptionPage implements OnInit {
     location.reload();
   }
 
+  ////////////
+  // PRIVATE
+  ////////////
   private _addControl(controlsName: string, controls: any[], required?: boolean): void {
     controls.forEach(() => {
       (<FormArray>this.subscriptionForm.controls[controlsName]).push(new FormControl(null));

@@ -1,5 +1,5 @@
-@import '../../../styles/tools/variables';
-@import '../../../styles/tools/mixins';
+@import "../../../styles/tools/variables";
+@import "../../../styles/tools/mixins";
 
 h1 {
   padding: 1rem;
@@ -52,7 +52,7 @@ h1 {
     width: 100%;
     padding: 0.5rem 0 0.5rem 1rem;
     background: $color-primary;
-    color: $cod-gray;
+    color: $white;
   }
 
   &__content {
@@ -69,9 +69,6 @@ h1 {
         padding: 0 3rem;
       }
 
-      mat-card {
-        margin: 0 0 1rem;
-      }
       .previous-course-toggle {
         margin: 0 0 0 1rem;
       }
@@ -83,23 +80,21 @@ h1 {
   }
 }
 
-.form-control {
-  width: 100%;
-  max-width: 300px;
-}
-
-.radio-group {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  width: 100%;
-  max-width: 300px;
-
-  .radio-button {
-    margin: 0.5rem 0;
+// PREVIOUSLY ENROLLED
+.slide-toggle {
+  &__section {
+    display: flex;
+    flex-flow: column;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0 0 1rem;
   }
 }
 
+// CTA
 .submit-btn {
   margin: 1rem auto 2rem;
 }

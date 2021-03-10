@@ -1,91 +1,56 @@
 <div class="ion-page">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title
-        >Edition de
-        <ion-text color="secondary"
-          >{{ member.firstName }} {{ member.lastName }}</ion-text
-        ></ion-title
-      >
+      <ion-title>Edition de
+        <ion-text color="secondary">{{ member.firstName }} {{ member.lastName }}</ion-text>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <form
-      *ngIf="!isLoading"
-      class="member-edition-form"
-      [formGroup]="memberEditionForm"
-      (ngSubmit)="onSubmit()"
-    >
+    <form *ngIf="!isLoading" class="member-edition-form" [formGroup]="memberEditionForm" (ngSubmit)="onSubmit()">
       <ion-list>
         <!-- First name -->
         <ion-item>
-          <ion-label position="floating"
-            >Prénom<atom-asterisk></atom-asterisk
-          ></ion-label>
-          <ion-input
-            type="text"
-            name="firstName"
-            formControlName="firstName"
-            required
-          ></ion-input>
+          <ion-label position="floating">Prénom<atom-asterisk></atom-asterisk>
+          </ion-label>
+          <ion-input type="text" name="firstName" formControlName="firstName" required></ion-input>
         </ion-item>
-        <p
-          class="error-message"
-          [ngClass]="
+        <p class="error-message" [ngClass]="
             memberEditionForm.get('firstName').invalid &&
             memberEditionForm.get('firstName').touched
               ? 'show-error'
               : ''
-          "
-        >
+          ">
           Veuillez renseigner un prénom
         </p>
 
         <!-- Last name -->
         <ion-item>
-          <ion-label position="floating"
-            >Nom<atom-asterisk></atom-asterisk
-          ></ion-label>
-          <ion-input
-            type="text"
-            name="lastName"
-            formControlName="lastName"
-            required
-          ></ion-input>
+          <ion-label position="floating">Nom<atom-asterisk></atom-asterisk>
+          </ion-label>
+          <ion-input type="text" name="lastName" formControlName="lastName" required></ion-input>
         </ion-item>
-        <p
-          class="error-message"
-          [ngClass]="
+        <p class="error-message" [ngClass]="
             memberEditionForm.get('lastName').invalid &&
             memberEditionForm.get('lastName').touched
               ? 'show-error'
               : ''
-          "
-        >
+          ">
           Veuillez renseigner un nom
         </p>
 
         <!-- Email -->
         <ion-item>
-          <ion-label position="floating"
-            >Email<atom-asterisk></atom-asterisk
-          ></ion-label>
-          <ion-input
-            type="text"
-            name="email"
-            formControlName="email"
-            required
-          ></ion-input>
+          <ion-label position="floating">Email<atom-asterisk></atom-asterisk>
+          </ion-label>
+          <ion-input type="text" name="email" formControlName="email" required></ion-input>
         </ion-item>
-        <p
-          class="error-message"
-          [ngClass]="
+        <p class="error-message" [ngClass]="
             memberEditionForm.get('email').invalid &&
             memberEditionForm.get('email').touched
               ? 'show-error'
               : ''
-          "
-        >
+          ">
           Veuillez renseigner un email
         </p>
 
@@ -94,19 +59,11 @@
           <ion-label>Inscription newsletter</ion-label>
         </ion-item>
         <div class="slide-toggle__container">
-          <ion-text [color]="newsletterSubscription ? '' : 'primary'"
-            >Non</ion-text
-          >
-          <ion-toggle
-            class="slide-toggle__input"
-            [color]="newsletterSubscription ? 'secondary' : 'primary'"
-            formControlName="newsletterSubscription"
-            (ionChange)="toggleNewsletterSubscription($event)"
-          >
+          <ion-text [color]="newsletterSubscription ? '' : 'primary'">Non</ion-text>
+          <ion-toggle class="slide-toggle__input" [color]="newsletterSubscription ? 'secondary' : 'primary'"
+            formControlName="newsletterSubscription" (ionChange)="toggleNewsletterSubscription($event)">
           </ion-toggle>
-          <ion-text [color]="newsletterSubscription ? 'secondary' : ''"
-            >Oui</ion-text
-          >
+          <ion-text [color]="newsletterSubscription ? 'secondary' : ''">Oui</ion-text>
         </div>
       </ion-list>
     </form>
@@ -114,19 +71,11 @@
 
   <!-- CTAs -->
   <div class="ion-padding btn__container">
-    <ion-button
-      class="btn--delete"
-      color="danger"
-      (click)="onOpenDeleteModal()"
-    >
+    <ion-button class="btn--delete" color="danger" (click)="onOpenDeleteModal()">
       Supprimer
     </ion-button>
     <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
-    <ion-button
-      [disabled]="memberEditionForm.invalid"
-      color="primary"
-      (click)="onSubmit()"
-    >
+    <ion-button [disabled]="memberEditionForm.invalid" color="primary" (click)="onSubmit()">
       Modifier
     </ion-button>
   </div>

@@ -5,10 +5,7 @@
     <!-- TITLE -->
     <ion-row>
       <ion-col>
-        <squared-shapes-svg
-          [title]="TITLE"
-          class="squared-shapes"
-        ></squared-shapes-svg>
+        <squared-shapes-svg [title]="TITLE" class="squared-shapes"></squared-shapes-svg>
       </ion-col>
     </ion-row>
 
@@ -18,9 +15,7 @@
         <div class="description-container">
           <ul class="description">
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">
                 Pour les artistes et compagnies du spectacle vivant, plus
                 spécifiquement en danse contemporaine et en théâtre, en priorité
@@ -28,27 +23,21 @@
               </p>
             </li>
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">
                 Accueil en résidence pendant 5 jours, du lundi au vendredi, 9h à
                 16h.
               </p>
             </li>
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">
                 Possibilité d’accompagnement artistique avec les membres de la
                 Cie Bela & Côme - Bela Balsa et Côme Tanguy.
               </p>
             </li>
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">
                 Présentation en fin de semaine auprès d’un public restreint
                 d’une étape de travail, extrait, lecture, selon l’envie des
@@ -56,9 +45,7 @@
               </p>
             </li>
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">
                 L’espace de travail est de 50m2 et ne permet pas d’accueillir de
                 grands groupes.<br />
@@ -66,16 +53,12 @@
             </li>
 
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">Pas de technique lumière.</p>
             </li>
 
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
+              <two-triangle-svg class="description-item--icon"></two-triangle-svg>
               <p class="description-item--content">
                 Possibilité de stocker, le temps de la résidence, une très
                 petite quantité de matériel.
@@ -106,10 +89,7 @@
             <!-- Loader -->
             <loader *ngIf="isLoading"></loader>
             <!-- Message fail -->
-            <div
-              *ngIf="!isLoading && isFormFailed && !isFormSent"
-              class="message-sent message-sent--fail"
-            >
+            <div *ngIf="!isLoading && isFormFailed && !isFormSent" class="message-sent message-sent--fail">
               <ion-text color="danger">
                 <p class="ion-text-center message-sent__content">
                   Votre candidature n'a pas pu être envoyée. Veuillez réessayer.
@@ -120,10 +100,7 @@
               </div>
             </div>
             <!-- Message success -->
-            <div
-              *ngIf="!isLoading && isFormSent"
-              class="message-sent message-sent--success"
-            >
+            <div *ngIf="!isLoading && isFormSent" class="message-sent message-sent--success">
               <ion-text color="primary">
                 <p class="ion-text-center message-sent__content">
                   Merci, votre demande a bien été envoyée. Nous vous répondrons
@@ -131,199 +108,116 @@
                 </p>
               </ion-text>
               <div class="btn__container ion-margin-vertical">
-                <ion-button (click)="onNavigateHome()"
-                  >{{HOME_BTN_TEXT}}</ion-button
-                >
+                <ion-button (click)="onNavigateHome()">{{HOME_BTN_TEXT}}</ion-button>
               </div>
             </div>
 
             <!-- Residence Form -->
-            <form
-              *ngIf="!isLoading && !hideForm"
-              class="residence-form"
-              [formGroup]="residenceForm"
-              (ngSubmit)="onSubmit()"
-            >
+            <form *ngIf="!isLoading && !hideForm" class="residence-form" [formGroup]="residenceForm"
+              (ngSubmit)="onSubmit()">
               <ion-list>
                 <!--  Project Name -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Nom du projet<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating">Nom du projet<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input
-                    type="text"
-                    name="projectName"
-                    formControlName="projectName"
-                    required
-                  ></ion-input>
+                  <ion-input type="text" name="projectName" formControlName="projectName" required></ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('projectName').invalid && residenceForm.get('projectName').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('projectName').invalid && residenceForm.get('projectName').touched ? 'show-error' : ''">
                   Veuillez renseigner un nom de projet
                 </p>
 
                 <!-- Company Name -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Nom de la compagnie<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating">Nom de la compagnie<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input
-                    type="text"
-                    name="companyName"
-                    formControlName="companyName"
-                    required
-                  ></ion-input>
+                  <ion-input type="text" name="companyName" formControlName="companyName" required></ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('companyName').invalid && residenceForm.get('companyName').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('companyName').invalid && residenceForm.get('companyName').touched ? 'show-error' : ''">
                   Veuillez renseigner le nom de la compagnie
                 </p>
 
                 <!-- Manager Name -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Nom de la personne qui gère cette candidature<span
-                      class="label-asterisk"
-                      >*</span
-                    ></ion-label
-                  >
-                  <ion-input
-                    type="text"
-                    name="managerName"
-                    formControlName="managerName"
-                    required
-                  ></ion-input>
+                  <ion-label position="floating">Nom de la personne qui gère cette candidature<span
+                      class="label-asterisk">*</span></ion-label>
+                  <ion-input type="text" name="managerName" formControlName="managerName" required></ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('managerName').invalid && residenceForm.get('managerName').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('managerName').invalid && residenceForm.get('managerName').touched ? 'show-error' : ''">
                   Veuillez renseigner votre nom
                 </p>
 
                 <!-- Email -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >E-mail<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating">E-mail<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input
-                    type="email"
-                    name="email"
-                    formControlName="email"
-                    required
-                  ></ion-input>
+                  <ion-input type="email" name="email" formControlName="email" required></ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('email').invalid && residenceForm.get('email').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('email').invalid && residenceForm.get('email').touched ? 'show-error' : ''">
                   Veuillez renseigner votre email
                 </p>
 
                 <!-- Phone -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Téléphone<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input
-                    type="text"
-                    name="phone"
-                    formControlName="phone"
-                    required
-                  ></ion-input>
+                  <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('phone').invalid && residenceForm.get('phone').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('phone').invalid && residenceForm.get('phone').touched ? 'show-error' : ''">
                   Veuillez renseigner un numéro de téléphone
                 </p>
 
                 <!-- Address -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Adresse de gestion de la structure<atom-asterisk
-                    ></atom-asterisk>
+                  <ion-label position="floating">Adresse de gestion de la structure<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input
-                    type="text"
-                    name="address"
-                    formControlName="address"
-                    required
-                  ></ion-input>
+                  <ion-input type="text" name="address" formControlName="address" required></ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('address').invalid && residenceForm.get('address').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('address').invalid && residenceForm.get('address').touched ? 'show-error' : ''">
                   Veuillez renseigner une adresse
                 </p>
 
                 <!-- Project Description -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Quelques mots sur votre projet<atom-asterisk
-                    ></atom-asterisk>
+                  <ion-label position="floating">Quelques mots sur votre projet<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input
-                    type="text"
-                    name="projectDescription"
-                    formControlName="projectDescription"
-                  >
+                  <ion-input type="text" name="projectDescription" formControlName="projectDescription">
                   </ion-input>
                 </ion-item>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('projectDescription').invalid && residenceForm.get('projectDescription').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('projectDescription').invalid && residenceForm.get('projectDescription').touched ? 'show-error' : ''">
                   Veuillez renseigner une description
                 </p>
 
                 <!-- VIDEO LINK -->
                 <ion-item>
                   <ion-label position="floating">
-                    Un lien vidéo vers un projet actuel ou passé ?</ion-label
-                  >
-                  <ion-input
-                    name="videoLink"
-                    formControlName="videoLink"
-                  ></ion-input>
+                    Un lien vidéo vers un projet actuel ou passé ?</ion-label>
+                  <ion-input name="videoLink" formControlName="videoLink"></ion-input>
                 </ion-item>
 
                 <!-- WEBSITE -->
                 <ion-item>
                   <ion-label position="floating">Site internet</ion-label>
-                  <ion-input
-                    name="website"
-                    formControlName="website"
-                  ></ion-input>
+                  <ion-input name="website" formControlName="website"></ion-input>
                 </ion-item>
 
                 <!-- PARTNERS -->
                 <ion-item>
-                  <ion-label position="floating"
-                    >Des partenaires ou soutiens ?
+                  <ion-label position="floating">Des partenaires ou soutiens ?
                   </ion-label>
-                  <ion-input
-                    name="partners"
-                    formControlName="partners"
-                  ></ion-input>
+                  <ion-input name="partners" formControlName="partners"></ion-input>
                 </ion-item>
 
                 <!-- Location -->
-                <ion-radio-group
-                  class="radio-group"
-                  aria-label="Région"
-                  formControlName="location"
-                >
+                <ion-radio-group class="radio-group" aria-label="Région" formControlName="location">
                   <ion-list-header>
-                    <ion-label
-                      >Vous êtes installé dans quel coin ?<atom-asterisk
-                      ></atom-asterisk>
+                    <ion-label>Vous êtes installé dans quel coin ?<atom-asterisk></atom-asterisk>
                     </ion-label>
                   </ion-list-header>
                   <ion-item lines="none" *ngFor="let location of locations">
@@ -335,93 +229,55 @@
                 <!-- Artistic Pratice -->
                 <ion-list formArrayName="artisticPractice">
                   <ion-list-header>
-                    <ion-label
-                      >Votre pratique artistique<atom-asterisk></atom-asterisk>
+                    <ion-label>Votre pratique artistique<atom-asterisk></atom-asterisk>
                     </ion-label>
                   </ion-list-header>
-                  <ion-item
-                    lines="none"
-                    *ngFor="let practice of artisticPracticeFormArray.controls; let i = index"
-                  >
+                  <ion-item lines="none" *ngFor="let practice of artisticPracticeFormArray.controls; let i = index">
                     <ion-label>{{artisticPractices[i]}}</ion-label>
-                    <ion-checkbox
-                      slot="start"
-                      [formControlName]="i"
-                    ></ion-checkbox>
+                    <ion-checkbox slot="start" [formControlName]="i"></ion-checkbox>
                   </ion-item>
                 </ion-list>
 
                 <!-- Availability -->
                 <ion-list formArrayName="availability">
                   <ion-list-header>
-                    <ion-label
-                      >Sur quelles périodes êtes-vous disponibles pour
+                    <ion-label>Sur quelles périodes êtes-vous disponibles pour
                       travailler chez nous ?<atom-asterisk></atom-asterisk>
                     </ion-label>
                   </ion-list-header>
-                  <ion-item
-                    lines="none"
-                    *ngFor="let availability of availabilityFormArray.controls; let i = index"
-                  >
+                  <ion-item lines="none" *ngFor="let availability of availabilityFormArray.controls; let i = index">
                     <ion-label>{{ availabilities[i] }}</ion-label>
-                    <ion-checkbox
-                      slot="start"
-                      [formControlName]="i"
-                      [disabled]="i === 0 || i === 1 || i === 2"
-                    ></ion-checkbox>
+                    <ion-checkbox slot="start" [formControlName]="i" [disabled]="i === 0 || i === 1 || i === 2">
+                    </ion-checkbox>
                   </ion-item>
                 </ion-list>
-                <p
-                  class="error-message"
-                  [ngClass]="residenceForm.get('availability').invalid && residenceForm.get('availability').touched ? 'show-error' : ''"
-                >
+                <p class="error-message"
+                  [ngClass]="residenceForm.get('availability').invalid && residenceForm.get('availability').touched ? 'show-error' : ''">
                   Veuillez renseigner une disponibilité
                 </p>
 
                 <!-- Project Team -->
                 <ion-list formArrayName="projectTeam">
                   <ion-list-header>
-                    <ion-label
-                      >De qui l'équipe sera-t-elle constituée?</ion-label
-                    >
+                    <ion-label>De qui l'équipe sera-t-elle constituée?</ion-label>
                   </ion-list-header>
-                  <div
-                    *ngFor="let teamMember of projectTeamFormArray.controls; let i = index"
-                  >
+                  <div *ngFor="let teamMember of projectTeamFormArray.controls; let i = index">
                     <ion-item>
-                      <ion-label position="floating"
-                        >Nom, prénom et fonction<atom-asterisk></atom-asterisk>
+                      <ion-label position="floating">Nom, prénom et fonction<atom-asterisk></atom-asterisk>
                       </ion-label>
-                      <ion-input
-                        type="text"
-                        name="projectTeam"
-                        [formControlName]="i"
-                        required
-                      ></ion-input>
+                      <ion-input type="text" name="projectTeam" [formControlName]="i" required></ion-input>
                     </ion-item>
-                    <p
-                      class="error-message"
-                      [ngClass]="teamMember.invalid && teamMember.touched ? 'show-error' : ''"
-                    >
+                    <p class="error-message" [ngClass]="teamMember.invalid && teamMember.touched ? 'show-error' : ''">
                       Veuillez renseigner les informations
                     </p>
-                    <ion-button
-                      *ngIf="projectTeamFormArray.controls.length > 1"
-                      fill="clear"
-                      size="small"
-                      color="secondary"
-                      (click)="onRemoveTeamMember($event, i)"
-                    >
+                    <ion-button *ngIf="projectTeamFormArray.controls.length > 1" fill="clear" size="small"
+                      color="secondary" (click)="onRemoveTeamMember($event, i)">
                       Supprimer
                       <ion-icon slot="end" name="close-outline"></ion-icon>
                     </ion-button>
                   </div>
                   <div class="btn__container ion-margin-vertical">
-                    <ion-button
-                      fill="clear"
-                      size="small"
-                      (click)="onAddTeamMember()"
-                    >
+                    <ion-button fill="clear" size="small" (click)="onAddTeamMember()">
                       Ajouter un membre d'équipe
                       <ion-icon slot="start" name="add-outline"></ion-icon>
                     </ion-button>
@@ -430,17 +286,9 @@
 
                 <!-- Submit -->
                 <div class="btn__container btn__container--submit">
-                  <ion-button
-                    class="ion-margin-vertical"
-                    type="submit"
-                    color="primary"
-                    [disabled]="residenceForm.invalid || isLoading"
-                  >
-                    <ion-icon
-                      *ngIf="!isLoading"
-                      slot="start"
-                      name="paper-plane-outline"
-                    ></ion-icon>
+                  <ion-button class="ion-margin-vertical" type="submit" color="primary"
+                    [disabled]="residenceForm.invalid || isLoading">
+                    <ion-icon *ngIf="!isLoading" slot="start" name="paper-plane-outline"></ion-icon>
                     <loader *ngIf="isLoading"></loader>
                     {{SEND_BUTTON_TEXT}}
                   </ion-button>
