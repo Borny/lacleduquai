@@ -238,7 +238,14 @@ export class ModalResidenceManagerPage implements OnInit {
 
 @NgModule({
   declarations: [ModalResidenceManagerPage],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule, AtomAsteriskModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonicModule,
+    MaterialModule,
+    FormsModule,
+    AtomAsteriskModule
+  ],
   exports: [],
   providers: [],
 })

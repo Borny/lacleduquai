@@ -69,10 +69,10 @@ export class OrganismResidenceAdminComponent implements OnInit {
         (updateData) => {
           this.currentResidenceData[index] = updatedResidence;
           // show snack bar
-          this._presentToast(this.RESIDENCE_UPDATED_SUCCESS);
+          this._presentToast(this.RESIDENCE_UPDATED_SUCCESS, 'success');
         },
         (err) => {
-          this._presentToast(this.RESIDENCE_UPDATED_FAIL);
+          this._presentToast(this.RESIDENCE_UPDATED_FAIL, 'warning');
         }
       );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
@@ -83,11 +83,11 @@ export class OrganismResidenceAdminComponent implements OnInit {
           );
           this.currentResidenceData = this.originalResidenceData;
           // show snack bar
-          this._presentToast(this.RESIDENCE_DELETED_SUCCESS);
+          this._presentToast(this.RESIDENCE_DELETED_SUCCESS, 'success');
         },
         (err) => {
           // show snack bar
-          this._presentToast(this.RESIDENCE_DELETED_FAIL);
+          this._presentToast(this.RESIDENCE_DELETED_FAIL, 'warning');
         }
       );
     }
@@ -96,10 +96,11 @@ export class OrganismResidenceAdminComponent implements OnInit {
   ////////////
   // PRIVATE
   ////////////
-  async _presentToast(message: string) {
+  private async _presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message,
       duration: 2000,
+      color
     });
     toast.present();
   }

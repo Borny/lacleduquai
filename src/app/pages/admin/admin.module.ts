@@ -14,7 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { OrganismHomeAdminModule } from '../../organisms/organism-home-admin/organism-home-admin.module';
 import { CafeAdminOrganismModule } from '../../organisms/cafe-admin-organism/cafe-admin-organism.module';
-import { CoursesAdminOrganismModule } from '../../organisms/courses-admin-organism/courses-admin-organism.module';
+import { OrganismCoursesAdminModule } from '../../organisms/organism-courses-admin/organism-courses-admin.module';
 import { CafeSubscriptionAdminOrganismModule } from '../../organisms/cafe-subscription-admin-organism/cafe-subscription-admin-organism.module';
 import { OrganismTakeAwayAdminModule } from '../../organisms/organism-take-away-admin/organism-take-away-admin.module';
 import { OrganismResidenceAdminModule } from '../../organisms/organism-residence-admin/organism-residence-admin.module';
@@ -32,7 +32,7 @@ import { OrganismResidenceAdminModule } from '../../organisms/organism-residence
     CafeAdminOrganismModule,
     OrganismTakeAwayAdminModule,
     CafeSubscriptionAdminOrganismModule,
-    CoursesAdminOrganismModule,
+    OrganismCoursesAdminModule,
     OrganismResidenceAdminModule
   ],
   declarations: [AdminPage]

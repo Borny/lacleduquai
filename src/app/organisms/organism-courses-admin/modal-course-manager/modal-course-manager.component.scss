@@ -72,6 +72,12 @@
   justify-content: space-between;
 }
 
-.courses-container {
-  margin: 0 0 1rem;
+// CTA
+.btn__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
 }

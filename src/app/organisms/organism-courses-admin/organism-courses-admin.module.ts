@@ -6,11 +6,11 @@ import { MaterialModule } from '../../angular-material/angular-material.module';
 
 import { FilterModule } from '../../molecules/filter/filter.module';
 import { CopyToClipBoardModule } from '../../molecules/copy-to-clipboard/copy-to-clipboard.module';
-import { CoursesAdminOrganismComponent } from './courses-admin-organism.component';
+import { OrganismCoursesAdminComponent } from './organism-courses-admin.component';
 
 
 @NgModule({
-  declarations: [CoursesAdminOrganismComponent],
+  declarations: [OrganismCoursesAdminComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -18,6 +18,6 @@ import { CoursesAdminOrganismComponent } from './courses-admin-organism.componen
     FilterModule,
     CopyToClipBoardModule
   ],
-  exports: [CoursesAdminOrganismComponent]
+  exports: [OrganismCoursesAdminComponent]
 })
-export class CoursesAdminOrganismModule { }
+export class OrganismCoursesAdminModule { }

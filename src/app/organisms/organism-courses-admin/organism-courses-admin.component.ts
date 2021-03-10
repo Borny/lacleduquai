@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
 
 import { Member } from '../../models/member.model';
 import { PaymentMethods } from '../../models/payment-methods.enum';
 import { SubscriptionService } from '../../services/subscription.service';
-import { MemberManagerDialog } from './member-manager/member-manager.component';
-import { PaymentReceivedDialog } from './payment-received-dialog/payment-received-dialog.component';
-import { RefundDialog } from './refund-dialog/refund-dialog.component';
+import { ModalCourseManagerPage } from './modal-course-manager/modal-course-manager.component';
+import { ModalCoursePaymentReceivedPage } from './modal-course-payment-received/modal-course-payment-received.component';
+import { ModalCourseRefundPage } from './modal-course-refund/modal-course-refund.component';
 
 @Component({
-  selector: 'courses-admin-organism',
-  templateUrl: './courses-admin-organism.component.html',
-  styleUrls: ['./courses-admin-organism.component.scss'],
+  selector: 'organism-courses-admin',
+  templateUrl: './organism-courses-admin.component.html',
+  styleUrls: ['./organism-courses-admin.component.scss'],
 })
-export class CoursesAdminOrganismComponent implements OnInit {
+export class OrganismCoursesAdminComponent implements OnInit {
 
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
@@ -85,111 +85,118 @@ export class CoursesAdminOrganismComponent implements OnInit {
 
   constructor(
     private subscriptionService: SubscriptionService,
-    private _snackBar: MatSnackBar,
-    public dialog: MatDialog,
+    public modalController: ModalController,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
     this._getMembersData();
   }
 
-  public onOpenRefundDialog(member: Member, index: number): void {
-    const dialogRef = this.dialog.open(RefundDialog, {
-      minWidth: '300px',
-      data: member
+  async onOpenCourseRefundModal(
+    memberData: Member,
+    index: number
+  ): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalCourseRefundPage,
+      componentProps: {
+        member: memberData,
+      },
     });
-    dialogRef.beforeClosed()
-      .subscribe(result => {
-        if (result.action === this.CONFIRM) {
-          this.subscriptionService.updateMember(member)
-            .subscribe(
-              result => {
-                // show snack bar
-                this._snackBar.open(this.REFUND_UPDATED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        }
-      });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (!data) {
+      return;
+    }
+    // On dismiss
+    let updatedMember = data.member;
+    if (data.dismissed === this.CONFIRM) {
+      this.subscriptionService.updateMember(updatedMember)
+        .subscribe(
+          result => {
+            // show snack bar
+            this._presentToast(this.REFUND_UPDATED_SUCCESS, 'success');
+          },
+          err => {
+            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+          });
+    }
   }
 
-  public onOpenPaymentReceived(member: Member): void {
-    const dialogRef = this.dialog.open(PaymentReceivedDialog, {
-      minWidth: '300px',
-      data: member
+  async onOpenCoursePaymentReceivedModal(
+    memberData: Member,
+    index: number
+  ): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalCoursePaymentReceivedPage,
+      componentProps: {
+        member: memberData,
+      },
     });
-    dialogRef.beforeClosed()
-      .subscribe(result => {
-        member.paymentReceived = result.isPaymentReceived;
-        member.checks = result.member.checks;
-        if (result.action === this.CONFIRM) {
-          this.subscriptionService.updateMember(member)
-            .subscribe(
-              result => {
-                // show snack bar
-                this._snackBar.open(this.PAYMENT_UPDATED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        }
-      });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (!data) {
+      return;
+    }
+    // On dismiss
+    const updatedMember = data.member;
+
+    if (data.dismissed === this.CONFIRM) {
+      this.subscriptionService.updateMember(updatedMember)
+        .subscribe(
+          result => {
+            this.currentMembersData[index] = updatedMember;
+            // show snack bar
+            this._presentToast(this.PAYMENT_UPDATED_SUCCESS, 'success');
+          },
+          err => {
+            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+          });
+    }
   }
 
-  public onOpenMemberManager(memb: Member, index: number): void {
-    const id = memb._id;
-    const dialogRef = this.dialog.open(MemberManagerDialog, {
-      minWidth: '500px',
-      data: id
+  async onOpenCourseManagerModal(
+    memberData: Member,
+    index: number
+  ): Promise<void> {
+    const modal = await this.modalController.create({
+      component: ModalCourseManagerPage,
+      componentProps: {
+        member: memberData,
+      },
     });
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        if (!result) {
-          return;
-        }
-        let updatedMember = result.member;
-        if (result.action === this.CONFIRM) {
-          this.currentMembersData[index] = result.member;
-          this.subscriptionService.updateMember(updatedMember)
-            .subscribe(
-              result => {
-                // show snack bar
-                this._snackBar.open(this.MEMBER_UPDATED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.MEMBER_UPDATED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        } else if (result.action === this.CONFIRM_DELETE) {
-          this.subscriptionService.deleteMember(result.member)
-            .subscribe(
-              result => {
-                this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
-                this.currentMembersData = this.originalMembersData;
-                // show snack bar
-                this._snackBar.open(this.MEMBER_DELETED_SUCCESS, null, {
-                  duration: 3000,
-                });
-              },
-              err => {
-                this._snackBar.open(this.MEMBER_DELETED_FAIL, null, {
-                  duration: 3000,
-                });
-              });
-        }
-      });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (!data) {
+      return;
+    }
+    // On dismiss
+    let updatedMember = data.member;
+    if (data.dismissed === this.CONFIRM) {
+      this.subscriptionService.updateMember(updatedMember)
+        .subscribe(
+          result => {
+            this.currentMembersData[index] = updatedMember;
+            // show snack bar
+            this._presentToast(this.MEMBER_UPDATED_SUCCESS, 'success');
+          },
+          err => {
+            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+          });
+
+    } else if (data.dismissed === this.CONFIRM_DELETE) {
+      this.subscriptionService.deleteMember(updatedMember)
+        .subscribe(
+          result => {
+            this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
+            this.currentMembersData = this.originalMembersData;
+            // show snack bar
+            this._presentToast(this.MEMBER_DELETED_SUCCESS, 'success');
+          },
+          err => {
+            this._presentToast(this.MEMBER_DELETED_FAIL, 'warning');
+          });
+    }
   }
 
   public onSelectedOption(filter: string, value?: string): void {
@@ -217,9 +224,7 @@ export class CoursesAdminOrganismComponent implements OnInit {
   }
 
   public onCopyToClipBoard(): void {
-    this._snackBar.open(this.EMAIL_LIST_COPIED, null, {
-      duration: 3000,
-    });
+    this._presentToast(this.EMAIL_LIST_COPIED, 'success');
   }
 
   // public get getTotalRefund(member: Member): number {
@@ -234,6 +239,15 @@ export class CoursesAdminOrganismComponent implements OnInit {
   ////////////
   // PRIVATE
   ////////////
+  private async _presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color
+    });
+    toast.present();
+  }
+
   private _getMembersData(): void {
     this.isLoading = true;
     this.subscriptionService.getMembersData()

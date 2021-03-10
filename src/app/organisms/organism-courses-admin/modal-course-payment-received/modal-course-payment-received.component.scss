@@ -7,9 +7,12 @@
   max-width: 300px;
 }
 
-.btn-container {
+// CTA
+.btn__container {
   display: flex;
-  .btn {
-    margin: 0 1rem 0 0;
-  }
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
 }

@@ -1,19 +1,19 @@
-import { Inject, NgModule, OnInit } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 
+import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.module';
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 import { Member, Refund } from '../../../models/member.model';
 
 @Component({
   selector: 'refund-dialog',
-  templateUrl: './refund-dialog.component.html',
-  styleUrls: ['./refund-dialog.component.scss']
+  templateUrl: './modal-course-refund.component.html',
+  styleUrls: ['./modal-course-refund.component.scss']
 })
-export class RefundDialog implements OnInit {
+export class ModalCourseRefundPage implements OnInit {
 
   public member: Member;
   public refundForm: FormGroup = new FormGroup({});
@@ -24,16 +24,12 @@ export class RefundDialog implements OnInit {
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
 
-  constructor(
-    public dialogRef: MatDialogRef<RefundDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Member) {
-    this.member = data;
+  constructor(public modalCtrl: ModalController) {
   }
 
   ngOnInit(): void {
     this._initRefundForm();
     this._getRefundTotal();
-    this.dialogRef.disableClose = true;
   }
 
   public onSubmit(): void {
@@ -44,18 +40,10 @@ export class RefundDialog implements OnInit {
 
     this.member.totalRefund = this._getRefundTotal();
 
-    // Closing the dialog
-    this.dialogRef.close({
-      member: this.member,
-      action: this.CONFIRM
-    });
-  }
-
-  public onCancel(): void {
-    this.dialogRef.close({
-      member: this.member,
-      action: this.CANCEL
-    });
+    this.modalCtrl.dismiss({
+      'dismissed': this.CONFIRM,
+      'member': { ...this.member }
+    })
   }
 
   public onAddRefund(): void {
@@ -68,6 +56,12 @@ export class RefundDialog implements OnInit {
 
   public onRemoveLastRefund(index: number): void {
     this.refundArray.removeAt(index);
+  }
+
+  public onCancel(): void {
+    this.modalCtrl.dismiss({
+      'dismissed': this.CANCEL
+    });
   }
 
   // Refund Form Array
@@ -97,9 +91,14 @@ export class RefundDialog implements OnInit {
 }
 
 @NgModule({
-  declarations: [RefundDialog],
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule, FormsModule, IonicModule],
+  declarations: [ModalCourseRefundPage],
+  imports: [CommonModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    FormsModule,
+    IonicModule,
+    AtomAsteriskModule],
   exports: [],
   providers: [],
 })
-class RefundDialogModule { }
+class ModalCourseRefundModule { }

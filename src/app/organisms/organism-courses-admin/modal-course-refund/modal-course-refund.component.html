@@ -1,0 +1,70 @@
+<div class="ion-page">
+	<ion-header>
+		<ion-toolbar color="primary">
+			<ion-title>Edition des remboursements</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content class="ion-padding">
+
+		<div *ngIf="member.refunds.length" class="existing-refund__container">
+			<p class="existing-refund__title">Remboursements effectués</p>
+			<div class="existing-refund__header">
+				<p>Montant</p>
+				<p>Date</p>
+			</div>
+			<div class="existing-refund__content" *ngFor="let refund of member.refunds">
+				<p>{{ refund.amount }}€</p>
+				<p>
+					{{ refund.date | date }}
+				</p>
+			</div>
+		</div>
+		<form [formGroup]="refundForm" (ngSubmit)="onSubmit()">
+			<ng-container formArrayName="refunds">
+				<div class="controls__container" *ngFor="let refund of refunds.controls; let i = index">
+					<ng-container [formGroup]="refund">
+
+						<!-- Amount -->
+						<ion-item>
+							<ion-label position="floating">Montant<atom-asterisk></atom-asterisk>
+							</ion-label>
+							<ion-input type="number" name="amount" formControlName="amount" required></ion-input>
+						</ion-item>
+
+						<!-- Date -->
+						<div class="form-control">
+							<mat-form-field appearance="fill" class="form__calendar">
+								<mat-label>Date</mat-label>
+								<input matInput [matDatepicker]="picker" formControlName="date" disabled />
+								<mat-datepicker-toggle matSuffix [for]="picker">
+								</mat-datepicker-toggle>
+								<mat-datepicker #picker disabled="false"></mat-datepicker>
+							</mat-form-field>
+						</div>
+					</ng-container>
+				</div>
+			</ng-container>
+
+			<!-- ADD / REMOVE REFUNDS CONTROLS -->
+			<div class="btn__container">
+				<div>
+					<ion-button *ngIf="refundArray.controls.length > 1" color="secondary" size="small"
+						(click)="onRemoveLastRefund(refundArray.controls.length - 1)">
+						Supprimer le dernier
+					</ion-button>
+				</div>
+				<ion-button color="primary" size="small" (click)="onAddRefund()">
+					Ajouter
+				</ion-button>
+			</div>
+		</form>
+	</ion-content>
+
+	<!-- CTAs -->
+	<div class="ion-padding btn__container">
+		<ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+		<ion-button [disabled]="refundForm.invalid" color="primary" (click)="onSubmit()">
+			Modifier
+		</ion-button>
+	</div>
+</div>

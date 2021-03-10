@@ -22,7 +22,7 @@ export interface Member {
   paymentMethod: string;
   checks?: Check[];
   paymentReceived: boolean;
-  paymentAmount?: string;
+  paymentAmount?: number;
   previouslyEnrolled: boolean;
   previousCourseInfo?: string;
   extraInfo?: string;

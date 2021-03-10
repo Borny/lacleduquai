@@ -25,23 +25,17 @@
 				<ion-button color="secondary" (click)="onResetFilters()">
 					Réinitialiser
 				</ion-button>
-				<filter-molecule
-					*ngFor="let filter of filterOptions"
-					[selectLabel]="filter.filterLabel"
-					[filterOptions]="filter.values"
-					[select]="matSelect"
-					(selectedFilterOption)="onSelectedOption(filter.filterName, $event)"
-				>
+				<filter-molecule *ngFor="let filter of filterOptions" [selectLabel]="filter.filterLabel"
+					[filterOptions]="filter.values" [select]="matSelect"
+					(selectedFilterOption)="onSelectedOption(filter.filterName, $event)">
 				</filter-molecule>
 			</div>
 		</ion-col>
 	</ion-row>
 	<ion-row *ngIf="!isLoading">
 		<ion-col>
-			<copy-to-clipboard-molecule
-				[list]="emailList"
-				(copySuccessMessage)="onCopyToClipBoard()"
-			></copy-to-clipboard-molecule>
+			<copy-to-clipboard-molecule [list]="emailList" (copySuccessMessage)="onCopyToClipBoard()">
+			</copy-to-clipboard-molecule>
 		</ion-col>
 	</ion-row>
 	<ion-row *ngIf="!isLoading">
@@ -50,6 +44,7 @@
 				<!-- TABLE HEADER -->
 				<li class="data-table__item data-table__item__header">
 					<div class="first-column"></div>
+					<div></div>
 					<div>Nom</div>
 					<div>Prénom</div>
 					<div>Téléphone</div>
@@ -67,25 +62,23 @@
 				</li>
 
 				<!-- NO RESULTS -->
-				<li
-					class="data-table__item data-table__item-no-result"
-					*ngIf="!currentMembersData.length"
-				>
+				<li class="data-table__item data-table__item-no-result" *ngIf="!currentMembersData.length">
 					No results...
 				</li>
 
 				<!-- DATA -->
-				<li
-					class="data-table__item"
-					[ngClass]="{ odd: odd, even: even }"
-					*ngFor="
+				<li class="data-table__item" [ngClass]="{ odd: odd, even: even }" *ngFor="
 						let member of currentMembersData;
 						let even = even;
 						let odd = odd;
 						let i = index
-					"
-				>
+					">
 					<div class="first-column">{{ i + 1 }}</div>
+					<div>
+						<ion-button (click)="onOpenCourseManagerModal(member, i)">
+							<ion-icon name="create-outline"></ion-icon>
+						</ion-button>
+					</div>
 					<div>{{ member.lastName }}</div>
 					<div>{{ member.firstName }}</div>
 					<div>{{ member.phone }}</div>
@@ -98,38 +91,29 @@
 					</div>
 					<div>{{ member.paymentMethod }}</div>
 					<div>
-						<ion-button
-							size="small"
-							[color]="member.paymentReceived ? 'primary' : 'secondary'"
-							(click)="onOpenPaymentReceived(member)"
-						>
+						<ion-button size="small" [color]="member.paymentReceived ? 'primary' : 'secondary'"
+							(click)="onOpenCoursePaymentReceivedModal(member, i)">
 							{{ member.paymentReceived ? 'Oui' : 'Non' }}
 						</ion-button>
 					</div>
 					<div>{{ member.paymentAmount ? member.paymentAmount : '-' }}</div>
 					<div>
-						<div
-							*ngIf="
+						<div *ngIf="
 								member.paymentMethod === paymentMethods[1];
 								else noContentBlock
-							"
-						>
-							<mat-checkbox
-								*ngFor="let check of member.checks"
-								[checked]="check.depositMade"
-								disabled
-							></mat-checkbox>
+							">
+							<mat-checkbox *ngFor="let check of member.checks" [checked]="check.depositMade" disabled>
+							</mat-checkbox>
 						</div>
-						<ng-template #noContentBlock><div>-</div></ng-template>
+						<ng-template #noContentBlock>
+							<div>-</div>
+						</ng-template>
 					</div>
 
 					<!-- Refund -->
 					<div>
-						<ion-button
-							[color]="member.totalRefund ? 'primary' : 'secondary'"
-							(click)="onOpenRefundDialog(member, i)"
-							>{{ member.totalRefund }}€</ion-button
-						>
+						<ion-button [color]="member.totalRefund ? 'primary' : 'secondary'"
+							(click)="onOpenCourseRefundModal(member, i)">{{ member.totalRefund }}€</ion-button>
 					</div>
 					<div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
 						{{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
@@ -141,7 +125,7 @@
 						{{ member.extraInfo ? member.extraInfo : '-' }}
 					</div>
 					<div>
-						<ion-button (click)="onOpenMemberManager(member, i)">
+						<ion-button (click)="onOpenCourseManagerModal(member, i)">
 							<ion-icon name="create-outline"></ion-icon>
 						</ion-button>
 					</div>

@@ -1,20 +1,20 @@
-import { Inject, NgModule, OnInit } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
+import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.module';
 import { Member, Check } from '../../../models/member.model';
 import { PaymentMethods } from '../../../models/payment-methods.enum';
 
 @Component({
   selector: 'payment-received-dialog',
-  templateUrl: './payment-received-dialog.component.html',
-  styleUrls: ['./payment-received-dialog.component.scss']
+  templateUrl: './modal-course-payment-received.component.html',
+  styleUrls: ['./modal-course-payment-received.component.scss']
 })
-export class PaymentReceivedDialog implements OnInit {
+export class ModalCoursePaymentReceivedPage implements OnInit {
 
   public isPaymentReceived: boolean;
   public member: Member;
@@ -25,22 +25,20 @@ export class PaymentReceivedDialog implements OnInit {
   public paymentMethods = PaymentMethods;
 
   public payment_received_title = `Vous confirmez avoir reçu le paiement : `
-  public payment_not_received_title = `Attention, vous indiquez que vous n'avez pas reçu de paiement : `
+  public payment_not_received_title = `Attention, annuler le paiement ? `
 
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
 
-  constructor(
-    public dialogRef: MatDialogRef<PaymentReceivedDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Member) {
-    this.member = data;
-    this.isPaymentReceived = this.member.paymentReceived;
+  constructor(public modalCtrl: ModalController) {
   }
 
   ngOnInit(): void {
+    console.log(this.member);
+    this.isPaymentReceived = this.member.paymentReceived;
+
     this.payment_received_title += this.member.paymentMethod;
     this.payment_not_received_title += this.member.paymentMethod;
-    this.dialogRef.disableClose = true;
 
     this.member.paymentMethod === this.paymentMethods.SECOND
       ? this.memberPaymentForm.addControl('checks', this.checkArray)
@@ -58,17 +56,22 @@ export class PaymentReceivedDialog implements OnInit {
         })
         checkSum += +value;
       });
-      this.member.paymentAmount = checkSum.toString();
+      this.member.paymentAmount = checkSum;
     } else {
       this.member.paymentAmount = this.memberPaymentForm.get('amount').value;
     }
+
+    this.member.paymentReceived = !this.member.paymentReceived;
+
+    this.modalCtrl.dismiss({
+      'dismissed': this.CONFIRM,
+      'member': { ...this.member }
+    })
   }
 
   public onCancel(): void {
-    this.dialogRef.close({
-      isPaymentReceived: this.isPaymentReceived,
-      member: this.member,
-      action: this.CANCEL
+    this.modalCtrl.dismiss({
+      'dismissed': this.CANCEL
     });
   }
 
@@ -82,9 +85,16 @@ export class PaymentReceivedDialog implements OnInit {
 }
 
 @NgModule({
-  declarations: [PaymentReceivedDialog],
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule, FormsModule, IonicModule],
+  declarations: [ModalCoursePaymentReceivedPage],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    FormsModule,
+    IonicModule,
+    AtomAsteriskModule
+  ],
   exports: [],
   providers: [],
 })
-class MemberManagerModule { }
+class ModalMemberManagerModule { }

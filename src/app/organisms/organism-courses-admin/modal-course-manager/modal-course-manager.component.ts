@@ -1,22 +1,23 @@
-import { Inject, NgModule, OnInit } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 import { Check, Member } from '../../../models/member.model';
 import { SubscriptionService } from '../../../services/subscription.service';
 import { PaymentMethods } from '../../../models/payment-methods.enum';
 import { Course } from '../../../models/courses.model';
-import { DeleteMemberDialog } from '../delete-member-dialog/delete-member-dialog.component';
+import { ModalDelete } from '../modal-delete/modal-delete.component';
+import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.module';
 
 @Component({
   selector: 'member-manager',
-  templateUrl: './member-manager.component.html',
-  styleUrls: ['./member-manager.component.scss']
+  templateUrl: './modal-course-manager.component.html',
+  styleUrls: ['./modal-course-manager.component.scss']
 })
-export class MemberManagerDialog implements OnInit {
+export class ModalCourseManagerPage implements OnInit {
 
   public memberEditionForm: FormGroup = new FormGroup({});
   public checkForm: FormArray = new FormArray([]);
@@ -77,19 +78,14 @@ export class MemberManagerDialog implements OnInit {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<MemberManagerDialog>,
     private subscriptionService: SubscriptionService,
-    @Inject(MAT_DIALOG_DATA) public data: string,
-    public dialog: MatDialog,
+    public modalCtrl: ModalController
   ) {
-    this.dialogRef.disableClose = true;
-    this.memberId = data;
   }
 
   ngOnInit(): void {
-    this.showDialog = false;
     this.isLoading = true;
-    this._getMemberData();
+    this._initMemberEditionForm();
   }
 
   public onSubmit(): void {
@@ -107,39 +103,88 @@ export class MemberManagerDialog implements OnInit {
     this.member.paymentMethod = this.memberEditionForm.get('paymentMethod').value;
     this.member.paymentAmount = this.memberEditionForm.get('paymentAmount').value;
     this.member.extraInfo = this.memberEditionForm.get('extraInfo').value;
+
+    this.modalCtrl.dismiss({
+      'dismissed': this.CONFIRM,
+      'member': { ...this.member }
+    })
   }
 
-  public onCancel(): void {
-    this.dialogRef.close({ member: this.member, action: this.CANCEL });
-  }
-
-  public onDepositMade(checkIndex: number, depositMade: boolean): void {
-    this.checkList[checkIndex].depositMade = depositMade;
-    if (!depositMade) {
+  public onDepositMade(event, checkIndex: number): void {
+    this.checkList[checkIndex].depositMade = event.detail.checked;
+    if (!event.detail.checked) {
       this.checkList[checkIndex].depositDate = null;
     }
   }
 
-  public onOpenDeleteModal(): void {
-    const dialogRef = this.dialog.open(DeleteMemberDialog, {
-      minWidth: '500px',
-      data: this.member
+  async onOpenDeleteModal(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: ModalDelete,
+      cssClass: 'modal-delete',
+      componentProps: {
+        'contentData': this.member
+      }
     });
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        if (result.action === this.CONFIRM_DELETE) {
-          this.dialogRef.close({ member: this.member, action: this.CONFIRM_DELETE });
-        }
-      });
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if (!data) {
+      return;
+    }
+    if (data.dismissed === this.CONFIRM_DELETE) {
+      // !!! Not sure why but the setTimeout is needed, probably asynchronous stuff...
+      setTimeout(() => {
+        this.modalCtrl.dismiss({
+          'dismissed': this.CONFIRM_DELETE,
+          'member': this.member
+        })
+      })
+    }
   }
 
-  public onClose(): void {
-    this.dialogRef.close()
+  public onCancel(): void {
+    this.modalCtrl.dismiss({
+      'dismissed': this.CANCEL
+    });
   }
 
   ////////////
   // PRIVATE
   ////////////
+  private _initMemberEditionForm(): void {
+    if (this.member.checks.length) {
+      this.checkList = this.member.checks;
+      this.checkList.forEach((check, i) => {
+        let updateDepositDate: undefined | string | null | Date;
+        if (this.member.checks[i].depositDate === null || this.member.checks[i].depositDate === undefined) {
+          updateDepositDate = null;
+        } else if (typeof (this.member.checks[i].depositDate) === 'string') {
+          updateDepositDate = this.member.checks[i].depositDate;
+        } else {
+          updateDepositDate = this.member.checks[i].depositDate.toLocaleDateString();
+        }
+
+        const checkFormGroup: FormGroup = new FormGroup({
+          depositMade: new FormControl(this.member.checks[i].depositMade),
+          depositDate: new FormControl(updateDepositDate)
+        });
+        this.checkForm.push(checkFormGroup);
+      });
+
+    }
+
+    this.memberEditionForm.addControl('firstName', new FormControl(this.member.firstName, Validators.required));
+    this.memberEditionForm.addControl('lastName', new FormControl(this.member.lastName, Validators.required));
+    this.memberEditionForm.addControl('email', new FormControl(this.member.email, [Validators.required, Validators.email]));
+    this.memberEditionForm.addControl('phone', new FormControl(this.member.phone, Validators.required));
+    this.memberEditionForm.addControl('courses', new FormControl(this.member.courses));
+    this.memberEditionForm.addControl('paymentMethod', new FormControl(this.member.paymentMethod, Validators.required));
+    this.memberEditionForm.addControl('checks', this.checkForm);
+    this.memberEditionForm.addControl('paymentAmount', new FormControl(this.member.paymentAmount));
+    this.memberEditionForm.addControl('extraInfo', new FormControl(this.member.extraInfo));
+
+    this.isLoading = false;
+  }
+
   private _getMemberData(): void {
     this.subscriptionService.getMemberData(this.memberId)
       .subscribe(
@@ -147,35 +192,6 @@ export class MemberManagerDialog implements OnInit {
           this.isLoading = false;
           this.showDialog = true;
           this.member = result.member;
-          if (this.member.checks.length) {
-            this.checkList = this.member.checks;
-            this.checkList.forEach((check, i) => {
-              let updateDepositDate: undefined | string | null | Date;
-              if (this.member.checks[i].depositDate === null || this.member.checks[i].depositDate === undefined) {
-                updateDepositDate = null;
-              } else if (typeof (this.member.checks[i].depositDate) === 'string') {
-                updateDepositDate = this.member.checks[i].depositDate;
-              } else {
-                updateDepositDate = this.member.checks[i].depositDate.toLocaleDateString();
-              }
-
-              const checkFormGroup: FormGroup = new FormGroup({
-                depositMade: new FormControl(this.member.checks[i].depositMade),
-                depositDate: new FormControl(updateDepositDate)
-              });
-              this.checkForm.push(checkFormGroup);
-            });
-          }
-
-          this.memberEditionForm.addControl('firstName', new FormControl(this.member.firstName, Validators.required));
-          this.memberEditionForm.addControl('lastName', new FormControl(this.member.lastName, Validators.required));
-          this.memberEditionForm.addControl('email', new FormControl(this.member.email, [Validators.required, Validators.email]));
-          this.memberEditionForm.addControl('phone', new FormControl(this.member.phone, Validators.required));
-          this.memberEditionForm.addControl('courses', new FormControl(this.member.courses));
-          this.memberEditionForm.addControl('paymentMethod', new FormControl(this.member.paymentMethod, Validators.required));
-          this.memberEditionForm.addControl('checks', this.checkForm);
-          this.memberEditionForm.addControl('paymentAmount', new FormControl(this.member.paymentAmount));
-          this.memberEditionForm.addControl('extraInfo', new FormControl(this.member.extraInfo));
 
         },
         err => {
@@ -187,8 +203,15 @@ export class MemberManagerDialog implements OnInit {
 }
 
 @NgModule({
-  declarations: [MemberManagerDialog],
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule, FormsModule],
+  declarations: [ModalCourseManagerPage],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    FormsModule,
+    IonicModule,
+    AtomAsteriskModule
+  ],
   exports: [],
   providers: [],
 })
