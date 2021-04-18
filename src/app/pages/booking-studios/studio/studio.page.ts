@@ -13,10 +13,10 @@ export class StudioPage implements OnInit {
   public descriptionItems: string[] = [
     `Située au sous-sol, jolie cave bordelaise voutée de 50m2`,
     `Parquet souple, idéal pour la danse`,
-    `Equipée d'une sono - prise mini-jack / CD / bluetooth`,
+    `Equipée d'une sono: prise mini-jack / CD / bluetooth`,
     `Pas de réseau téléphonique ni internet`,
     `5€ de l'heure pour vos répétitions`,
-    `17.5€ de l'heure pour vos ateliers`
+    `20€ de l'heure pour vos ateliers`
   ];
 
   constructor() { }

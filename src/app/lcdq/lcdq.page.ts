@@ -20,11 +20,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: 'lcdq.page.html',
   animations: [
     // slideInAnimation
-  ]
-
+  ],
 })
 export class LcdqPage implements OnInit {
-
   @ViewChild('snav') navToggle: any;
 
   public mobileQuery: MediaQueryList;
@@ -33,17 +31,15 @@ export class LcdqPage implements OnInit {
 
   private readonly SCREEN_SM = '(max-width: 768px)';
 
-  constructor(
-    private media: MediaMatcher) {
+  constructor(private media: MediaMatcher) {
     this.mobileQuery = media.matchMedia(this.SCREEN_SM);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+    return (
+      outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation
+    );
   }
-
 }
-

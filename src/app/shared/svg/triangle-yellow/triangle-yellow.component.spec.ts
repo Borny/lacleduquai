@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { TwoTriangleComponent } from './triangle-yellow.component';
@@ -7,7 +7,7 @@ describe('TwoTriangleComponent', () => {
   let component: TwoTriangleComponent;
   let fixture: ComponentFixture<TwoTriangleComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TwoTriangleComponent],
       imports: [IonicModule.forRoot()]

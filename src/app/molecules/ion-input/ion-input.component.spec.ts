@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { IonInputComponent } from './ion-input.component';
@@ -7,7 +7,7 @@ describe('IonInputComponent', () => {
   let component: IonInputComponent;
   let fixture: ComponentFixture<IonInputComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ IonInputComponent ],
       imports: [IonicModule.forRoot()]
