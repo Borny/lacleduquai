@@ -151,7 +151,7 @@
             </div>
             <div class="events__list">
               <ion-card *ngFor="let event of day.events" class="events__card">
-                <ion-card-header class="events__card__header ion-activatable" (click)="toggleCollapse(event)">
+                <ion-card-header class="events__card__header" (click)="toggleCollapse(event)">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-card-title color="medium" class="ion-text-center events__card__title">
                     {{event.name}} - {{event.prof}}

@@ -1,6 +1,33 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
+:host {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+// OVERLAY
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0 0 0 / 40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    padding: 2rem;
+    background: $color-primary;
+    color: $white;
+    border-radius: 8px;
+    transform: rotate(-15deg);
+  }
+}
+
 // LOADER
 .spinner {
   padding: 5rem 0;
