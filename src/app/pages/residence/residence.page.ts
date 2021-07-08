@@ -12,7 +12,6 @@ import { requireCheckboxesToBeCheckedValidator } from '../../validators/checkbox
   styleUrls: ['./residence.page.scss'],
 })
 export class ResidencePage implements OnInit {
-
   public isLoading = false;
   public hideForm = false;
   public isFormSent = false;
@@ -22,23 +21,25 @@ export class ResidencePage implements OnInit {
     'Bordeaux Métropole',
     'Région Nouvelle-Aquitaine',
     'France',
-    'Au-delà...'
+    'Au-delà...',
   ];
 
   public artisticPractices: string[] = [
     'Danse contemporaine',
     'Théâtre',
     'Danse - théâtre',
-    'Autre'
+    'Autre',
   ];
 
   public availabilities: string[] = [
-    'du 11 au 15 janvier',
-    'du 8 au 12 février',
-    'du 8 au 12 mars',
-    'du 12 au 16 avril',
-    'du 10 au 14 mai',
-    'du 31 mai au 4 juin'
+    'Du 25 au 29 Octobre 2021',
+    'Du 22 au 26 Novembre 2021',
+    'Du 27 au 31 Décembre 2021',
+    'Du 17 au 21 Janvier 2022',
+    'Du 21 au 25 Février 2022',
+    'Du 21 au 25 Mars 2022',
+    'Du 18 au 22 Avril 2022',
+    'Du 16 au 20 Mai 2022',
   ];
 
   public residenceForm: FormGroup;
@@ -52,7 +53,7 @@ export class ResidencePage implements OnInit {
   constructor(
     private residenceService: ResidenceService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this._initContactForm();
@@ -78,14 +79,17 @@ export class ResidencePage implements OnInit {
     // Filtering the choosen course
     const selectedArtisticPracticeNames =
       this.residenceForm.value.artisticPractice
-        .map((checked: boolean, index: number) => checked ? this.artisticPractices[index] : null)
-        .filter(value => value !== null);
+        .map((checked: boolean, index: number) =>
+          checked ? this.artisticPractices[index] : null
+        )
+        .filter((value) => value !== null);
 
     // Filtering the choosen availability
-    const selectedAvailability =
-      this.residenceForm.value.availability
-        .map((checked: boolean, index: number) => checked ? this.availabilities[index] : null)
-        .filter(value => value !== null);
+    const selectedAvailability = this.residenceForm.value.availability
+      .map((checked: boolean, index: number) =>
+        checked ? this.availabilities[index] : null
+      )
+      .filter((value) => value !== null);
 
     // Updating the form values
     const formValues: Residence = this.residenceForm.value;
@@ -93,18 +97,20 @@ export class ResidencePage implements OnInit {
     formValues.artisticPractice = selectedArtisticPracticeNames;
 
     // Sending the message
-    this.residenceService.postResidenceForm(formValues)
-      .subscribe(
-        (response) => {
-          this.isLoading = false;
-          this.isFormSent = true;
-          this.hideForm = true;
-          this.residenceForm.reset();
-        },
-        (error) => {
-          this.isLoading = false;
-          this.isFormFailed = true;
-        });
+    this.residenceService.postResidenceForm(formValues).subscribe(
+      (response) => {
+        this.isLoading = false;
+        this.isFormSent = true;
+        this.hideForm = true;
+        this.residenceForm.reset();
+      },
+      (error) => {
+        this.isLoading = false;
+        this.isFormFailed = true;
+        console.log(error);
+        console.log(error.error.message);
+      }
+    );
   }
 
   // Navigate home
@@ -159,19 +165,26 @@ export class ResidencePage implements OnInit {
       companyName: new FormControl(null, Validators.required),
       managerName: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      phone: new FormControl(null, Validators.required),
+      phone: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+        Validators.minLength(10),
+      ]),
       address: new FormControl(null, Validators.required),
       location: new FormControl(null, Validators.required),
       projectDescription: new FormControl(null, Validators.required),
-      projectTeam: new FormArray([
-        new FormControl(null, Validators.required)
-      ],
-        Validators.required),
-      artisticPractice: new FormArray([], requireCheckboxesToBeCheckedValidator()),
+      projectTeam: new FormArray(
+        [new FormControl(null, Validators.required)],
+        Validators.required
+      ),
+      artisticPractice: new FormArray(
+        [],
+        requireCheckboxesToBeCheckedValidator()
+      ),
       availability: new FormArray([], requireCheckboxesToBeCheckedValidator()),
       videoLink: new FormControl(null),
       website: new FormControl(null),
-      partners: new FormControl(null)
+      partners: new FormControl(null),
     });
     this._addControl('artisticPractice', this.artisticPractices);
     this._addControl('availability', this.availabilities);
