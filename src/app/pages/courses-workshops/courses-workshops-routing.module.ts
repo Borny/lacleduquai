@@ -6,17 +6,22 @@ import { CoursesWorkshopsPage } from './courses-workshops.page';
 const routes: Routes = [
   {
     path: '',
-    component: CoursesWorkshopsPage
+    component: CoursesWorkshopsPage,
+  },
+  {
+    path: 'cours',
+    loadChildren: () =>
+      import('./courses/courses.module').then((m) => m.CoursesPageModule),
   },
   {
     path: 'cours-stages',
     redirectTo: '',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CoursesWorkshopsPageRoutingModule { }
+export class CoursesWorkshopsPageRoutingModule {}
