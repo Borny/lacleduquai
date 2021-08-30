@@ -123,11 +123,35 @@ textarea {
   display: none;
 }
 
-.mobile-hidden {
+.mobile-hidden--block {
   display: none !important;
 
   @include screen-sm() {
     display: block !important;
+  }
+}
+
+.mobile-hidden--flex {
+  display: none !important;
+
+  @include screen-sm() {
+    display: flex !important;
+  }
+}
+
+.desktop-hidden--block {
+  display: block !important;
+
+  @include screen-sm() {
+    display: none !important;
+  }
+}
+
+.desktop-hidden--flex {
+  display: flex !important;
+
+  @include screen-sm() {
+    display: none !important;
   }
 }
 

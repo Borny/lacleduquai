@@ -161,7 +161,7 @@ export class ModalEventCreatePage implements OnInit {
     this.minDate = new Date();
 
     const currentYear = new Date().getFullYear();
-    this.maxDate = new Date(currentYear + 0, 5, 30);
+    this.maxDate = new Date(currentYear + 0, 11, 30);
   }
 
 }

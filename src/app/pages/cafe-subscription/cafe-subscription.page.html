@@ -1,9 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title color="secondary">Adhésion au Café</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
   <ion-grid class="ion-no-padding">
     <ion-row>
@@ -12,7 +6,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="12" size-sm="6" offset-sm="3">
+      <ion-col size="12" size-sm="10" offset-sm="1">
         <ion-card class="form__container">
           <ion-card-content>
             <!-- Loader -->
@@ -21,7 +15,12 @@
             <!-- Response success -->
             <div class="form__response" *ngIf="formSentSuccess">
               <p>Merci, votre adhésion a bien été prise en compte.</p>
-              <ion-button color="primary" type="button" (click)="onReload()">
+              <ion-button
+                class="btn"
+                color="primary"
+                type="button"
+                (click)="onReload()"
+              >
                 Terminé !
               </ion-button>
             </div>
@@ -29,7 +28,12 @@
             <!-- Response error -->
             <div *ngIf="formSentFail" class="form__response">
               <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
-              <ion-button type="button" color="primary" (click)="onReload()">
+              <ion-button
+                class="btn"
+                type="button"
+                color="primary"
+                (click)="onReload()"
+              >
                 S'inscrire
               </ion-button>
             </div>
@@ -40,12 +44,13 @@
               (ngSubmit)="onSubmit()"
             >
               <ion-item class="form-control">
-                <ion-label position="stacked"
+                <ion-label class="label" position="stacked"
                   >Nom<atom-asterisk></atom-asterisk
                 ></ion-label>
                 <ion-input
                   type="text"
                   name="lastName"
+                  class="label"
                   formControlName="lastName"
                   required
                 ></ion-input>
@@ -57,12 +62,13 @@
                 Veuillez renseigner votre nom
               </p>
               <ion-item class="form-control">
-                <ion-label position="stacked"
+                <ion-label class="label" position="stacked"
                   >Prénom<atom-asterisk></atom-asterisk
                 ></ion-label>
                 <ion-input
                   type="text"
                   name="firstName"
+                  class="label"
                   formControlName="firstName"
                   required
                 ></ion-input>
@@ -74,12 +80,13 @@
                 Veuillez renseigner votre prénom
               </p>
               <ion-item class="form-control">
-                <ion-label position="stacked"
+                <ion-label class="label" position="stacked"
                   >Email<atom-asterisk></atom-asterisk
                 ></ion-label>
                 <ion-input
                   type="email"
                   name="email"
+                  class="label"
                   formControlName="email"
                   required
                 ></ion-input>
@@ -96,8 +103,8 @@
                   formControlName="newsletterSubscription"
                 ></ion-checkbox>
                 <ion-label class="newsletter-checkbox-label"
-                  >Je souhaite m'inscrire à la newsletter de La Clé du
-                  Quai</ion-label
+                  >Je souhaite m'inscrire à la newsletter de <br />
+                  La Clé du Quai</ion-label
                 >
               </ion-item>
               <p class="price">Adhésion à prix libre</p>

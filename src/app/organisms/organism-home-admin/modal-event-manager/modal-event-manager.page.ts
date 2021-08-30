@@ -1,9 +1,19 @@
 import { Input, NgModule, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormsModule,
+  FormArray,
+} from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from '@angular/material/datepicker';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 
@@ -14,10 +24,9 @@ import { Event } from '../../../models/events.model';
 @Component({
   selector: 'modal-event-manager-page',
   templateUrl: './modal-event-manager.page.html',
-  styleUrls: ['./modal-event-manager.page.scss']
+  styleUrls: ['./modal-event-manager.page.scss'],
 })
 export class ModalEventManagerPage implements OnInit {
-
   @Input() event: Event;
   @ViewChild('picker') _picker: MatDatepicker<Date>;
 
@@ -44,20 +53,18 @@ export class ModalEventManagerPage implements OnInit {
     'coworking',
     'cours-stages',
     'notre-equipe',
-    'contact'
-  ]
+    'contact',
+  ];
 
   public readonly CONFIRM = 'confirm';
   public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = 'cancel';
-  public readonly INTERNAL_LINK = 'interne'
+  public readonly INTERNAL_LINK = 'interne';
   public readonly EXTERNAL_LINK = 'externe';
 
   private _close_on_selected = false;
 
-  constructor(
-    public modalCtrl: ModalController
-  ) { }
+  constructor(public modalCtrl: ModalController) {}
 
   ngOnInit(): void {
     this.showDialog = false;
@@ -85,9 +92,9 @@ export class ModalEventManagerPage implements OnInit {
       : this.INTERNAL_LINK;
 
     this.modalCtrl.dismiss({
-      'dismissed': this.CONFIRM,
-      'event': { ...this.event }
-    })
+      dismissed: this.CONFIRM,
+      event: { ...this.event },
+    });
   }
 
   // TIME PICKER
@@ -101,8 +108,8 @@ export class ModalEventManagerPage implements OnInit {
 
   public onCancel(): void {
     this.modalCtrl.dismiss({
-      'dismissed': this.CANCEL
-    })
+      dismissed: this.CANCEL,
+    });
   }
 
   async onOpenDeleteModal(): Promise<void> {
@@ -110,8 +117,8 @@ export class ModalEventManagerPage implements OnInit {
       component: ModalDelete,
       cssClass: 'modal-delete',
       componentProps: {
-        'contentData': this.event
-      }
+        contentData: this.event,
+      },
     });
     await modal.present();
     const { data } = await modal.onDidDismiss();
@@ -122,10 +129,10 @@ export class ModalEventManagerPage implements OnInit {
       // !!! Not sure why but the setTimeout is needed, probably asynchronous stuff...
       setTimeout(() => {
         this.modalCtrl.dismiss({
-          'dismissed': this.CONFIRM_DELETE,
-          'event': this.event
-        })
-      })
+          dismissed: this.CONFIRM_DELETE,
+          event: this.event,
+        });
+      });
     }
   }
 
@@ -135,26 +142,30 @@ export class ModalEventManagerPage implements OnInit {
       return ['selected'];
     }
     return [];
-  }
+  };
 
   // On toggle date
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
     if (event.value) {
       const date = event.value;
       const index = this._findDate(date);
-      const eventDateFormArray = this.eventEditionForm.get('dates') as FormArray;
+      const eventDateFormArray = this.eventEditionForm.get(
+        'dates'
+      ) as FormArray;
       if (index === -1) {
         this.dates.push(date);
         eventDateFormArray.push(new FormControl(date));
       } else {
-        this.dates.splice(index, 1)
+        this.dates.splice(index, 1);
         eventDateFormArray.removeAt(index);
       }
       this.resetDates = new Date(0);
       if (!this._close_on_selected) {
         const closeFn = this._picker.close;
-        this._picker.close = () => { };
-        this._picker['_popupComponentRef'].instance._calendar.monthView._createWeekCells()
+        this._picker.close = () => {};
+        this._picker[
+          '_popupComponentRef'
+        ].instance._calendar.monthView._createWeekCells();
         setTimeout(() => {
           this._picker.close = closeFn;
         });
@@ -181,28 +192,70 @@ export class ModalEventManagerPage implements OnInit {
   ////////////
   private _initEventEditForm(): void {
     const externalLink = this.event.linkType === 'externe';
-    this.eventEditionForm.addControl('name', new FormControl(this.event.name, Validators.required));
-    this.eventEditionForm.addControl('prof', new FormControl(this.event.prof, Validators.required));
-    this.eventEditionForm.addControl('timeStart', new FormControl(this.event.timeStart, Validators.required));
-    this.eventEditionForm.addControl('timeEnd', new FormControl(this.event.timeEnd, Validators.required));
-    this.eventEditionForm.addControl('price', new FormControl(this.event.price, Validators.compose([Validators.min(0), Validators.required])));
-    this.eventEditionForm.addControl('phone', new FormControl(this.event.phone, Validators.compose([Validators.required, Validators.minLength(10)])));
-    this.eventEditionForm.addControl('description', new FormControl(this.event.description, Validators.required));
-    this.eventEditionForm.addControl('externalLink', new FormControl(externalLink, Validators.required));
-    this.eventEditionForm.addControl('link', new FormControl(this.event.link, Validators.required));
-    this.eventEditionForm.addControl('dates', new FormArray([], Validators.required));
+    this.eventEditionForm.addControl(
+      'name',
+      new FormControl(this.event.name, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'prof',
+      new FormControl(this.event.prof, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'timeStart',
+      new FormControl(this.event.timeStart, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'timeEnd',
+      new FormControl(this.event.timeEnd, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'price',
+      new FormControl(
+        this.event.price,
+        Validators.compose([Validators.min(0), Validators.required])
+      )
+    );
+    this.eventEditionForm.addControl(
+      'phone',
+      new FormControl(
+        this.event.phone,
+        Validators.compose([Validators.required, Validators.minLength(10)])
+      )
+    );
+    this.eventEditionForm.addControl(
+      'description',
+      new FormControl(this.event.description, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'externalLink',
+      new FormControl(externalLink, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'link',
+      new FormControl(this.event.link, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'dates',
+      new FormArray([], Validators.required)
+    );
     this._addControl('dates', this.event.dates, true);
     this.dates = this.event.dates;
   }
 
-  private _addControl(controlsName: string, controls: any[], required?: boolean): void {
-    controls.forEach(control => {
-      (<FormArray>this.eventEditionForm.controls[controlsName]).push(new FormControl(control));
+  private _addControl(
+    controlsName: string,
+    controls: any[],
+    required?: boolean
+  ): void {
+    controls.forEach((control) => {
+      (<FormArray>this.eventEditionForm.controls[controlsName]).push(
+        new FormControl(control)
+      );
     });
   }
 
   private _findDate(date: Date): number {
-    return this.event.dates.map(d => +(new Date(d))).indexOf(+(new Date(date)));
+    return this.event.dates.map((d) => +new Date(d)).indexOf(+new Date(date));
   }
 
   // Setting the min and max available dates
@@ -210,14 +263,20 @@ export class ModalEventManagerPage implements OnInit {
     this.minDate = new Date();
 
     const currentYear = new Date().getFullYear();
-    this.maxDate = new Date(currentYear + 0, 5, 30);
+    this.maxDate = new Date(currentYear + 0, 11, 30);
   }
 }
 
 @NgModule({
   declarations: [ModalEventManagerPage],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonicModule,
+    MaterialModule,
+    FormsModule,
+  ],
   exports: [],
   providers: [],
 })
-class ModalEventCreateModule { }
+class ModalEventCreateModule {}

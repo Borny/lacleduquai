@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from '@angular/material/datepicker';
 
 import { CoworkingService } from '../../services/coworking.service';
 import { Coworking, CoworkingBookedDay } from '../../models/coworking.model';
@@ -37,36 +40,36 @@ export class CoworkingPage implements OnInit {
   public bookedDays: any[] = [
     {
       date: new Date('12/15/2020'),
-      bookedPeople: 5
+      bookedPeople: 5,
     },
     {
       date: new Date('12/17/2020'),
-      bookedPeople: 4
+      bookedPeople: 4,
     },
     {
       date: new Date('12/7/2020'),
-      bookedPeople: 10
+      bookedPeople: 10,
     },
     {
       date: new Date('12/25/2020'),
-      bookedPeople: 5
+      bookedPeople: 5,
     },
     {
       date: new Date('12/29/2020'),
-      bookedPeople: 8
+      bookedPeople: 8,
     },
     {
       date: new Date('12/9/2020'),
-      bookedPeople: 7
+      bookedPeople: 7,
     },
     {
       date: new Date('1/20/2021'),
-      bookedPeople: 7
+      bookedPeople: 7,
     },
     {
       date: new Date('1/25/2021'),
-      bookedPeople: 7
-    }
+      bookedPeople: 7,
+    },
   ];
 
   public readonly HEADER_TITLE = 'Coworking';
@@ -79,13 +82,15 @@ export class CoworkingPage implements OnInit {
   // Card number
   private readonly FRENCH_CARD_NUMBER = 4000002500000003;
 
-
   private _close_on_selected = false;
 
   private stripe: any; // : stripe.Stripe;
   private creditCardContainer: any;
 
-  constructor(private router: Router, private coworkingService: CoworkingService) { }
+  constructor(
+    private router: Router,
+    private coworkingService: CoworkingService
+  ) {}
 
   // LYFE CYCLE HOOKS
   ngOnInit(): void {
@@ -112,7 +117,7 @@ export class CoworkingPage implements OnInit {
       return ['selected'];
     }
     return [];
-  }
+  };
 
   // CALENDAR
 
@@ -121,25 +126,32 @@ export class CoworkingPage implements OnInit {
     if (event.value) {
       const date = event.value;
       const index = this._findDate(date);
-      const bookingDateFormArray = this.coworkingForm.get('bookingDateList') as FormArray;
+      const bookingDateFormArray = this.coworkingForm.get(
+        'bookingDateList'
+      ) as FormArray;
       if (index === -1) {
         this.model.push(date);
         bookingDateFormArray.push(new FormControl(date));
       } else {
-        this.model.splice(index, 1)
+        this.model.splice(index, 1);
         bookingDateFormArray.removeAt(index);
       }
       this.resetModel = new Date(0);
       if (!this._close_on_selected) {
         const closeFn = this._picker.close;
-        this._picker.close = () => { };
-        this._picker['_popupComponentRef'].instance._calendar.monthView._createWeekCells()
+        this._picker.close = () => {};
+        this._picker[
+          '_popupComponentRef'
+        ].instance._calendar.monthView._createWeekCells();
         setTimeout(() => {
           this._picker.close = closeFn;
         });
       }
 
-      this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * this.pricePerHour;
+      this.totalPrice =
+        this.coworkingForm.get('personsNumber').value *
+        this.model.length *
+        this.pricePerHour;
     }
   }
 
@@ -148,10 +160,15 @@ export class CoworkingPage implements OnInit {
     const index = this._findDate(date);
     this.model.splice(index, 1);
 
-    const bookingDateFormArray = this.coworkingForm.get('bookingDateList') as FormArray;
+    const bookingDateFormArray = this.coworkingForm.get(
+      'bookingDateList'
+    ) as FormArray;
     bookingDateFormArray.removeAt(index);
 
-    this.totalPrice = (this.coworkingForm.get('personsNumber').value * this.model.length) * this.pricePerHour;
+    this.totalPrice =
+      this.coworkingForm.get('personsNumber').value *
+      this.model.length *
+      this.pricePerHour;
   }
 
   // Submitting the form
@@ -168,21 +185,20 @@ export class CoworkingPage implements OnInit {
       // this.cardErrors = result.error.message;
     } else {
       this.isLoading = true;
-      this.coworkingService.postCoworking(formValues)
-        .subscribe(
-          (response) => {
-            this.isLoading = false;
-            this.isFormSent = true;
-            this.hideForm = true;
-            this.coworkingForm.reset();
-          },
-          (error) => {
-            console.log(error)
-            this.isLoading = false;
-            this.isFormFailed = true;
-          });
+      this.coworkingService.postCoworking(formValues).subscribe(
+        (response) => {
+          this.isLoading = false;
+          this.isFormSent = true;
+          this.hideForm = true;
+          this.coworkingForm.reset();
+        },
+        (error) => {
+          console.log(error);
+          this.isLoading = false;
+          this.isFormFailed = true;
+        }
+      );
     }
-
 
     // Sending the form
   }
@@ -190,13 +206,17 @@ export class CoworkingPage implements OnInit {
   // On select change
   public onSelectChange(event: CustomEvent): void {
     if (this.totalPrice !== 0) {
-      this.totalPrice = (event.detail.value * this.model.length) * this.pricePerHour;
+      this.totalPrice =
+        event.detail.value * this.model.length * this.pricePerHour;
     }
   }
 
   // Setting a filter on the datepicker
   public dateFilter = (date: Date | null): boolean => {
-    const unAvailableDays: string[] = this._getUnAvailableDays(this.coworkingForm.get('personsNumber').value, this.bookedDays);
+    const unAvailableDays: string[] = this._getUnAvailableDays(
+      this.coworkingForm.get('personsNumber').value,
+      this.bookedDays
+    );
 
     // Get the day of the week
     const calendarDay: number = (date || new Date()).getDay();
@@ -210,7 +230,7 @@ export class CoworkingPage implements OnInit {
 
     // Only allows Monday to Friday to be selected
     return calendarDay !== 0 && calendarDay !== 6;
-  }
+  };
 
   // Get the max count of people as an array
   public getCount(num: number): number[] {
@@ -237,9 +257,10 @@ export class CoworkingPage implements OnInit {
 
   // Calling stripe and creating the card input element
   private _initStripe(): void {
-
     // Importing the key
-    this.stripe = Stripe('pk_test_51HuFU7H5cEg8n0QAB1Y3OMIH5H6T3o4rs7q8pBLsLzQ3w01hNGmPjuipe4R8G1zn9AAp4IHCzMm0K1erufpLAcjU00ISs2mBZX');
+    this.stripe = Stripe(
+      'pk_test_51HuFU7H5cEg8n0QAB1Y3OMIH5H6T3o4rs7q8pBLsLzQ3w01hNGmPjuipe4R8G1zn9AAp4IHCzMm0K1erufpLAcjU00ISs2mBZX'
+    );
 
     // Creating the element
     const elements = this.stripe.elements({ locale: 'fr' });
@@ -253,7 +274,6 @@ export class CoworkingPage implements OnInit {
       this.cardErrors = callback.error && callback.error.message;
       this.isCardValid = callback.complete;
     });
-
   }
 
   // Builds the coworking form
@@ -272,7 +292,7 @@ export class CoworkingPage implements OnInit {
     this.minDateFilter = new Date();
 
     const currentYear = new Date().getFullYear();
-    this.maxDateFilter = new Date(currentYear + 0, 5, 30);
+    this.maxDateFilter = new Date(currentYear + 0, 11, 30);
   }
 
   private _findDate(date: Date): number {
@@ -280,13 +300,15 @@ export class CoworkingPage implements OnInit {
   }
 
   // Get the unavailable
-  private _getUnAvailableDays(peopleCount: number, bookedDays: CoworkingBookedDay[]): string[] {
-
+  private _getUnAvailableDays(
+    peopleCount: number,
+    bookedDays: CoworkingBookedDay[]
+  ): string[] {
     // Filtering the booked days to return the ones unavailable compared to the number of people chosen by the user
     const unAvailableDays = bookedDays
       .filter((day) => day.bookedPeople + peopleCount > this.maxPersonsAllowed)
-      .map(day => day.date.toLocaleDateString());
-    console.log(unAvailableDays)
+      .map((day) => day.date.toLocaleDateString());
+    console.log(unAvailableDays);
     return unAvailableDays;
   }
 }
