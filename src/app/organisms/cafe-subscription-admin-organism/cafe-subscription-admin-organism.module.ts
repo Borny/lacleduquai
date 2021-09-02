@@ -7,6 +7,7 @@ import { MaterialModule } from '../../angular-material/angular-material.module';
 import { FilterModule } from '../../molecules/filter/filter.module';
 import { CopyToClipBoardModule } from '../../molecules/copy-to-clipboard/copy-to-clipboard.module';
 import { CafeSubscriptionAdminOrganismComponent } from './cafe-subscription-admin-organism.component';
+import { CafeMemberManagerModule } from './modal-cafe-member-manager/modal-cafe-member-manager.component';
 
 @NgModule({
   declarations: [CafeSubscriptionAdminOrganismComponent],
@@ -15,7 +16,8 @@ import { CafeSubscriptionAdminOrganismComponent } from './cafe-subscription-admi
     IonicModule,
     MaterialModule,
     FilterModule,
-    CopyToClipBoardModule
+    CopyToClipBoardModule,
+    CafeMemberManagerModule
   ],
   exports: [CafeSubscriptionAdminOrganismComponent]
 })

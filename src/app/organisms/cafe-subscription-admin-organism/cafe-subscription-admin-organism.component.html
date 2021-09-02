@@ -1,24 +1,32 @@
 <ion-grid>
-  <!-- Loader -->
-  <ion-row *ngIf="isLoading">
-    <ion-col class="ion-text-center spinner">
-      <ion-spinner color="primary"></ion-spinner>
-    </ion-col>
-  </ion-row>
-
   <!-- <p *ngIf="memberError">
     Impossible de récupérer les données, veuillez réessayer
   </p> -->
 
   <!-- TITLE -->
-  <ion-row *ngIf="!isLoading">
-    <ion-col>
-      <div>
-        <h2 class="ion-text-center">Café adhésions 2020/2021</h2>
+  <ion-row>
+    <ion-col size="5">
+      <ion-list>
+        <ion-radio-group [value]="seasonEnum.TWENTY_ONE" class="display-flex">
+          <ion-item *ngFor="let season of seasons">
+            <ion-label>{{ season.label }}</ion-label>
+            <ion-radio
+              (ionFocus)="onSeasonSelected($event, season)"
+              [value]="season.value"
+            ></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </ion-col>
+    <ion-col size="7">
+      <div class="title__container">
+        <h2 class="ion-text-center">
+          Café adhésions <span class="color-primary">{{ selectedSeason }}</span>
+        </h2>
       </div>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <!-- <ion-row>
     <ion-col>
       <div class="filter__container">
         <ion-button color="secondary" (click)="onResetFilters()">
@@ -34,8 +42,16 @@
         </filter-molecule>
       </div>
     </ion-col>
+  </ion-row> -->
+
+  <!-- Loader -->
+  <ion-row *ngIf="isLoading">
+    <ion-col class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-col>
   </ion-row>
-  <ion-row>
+
+  <ion-row *ngIf="!isLoading">
     <ion-col>
       <copy-to-clipboard-molecule
         [list]="emailList"
@@ -43,7 +59,7 @@
       ></copy-to-clipboard-molecule>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row *ngIf="!isLoading">
     <ion-col>
       <ul class="data-table__container">
         <li class="data-table__item data-table__item__header">
@@ -52,6 +68,7 @@
           <div>Prénom</div>
           <div>Email</div>
           <div>Newsletter</div>
+          <div>Date d'inscription</div>
           <div></div>
         </li>
 
@@ -76,12 +93,11 @@
           <div>{{ member.firstName }}</div>
           <div>{{ member.email }}</div>
           <div [ngClass]="member.newsletterSubscription ? 'primary-color' : ''">
-            {{ member.newsletterSubscription ? "Oui" : "Non" }}
+            {{ member.newsletterSubscription ? 'Oui' : 'Non' }}
           </div>
+          <div>{{ member.subscriptionDate | date }}</div>
           <div>
-            <ion-button
-              (click)="onOpenManageCafeSubscriptionModal(member, i)"
-            >
+            <ion-button (click)="onOpenManageCafeSubscriptionModal(member, i)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>

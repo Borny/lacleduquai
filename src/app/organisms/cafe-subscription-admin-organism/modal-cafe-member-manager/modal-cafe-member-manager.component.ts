@@ -1,7 +1,14 @@
 import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormsModule,
+  FormArray,
+} from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
@@ -15,10 +22,9 @@ import { CafeSubscriptionService } from '../../../services/cafe-subscription.ser
 @Component({
   selector: 'cafe-member-manager',
   templateUrl: './modal-cafe-member-manager.component.html',
-  styleUrls: ['./modal-cafe-member-manager.component.scss']
+  styleUrls: ['./modal-cafe-member-manager.component.scss'],
 })
 export class ModalCafeMemberManagerDialog implements OnInit {
-
   public memberEditionForm: FormGroup = new FormGroup({});
   public courseForm: FormArray = new FormArray([]);
   public member: CafeSubscription;
@@ -43,8 +49,8 @@ export class ModalCafeMemberManagerDialog implements OnInit {
 
   constructor(
     public modalCtrl: ModalController,
-    private cafeSubscriptionService: CafeSubscriptionService,
-  ) { }
+    private cafeSubscriptionService: CafeSubscriptionService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -55,17 +61,19 @@ export class ModalCafeMemberManagerDialog implements OnInit {
     this.member.firstName = this.memberEditionForm.get('firstName').value;
     this.member.lastName = this.memberEditionForm.get('lastName').value;
     this.member.email = this.memberEditionForm.get('email').value;
-    this.member.newsletterSubscription = this.memberEditionForm.get('newsletterSubscription').value;
+    this.member.newsletterSubscription = this.memberEditionForm.get(
+      'newsletterSubscription'
+    ).value;
 
     this.modalCtrl.dismiss({
-      'dismissed': this.CONFIRM,
-      'member': { ...this.member }
-    })
+      dismissed: this.CONFIRM,
+      member: { ...this.member },
+    });
   }
 
   public onCancel(): void {
     this.modalCtrl.dismiss({
-      'dismissed': this.CANCEL
+      dismissed: this.CANCEL,
     });
   }
 
@@ -78,8 +86,8 @@ export class ModalCafeMemberManagerDialog implements OnInit {
       component: ModalDelete,
       cssClass: 'modal-delete',
       componentProps: {
-        'contentData': this.member
-      }
+        contentData: this.member,
+      },
     });
     await modal.present();
     const { data } = await modal.onDidDismiss();
@@ -90,41 +98,74 @@ export class ModalCafeMemberManagerDialog implements OnInit {
       // !!! Not sure why but the setTimeout is needed, probably asynchronous stuff...
       setTimeout(() => {
         this.modalCtrl.dismiss({
-          'dismissed': this.CONFIRM_DELETE,
-          'member': this.member
-        })
-      })
+          dismissed: this.CONFIRM_DELETE,
+          member: this.member,
+        });
+      });
     }
   }
-
 
   ////////////
   // PRIVATE
   ////////////
   private _getMemberData(): void {
-    this.cafeSubscriptionService.getCafeSubscriptionMemberData(this.member._id)
+    this.cafeSubscriptionService
+      .getCafeSubscriptionMemberData(this.member._id)
       .subscribe(
-        result => {
+        (result) => {
           this.member = result.member;
+          console.log(this.member);
+          const formatedSubscriptionDate = new Date(
+            this.member.subscriptionDate
+          ).toLocaleDateString();
           this.newsletterSubscription = this.member.newsletterSubscription;
 
-          this.memberEditionForm.addControl('firstName', new FormControl(this.member.firstName, Validators.required));
-          this.memberEditionForm.addControl('lastName', new FormControl(this.member.lastName, Validators.required));
-          this.memberEditionForm.addControl('email', new FormControl(this.member.email, [Validators.required, Validators.email]));
-          this.memberEditionForm.addControl('newsletterSubscription', new FormControl(this.member.newsletterSubscription));
+          this.memberEditionForm.addControl(
+            'firstName',
+            new FormControl(this.member.firstName, Validators.required)
+          );
+          this.memberEditionForm.addControl(
+            'lastName',
+            new FormControl(this.member.lastName, Validators.required)
+          );
+          this.memberEditionForm.addControl(
+            'email',
+            new FormControl(this.member.email, [
+              Validators.required,
+              Validators.email,
+            ])
+          );
+          this.memberEditionForm.addControl(
+            'subscriptionDate',
+            new FormControl(
+              { value: formatedSubscriptionDate, disabled: true },
+              Validators.required
+            )
+          );
+          this.memberEditionForm.addControl(
+            'newsletterSubscription',
+            new FormControl(this.member.newsletterSubscription)
+          );
           this.isLoading = false;
         },
-        err => {
+        (err) => {
           this.isLoading = false;
           this.memberError = true;
-          console.log('fetching user err :', err)
+          console.log('fetching user err :', err);
         }
-      )
+      );
   }
 }
 
 @NgModule({
   declarations: [ModalCafeMemberManagerDialog],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule, AtomAsteriskModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonicModule,
+    MaterialModule,
+    FormsModule,
+    AtomAsteriskModule,
+  ],
 })
-class CafeMemberManagerModule { }
+export class CafeMemberManagerModule {}

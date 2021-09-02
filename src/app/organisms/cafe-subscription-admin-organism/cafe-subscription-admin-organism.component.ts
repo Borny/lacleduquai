@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { ToastController } from "@ionic/angular";
+import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { SeasonEnum } from 'src/app/models/season.enum';
 
 import { CafeSubscription } from '../../models/cafe-subscription.model';
 import { CafeSubscriptionService } from '../../services/cafe-subscription.service';
 
 import { ModalCafeMemberManagerDialog } from './modal-cafe-member-manager/modal-cafe-member-manager.component';
+
+interface Season {
+  label: string;
+  value: string;
+}
 
 @Component({
   selector: 'cafe-subscription-admin-organism',
@@ -13,13 +19,26 @@ import { ModalCafeMemberManagerDialog } from './modal-cafe-member-manager/modal-
   styleUrls: ['./cafe-subscription-admin-organism.component.scss'],
 })
 export class CafeSubscriptionAdminOrganismComponent implements OnInit {
-
   public originalMembersData: CafeSubscription[] = [];
   public currentMembersData: CafeSubscription[] = [];
   public isLoading = false;
   public memberError = false;
   public matSelect: any;
   public emailList: string;
+  public selectedSeason: string;
+  public initialSeasonValue: string;
+  public seasonEnum = SeasonEnum;
+
+  public seasons: Season[] = [
+    {
+      label: '2020-2021',
+      value: SeasonEnum.TWENTY,
+    },
+    {
+      label: '2021-2022',
+      value: SeasonEnum.TWENTY_ONE,
+    },
+  ];
 
   public readonly CONFIRM = `confirm`;
   public readonly CONFIRM_DELETE = 'confirm-delete';
@@ -31,49 +50,29 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
   public readonly LOADING_TEXT = 'Chargement des données...';
   public readonly EMAIL_LIST_COPIED = 'Emails copiés';
 
-  // public tableHeaderSubscriptionCells: string[] = [
-  //   'Nom',
-  //   'Prénom',
-  //   'Téléphone',
-  //   'Email',
-  //   'Cours',
-  //   'Moyen de paiement',
-  //   'Réglement reçu',
-  //   'Montant du réglement',
-  //   'Encaissement chèques',
-  //   'Remboursement',
-  //   'Inscrit 2019/2020',
-  //   'Cours 2019/2020',
-  //   'Extra info'
-  // ];
-
   public filterOptions = [
     {
       filterName: 'newsletter',
       filterLabel: 'Inscription Newsletter',
-      values: [
-        'Oui',
-        'Non'
-      ]
+      values: ['Oui', 'Non'],
     },
     {
       filterName: 'alphabeticalOrder',
       filterLabel: 'Ordre alphabétique',
-      values: [
-        'A - Z',
-        'Z - A'
-      ]
-    }
-  ]
+      values: ['A - Z', 'Z - A'],
+    },
+  ];
 
   constructor(
     private cafeSubscriptionService: CafeSubscriptionService,
     public modalController: ModalController,
     public toastController: ToastController
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this._getMembersInfo();
+    this._getMembersInfo(SeasonEnum.TWENTY_ONE);
+    this.initialSeasonValue = SeasonEnum.TWENTY_ONE;
+    this.selectedSeason = this.seasons[1].label;
   }
 
   async onOpenManageCafeSubscriptionModal(
@@ -94,30 +93,46 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
 
     let updatedMember = data.member;
     if (data.dismissed === this.CONFIRM) {
-      console.log('confirm :', updatedMember)
+      console.log('confirm :', updatedMember);
       this.currentMembersData[index] = data.member;
-      this.cafeSubscriptionService.updateCafeMember(updatedMember)
-        .subscribe(
-          result => {
-            // show snack bar
-            this._presentToast(this.MEMBER_UPDATED_SUCCESS);
-          },
-          err => {
-            this._presentToast(this.MEMBER_UPDATED_FAIL);
-          });
+      this.cafeSubscriptionService.updateCafeMember(updatedMember).subscribe(
+        (result) => {
+          // show snack bar
+          this._presentToast(this.MEMBER_UPDATED_SUCCESS);
+        },
+        (err) => {
+          this._presentToast(this.MEMBER_UPDATED_FAIL);
+        }
+      );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
-      this.cafeSubscriptionService.deleteCafeMember(data.member)
-        .subscribe(
-          result => {
-            this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
-            this.currentMembersData = this.originalMembersData;
-            // show snack bar
-            this._presentToast(this.MEMBER_DELETED_SUCCESS);
-          },
-          err => {
-            this._presentToast(this.MEMBER_DELETED_FAIL);
-          });
+      this.cafeSubscriptionService.deleteCafeMember(data.member).subscribe(
+        (result) => {
+          this.originalMembersData = this.originalMembersData.filter(
+            (member) => member._id !== updatedMember._id
+          );
+          this.currentMembersData = this.originalMembersData;
+          // show snack bar
+          this._presentToast(this.MEMBER_DELETED_SUCCESS);
+        },
+        (err) => {
+          this._presentToast(this.MEMBER_DELETED_FAIL);
+        }
+      );
     }
+  }
+
+  public onSeasonChange(value): void {
+    console.log(value);
+    console.log(value.detail.value);
+  }
+
+  public onSeasonSelected(value, season: Season): void {
+    const seasonValue =
+      season.value === SeasonEnum.TWENTY_ONE ? season.value : null;
+    this.selectedSeason = season.label;
+
+    console.log(seasonValue);
+    this._getMembersInfo(seasonValue);
   }
 
   public onSelectedOption(filter: string, value?: string): void {
@@ -137,7 +152,7 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
   }
 
   public onResetFilters(): void {
-    this._getMembersInfo();
+    this._getMembersInfo(this.seasons[1].value);
     this.matSelect = null;
   }
 
@@ -156,18 +171,18 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
     toast.present();
   }
 
-  private _getMembersInfo(): void {
+  private _getMembersInfo(season?: string): void {
     this.isLoading = true;
-    this.cafeSubscriptionService.getCafeSubscriptionMembersData()
+    this.cafeSubscriptionService
+      .getCafeSubscriptionMembersData(season)
       .subscribe(
-        response => {
+        (response) => {
           this.isLoading = false;
           this.originalMembersData = response.data;
           this.currentMembersData = [...this.originalMembersData];
-
           this._generateEmailList();
         },
-        err => {
+        (err) => {
           this.isLoading = false;
           this.memberError = true;
         }
@@ -179,9 +194,14 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
       this.currentMembersData = this.originalMembersData;
       return;
     }
-    this.currentMembersData = selectValue === this.filterOptions[0].values[0]
-      ? this.originalMembersData.filter(member => member.newsletterSubscription)
-      : this.originalMembersData.filter(member => !member.newsletterSubscription)
+    this.currentMembersData =
+      selectValue === this.filterOptions[0].values[0]
+        ? this.originalMembersData.filter(
+            (member) => member.newsletterSubscription
+          )
+        : this.originalMembersData.filter(
+            (member) => !member.newsletterSubscription
+          );
   }
 
   private _filterAlphaOrder(selectValue: string): void {
@@ -218,7 +238,8 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
 
   private _generateEmailList(): void {
     // The email list will reflect the members displayed in the main table
-    this.emailList = this.currentMembersData.map(member => member.email).toString();
+    this.emailList = this.currentMembersData
+      .map((member) => member.email)
+      .toString();
   }
-
 }

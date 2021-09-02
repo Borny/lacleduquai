@@ -6,6 +6,14 @@
   padding: 5rem 0;
 }
 
+// TITLE
+.title__container {
+  height: 100%;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+}
+
 // Filter
 .filter__container {
   display: flex;
