@@ -1,3 +1,10 @@
+import { SeasonEnum } from './season.enum';
+
+export interface Refund {
+  amount: number;
+  date: Date;
+}
+
 export interface Check {
   amount: string;
   depositMade: boolean;
@@ -12,11 +19,16 @@ export interface Member {
   email: string;
   courses: string[];
   workshops: string[];
+  refunds?: Refund[];
+  totalRefund?: number;
   paymentMethod: string;
   checks?: Check[];
   paymentReceived: boolean;
-  paymentAmount?: string;
+  paymentAmount?: number;
   previouslyEnrolled: boolean;
   previousCourseInfo?: string;
   extraInfo?: string;
+  subscriptionRequestDate: Date;
+  subscriptionDate: Date;
+  season: SeasonEnum;
 }

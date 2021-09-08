@@ -1,4 +1,6 @@
 @use "sass:color";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 ///////////
 // COLORS
@@ -7,23 +9,38 @@
 $white: #ffffff;
 $black: #000000;
 
+$jaggedIce: #ceecea;
 $fountainblue: #5dbeba;
+$oracle: #3d827f;
+
+$butterMilk: #fff4b0;
 $schoolbusyellow: #ffde00;
+$corn: #eacd00;
 
 $cod-gray: #191919;
+$dove-gray: #737373;
 
 $red: #f44336;
 
+// PRIMARY
 $color-primary: $fountainblue;
+$color-primary-light: $jaggedIce;
+$color-primary-dark: $oracle;
+
+// SECONDARY
 $color-secondary: $schoolbusyellow;
+$color-secondary-light: $butterMilk;
+$color-secondary-dark: $corn;
+
+// GRAY
 $color-gray: $cod-gray;
-
-$color-warning: $red;
-
-$color-primary-light: color.scale($fountainblue, $lightness: 70%);
 $grey-light: color.scale($cod-gray, $lightness: 70%);
+$grey-lighter: color.scale($cod-gray, $lightness: 90%);
 $grey-dark: darken($cod-gray, 0.5);
 
+$color-warning: $red;
+$grey-disabled: $grey-light;
+$grey-calendar-disabled: $grey-lighter;
 //////////
 // FONTS
 //////////
@@ -40,6 +57,8 @@ $fontOswald: 'Oswald', 'Roboto', sans-serif;
 $font-size-sm: 0.8rem;
 $font-size-xs: 0.6rem;
 $font-size-base: 1rem;
+$font-size-md: 1.2rem;
+$font-size-lg: 1.5rem;
 
 ////////////////
 // FONT WEIGHT
@@ -56,6 +75,7 @@ $fontWeightBolder: bolder;
 /////////////////
 $zindex-header: 50;
 $zindex-modal: 100;
+$zindex-events-label: 10;
 
 /////////////////
 // SCREEN SIZES

@@ -1,0 +1,18 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+.check-form {
+  display: flex;
+  flex-flow: column;
+  max-width: 300px;
+}
+
+// CTA
+.btn__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
+}

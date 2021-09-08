@@ -1,0 +1,280 @@
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="no-padding">
+        <h1>
+          Formulaire de pré-inscription <br />
+          La Clé Du Quai saison 2021/2022
+        </h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-padding-vertical">
+        <ion-card class="form__container">
+          <!-- Loader -->
+          <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+          <!-- Sending success -->
+          <div class="form__response" *ngIf="formSentSuccess">
+            <p>
+              Merci beaucoup ! Votre pré-inscription a bien été prise en compte.
+            </p>
+            <p>Elle sera finalisée au moment de votre règlement.</p>
+            <ul>
+              <li>- En CB : paiement au comptoir de l’association</li>
+              <li>
+                - Par chèque : à déposer au comptoir lors de votre prochain
+                passage
+              </li>
+              <li>
+                - En espèces : à déposer au comptoir lors de votre prochain
+                passage
+              </li>
+            </ul>
+
+            <p>A très bientôt !</p>
+            <p>L’équipe de La Clé du Quai</p>
+          </div>
+
+          <!-- Sending Error -->
+          <div *ngIf="formSentFail" class="form__response">
+            <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
+            <ion-button type="button" color="primary" (click)="onReload()">
+              S'inscrire
+            </ion-button>
+          </div>
+
+          <!-- FORM -->
+          <form
+            *ngIf="!isLoading && !hideForm"
+            class="subscription-form"
+            [formGroup]="subscriptionForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <!-- INFORMATIONS -->
+            <div class="form-section">
+              <p class="form-section__title">Informations</p>
+              <div class="form-section__content">
+                <ion-item>
+                  <!-- LAST NAME -->
+                  <ion-label position="floating"
+                    >Nom<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="lastName"
+                    formControlName="lastName"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="error-message"
+                  [ngClass]="subscriptionForm.get('lastName').invalid &&
+                subscriptionForm.get('lastName').touched ? 'show-error': '' ? 'show-error': ''
+              "
+                >
+                  Veuillez renseigner votre nom
+                </p>
+
+                <!-- FIRST NAME -->
+                <ion-item>
+                  <ion-label position="floating"
+                    >Prénom<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="firstName"
+                    formControlName="firstName"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="error-message"
+                  [ngClass]="subscriptionForm.get('firstName').invalid &&
+                subscriptionForm.get('firstName').touched ? 'show-error': '' ? 'show-error': ''
+              "
+                >
+                  Veuillez renseigner votre prénom
+                </p>
+
+                <!-- PHONE -->
+                <ion-item>
+                  <ion-label position="floating"
+                    >Téléphone<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="phone"
+                    formControlName="phone"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="error-message"
+                  [ngClass]="subscriptionForm.get('phone').invalid && subscriptionForm.get('phone').touched ? 'show-error': '' ? 'show-error': ''
+              "
+                >
+                  Veuillez renseigner votre numéro de téléphone
+                </p>
+
+                <!-- EMAIL -->
+                <ion-item>
+                  <ion-label position="floating"
+                    >Email<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input
+                    type="email"
+                    name="email"
+                    formControlName="email"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="error-message"
+                  [ngClass]="subscriptionForm.get('email').invalid && subscriptionForm.get('email').touched ? 'show-error': ''
+              "
+                >
+                  Veuillez renseigner votre email
+                </p>
+              </div>
+            </div>
+
+            <!-- CLASSES -->
+            <div class="form-section">
+              <!-- COURS -->
+              <p class="form-section__title">Cours</p>
+              <div class="form-section__content">
+                <ion-list formArrayName="courses">
+                  <ion-list-header>
+                    <ion-label>
+                      Choisissez un cours<atom-asterisk></atom-asterisk>
+                    </ion-label>
+                  </ion-list-header>
+                  <ion-item
+                    lines="none"
+                    *ngFor="let course of coursesFormArray.controls; let i = index"
+                  >
+                    <ion-label>{{ courses[i].detail }}</ion-label>
+                    <ion-checkbox slot="start" [formControlName]="i">
+                    </ion-checkbox>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </div>
+            <!-- <div class="form-section">
+          <p class="form-section__title">Stages</p>
+          <div class="form-section__content">
+            <p>Choisissez un stage</p>
+            <ul class="checkbox-list" formArrayName="workshops">
+              <li
+                *ngFor="let workshop of workshopsFormArray.controls; let i = index"
+                
+              >
+                <mat-checkbox [formControlName]="i">
+                  {{ workshops[i].date }}
+                </mat-checkbox>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+            <!-- PRICES -->
+            <div class="form-section">
+              <p class="form-section__title">Tarifs</p>
+              <div class="form-section__content form-section__content-price">
+                <ion-list>
+                  <ion-list-header>
+                    <ion-label
+                      >Tarifs annuels pour les cours hebdomadaires :</ion-label
+                    >
+                  </ion-list-header>
+                  <ion-item lines="none">
+                    <ion-label>- 1 cours/ semaine (2h) / 350€</ion-label>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>- 2 cours/ semaine (2h + 2h) / 630€</ion-label>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>- Cie Amateur (2h30) / 430€</ion-label>
+                  </ion-item>
+                </ion-list>
+                <ion-item lines="none" class="slide-toggle__section">
+                  <ion-label>
+                    Etiez-vous inscrit à un atelier auprès de La Clé du Quai
+                    l’année dernière ?</ion-label
+                  >
+                </ion-item>
+                <div class="slide-toggle__container">
+                  <ion-text>Non</ion-text>
+                  <ion-toggle
+                    class="slide-toggle__input"
+                    formControlName="previouslyEnrolled"
+                    (ionChange)="toggleShowDiscountText($event.detail.checked)"
+                  ></ion-toggle>
+                  <ion-text [color]="isPreviouslyEnrolled ? 'primary' : ''"
+                    >Oui</ion-text
+                  >
+                </div>
+
+                <!-- PREVIOUSLY ENROLLED -->
+                <div *ngIf="isPreviouslyEnrolled">
+                  <p class="color-primary italic">
+                    Vous bénéficiez, en tant qu’ancien élève, d’une réduction de
+                    10% sur le montant de l’inscription aux cours hebdomadaires.
+                  </p>
+                  <ion-item class="previous-course-detail">
+                    <ion-label position="floating"
+                      >A quel atelier étiez-vous inscrit ?<atom-asterisk
+                      > </atom-asterisk>
+                    </ion-label>
+                    <ion-textarea
+                      name="previousCouseInfo"
+                      formControlName="previousCourseInfo"
+                    ></ion-textarea>
+                  </ion-item>
+                </div>
+              </div>
+            </div>
+
+            <!-- PAYMENT METHOD -->
+            <div class="form-section">
+              <p class="form-section__title">Mode de paiement</p>
+              <div class="form-section__content">
+                <ion-radio-group
+                  class="radio-group"
+                  aria-label="Selectionnez un mode de paiement"
+                  formControlName="paymentMethod"
+                >
+                  <ion-list-header>
+                    <ion-label
+                      >Quel est votre mode de paiement favori ?<atom-asterisk
+                      ></atom-asterisk>
+                    </ion-label>
+                  </ion-list-header>
+                  <ion-item
+                    lines="none"
+                    *ngFor="let paymentMethod of paymentMethods"
+                  >
+                    <ion-label> {{ paymentMethod }} </ion-label>
+                    <ion-radio slot="start" [value]="paymentMethod">
+                    </ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <ion-button
+              class="submit-btn"
+              type="submit"
+              color="primary"
+              [disabled]="subscriptionForm.invalid"
+            >
+              Valider
+            </ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

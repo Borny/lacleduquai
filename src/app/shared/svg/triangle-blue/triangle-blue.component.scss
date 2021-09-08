@@ -1,0 +1,17 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+svg {
+  width: 100%;
+  height: 100%;
+
+  &.primary {
+    fill: $color-primary;
+  }
+  &.primary-light {
+    fill: $color-primary-light;
+  }
+  &.primary-dark {
+    fill: $color-primary-dark;
+  }
+}

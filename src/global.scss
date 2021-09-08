@@ -1,0 +1,130 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+// Custom styles
+@import './styles/tools/variables';
+@import './styles/tools/mixins';
+
+@import './styles/base/normalize';
+@import './styles/base/base';
+
+@import './styles/components/error';
+
+/////////////////////
+// ANGULAR MATERIAL
+/////////////////////
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$custom-theme-primary: (
+  50: #ecf7f7,
+  100: #ceecea,
+  200: #aedfdd,
+  300: #8ed2cf,
+  400: #75c8c4,
+  500: #5dbeba,
+  600: #55b8b3,
+  700: #4bafab,
+  800: #41a7a3,
+  900: #309994,
+  A100: #e0fffd,
+  A200: #adfffa,
+  A400: #7afff8,
+  A700: #61fff6,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
+$custom-theme-secondary: (
+  50: #fffbe0,
+  100: #fff5b3,
+  200: #ffef80,
+  300: #ffe84d,
+  400: #ffe326,
+  500: #ffde00,
+  600: #ffda00,
+  700: #ffd500,
+  800: #ffd100,
+  900: #ffc800,
+  A100: #ffffff,
+  A200: #fffcf2,
+  A400: #fff0bf,
+  A700: #ffe9a6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$lcdq-primary: mat-palette($custom-theme-primary);
+// $lcdq-accent: mat-palette($custom-theme-secondary, A200, A100, A400);
+$lcdq-accent: mat-palette($custom-theme-secondary);
+
+// The warn palette is optional (defaults to red).
+$lcdq-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$lcdq-theme: mat-light-theme($lcdq-primary, $lcdq-accent, $lcdq-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($lcdq-theme);

@@ -1,0 +1,34 @@
+@import "../../../../styles/tools/variables";
+@import "../../../../styles/tools/mixins";
+
+.loader {
+  margin: 3rem auto;
+}
+
+.chalkboard-edition-form {
+  display: flex;
+  flex-flow: column;
+}
+
+// INTERNAL LINK
+ion-toggle {
+  --background: #ceecea;
+  --handle-background: #5dbeba;
+}
+.slide-toggle {
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 1rem;
+  }
+}
+
+// CTA
+.btn__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
+}

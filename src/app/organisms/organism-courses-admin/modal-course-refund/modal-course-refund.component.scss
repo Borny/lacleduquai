@@ -1,0 +1,63 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+.existing-refund__container {
+  border-radius: 4px;
+  background: $color-primary-light;
+  padding: 1rem;
+  margin: 0 0 1rem;
+}
+
+.existing-refund__title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.existing-refund__header {
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-weight: bold;
+  }
+}
+
+.existing-refund__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+// CONTROLS
+.controls__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+// CALENDAR
+.form__calendar {
+  width: 100%;
+
+  .mat-input-element {
+    // changes the label color
+    color: $color-primary;
+  }
+
+  mat-datepicker-toggle {
+    // changes the calendar icon color
+    color: $color-primary;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+}
+
+// CTA
+.btn__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
+}

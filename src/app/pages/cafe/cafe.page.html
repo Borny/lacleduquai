@@ -1,0 +1,101 @@
+<ion-header-component [headerTitle]="HEADER_TITLE"> </ion-header-component>
+
+<ion-content>
+  <!-- <ion-content @fadeInAnimationView> -->
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <h1 class="title-xl">{{TITLE}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-horizontal">
+      <ion-col size="12" size-sm="6" class="ion-padding-horizontal">
+        <div class="chai__container">
+          <h3 class="chai__text--intro">
+            Et son incontournable thé Chaï fait maison !
+          </h3>
+          <div class="chai__image__container">
+            <img class="img" src="./assets/img/chai-pie.jpg" alt="ingredient chai" />
+          </div>
+          <p class="chai__text--description">
+            Situé en plein centre de Bordeaux, cet endoit chaleureux est le lieu
+            de rassemblement de nos activités. Un lieu de partage, d'échanges et
+            de rencontres. Offre salée et sucrée ainsi qu'un large choix de
+            boissons, le tout préparé par nos soins.
+          </p>
+        </div>
+        <multi-triangle-svg class="multi-triangles"></multi-triangle-svg>
+        <p class="discount-text color-primary">
+          Ici, 30% du prix affiché constitue un don pour le développement de
+          l’art et de la culture au sein de l'association.
+        </p>
+      </ion-col>
+
+      <!-- CHALKBOARD -->
+      <ion-col size="12" size-sm="6">
+        <div class="todays-special ion-padding">
+          <div>
+            <p class="ion-text-center">Ardoise du jour</p>
+            <!-- <p class="ion-text-center">Aujourd'hui</p>
+            <p class="ion-text-center">Fait maison avec des produits frais</p> -->
+          </div>
+          <div *ngIf="chalkboard" class="todays-special__main-course">
+            <p class="ion-text-center">{{chalkboard.mainCourse}}</p>
+            <p class="ion-text-center">{{chalkboard.mainCourseSide}}</p>
+            <p *ngIf="chalkboard.mainCoursePrice > 0" class="ion-text-center">
+              {{chalkboard.mainCoursePrice | currency}}
+            </p>
+          </div>
+          <div *ngIf="chalkboard" class="todays-special__dessert">
+            <p class="ion-text-center">{{chalkboard.dessert}}</p>
+            <p *ngIf="chalkboard.dessertPrice > 0" class="ion-text-center">
+              {{chalkboard.dessertPrice | currency}}
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- DRINKS -->
+    <ion-row>
+      <ion-col size="12" size-sm="3" offset-sm="3">
+        <div class="section-title">
+          <h2>Nos boissons</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- DRINKS CARDS -->
+    <ion-row class="drinks-row ion-justify-content-center">
+      <ion-col *ngFor="let card of drinks; let i = index" size="12" size-sm="6" size-md="4">
+        <ion-card class="drinks-card">
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>{{card.title}} </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding">
+            <div *ngFor="let category of card.categories">
+              <div class="drinks-card--intro" *ngIf="i === 0">
+                <p class="drinks-card__category--drink--label">Le Chaï</p>
+                <p>
+                  Thé noir indien épicé. Concocté chaque jour avec des épices
+                  fraîches. Servi chaud ou froid Petit ou Grand format.
+                </p>
+              </div>
+              <p *ngIf="category.label" class="drinks-card__category--label">
+                {{category.label}}
+              </p>
+              <div *ngFor="let drink of category.drinks" class="drinks-card__category--drinks">
+                <p class="drinks-card__category--drink--label">
+                  {{drink.label}}
+                </p>
+                <p class="drinks-card__category--drink--price">
+                  {{drink.price}}€
+                </p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

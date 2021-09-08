@@ -1,16 +1,11 @@
-# Lacleduquai
+# La Clé Du Quai - PWA
 
-Web App de l'association La CLé Du Quai - Bordeaux.
+Progressive Web App of the association La Clé Du Quai
 
-- Angular 10
-- Angular Material
-- Git
-- Scss  
-**Back End**
-- NodeJS
-- Express
-- MongoDB
+## Technologies
 
-## Features
+- Ionic 5
+- Angular 11
 
-Cette Webapp comporte un formulaire d'inscription en ligne pour le Café.  
+## Github Pages
+https://borny.github.io/lacleduquai

@@ -1,0 +1,55 @@
+@import '../../../../styles/tools/variables';
+@import '../../../../styles/tools/mixins';
+
+// Courses table
+
+// Mobile
+.mobile-hidden--flex {
+  .courses__table {
+  }
+}
+
+// Desktop
+.mobile-hidden--flex {
+  .courses__table {
+    &__header {
+      background: $color-primary;
+      .courses__table__detail {
+        color: $white;
+        background: $color-primary;
+        font-weight: $fontWeightBold;
+      }
+    }
+
+    &__item {
+      display: flex;
+      border: 1px solid $grey-light;
+      border-bottom: none;
+
+      &--header {
+        .courses__table__detail {
+          font-weight: $fontWeightBold;
+          color: $color-primary;
+          text-align: left;
+        }
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: 1px solid $grey-light;
+      }
+    }
+
+    &__detail {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+
+      &:first-child {
+        color: $color-primary;
+      }
+      &:not(:last-child) {
+        border-right: 1px solid $grey-light;
+      }
+    }
+  }
+}

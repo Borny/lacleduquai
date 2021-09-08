@@ -1,0 +1,224 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+.chai__container {
+  display: flex;
+  flex-flow: column;
+  padding: 1rem;
+  border-radius: 4px;
+  position: relative;
+  background-color: $color-primary;
+
+  &:before {
+    content: '';
+    background-color: $color-secondary-light;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+  .chai__text--intro {
+    color: $white;
+    font-weight: bold;
+  }
+  .chai__text--description {
+    color: $white;
+  }
+
+  .chai__image__container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 200px;
+    height: 172px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1rem 0;
+    .img {
+      border-radius: 4px;
+    }
+  }
+
+  @include screen-sm {
+    padding: 0 0 0 1rem;
+    display: grid;
+    grid-template: 'textIntro imageContainer' 'textDescription imageContainer' /2fr 1fr;
+
+    .chai__text--intro {
+      grid-area: textIntro;
+      margin: 1rem 1rem 1rem 0;
+    }
+    .chai__text--description {
+      grid-area: textDescription;
+      padding: 0 0 1rem;
+    }
+
+    .chai__image__container {
+      grid-area: imageContainer;
+      border-radius: 0 4px 4px 0;
+      width: auto;
+      height: auto;
+      margin: 0;
+      .img {
+        width: 110%;
+        height: 110%;
+        object-fit: cover;
+        border-radius: 0 4px 4px 0;
+      }
+    }
+  }
+}
+
+// MULTI TRIANGLES
+.multi-triangles {
+  display: none;
+
+  @include screen-sm {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+    margin: 2rem auto;
+  }
+}
+
+// DISCOUNT TEXT
+.discount-text {
+  margin: 2rem 0;
+}
+
+//  CHALKBOARD
+.todays-special {
+  display: flex;
+  height: 450px;
+  color: $white;
+  border-radius: 8px;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 105%;
+    height: 105%;
+    border-radius: 8px;
+    z-index: -1;
+    background-color: $color-secondary-light;
+    background-image: url(../../../assets/img/ChalkboardPaperPlainPortrait.jpg);
+    background-repeat: no-repeat;
+    background-size: 95% 95%;
+    background-position: center center;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.7);
+  }
+
+  @include screen-sm {
+    max-width: 550px;
+    height: 600px;
+    transform: rotate(3deg);
+    margin: 2rem auto 0;
+  }
+
+  &__main-course {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    p {
+      line-height: 1;
+    }
+  }
+  p {
+    font-family: 'Indie Flower', cursive;
+    font-size: 2rem;
+  }
+}
+
+// DRINKS
+.section-title {
+  position: relative;
+  padding: 1rem;
+  background-color: $color-primary-light;
+  border-radius: 8px;
+  margin: 5rem auto 2rem;
+  width: 210px;
+  text-align: center;
+
+  @include screen-sm {
+    margin: 5rem 0 2rem;
+  }
+
+  h2 {
+    font-family: $fontOswald;
+    color: $color-primary-dark;
+    font-size: 2rem;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 8px;
+    background-color: $color-secondary-light;
+  }
+}
+
+// DRINKS CARDS
+.drinks-row {
+  max-width: $screen-md;
+  margin: 0 auto;
+}
+
+.drinks-card {
+  ion-card-header {
+    // --background: var(--background, #ceecea);
+    background: $color-primary-light;
+  }
+  ion-card-title {
+    // --color: var(--color, #3d827f);
+    color: $color-primary-dark;
+  }
+
+  &--intro {
+    padding: 1rem;
+    background: $color-secondary-light;
+  }
+
+  &__category--label {
+    padding: 1rem;
+    background: $color-secondary-light;
+    color: $color-secondary-dark;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__category--drinks {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
+
+  &__category--drink--label {
+    font-weight: bold;
+  }
+
+  &__category--drink--price {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -20,8 +20,8 @@ export class TakeAwayService {
   constructor(private http: HttpClient) { }
 
   // CHAI
-  public createChaiTakeAwayOrder(tchaiOrderData: ChaiTakeAway): Observable<string> {
-    return this.http.post<string>(`${this.CHAI_TAKE_AWAY_URL}`, tchaiOrderData);
+  public createChaiTakeAwayOrder(chaiOrderData: ChaiTakeAway): Observable<string> {
+    return this.http.post<string>(`${this.CHAI_TAKE_AWAY_URL}`, chaiOrderData);
   }
 
   public getChaiTakeAwayOrders(): Observable<{ message: string, data: ChaiTakeAway[] }> {

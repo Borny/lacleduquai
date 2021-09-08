@@ -1,0 +1,48 @@
+<div class="ion-page">
+	<ion-header>
+		<ion-toolbar [color]="!isPaymentReceived ? 'primary' : 'warning'">
+			<ion-title>{{ !isPaymentReceived ? payment_received_title : payment_not_received_title }}</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content class="ion-padding">
+		<form [formGroup]="memberPaymentForm" (ngSubmit)="onSubmit()">
+			<ng-container *ngIf="
+				member.paymentMethod === paymentMethods.SECOND && !isPaymentReceived
+			">
+				<div class="check-form">
+					<mat-form-field *ngFor="let check of checkArray.controls; let i = index">
+						<mat-label>Chèque {{ i + 1 }}</mat-label>
+						<input matInput type="text" name="i" [formControl]="checkArray.controls[i]" required />
+					</mat-form-field>
+				</div>
+				<div class="btn-container">
+					<ion-button *ngIf="checkArray.controls.length > 1" class="btn" color="secondary"
+						(click)="onRemoveLastCheck(checkArray.controls.length - 1)">
+						Supprimer le dernier chèque
+					</ion-button>
+					<ion-button class="btn" color="primary" (click)="onAddCheck()">
+						Ajouter un chèque
+					</ion-button>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="
+				member.paymentMethod !== paymentMethods.SECOND && !isPaymentReceived
+			">
+				<ion-item>
+					<ion-label position="floating">Montant €</ion-label>
+					<ion-input type="number" name="amount" formControlName="amount" required></ion-input>
+				</ion-item>
+			</ng-container>
+		</form>
+	</ion-content>
+
+	<!-- CTAs -->
+	<div class="ion-padding btn__container">
+		<ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+		<ion-button [disabled]="member.paymentMethod === paymentMethods.SECOND && !isPaymentReceived
+		? checkArray.invalid
+		: false" color="primary" (click)="onSubmit()">
+			Modifier
+		</ion-button>
+	</div>
+</div>

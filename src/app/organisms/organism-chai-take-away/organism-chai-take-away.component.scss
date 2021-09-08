@@ -1,0 +1,116 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+:host {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+// OVERLAY
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0 0 0 / 40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    padding: 2rem;
+    background: $color-primary;
+    color: $white;
+    border-radius: 8px;
+    transform: rotate(-15deg);
+  }
+}
+
+// LOADER
+.spinner {
+  padding: 5rem 0;
+}
+
+.heading {
+  color: $color-secondary;
+  text-align: center;
+}
+
+.form__container {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.form__response {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  p {
+    margin: 0 auto 0.5rem;
+  }
+}
+
+// CLANEDAR
+.calendar {
+  margin: 1rem 0 0;
+}
+
+// QUANTITY
+.quantity {
+  &__container {
+    margin: 1rem 0;
+  }
+  &__form {
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+  }
+}
+
+// HAS CONTAINER
+.slide-toggle {
+  &__section {
+    display: flex;
+    flex-flow: column;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
+
+.price {
+  &__amount {
+    display: block;
+    margin: 1rem 0 0;
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: $color-primary;
+    border-bottom: 2px solid $color-primary;
+    border-top: 2px solid $color-primary;
+  }
+  &__deposit {
+    margin: 1rem 0 0;
+  }
+}
+
+// BUTTON CONTAINER
+.btn__container {
+  &--flex {
+    display: flex;
+    justify-content: center;
+  }
+  &--block {
+    display: block;
+  }
+  &--submit {
+    margin: 3rem 0 1rem;
+  }
+}

@@ -1,0 +1,21 @@
+@import "../../../../styles/tools/variables";
+@import "../../../../styles/tools/mixins";
+
+.spinner {
+  margin: auto;
+}
+
+.member-edition-form {
+  display: flex;
+  flex-flow: column;
+}
+
+// CTA
+.btn__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn--delete {
+  margin-right: auto;
+}

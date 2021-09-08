@@ -1,0 +1,85 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+:host {
+  display: block;
+  background: url('../../../assets/img/et-rien-ne-bouge.jpg') center center;
+}
+
+h1 {
+  padding: 1rem;
+  text-align: center;
+  background: $color-primary;
+  color: $white;
+  font-family: $fontPoppins;
+
+  @include screen-sm {
+    padding: 3rem;
+  }
+}
+
+.form__container {
+  margin: 3rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px;
+}
+
+.form__response {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 0 auto 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .btn {
+    font-size: 1.5rem;
+  }
+}
+
+.subscription-form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  .label {
+    font-size: 1.5rem;
+  }
+
+  .error-message {
+    &.show-error {
+      font-size: 100% !important;
+    }
+  }
+}
+
+.checkbox__container {
+  margin: 2rem auto;
+  display: flex;
+  width: 100%;
+
+  .newsletter-checkbox-label {
+    white-space: normal;
+    font-size: 1.5rem;
+  }
+}
+
+.form-control {
+  width: 100%;
+}
+
+.price {
+  color: $color-primary;
+  font-weight: $fontWeightBold;
+  font-size: 1.5rem;
+}
+
+.submit-btn {
+  margin: 1rem auto 2rem;
+  font-size: 1.5rem;
+}

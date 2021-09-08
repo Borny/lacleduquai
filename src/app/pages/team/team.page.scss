@@ -1,0 +1,45 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+.ion-grid {
+  overflow: hidden;
+}
+
+// MAIN CONTENT
+.main-content {
+  position: relative;
+  .icon-triangle-blue,
+  .icon-triangle-yellow {
+    position: absolute;
+    z-index: -1;
+  }
+  .icon-triangle-blue {
+    width: 75px;
+    height: 140px;
+    top: -20px;
+    left: -30px;
+    @include screen-sm {
+      width: 165px;
+      height: 313px;
+      top: -70px;
+      left: -70px;
+    }
+  }
+  .icon-triangle-yellow {
+    width: 723px;
+    height: 176px;
+    bottom: 30px;
+    right: -290px;
+
+    @include screen-sm {
+      width: 680px;
+      height: 540px;
+      bottom: -440px;
+      right: -290px;
+    }
+  }
+}
+
+.list {
+  margin: 1rem 0;
+}

@@ -1,0 +1,12 @@
+<ion-item>
+  <ion-label [position]="position">{{ inputLabel }}</ion-label>
+  <ion-input
+    [type]="inputType"
+    [name]="inputName"
+    [formControlName]="controlName"
+    [required]="required"
+  ></ion-input>
+</ion-item>
+<p class="error-message" [ngClass]="ngclass">
+  {{ errorMessage }}
+</p>

@@ -1,0 +1,118 @@
+<ion-header-component [headerTitle]="HEADER_TITLE"> </ion-header-component>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <!-- TITLE -->
+    <ion-row>
+      <ion-col>
+        <squared-shapes-svg [title]="TITLE" class="squared-shapes"></squared-shapes-svg>
+      </ion-col>
+    </ion-row>
+
+    <!-- TEXT INTRO -->
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+        <p class="info__container">
+          Nos locaux sont situés au 49 rue du Mirail. Vous pouvez nous contacter
+          par téléphone au
+          <ion-text color="primary" class="display-block">
+            <a class="phone-number" href="tel:+33688028199"> 06 88 02 81 99 </a>
+          </ion-text>
+          <span class="display-block">ou via ce formulaire</span>
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <!-- FORM -->
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+        <ion-card class="ion-no-margin">
+          <ion-card-content>
+            <!-- Loader -->
+            <loader *ngIf="isLoading"></loader>
+            <!-- Message fail -->
+            <div *ngIf="!isLoading && isSendMessageFailed" class="message-sent--fail">
+              <p>Votre message n'a pas pu être envoyé. Veuillez réessayer.</p>
+              <div class="btn__container">
+                <ion-button (click)="onReload()">{{RELOAD}}</ion-button>
+              </div>
+            </div>
+            <!-- Message success -->
+            <div *ngIf="!isLoading && isMessageSent" class="message-sent--success">
+              <p>
+                Merci, votre message a bien été envoyé. Nous vous répondrons dès
+                que possible.
+              </p>
+              <div class="btn__container">
+                <ion-button (click)="onNavigateHome()">{{HOME_BTN_TEXT}}</ion-button>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form *ngIf="!isLoading && !isMessageSent && !isSendMessageFailed" class="contact-form"
+              [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+              <ion-list>
+                <!-- Name -->
+                <ion-item>
+                  <ion-label position="floating">Nom - Prénom<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input type="text" name="name" formControlName="name" required></ion-input>
+                </ion-item>
+                <p class="error-message"
+                  [ngClass]="contactForm.get('name').invalid && contactForm.get('name').touched ? 'show-error': ''">
+                  Veuillez renseigner votre nom
+                </p>
+
+                <!-- Subject -->
+                <ion-item>
+                  <ion-label position="floating">Objet<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input type="text" name="subject" formControlName="subject" required></ion-input>
+                </ion-item>
+                <p class="error-message"
+                  [ngClass]="contactForm.get('subject').invalid && contactForm.get('subject').touched ? 'show-error' : ''">
+                  Veuillez renseigner un object
+                </p>
+
+                <!-- Email -->
+                <ion-item>
+                  <ion-label position="floating">E-mail<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-input type="email" name="email" formControlName="email" required></ion-input>
+                </ion-item>
+                <p class="error-message"
+                  [ngClass]="contactForm.get('email').invalid &&contactForm.get('email').touched ? 'show-error' : ''">
+                  Veuillez renseigner votre email
+                </p>
+
+                <!-- Message -->
+                <ion-item>
+                  <ion-label position="floating">Message<atom-asterisk></atom-asterisk>
+                  </ion-label>
+                  <ion-textarea name="message" formControlName="message" required></ion-textarea>
+                </ion-item>
+                <p class="error-message"
+                  [ngClass]="contactForm.get('message').invalid && contactForm.get('message').touched ? 'show-error' : ''">
+                  Veuillez écrire un message
+                </p>
+
+                <!-- SUBMIT -->
+                <div class="btn__container">
+                  <ion-button class="ion-margin-vertical" type="submit" color="primary"
+                    [disabled]="contactForm.invalid">
+                    <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
+                    {{SEND_BUTTON_TEXT}}
+                  </ion-button>
+                </div>
+              </ion-list>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+        <p class="color-primary ion-margin-vertical ion-padding-vertical ion-text-center">
+          <a [routerLink]="['/lcdq/contact/mentions-legales']">Mentions Légales</a>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

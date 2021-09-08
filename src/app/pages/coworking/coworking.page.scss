@@ -1,0 +1,72 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+// FORM OVERLAY
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0 0 0 / 40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    padding: 2rem;
+    background: $color-primary;
+    color: $white;
+    border-radius: 8px;
+    transform: rotate(-15deg);
+  }
+}
+
+// Description
+.description-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 1rem auto 0;
+}
+
+.description-item--icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 1rem 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.description-item--content {
+  flex: 1;
+}
+
+// CALENDAR
+.calendar {
+  margin: 1rem 0 0;
+}
+
+// CREDIT CARD
+.credit-card__label {
+  margin: 2rem 0 0;
+}
+
+.credit-card__input {
+  padding: 0 0 0 1rem;
+}
+
+// BUTTON CONTAINER
+.btn__container {
+  &--flex {
+    display: flex;
+    justify-content: center;
+  }
+  &--block {
+    display: block;
+  }
+  &--submit {
+    margin: 3rem 0 1rem;
+  }
+}

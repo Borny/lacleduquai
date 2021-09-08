@@ -1,0 +1,159 @@
+<ion-card class="form__container">
+  <!-- OVERLAY -->
+  <div class="overlay">
+    <p>En pause COVID...</p>
+  </div>
+
+  <ion-card-content>
+
+    <!-- LOADER -->
+    <loader *ngIf="isLoading"></loader>
+
+    <!-- MESSAGE SUCCESS -->
+    <div *ngIf="!isLoading && formSentSuccess" class="form__response">
+      <!-- <div *ngIf="true" class="form__response"> -->
+      <ion-text color="primary">
+        <p>Merci beaucoup !</p>
+        <p>
+          Vous pourrez venir récupérer votre commande le {{ pickUpDay }}
+          <strong>{{ pickUpMonth }}</strong>, entre <strong>16h30 et 18h30</strong>, au 49 rue du Mirail.
+        </p>
+        <p>
+          D’ici là, portez-vous bien !<br />
+          A très vite,<br />
+          La Clé du Quai.
+        </p>
+      </ion-text>
+    </div>
+
+    <!-- MESSAGE FAILED -->
+    <div *ngIf="!isLoading && formSentFail" class="form__response">
+      <!-- <div *ngIf="true" class="form__response"> -->
+      <ion-text color="danger">
+        <p>Désolé, une erreur s'est produite. Veuillez réessayer.</p>
+      </ion-text>
+      <div class="btn__container ion-margin-vertical">
+        <ion-button type="button" color="primary" (click)="onReload()">
+          Passer commande
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- CHAI TAKE AWAY FORM -->
+    <form *ngIf="!isLoading && !hideForm" class="form" [formGroup]="chaiTakeAwayForm" (ngSubmit)="onSubmit()">
+      <!-- <form *ngIf="false" class="take-away-form" [formGroup]="chaiTakeAwayForm" (ngSubmit)="onSubmit()"> -->
+
+      <ion-list>
+        <!-- LAST NAME -->
+        <ion-item>
+          <ion-label position="floating">Nom<atom-asterisk></atom-asterisk>
+          </ion-label>
+          <ion-input type="text" name="lastName" formControlName="lastName" required></ion-input>
+        </ion-item>
+        <p class="error-message" [ngClass]="
+            chaiTakeAwayForm.get('lastName').invalid &&
+            chaiTakeAwayForm.get('lastName').touched
+              ? 'show-error'
+              : ''
+          ">
+          Veuillez renseigner votre nom
+        </p>
+
+        <!-- FIRST NAME -->
+        <ion-item>
+          <ion-label position="floating">Prénom<atom-asterisk></atom-asterisk>
+          </ion-label>
+          <ion-input type="text" name="firstName" formControlName="firstName" required></ion-input>
+        </ion-item>
+        <p class="error-message" [ngClass]="
+            chaiTakeAwayForm.get('firstName').invalid &&
+            chaiTakeAwayForm.get('firstName').touched
+              ? 'show-error'
+              : ''
+          ">
+          Veuillez renseigner votre prénom
+        </p>
+
+        <!-- PHONE -->
+        <ion-item>
+          <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
+          </ion-label>
+          <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
+        </ion-item>
+        <p class="error-message" [ngClass]="
+            chaiTakeAwayForm.get('phone').invalid &&
+            chaiTakeAwayForm.get('phone').touched
+              ? 'show-error'
+              : ''
+          ">
+          Veuillez renseigner votre numéro de téléphone
+        </p>
+
+        <!-- QUANTITY -->
+        <div class="quantity__container">
+          <ion-list-header>
+            <ion-label class="label">Quantité (par bouteille de 1 litre)<atom-asterisk></atom-asterisk>
+            </ion-label>
+          </ion-list-header>
+          <div class="quantity__form">
+            <ion-button size="small" [disabled]="quantity <= 1" (click)="removeQuantity($event)">
+              <ion-icon name="remove"></ion-icon>
+            </ion-button>
+            <ion-input class="ion-text-center" formControlName="quantity" [value]="quantity"
+              (ionChange)="onQuantityChange($event)">
+            </ion-input>
+            <ion-button size="small" [disabled]="quantity >= 4" (click)="addQuantity($event)">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+
+        <!-- Pick Up Date -->
+        <div class="calendar">
+          <mat-form-field appearance="fill" class="form__calendar">
+            <mat-label>Date de retrait</mat-label>
+            <input matInput [min]="minDateFilter" [max]="maxDateFilter" [matDatepickerFilter]="dateFilter"
+              [matDatepicker]="picker" formControlName="pickUpDate" disabled />
+            <mat-datepicker-toggle matSuffix [for]="picker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+            <p class="font-sm">(entre 16h30 et 18h30)</p>
+          </mat-form-field>
+        </div>
+
+        <!-- Has Container -->
+        <ion-item lines="none" class="slide-toggle__section">
+          <ion-label>J'ai mon propre contenant<atom-asterisk></atom-asterisk>
+          </ion-label>
+        </ion-item>
+        <div class="slide-toggle__container">
+          <ion-text>Non</ion-text>
+          <ion-toggle class="slide-toggle__input" formControlName="hasOwnContainer" [checked]="hasContainer"
+            (ionChange)="toggleHasContainer($event)"></ion-toggle>
+          <ion-text [color]="hasContainer ? 'primary' : ''">Oui</ion-text>
+        </div>
+
+        <!-- Total -->
+        <div class="price">
+          <p class="price__amount ion-text-center">Total: {{ totalPrice }}€</p>
+          <p class="price__deposit ion-text-center" *ngIf="!hasContainer">
+            (dont {{ totalDeposit }}€ de consigne)
+          </p>
+        </div>
+
+        <!-- Submit button -->
+        <div class="btn__container btn__container--block btn__container--submit">
+          <!-- <ion-button class="ion-margin-vertical" type="submit" color="secondary" expand="block"
+            [disabled]="chaiTakeAwayForm.invalid || totalPrice === 0 || chaiTakeAwayForm.get('bookingDateList').value.length === 0 || !isCardValid">
+            {{PAY_BUTTON_TEXT}} {{totalPrice}}€
+          </ion-button> -->
+
+          <!-- Loading button -->
+          <ion-button *ngIf="isLoading" type="button" color="secondary" expand="block">
+            <loader></loader>
+          </ion-button>
+        </div>
+      </ion-list>
+    </form>
+  </ion-card-content>
+</ion-card>

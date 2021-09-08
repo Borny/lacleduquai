@@ -1,0 +1,108 @@
+<ion-grid>
+  <!-- <p *ngIf="memberError">
+    Impossible de récupérer les données, veuillez réessayer
+  </p> -->
+
+  <!-- TITLE -->
+  <ion-row>
+    <ion-col size="5">
+      <ion-list>
+        <ion-radio-group [value]="seasonEnum.TWENTY_ONE" class="display-flex">
+          <ion-item *ngFor="let season of seasons">
+            <ion-label>{{ season.label }}</ion-label>
+            <ion-radio
+              (ionFocus)="onSeasonSelected(season)"
+              [value]="season.value"
+            ></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </ion-col>
+    <ion-col size="7">
+      <div class="title__container">
+        <h2 class="ion-text-center">
+          Café adhésions <span class="color-primary">{{ selectedSeason }}</span>
+        </h2>
+      </div>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row>
+    <ion-col>
+      <div class="filter__container">
+        <ion-button color="secondary" (click)="onResetFilters()">
+          Réinitialiser
+        </ion-button>
+        <filter-molecule
+          *ngFor="let filter of filterOptions"
+          [selectLabel]="filter.filterLabel"
+          [filterOptions]="filter.values"
+          [select]="matSelect"
+          (selectedFilterOption)="onSelectedOption(filter.filterName, $event)"
+        >
+        </filter-molecule>
+      </div>
+    </ion-col>
+  </ion-row> -->
+
+  <!-- Loader -->
+  <ion-row *ngIf="isLoading">
+    <ion-col class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="!isLoading">
+    <ion-col>
+      <copy-to-clipboard-molecule
+        [list]="emailList"
+        (copySuccessMessage)="onCopyToClipBoard()"
+      ></copy-to-clipboard-molecule>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!isLoading">
+    <ion-col>
+      <ul class="data-table__container">
+        <li class="data-table__item data-table__item__header">
+          <div class="first-column"></div>
+          <div>Nom</div>
+          <div>Prénom</div>
+          <div>Email</div>
+          <div>Newsletter</div>
+          <div>Date d'inscription</div>
+          <div></div>
+        </li>
+
+        <li
+          class="data-table__item data-table__item-no-result"
+          *ngIf="!currentMembersData.length"
+        >
+          No results...
+        </li>
+        <li
+          class="data-table__item"
+          [ngClass]="{ odd: odd, even: even }"
+          *ngFor="
+            let member of currentMembersData;
+            let even = even;
+            let odd = odd;
+            let i = index
+          "
+        >
+          <div class="first-column">{{ i + 1 }}</div>
+          <div>{{ member.lastName }}</div>
+          <div>{{ member.firstName }}</div>
+          <div>{{ member.email }}</div>
+          <div [ngClass]="member.newsletterSubscription ? 'primary-color' : ''">
+            {{ member.newsletterSubscription ? 'Oui' : 'Non' }}
+          </div>
+          <div>{{ member.subscriptionDate | date }}</div>
+          <div>
+            <ion-button (click)="onOpenManageCafeSubscriptionModal(member, i)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </li>
+      </ul>
+    </ion-col>
+  </ion-row>
+</ion-grid>

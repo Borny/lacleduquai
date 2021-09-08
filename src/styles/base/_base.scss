@@ -1,7 +1,6 @@
 ////////////////////////////////
 // BOX SIZING FOR ALL ELEMENTS
 ////////////////////////////////
-
 *,
 ::before,
 ::after {
@@ -73,7 +72,9 @@ textarea {
   font-family: $fontOswald;
 }
 
+//////////
 // LINKS
+//////////
 a {
   text-decoration: none;
   border: none;
@@ -87,9 +88,9 @@ li {
   list-style: none;
 }
 
-///////////
-// BUTTON
-///////////
+////////////
+// BUTTONS
+////////////
 button,
 .btn {
   outline: none;
@@ -103,8 +104,9 @@ button,
     font-size: 1em;
   }
 }
-
+//////////////////////////
 // CANCELS OUTLINE INPUT
+//////////////////////////
 input,
 button,
 select,
@@ -117,7 +119,11 @@ textarea {
 ///////////////////
 // GLOBAL CLASSES
 ///////////////////
-.mobile-hidden {
+.hidden {
+  display: none;
+}
+
+.mobile-hidden--block {
   display: none !important;
 
   @include screen-sm() {
@@ -125,20 +131,44 @@ textarea {
   }
 }
 
+.mobile-hidden--flex {
+  display: none !important;
+
+  @include screen-sm() {
+    display: flex !important;
+  }
+}
+
+.desktop-hidden--block {
+  display: block !important;
+
+  @include screen-sm() {
+    display: none !important;
+  }
+}
+
+.desktop-hidden--flex {
+  display: flex !important;
+
+  @include screen-sm() {
+    display: none !important;
+  }
+}
+
+.display-block {
+  display: block;
+}
+
 .display-flex {
   display: flex;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .full-height {
   height: 100%;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.color-primary-font {
-  color: $color-primary;
 }
 
 .color-primary {
@@ -158,30 +188,82 @@ textarea {
 }
 
 .title-xl {
-  font-family: $fontOswald;
-  font-size: 3rem;
-  text-align: center;
-  color: $color-primary;
+  margin: 2rem auto !important;
+  font-family: $fontOswald !important;
+  font-size: 1.7rem !important;
+  text-align: center !important;
+  color: $color-primary-dark !important;
 
   @include screen-sm {
-    font-size: 4rem;
+    font-size: 3rem !important;
+  }
+}
+
+.spacer-horizontal {
+  display: flex;
+  padding: 0 1rem 1rem;
+  justify-content: center;
+  align-items: center;
+  span {
+    height: 3px;
+    width: 170px;
+    max-width: 300px;
+    border-radius: 3px;
+  }
+  &--primary {
+    span {
+      background-color: $color-primary;
+    }
+  }
+  &--secondary {
+    span {
+      background-color: $color-secondary;
+    }
   }
 }
 
 .font-xs {
-  font-size: $font-size-xs;
+  font-size: $font-size-xs !important;
 }
 
 .font-sm {
-  font-size: $font-size-sm;
+  font-size: $font-size-sm !important;
 }
 
+.font-oswald {
+  font-family: $fontOswald;
+}
+
+//////////
+// IONIC
+//////////
+ion-card:focus {
+  outline: 0;
+  border: 0;
+}
+
+.modal-delete {
+  --max-height: 200px;
+  .btn__container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+// FORM
+// highlight the ion-item in green when the input has focus for the first time instead of red
+.ion-invalid.ion-untouched.item-has-focus {
+  --highlight-background: #5dbeba;
+}
+
+/////////////////////
+// ANGULAR MATERIAL
+/////////////////////
 // .mat-expansion-panel-body {
 //   padding: 0 !important;
 // }
 
 // Wraps the text for checkboxes
-
 .mat-checkbox-layout {
   white-space: initial !important;
 }
@@ -200,15 +282,51 @@ textarea {
   }
 }
 
-// Mat Tabs
+// Mat Tabs //
 .mat-tab-header {
   margin: 0 auto;
+}
+
+// Mat Dialog //
+.mat-dialog__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+// CALENDAR //
+.mat-input-element {
+  // changes the label color
+  color: $color-primary !important;
+}
+
+mat-datepicker-toggle {
+  // changes the calendar icon color
+  color: $color-primary !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent !important;
+}
+
+.mat-calendar-body-cell.selected > .mat-calendar-body-cell-content,
+.mat-calendar-body-cell.selected:hover > .mat-calendar-body-cell-content,
+.mat-calendar-body-cell.selected > .mat-calendar-body-cell-content:hover {
+  background-color: $color-primary !important;
+  color: $white !important;
+}
+
+// CANCELS THE BOTTOM LINE HOVER EFFECT
+.mat-form-field-ripple {
+  opacity: 0 !important;
 }
 
 //////////
 // HACKS
 //////////
-
 //CANCELS SAFARI INPUT ICON
 input::-webkit-contacts-auto-fill-button {
   visibility: hidden;

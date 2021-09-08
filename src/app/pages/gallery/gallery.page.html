@@ -1,0 +1,27 @@
+<ion-header-component [headerTitle]="HEADER_TITLE"></ion-header-component>
+
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <!-- TITLE -->
+        <ion-row>
+            <ion-col>
+                <squared-shapes-svg [title]="HEADER_TITLE" class="squared-shapes"></squared-shapes-svg>
+            </ion-col>
+        </ion-row>
+
+        <!-- GALLERY -->
+        <ion-row class="ion-margin-vertical ion-padding-bottom">
+            <ion-col class="ion-margin-bottom ion-padding-bottom" size="12" size-sm="10" offset-sm="1" size-md="10"
+                offset-md="1">
+                <ul class="gallery__container">
+                    <li (click)="onHightLightImg(i)" [ngClass]="{'highlight': picture.highlight}" class="gallery__item"
+                        *ngFor="let picture of pictures; let i = index">
+                        <img class="gallery__img" [src]='picture.src' [alt]='picture.label'>
+                        <p class="ion-padding-start gallery__img-label">{{picture.label}}</p>
+                    </li>
+                </ul>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
