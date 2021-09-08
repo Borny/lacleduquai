@@ -7,34 +7,46 @@ import { PreSubscription } from '../models/pre-subscription.model';
 import { Member } from '../models/member.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubscriptionService {
-
   private readonly API_URL = `${environment.apiUrl}`;
   private readonly PRE_SUBSCRIPTION_URL = `/subscription/pre-subscription`;
+  private readonly GET_MEMBERS_URL_ALL = `/subscription/members_all`;
   private readonly GET_MEMBERS_URL = `/subscription/members`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // COURSES
   public createMember(formValue: PreSubscription): Observable<any> {
-    return this.http.post<any>(`${this.API_URL}${this.PRE_SUBSCRIPTION_URL}`, formValue);
+    return this.http.post<any>(
+      `${this.API_URL}${this.PRE_SUBSCRIPTION_URL}`,
+      formValue
+    );
   }
 
-  public getMembersData(): Observable<{ message: string, data: Member[] }> {
-    return this.http.get<{ message: string, data: Member[] }>(`${this.API_URL}${this.GET_MEMBERS_URL}`);
+  public getMembersData(season: string): Observable<{ message: string; data: Member[] }> {
+    return this.http.get<{ message: string; data: Member[] }>(
+      `${this.API_URL}${this.GET_MEMBERS_URL_ALL}/${season}`
+    );
   }
 
   public getMemberData(memberId: string): Observable<{ member: Member }> {
-    return this.http.get<{ member: Member }>(`${this.API_URL}${this.GET_MEMBERS_URL}/${memberId}`);
+    return this.http.get<{ member: Member }>(
+      `${this.API_URL}${this.GET_MEMBERS_URL}/${memberId}`
+    );
   }
 
   public updateMember(memberInfo: Member): Observable<any> {
-    return this.http.put<any>(`${this.API_URL}${this.PRE_SUBSCRIPTION_URL}/${memberInfo._id}`, memberInfo);
+    return this.http.put<any>(
+      `${this.API_URL}${this.PRE_SUBSCRIPTION_URL}/${memberInfo._id}`,
+      memberInfo
+    );
   }
 
   public deleteMember(member: Member): Observable<any> {
-    return this.http.delete<any>(`${this.API_URL}${this.GET_MEMBERS_URL}/${member._id}`);
+    return this.http.delete<any>(
+      `${this.API_URL}${this.GET_MEMBERS_URL}/${member._id}`
+    );
   }
 }

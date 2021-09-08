@@ -26,7 +26,7 @@ registerLocaleData(localeFr);
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     StatusBar,
@@ -35,9 +35,11 @@ registerLocaleData(localeFr);
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     {
-      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

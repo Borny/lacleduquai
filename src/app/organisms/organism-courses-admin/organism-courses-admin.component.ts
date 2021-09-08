@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { ToastController } from "@ionic/angular";
+import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { SeasonEnum } from 'src/app/models/season.enum';
+import { Season } from 'src/app/models/season.model';
 
 import { Member } from '../../models/member.model';
 import { PaymentMethods } from '../../models/payment-methods.enum';
@@ -15,13 +17,25 @@ import { ModalCourseRefundPage } from './modal-course-refund/modal-course-refund
   styleUrls: ['./organism-courses-admin.component.scss'],
 })
 export class OrganismCoursesAdminComponent implements OnInit {
-
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
   public isLoading = false;
   public memberError = false;
   public matSelect: any;
   public emailList: string;
+  public selectedSeason: string;
+  public seasonEnum = SeasonEnum;
+
+  public seasons: Season[] = [
+    {
+      label: '2020-2021',
+      value: SeasonEnum.TWENTY,
+    },
+    {
+      label: '2021-2022',
+      value: SeasonEnum.TWENTY_ONE,
+    },
+  ];
 
   public readonly CONFIRM = `confirm`;
   public readonly CONFIRM_DELETE = 'confirm-delete';
@@ -38,7 +52,7 @@ export class OrganismCoursesAdminComponent implements OnInit {
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
     PaymentMethods.SECOND,
-    PaymentMethods.THIRD
+    PaymentMethods.THIRD,
   ];
 
   public tableHeaderSubscriptionCells: string[] = [
@@ -54,43 +68,45 @@ export class OrganismCoursesAdminComponent implements OnInit {
     'Remboursement',
     'Inscrit 2019/2020',
     'Cours 2019/2020',
-    'Extra info'
+    'Extra info',
   ];
 
   public filterOptions = [
     {
       filterName: 'payment',
       filterLabel: 'Paiement',
-      values: [
-        'Paiement dû',
-        'Paiement effectué'
-      ]
+      values: ['Paiement dû', 'Paiement effectué'],
     },
     {
       filterName: 'course',
       filterLabel: 'Cours',
       values: [
-        'lundi 18h30', 'lundi 20h30', 'mardi 18h30', 'mardi 20h30', 'mercredi 18h30', 'mercredi 20h30', 'jeudi 18h30', 'jeudi 20h30'
+        'lundi 18h30',
+        'lundi 20h30',
+        'mardi 18h30',
+        'mardi 20h30',
+        'mercredi 18h30',
+        'mercredi 20h30',
+        'jeudi 18h30',
+        'jeudi 20h30',
       ],
     },
     {
       filterName: 'alphabeticalOrder',
       filterLabel: 'Ordre alphabétique',
-      values: [
-        'A - Z',
-        'Z - A'
-      ]
-    }
+      values: ['A - Z', 'Z - A'],
+    },
   ];
 
   constructor(
     private subscriptionService: SubscriptionService,
     public modalController: ModalController,
     public toastController: ToastController
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this._getMembersData();
+    this._getMembersData(this.seasonEnum.TWENTY_ONE);
+    this.selectedSeason = this.seasons[1].label;
   }
 
   async onOpenCourseRefundModal(
@@ -111,15 +127,15 @@ export class OrganismCoursesAdminComponent implements OnInit {
     // On dismiss
     let updatedMember = data.member;
     if (data.dismissed === this.CONFIRM) {
-      this.subscriptionService.updateMember(updatedMember)
-        .subscribe(
-          result => {
-            // show snack bar
-            this._presentToast(this.REFUND_UPDATED_SUCCESS, 'success');
-          },
-          err => {
-            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
-          });
+      this.subscriptionService.updateMember(updatedMember).subscribe(
+        (result) => {
+          // show snack bar
+          this._presentToast(this.REFUND_UPDATED_SUCCESS, 'success');
+        },
+        (err) => {
+          this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+        }
+      );
     }
   }
 
@@ -140,18 +156,18 @@ export class OrganismCoursesAdminComponent implements OnInit {
     }
     // On dismiss
     const updatedMember = data.member;
-
+    console.log(updatedMember);
     if (data.dismissed === this.CONFIRM) {
-      this.subscriptionService.updateMember(updatedMember)
-        .subscribe(
-          result => {
-            this.currentMembersData[index] = updatedMember;
-            // show snack bar
-            this._presentToast(this.PAYMENT_UPDATED_SUCCESS, 'success');
-          },
-          err => {
-            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
-          });
+      this.subscriptionService.updateMember(updatedMember).subscribe(
+        (result) => {
+          this.currentMembersData[index] = updatedMember;
+          // show snack bar
+          this._presentToast(this.PAYMENT_UPDATED_SUCCESS, 'success');
+        },
+        (err) => {
+          this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+        }
+      );
     }
   }
 
@@ -173,30 +189,36 @@ export class OrganismCoursesAdminComponent implements OnInit {
     // On dismiss
     let updatedMember = data.member;
     if (data.dismissed === this.CONFIRM) {
-      this.subscriptionService.updateMember(updatedMember)
-        .subscribe(
-          result => {
-            this.currentMembersData[index] = updatedMember;
-            // show snack bar
-            this._presentToast(this.MEMBER_UPDATED_SUCCESS, 'success');
-          },
-          err => {
-            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
-          });
-
+      this.subscriptionService.updateMember(updatedMember).subscribe(
+        (result) => {
+          this.currentMembersData[index] = updatedMember;
+          // show snack bar
+          this._presentToast(this.MEMBER_UPDATED_SUCCESS, 'success');
+        },
+        (err) => {
+          this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+        }
+      );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
-      this.subscriptionService.deleteMember(updatedMember)
-        .subscribe(
-          result => {
-            this.originalMembersData = this.originalMembersData.filter(member => member._id !== updatedMember._id);
-            this.currentMembersData = this.originalMembersData;
-            // show snack bar
-            this._presentToast(this.MEMBER_DELETED_SUCCESS, 'success');
-          },
-          err => {
-            this._presentToast(this.MEMBER_DELETED_FAIL, 'warning');
-          });
+      this.subscriptionService.deleteMember(updatedMember).subscribe(
+        (result) => {
+          this.originalMembersData = this.originalMembersData.filter(
+            (member) => member._id !== updatedMember._id
+          );
+          this.currentMembersData = this.originalMembersData;
+          // show snack bar
+          this._presentToast(this.MEMBER_DELETED_SUCCESS, 'success');
+        },
+        (err) => {
+          this._presentToast(this.MEMBER_DELETED_FAIL, 'warning');
+        }
+      );
     }
+  }
+
+  public onSeasonSelected(season: Season): void {
+    this.selectedSeason = season.label;
+    this._getMembersData(season.value);
   }
 
   public onSelectedOption(filter: string, value?: string): void {
@@ -243,34 +265,37 @@ export class OrganismCoursesAdminComponent implements OnInit {
     const toast = await this.toastController.create({
       message,
       duration: 2000,
-      color
+      color,
     });
     toast.present();
   }
 
-  private _getMembersData(): void {
+  private _getMembersData(season?: string): void {
     this.isLoading = true;
-    this.subscriptionService.getMembersData()
-      .subscribe(
-        response => {
-          this.isLoading = false;
-          this.originalMembersData = response.data;
-          this.currentMembersData = [...this.originalMembersData];
+    this.subscriptionService.getMembersData(season).subscribe(
+      (response) => {
+        this.isLoading = false;
+        this.originalMembersData = response.data;
+        this.currentMembersData = [...this.originalMembersData];
 
-          this._generateEmailList();
-        },
-        err => {
-          this.isLoading = false;
-          this.memberError = true;
-        }
-      );
+        this._generateEmailList();
+      },
+      (err) => {
+        this.isLoading = false;
+        this.memberError = true;
+      }
+    );
   }
 
   private filterPayment(selectValue: string): void {
     if (selectValue === this.filterOptions[0].values[0]) {
-      this.currentMembersData = this.originalMembersData.filter(member => member.paymentReceived === false)
+      this.currentMembersData = this.originalMembersData.filter(
+        (member) => member.paymentReceived === false
+      );
     } else if (selectValue === this.filterOptions[0].values[1]) {
-      this.currentMembersData = this.originalMembersData.filter(member => member.paymentReceived === true)
+      this.currentMembersData = this.originalMembersData.filter(
+        (member) => member.paymentReceived === true
+      );
     } else {
       this.currentMembersData = this.originalMembersData;
     }
@@ -278,9 +303,11 @@ export class OrganismCoursesAdminComponent implements OnInit {
 
   private filterCourses(selectValue: string): Member[] | void {
     if (selectValue === undefined) {
-      return this.currentMembersData = this.originalMembersData;
+      return (this.currentMembersData = this.originalMembersData);
     }
-    this.currentMembersData = this.originalMembersData.filter(member => member.courses.includes(selectValue));
+    this.currentMembersData = this.originalMembersData.filter((member) =>
+      member.courses.includes(selectValue)
+    );
   }
 
   private filterAlphaOrder(selectValue: string): void {
@@ -317,7 +344,8 @@ export class OrganismCoursesAdminComponent implements OnInit {
 
   private _generateEmailList(): void {
     // The email list will reflect the members displayed in the main table
-    this.emailList = this.currentMembersData.map(member => member.email).toString();
+    this.emailList = this.currentMembersData
+      .map((member) => member.email)
+      .toString();
   }
-
 }

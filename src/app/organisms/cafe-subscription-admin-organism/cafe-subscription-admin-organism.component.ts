@@ -2,16 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { SeasonEnum } from 'src/app/models/season.enum';
+import { Season } from 'src/app/models/season.model';
 
 import { CafeSubscription } from '../../models/cafe-subscription.model';
 import { CafeSubscriptionService } from '../../services/cafe-subscription.service';
 
 import { ModalCafeMemberManagerDialog } from './modal-cafe-member-manager/modal-cafe-member-manager.component';
-
-interface Season {
-  label: string;
-  value: string;
-}
 
 @Component({
   selector: 'cafe-subscription-admin-organism',
@@ -26,7 +22,6 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
   public matSelect: any;
   public emailList: string;
   public selectedSeason: string;
-  public initialSeasonValue: string;
   public seasonEnum = SeasonEnum;
 
   public seasons: Season[] = [
@@ -71,7 +66,6 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
 
   ngOnInit() {
     this._getMembersInfo(SeasonEnum.TWENTY_ONE);
-    this.initialSeasonValue = SeasonEnum.TWENTY_ONE;
     this.selectedSeason = this.seasons[1].label;
   }
 
@@ -121,18 +115,9 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
     }
   }
 
-  public onSeasonChange(value): void {
-    console.log(value);
-    console.log(value.detail.value);
-  }
-
-  public onSeasonSelected(value, season: Season): void {
-    const seasonValue =
-      season.value === SeasonEnum.TWENTY_ONE ? season.value : null;
+  public onSeasonSelected(season: Season): void {
     this.selectedSeason = season.label;
-
-    console.log(seasonValue);
-    this._getMembersInfo(seasonValue);
+    this._getMembersInfo(season.value);
   }
 
   public onSelectedOption(filter: string, value?: string): void {
@@ -173,6 +158,7 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
 
   private _getMembersInfo(season?: string): void {
     this.isLoading = true;
+
     this.cafeSubscriptionService
       .getCafeSubscriptionMembersData(season)
       .subscribe(

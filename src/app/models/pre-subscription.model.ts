@@ -1,3 +1,5 @@
+import { SeasonEnum } from './season.enum';
+
 export interface PreSubscription {
   lastName: string;
   firstName: string;
@@ -8,4 +10,7 @@ export interface PreSubscription {
   previouslyEnrolled: boolean;
   previousCourseInfo?: string;
   paymentMethod: string;
+  subscriptionRequestDate: Date;
+  subscriptionDate: Date;
+  season: SeasonEnum;
 }

@@ -11,7 +11,7 @@
           <ion-item *ngFor="let season of seasons">
             <ion-label>{{ season.label }}</ion-label>
             <ion-radio
-              (ionFocus)="onSeasonSelected($event, season)"
+              (ionFocus)="onSeasonSelected(season)"
               [value]="season.value"
             ></ion-radio>
           </ion-item>

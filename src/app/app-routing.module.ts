@@ -14,10 +14,10 @@ const routes: Routes = [
     path: 'cafe-adhesion',
     loadChildren: () => import('./pages/cafe-subscription/cafe-subscription.module').then(m => m.CafeSubscriptionPageModule)
   },
-  {
-    path: 'pre-inscription',
-    loadChildren: () => import('./pages/pre-subscription/pre-subscription.module').then(m => m.PreSubscriptionPageModule)
-  },
+  // {
+  //   path: 'pre-inscription',
+  //   loadChildren: () => import('./pages/pre-subscription/pre-subscription.module').then(m => m.PreSubscriptionPageModule)
+  // },
   {
     path: 'admin-login',
     loadChildren: () => import('./pages/admin-login/admin-login.module').then(m => m.AdminLoginPageModule)

@@ -7,7 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { CoursesPageRoutingModule } from './courses-routing.module';
 
 import { CoursesPage } from './courses.page';
+
 import { SharedModule } from '../../../shared/shared.module';
+import { OrganismCourseSubscriptionFormComponent } from 'src/app/organisms/organism-course-subscription-form/organism-course-subscription-form.component';
+import { OrganismCourseSubscriptionFormModule } from 'src/app/organisms/organism-course-subscription-form/organism-course-subscription-form.module';
 
 @NgModule({
   imports: [
@@ -16,6 +19,7 @@ import { SharedModule } from '../../../shared/shared.module';
     IonicModule,
     CoursesPageRoutingModule,
     SharedModule,
+    OrganismCourseSubscriptionFormModule,
   ],
   declarations: [CoursesPage],
 })

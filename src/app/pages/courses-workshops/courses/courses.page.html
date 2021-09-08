@@ -227,7 +227,13 @@
             </li>
             <li class="courses__table__item">
               <div class="courses__table__detail">
-                Cie A (2h30 + week-end + représentations)
+                2 cours / semaine (2h + 2h) - abonnement annuel danse et théâtre
+              </div>
+              <div class="courses__table__detail">630€ / an</div>
+            </li>
+            <li class="courses__table__item">
+              <div class="courses__table__detail">
+                Cie Amateur (2h30 + week-end + représentations)
               </div>
               <div class="courses__table__detail">430€ / an</div>
             </li>
@@ -254,17 +260,9 @@
         size="12"
         size-md="6"
         offset-md="3"
-        class="ion-justify-content-center ion-margin-vertical"
+        class="ion-justify-content-center ion-margin-vertical ion-padding-vertical"
       >
-        <ion-nav-link
-          class="ion-text-center"
-          [routerLink]="'/lcdq/contact'"
-          routerDirection="forward"
-        >
-          <ion-button size="small" expand="block" color="primary">
-            Contactez-nous
-          </ion-button>
-        </ion-nav-link>
+      <organism-course-subscription-form></organism-course-subscription-form>
       </ion-col>
     </ion-row>
   </ion-grid>

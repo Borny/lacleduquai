@@ -35,9 +35,12 @@ $color-secondary-dark: $corn;
 // GRAY
 $color-gray: $cod-gray;
 $grey-light: color.scale($cod-gray, $lightness: 70%);
+$grey-lighter: color.scale($cod-gray, $lightness: 90%);
 $grey-dark: darken($cod-gray, 0.5);
 
 $color-warning: $red;
+$grey-disabled: $grey-light;
+$grey-calendar-disabled: $grey-lighter;
 //////////
 // FONTS
 //////////

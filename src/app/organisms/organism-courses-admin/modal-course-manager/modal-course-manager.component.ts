@@ -1,7 +1,14 @@
 import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormsModule,
+  FormArray,
+} from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
@@ -15,10 +22,9 @@ import { AtomAsteriskModule } from '../../../atoms/atom-asterisk/atom-asterisk.m
 @Component({
   selector: 'member-manager',
   templateUrl: './modal-course-manager.component.html',
-  styleUrls: ['./modal-course-manager.component.scss']
+  styleUrls: ['./modal-course-manager.component.scss'],
 })
 export class ModalCourseManagerPage implements OnInit {
-
   public memberEditionForm: FormGroup = new FormGroup({});
   public checkForm: FormArray = new FormArray([]);
   public courseForm: FormArray = new FormArray([]);
@@ -38,50 +44,51 @@ export class ModalCourseManagerPage implements OnInit {
     {
       id: '1',
       detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
-      name: 'lundi 18h30'
+      name: 'lundi 18h30',
     },
     {
       id: '2',
       detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
-      name: 'lundi 20h30'
+      name: 'lundi 20h30',
     },
     {
       id: '3',
       detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
-      name: 'mardi 18h30'
+      name: 'mardi 18h30',
     },
     {
       id: '4',
       detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
-      name: 'mardi 20h30'
+      name: 'mardi 20h30',
     },
     {
       id: '5',
       detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
-      name: 'mercredi 18h30'
+      name: 'mercredi 18h30',
     },
     {
       id: '6',
-      detail: 'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
-      name: 'mercredi 20h30'
+      detail:
+        'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
+      name: 'mercredi 20h30',
     },
     {
       id: '7',
-      detail: 'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
-      name: 'jeudi 18h30'
+      detail:
+        'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
+      name: 'jeudi 18h30',
     },
     {
       id: '8',
       detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
-      name: 'jeudi 20h30'
+      name: 'jeudi 20h30',
     },
   ];
 
   constructor(
     private subscriptionService: SubscriptionService,
     public modalCtrl: ModalController
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -92,7 +99,9 @@ export class ModalCourseManagerPage implements OnInit {
     if (this.checkForm.value.length) {
       this.checkForm.value.forEach((value: Check, index: number) => {
         this.member.checks[index].depositMade = value.depositMade;
-        this.member.checks[index].depositDate = value.depositMade ? value.depositDate : null;
+        this.member.checks[index].depositDate = value.depositMade
+          ? value.depositDate
+          : null;
       });
     }
     this.member.firstName = this.memberEditionForm.get('firstName').value;
@@ -100,14 +109,16 @@ export class ModalCourseManagerPage implements OnInit {
     this.member.phone = this.memberEditionForm.get('phone').value;
     this.member.email = this.memberEditionForm.get('email').value;
     this.member.courses = this.memberEditionForm.get('courses').value;
-    this.member.paymentMethod = this.memberEditionForm.get('paymentMethod').value;
-    this.member.paymentAmount = this.memberEditionForm.get('paymentAmount').value;
+    this.member.paymentMethod =
+      this.memberEditionForm.get('paymentMethod').value;
+    this.member.paymentAmount =
+      this.memberEditionForm.get('paymentAmount').value;
     this.member.extraInfo = this.memberEditionForm.get('extraInfo').value;
 
     this.modalCtrl.dismiss({
-      'dismissed': this.CONFIRM,
-      'member': { ...this.member }
-    })
+      dismissed: this.CONFIRM,
+      member: { ...this.member },
+    });
   }
 
   public onDepositMade(event, checkIndex: number): void {
@@ -122,8 +133,8 @@ export class ModalCourseManagerPage implements OnInit {
       component: ModalDelete,
       cssClass: 'modal-delete',
       componentProps: {
-        'contentData': this.member
-      }
+        contentData: this.member,
+      },
     });
     await modal.present();
     const { data } = await modal.onDidDismiss();
@@ -134,16 +145,16 @@ export class ModalCourseManagerPage implements OnInit {
       // !!! Not sure why but the setTimeout is needed, probably asynchronous stuff...
       setTimeout(() => {
         this.modalCtrl.dismiss({
-          'dismissed': this.CONFIRM_DELETE,
-          'member': this.member
-        })
-      })
+          dismissed: this.CONFIRM_DELETE,
+          member: this.member,
+        });
+      });
     }
   }
 
   public onCancel(): void {
     this.modalCtrl.dismiss({
-      'dismissed': this.CANCEL
+      dismissed: this.CANCEL,
     });
   }
 
@@ -155,50 +166,109 @@ export class ModalCourseManagerPage implements OnInit {
       this.checkList = this.member.checks;
       this.checkList.forEach((check, i) => {
         let updateDepositDate: undefined | string | null | Date;
-        if (this.member.checks[i].depositDate === null || this.member.checks[i].depositDate === undefined) {
+        if (
+          this.member.checks[i].depositDate === null ||
+          this.member.checks[i].depositDate === undefined
+        ) {
           updateDepositDate = null;
-        } else if (typeof (this.member.checks[i].depositDate) === 'string') {
+        } else if (typeof this.member.checks[i].depositDate === 'string') {
           updateDepositDate = this.member.checks[i].depositDate;
         } else {
-          updateDepositDate = this.member.checks[i].depositDate.toLocaleDateString();
+          updateDepositDate =
+            this.member.checks[i].depositDate.toLocaleDateString();
         }
 
         const checkFormGroup: FormGroup = new FormGroup({
           depositMade: new FormControl(this.member.checks[i].depositMade),
-          depositDate: new FormControl(updateDepositDate)
+          depositDate: new FormControl(updateDepositDate),
         });
         this.checkForm.push(checkFormGroup);
       });
-
     }
 
-    this.memberEditionForm.addControl('firstName', new FormControl(this.member.firstName, Validators.required));
-    this.memberEditionForm.addControl('lastName', new FormControl(this.member.lastName, Validators.required));
-    this.memberEditionForm.addControl('email', new FormControl(this.member.email, [Validators.required, Validators.email]));
-    this.memberEditionForm.addControl('phone', new FormControl(this.member.phone, Validators.required));
-    this.memberEditionForm.addControl('courses', new FormControl(this.member.courses));
-    this.memberEditionForm.addControl('paymentMethod', new FormControl(this.member.paymentMethod, Validators.required));
+    // FORMATED DATES
+    const formatedSubscriptionRequestDate = new Date(
+      this.member.subscriptionRequestDate
+    ).toLocaleDateString();
+
+    let formatedSubscriptionDate: string | Date = this.member.subscriptionDate;
+    if (this.member.subscriptionDate) {
+      formatedSubscriptionDate = new Date(
+        this.member.subscriptionRequestDate
+      ).toLocaleDateString();
+    }
+
+    this.memberEditionForm.addControl(
+      'firstName',
+      new FormControl(this.member.firstName, Validators.required)
+    );
+    this.memberEditionForm.addControl(
+      'lastName',
+      new FormControl(this.member.lastName, Validators.required)
+    );
+    this.memberEditionForm.addControl(
+      'email',
+      new FormControl(this.member.email, [
+        Validators.required,
+        Validators.email,
+      ])
+    );
+    this.memberEditionForm.addControl(
+      'phone',
+      new FormControl(this.member.phone, Validators.required)
+    );
+    this.memberEditionForm.addControl(
+      'courses',
+      new FormControl(this.member.courses)
+    );
+    this.memberEditionForm.addControl(
+      'paymentMethod',
+      new FormControl(this.member.paymentMethod, Validators.required)
+    );
     this.memberEditionForm.addControl('checks', this.checkForm);
-    this.memberEditionForm.addControl('paymentAmount', new FormControl(this.member.paymentAmount));
-    this.memberEditionForm.addControl('extraInfo', new FormControl(this.member.extraInfo));
+    this.memberEditionForm.addControl(
+      'paymentAmount',
+      new FormControl(this.member.paymentAmount)
+    );
+    this.memberEditionForm.addControl(
+      'extraInfo',
+      new FormControl(this.member.extraInfo)
+    );
+    this.memberEditionForm.addControl(
+      'season',
+      new FormControl(this.member.season)
+    );
+    this.memberEditionForm.addControl(
+      'subscriptionDate',
+      new FormControl({ value: formatedSubscriptionDate, disabled: true })
+    );
+    this.memberEditionForm.addControl(
+      'subscriptionRequestDate',
+      new FormControl(
+        { value: formatedSubscriptionRequestDate, disabled: true },
+        Validators.required
+      )
+    );
+    this.memberEditionForm.addControl(
+      'extraInfo',
+      new FormControl(this.member.extraInfo)
+    );
 
     this.isLoading = false;
   }
 
   private _getMemberData(): void {
-    this.subscriptionService.getMemberData(this.memberId)
-      .subscribe(
-        result => {
-          this.isLoading = false;
-          this.showDialog = true;
-          this.member = result.member;
-
-        },
-        err => {
-          this.isLoading = false;
-          this.memberError = true;
-        }
-      )
+    this.subscriptionService.getMemberData(this.memberId).subscribe(
+      (result) => {
+        this.isLoading = false;
+        this.showDialog = true;
+        this.member = result.member;
+      },
+      (err) => {
+        this.isLoading = false;
+        this.memberError = true;
+      }
+    );
   }
 }
 
@@ -210,9 +280,9 @@ export class ModalCourseManagerPage implements OnInit {
     MaterialModule,
     FormsModule,
     IonicModule,
-    AtomAsteriskModule
+    AtomAsteriskModule,
   ],
   exports: [],
   providers: [],
 })
-class MemberManagerModule { }
+export class MemberManagerModule {}

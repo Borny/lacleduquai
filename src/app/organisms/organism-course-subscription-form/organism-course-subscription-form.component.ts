@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
+import { SeasonEnum } from '../../models/season.enum';
 import { PaymentMethods } from '../../models/payment-methods.enum';
 import { Course } from '../../models/courses.model';
 import { Workshop } from '../../models/workshop.model';
@@ -11,11 +12,11 @@ import { SubscriptionService } from '../../services/subscription.service';
 import { requireCheckboxesToBeCheckedValidator } from '../../validators/checkbox';
 
 @Component({
-  selector: 'app-pre-subscription',
-  templateUrl: './pre-subscription.page.html',
-  styleUrls: ['./pre-subscription.page.scss'],
+  selector: 'organism-course-subscription-form',
+  templateUrl: './organism-course-subscription-form.component.html',
+  styleUrls: ['./organism-course-subscription-form.component.scss'],
 })
-export class PreSubscriptionPage implements OnInit {
+export class OrganismCourseSubscriptionFormComponent implements OnInit {
   public isLoading = false;
   public formSentSuccess = false;
   public formSentFail = false;
@@ -144,6 +145,14 @@ export class PreSubscriptionPage implements OnInit {
     this.subscriptionForm.addControl(
       'paymentMethod',
       new FormControl(null, Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'subscriptionRequestDate',
+      new FormControl(new Date(), Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'season',
+      new FormControl(SeasonEnum.TWENTY_ONE, Validators.required)
     );
     this._addControl('courses', this.courses, false);
     this._addControl('workshops', this.workshops, false);
