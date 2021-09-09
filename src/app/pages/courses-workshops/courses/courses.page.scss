@@ -1,55 +1,95 @@
 @import '../../../../styles/tools/variables';
 @import '../../../../styles/tools/mixins';
 
-// Courses table
+ion-grid,
+ion-col {
+  padding: 0;
+}
 
-// Mobile
-.mobile-hidden--flex {
-  .courses__table {
+.schedule {
+  &.odd {
+    background: $color-primary;
+    .schedule__heading,
+    .schedule__property,
+    .schedule__value {
+      color: $white;
+    }
+  }
+
+  &__content {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  &__heading {
+    color: $color-primary;
+    font-weight: $fontWeightBold;
+    margin: 0 0 1rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1rem;
+  }
+
+  &__item {
+    display: flex;
+  }
+
+  &__property {
+    flex: 1;
+    color: $color-primary;
+  }
+
+  &__value {
+    flex: 2;
+    color: $grey-dark;
   }
 }
 
-// Desktop
-.mobile-hidden--flex {
-  .courses__table {
-    &__header {
+// .mobile-hidden--flex {
+.courses__table {
+  margin: 2rem auto 0;
+  &__header {
+    background: $color-primary;
+    .courses__table__detail {
+      color: $white;
       background: $color-primary;
+      font-weight: $fontWeightBold;
+    }
+  }
+
+  &__item {
+    display: flex;
+    border: 1px solid $grey-light;
+    border-bottom: none;
+
+    &--header {
       .courses__table__detail {
-        color: $white;
-        background: $color-primary;
         font-weight: $fontWeightBold;
-      }
-    }
-
-    &__item {
-      display: flex;
-      border: 1px solid $grey-light;
-      border-bottom: none;
-
-      &--header {
-        .courses__table__detail {
-          font-weight: $fontWeightBold;
-          color: $color-primary;
-          text-align: left;
-        }
-        border-top: none;
-      }
-      &:last-child {
-        border-bottom: 1px solid $grey-light;
-      }
-    }
-
-    &__detail {
-      flex: 1;
-      text-align: center;
-      padding: 1rem;
-
-      &:first-child {
         color: $color-primary;
+        text-align: left;
       }
-      &:not(:last-child) {
-        border-right: 1px solid $grey-light;
-      }
+      border-top: none;
+    }
+    &:last-child {
+      border-bottom: 1px solid $grey-light;
+    }
+  }
+
+  &__detail {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+
+    &:first-child {
+      color: $color-primary;
+    }
+    &:not(:last-child) {
+      border-right: 1px solid $grey-light;
     }
   }
 }
+// }
