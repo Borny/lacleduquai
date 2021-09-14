@@ -1,22 +1,30 @@
 import { NgModule, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormsModule,
+  FormArray,
+} from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from '@angular/material/datepicker';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 
 import { Event } from '../../../models/events.model';
 
-
 @Component({
   selector: 'modal-event-create-page',
   templateUrl: './modal-event-create.page.html',
-  styleUrls: ['./modal-event-create.page.scss']
+  styleUrls: ['./modal-event-create.page.scss'],
 })
 export class ModalEventCreatePage implements OnInit {
-
   @ViewChild('picker') _picker: MatDatepicker<Date>;
 
   public eventCreateForm: FormGroup;
@@ -39,17 +47,17 @@ export class ModalEventCreatePage implements OnInit {
     'coworking',
     'cours-stages',
     'notre-equipe',
-    'contact'
-  ]
+    'contact',
+  ];
 
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
-  public readonly INTERNAL_LINK = 'interne'
+  public readonly INTERNAL_LINK = 'interne';
   public readonly EXTERNAL_LINK = 'externe';
 
   private _close_on_selected = false;
 
-  constructor(public modalCtrl: ModalController) { }
+  constructor(public modalCtrl: ModalController) {}
 
   ngOnInit() {
     this._initEventCreateForm();
@@ -67,9 +75,9 @@ export class ModalEventCreatePage implements OnInit {
       : this.INTERNAL_LINK;
 
     this.modalCtrl.dismiss({
-      'dismissed': this.CONFIRM,
-      'event': { ...this.event }
-    })
+      dismissed: this.CONFIRM,
+      event: { ...this.event },
+    });
   }
 
   // LINK TYPE
@@ -88,7 +96,7 @@ export class ModalEventCreatePage implements OnInit {
 
   public onCancel(): void {
     this.modalCtrl.dismiss({
-      'dismissed': this.CANCEL
+      dismissed: this.CANCEL,
     });
   }
 
@@ -98,7 +106,7 @@ export class ModalEventCreatePage implements OnInit {
       return ['selected'];
     }
     return [];
-  }
+  };
 
   // On toggle date
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
@@ -110,14 +118,16 @@ export class ModalEventCreatePage implements OnInit {
         this.dates.push(date);
         eventDateFormArray.push(new FormControl(date));
       } else {
-        this.dates.splice(index, 1)
+        this.dates.splice(index, 1);
         eventDateFormArray.removeAt(index);
       }
       this.resetDates = new Date(0);
       if (!this._close_on_selected) {
         const closeFn = this._picker.close;
-        this._picker.close = () => { };
-        this._picker['_popupComponentRef'].instance._calendar.monthView._createWeekCells()
+        this._picker.close = () => {};
+        this._picker[
+          '_popupComponentRef'
+        ].instance._calendar.monthView._createWeekCells();
         setTimeout(() => {
           this._picker.close = closeFn;
         });
@@ -148,7 +158,7 @@ export class ModalEventCreatePage implements OnInit {
       dates: new FormArray([], Validators.required),
       description: new FormControl(null, Validators.required),
       externalLink: new FormControl(false, Validators.required),
-      link: new FormControl(null, Validators.required)
+      link: new FormControl(null, Validators.required),
     });
   }
 
@@ -163,13 +173,18 @@ export class ModalEventCreatePage implements OnInit {
     const currentYear = new Date().getFullYear();
     this.maxDate = new Date(currentYear + 0, 11, 30);
   }
-
 }
 
 @NgModule({
   declarations: [ModalEventCreatePage],
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, MaterialModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonicModule,
+    MaterialModule,
+    FormsModule,
+  ],
   exports: [],
   providers: [],
 })
-class ModalEventCreateModule { }
+export class ModalEventCreateModule {}

@@ -33,4 +33,4 @@ export class ModalDelete {
   exports: [],
   providers: [],
 })
-class ModalDeleteModule { }
+export class ModalDeleteModule { }

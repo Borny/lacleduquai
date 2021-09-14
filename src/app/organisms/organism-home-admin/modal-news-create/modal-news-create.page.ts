@@ -92,4 +92,4 @@ export class ModalNewsCreatePage implements OnInit {
   exports: [],
   providers: [],
 })
-class ModalEventCreateModule { }
+export class ModalEventCreateModule { }
