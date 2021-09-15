@@ -10,7 +10,7 @@
       <ion-list>
         <!-- Name -->
         <ion-item>
-          <ion-label position="floating">Nom</ion-label>
+          <ion-label position="floating">Nom de l'évènement</ion-label>
           <ion-input type="text" name="name" formControlName="name" required></ion-input>
         </ion-item>
         <p class="error-message" [ngClass]="
@@ -39,11 +39,11 @@
         <!-- Schedule -->
         <ion-item>
           <ion-label>Horaire début</ion-label>
-          <ion-datetime displayFormat="HH:mm" (ionChange)="onTimeFromChange($event)"></ion-datetime>
+          <ion-datetime displayFormat="HH:mm"  [minuteValues]="minutesRange" (ionChange)="onTimeFromChange($event)"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>Horaire fin</ion-label>
-          <ion-datetime displayFormat="HH:mm" (ionChange)="onTimeToChange($event)"></ion-datetime>
+          <ion-datetime displayFormat="HH:mm"  [minuteValues]="minutesRange" (ionChange)="onTimeToChange($event)"></ion-datetime>
         </ion-item>
 
         <!-- Price -->

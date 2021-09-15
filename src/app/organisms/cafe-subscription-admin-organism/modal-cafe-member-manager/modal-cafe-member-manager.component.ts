@@ -114,7 +114,6 @@ export class ModalCafeMemberManagerDialog implements OnInit {
       .subscribe(
         (result) => {
           this.member = result.member;
-          console.log(this.member);
           const formatedSubscriptionDate = new Date(
             this.member.subscriptionDate
           ).toLocaleDateString();

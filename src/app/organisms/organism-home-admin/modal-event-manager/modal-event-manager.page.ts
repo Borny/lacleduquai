@@ -56,6 +56,8 @@ export class ModalEventManagerPage implements OnInit {
     'contact',
   ];
 
+  public minutesRange = [0, 15, 30, 45];
+
   public readonly CONFIRM = 'confirm';
   public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = 'cancel';
@@ -262,8 +264,8 @@ export class ModalEventManagerPage implements OnInit {
   private _setMinMaxDates(): void {
     this.minDate = new Date();
 
-    const currentYear = new Date().getFullYear();
-    this.maxDate = new Date(currentYear + 0, 11, 30);
+    const nextYear = new Date().getFullYear() + 1;
+    this.maxDate = new Date(nextYear + 0, 11, 31);
   }
 }
 

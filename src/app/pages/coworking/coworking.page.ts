@@ -291,8 +291,8 @@ export class CoworkingPage implements OnInit {
   private _setMinMaxDates(): void {
     this.minDateFilter = new Date();
 
-    const currentYear = new Date().getFullYear();
-    this.maxDateFilter = new Date(currentYear + 0, 11, 30);
+    const nextYear = new Date().getFullYear() + 1;
+    this.maxDateFilter = new Date(nextYear + 0, 11, 31);
   }
 
   private _findDate(date: Date): number {

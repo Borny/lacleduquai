@@ -50,6 +50,11 @@ export class ModalEventCreatePage implements OnInit {
     'contact',
   ];
 
+  // public hoursRange = [
+  //   0, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+  // ];
+  public minutesRange = [0, 15, 30, 45];
+
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
   public readonly INTERNAL_LINK = 'interne';
@@ -170,8 +175,8 @@ export class ModalEventCreatePage implements OnInit {
   private _setMinMaxDates(): void {
     this.minDate = new Date();
 
-    const currentYear = new Date().getFullYear();
-    this.maxDate = new Date(currentYear + 0, 11, 30);
+    const nextYear = new Date().getFullYear() + 1;
+    this.maxDate = new Date(nextYear + 0, 11, 31);
   }
 }
 
