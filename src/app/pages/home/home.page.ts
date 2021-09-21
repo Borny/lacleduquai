@@ -66,9 +66,6 @@ export class HomePage implements OnInit {
 
   public priceMode = PriceMode;
 
-  // TODO: delete
-  daysListTest = []
-
   public readonly EVENT_CARD_CONTENT_MAX_HEIGHT = '500px';
   public readonly HEADER_TITLE = 'Accueil';
   public readonly TITLE = 'La Clé Du Quai';
@@ -157,12 +154,6 @@ export class HomePage implements OnInit {
   }
 
   private _setDayEventLabel(date: Date): string {
-    console.log(new Date(date).getDate(), new Date().getDate());
-    let item = {
-      dayDate: new Date(date).getDate(),
-      todayDate: new Date().getDate()
-    }
-    this.daysListTest.push(item)
     if (new Date(date).getDate() === new Date().getDate()) {
       return `Aujourd'hui`;
     } else if (new Date(date).getDate() === new Date().getDate() + 1) {
