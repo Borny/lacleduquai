@@ -1,7 +1,13 @@
 import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormsModule,
+} from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
@@ -14,10 +20,9 @@ import { CafeService } from '../../../services/cafe.service';
 @Component({
   selector: 'chalkboard-manager',
   templateUrl: './modal-chalkboard-manager-dialog.component.html',
-  styleUrls: ['./modal-chalkboard-manager-dialog.component.scss']
+  styleUrls: ['./modal-chalkboard-manager-dialog.component.scss'],
 })
 export class ModalChalkboardManagerDialog implements OnInit {
-
   public chalkboardEditionForm: FormGroup = new FormGroup({});
   public chalkboard: Chalkboard;
   public chalkboardId: string;
@@ -32,8 +37,7 @@ export class ModalChalkboardManagerDialog implements OnInit {
   constructor(
     public modalCtrl: ModalController,
     private cafeService: CafeService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -41,21 +45,25 @@ export class ModalChalkboardManagerDialog implements OnInit {
   }
 
   public onSubmit(): void {
-    this.chalkboard.mainCourse = this.chalkboardEditionForm.get('mainCourse').value;
-    this.chalkboard.mainCourseSide = this.chalkboardEditionForm.get('mainCourseSide').value;
-    this.chalkboard.mainCoursePrice = this.chalkboardEditionForm.get('mainCoursePrice').value;
+    this.chalkboard.mainCourse =
+      this.chalkboardEditionForm.get('mainCourse').value;
+    this.chalkboard.mainCourseSide =
+      this.chalkboardEditionForm.get('mainCourseSide').value;
+    this.chalkboard.mainCoursePrice =
+      this.chalkboardEditionForm.get('mainCoursePrice').value;
     this.chalkboard.dessert = this.chalkboardEditionForm.get('dessert').value;
-    this.chalkboard.dessertPrice = this.chalkboardEditionForm.get('dessertPrice').value;
+    this.chalkboard.dessertPrice =
+      this.chalkboardEditionForm.get('dessertPrice').value;
 
     this.modalCtrl.dismiss({
-      'dismissed': this.CONFIRM,
-      'chalkboard': { ...this.chalkboard }
-    })
+      dismissed: this.CONFIRM,
+      chalkboard: { ...this.chalkboard },
+    });
   }
 
   public onCancel(): void {
     this.modalCtrl.dismiss({
-      'dismissed': this.CANCEL
+      dismissed: this.CANCEL,
     });
   }
 
@@ -63,43 +71,55 @@ export class ModalChalkboardManagerDialog implements OnInit {
   // PRIVATE
   ////////////
   private _getChalkboardData(): void {
-    this.cafeService.getChalkboardData()
-      .subscribe(
-        result => {
-          this.chalkboard = result.data[0];
-          this._initChalkboardEditForm();
-          this.isLoading = false;
-        },
-        err => {
-          this.isLoading = false;
-          this.chalkboardError = true;
-        }
-      )
+    this.cafeService.getChalkboardData().subscribe(
+      (result) => {
+        this.chalkboard = result.data[0];
+        this._initChalkboardEditForm();
+        this.isLoading = false;
+      },
+      (err) => {
+        this.isLoading = false;
+        this.chalkboardError = true;
+      }
+    );
   }
 
   private _initChalkboardEditForm(): void {
-    this.chalkboardEditionForm.addControl('mainCourse', new FormControl(this.chalkboard.mainCourse, Validators.required));
-    this.chalkboardEditionForm.addControl('mainCourseSide', new FormControl(this.chalkboard.mainCourseSide));
-    this.chalkboardEditionForm.addControl('mainCoursePrice', new FormControl(this.chalkboard.mainCoursePrice));
-    this.chalkboardEditionForm.addControl('dessert', new FormControl(this.chalkboard.dessert));
-    this.chalkboardEditionForm.addControl('dessertPrice', new FormControl(this.chalkboard.dessertPrice));
+    this.chalkboardEditionForm.addControl(
+      'mainCourse',
+      new FormControl(this.chalkboard.mainCourse, Validators.required)
+    );
+    this.chalkboardEditionForm.addControl(
+      'mainCourseSide',
+      new FormControl(this.chalkboard.mainCourseSide)
+    );
+    this.chalkboardEditionForm.addControl(
+      'mainCoursePrice',
+      new FormControl(this.chalkboard.mainCoursePrice)
+    );
+    this.chalkboardEditionForm.addControl(
+      'dessert',
+      new FormControl(this.chalkboard.dessert)
+    );
+    this.chalkboardEditionForm.addControl(
+      'dessertPrice',
+      new FormControl(this.chalkboard.dessertPrice)
+    );
   }
-
-  // TODO: uncomment when the cafe reopens
-  // private _initChalkboardEditForm(): void {
-  //   this.chalkboardEditionForm.addControl('mainCourse', new FormControl(this.chalkboard.mainCourse, Validators.required));
-  //   this.chalkboardEditionForm.addControl('mainCourseSide', new FormControl(this.chalkboard.mainCourseSide, Validators.required));
-  //   this.chalkboardEditionForm.addControl('mainCoursePrice', new FormControl(this.chalkboard.mainCoursePrice, Validators.required));
-  //   this.chalkboardEditionForm.addControl('dessert', new FormControl(this.chalkboard.dessert, Validators.required));
-  //   this.chalkboardEditionForm.addControl('dessertPrice', new FormControl(this.chalkboard.dessertPrice, Validators.required));
-  // }
-
 }
 
 @NgModule({
   declarations: [ModalChalkboardManagerDialog],
-  imports: [CommonModule, ReactiveFormsModule, SharedModule, IonicModule, MaterialModule, FormsModule, AtomAsteriskModule,],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SharedModule,
+    IonicModule,
+    MaterialModule,
+    FormsModule,
+    AtomAsteriskModule,
+  ],
   exports: [],
   providers: [],
 })
-class OrderManagerModule { }
+export class OrderManagerModule {}

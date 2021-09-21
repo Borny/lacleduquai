@@ -31,4 +31,5 @@ export interface Member {
   subscriptionRequestDate: Date;
   subscriptionDate: Date;
   season: SeasonEnum;
+  waitingList: boolean;
 }

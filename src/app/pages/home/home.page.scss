@@ -305,7 +305,7 @@
   display: inline-block;
   width: 2px;
   height: 15px;
-  margin: 0 0.3rem;
+  margin: 0 0.6rem;
   background: $white;
 }
 
@@ -351,6 +351,7 @@
 
   &__title {
     position: relative;
+    padding: 0 1rem;
     color: $color-primary-dark;
 
     &__icon {

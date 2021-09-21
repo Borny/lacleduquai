@@ -43,7 +43,7 @@
     <ion-row>
 
       <!-- NEWS -->
-      <ion-col class="news" size="12" size-md="6" size-lg="4">
+      <ion-col class="news" size="12" size-md="6" size-lg="4" >
         <div class="news__container">
           <div class="news__label">
             <h2>Nouveautés</h2>
@@ -136,7 +136,7 @@
       </ion-col>
 
       <!-- EVENTS -->
-      <ion-col class="events" size="12" size-sm="8" offset-sm="2" offset-md="0" size-md="6" size-lg="4" offset-md="0">
+      <ion-col class="events" size="12" size-sm="8" offset-sm="2" offset-md="0" size-md="6" size-lg="5" size-xl="4" offset-md="0">
         <lacleduquai-logo-svg class="lcdq-svg ion-hide-md-down"></lacleduquai-logo-svg>
         <!-- EVENTS LOADER -->
         <ion-spinner *ngIf="isDayEventsLoading" class="loader" name="crescent" color="primary"></ion-spinner>
@@ -154,14 +154,15 @@
                 <ion-card-header class="events__card__header" (click)="toggleCollapse(event)">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-card-title color="medium" class="ion-text-center events__card__title">
-                    {{event.name}} - {{event.prof}}
+                    <strong>{{event.name}}</strong> - {{event.prof}}
                     <ion-icon class="events__card__title__icon"
                       [name]="event.expanded ? 'chevron-up-outline': 'chevron-down-outline'"></ion-icon>
                     <small class="event__details">{{event.timeStart | date:"HH"}}h{{event.timeStart |
                       date:"mm"}} - {{event.timeEnd |
                       date:"HH"}}h{{event.timeEnd | date:"mm"}}
                       <span class="spacer--round"></span>
-                      {{event.price | currency}}
+                      <span *ngIf="event.priceMode !== priceMode.PAYING">{{event.price}}</span>
+                      <span *ngIf="event.priceMode === priceMode.PAYING">{{event.price | currency}}</span>
                       <span class="spacer--round"></span>
                       {{event.phone}}
                     </small>
@@ -179,7 +180,7 @@
       </ion-col>
 
       <!-- SOCIAL -->
-      <ion-col size="0" size-lg="4">
+      <ion-col size="0" size-lg="3" size-xl="4">
         <div class="social">
           <div class="social__container">
             <div class="social__item">

@@ -1,3 +1,5 @@
+import { PriceMode } from "./price-mode.enum";
+
 export interface DayEvents {
   date: Date;
   label: string;
@@ -15,7 +17,8 @@ export interface Event {
   timeStart: Date;
   timeEnd: Date;
   price: number;
-  phone: number;
+  priceMode: PriceMode;
+  phone: string;
   description: string;
   linkType: string;
   link: string;

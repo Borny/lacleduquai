@@ -65,6 +65,12 @@ textarea {
   padding: 0;
   font-weight: $fontWeightBase;
   font-family: $fontPoppins;
+
+  // Enable text selection
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .main-view-title {

@@ -6,84 +6,151 @@
   </ion-header>
   <!-- Event info -->
   <ion-content class="ion-padding">
-    <form class="event-edition-form" [formGroup]="eventCreateForm" (ngSubmit)="onSubmit()">
+    <form
+      class="event-edition-form"
+      [formGroup]="eventCreateForm"
+      (ngSubmit)="onSubmit()"
+    >
       <ion-list>
         <!-- Name -->
         <ion-item>
           <ion-label position="floating">Nom de l'évènement</ion-label>
-          <ion-input type="text" name="name" formControlName="name" required></ion-input>
+          <ion-input
+            type="text"
+            name="name"
+            formControlName="name"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message" [ngClass]="
+        <p
+          class="error-message"
+          [ngClass]="
 						eventCreateForm.get('name').invalid &&
 						eventCreateForm.get('name').touched
 							? 'show-error'
 							: ''
-					">
+					"
+        >
           Veuillez renseigner un nom
         </p>
 
         <!-- Prof -->
         <ion-item>
           <ion-label position="floating">Intervenant</ion-label>
-          <ion-input type="text" name="prof" formControlName="prof" required></ion-input>
+          <ion-input
+            type="text"
+            name="prof"
+            formControlName="prof"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message" [ngClass]="
+        <p
+          class="error-message"
+          [ngClass]="
 						eventCreateForm.get('prof').invalid &&
 						eventCreateForm.get('prof').touched
 							? 'show-error'
 							: ''
-					">
+					"
+        >
           Veuillez renseigner un intervenant
         </p>
 
         <!-- Schedule -->
         <ion-item>
           <ion-label>Horaire début</ion-label>
-          <ion-datetime displayFormat="HH:mm"  [minuteValues]="minutesRange" (ionChange)="onTimeFromChange($event)"></ion-datetime>
+          <ion-datetime
+            displayFormat="HH:mm"
+            [minuteValues]="minutesRange"
+            (ionChange)="onTimeFromChange($event)"
+          ></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>Horaire fin</ion-label>
-          <ion-datetime displayFormat="HH:mm"  [minuteValues]="minutesRange" (ionChange)="onTimeToChange($event)"></ion-datetime>
+          <ion-datetime
+            displayFormat="HH:mm"
+            [minuteValues]="minutesRange"
+            (ionChange)="onTimeToChange($event)"
+          ></ion-datetime>
         </ion-item>
 
         <!-- Price -->
-        <ion-item>
+        <ion-list-header>
+          <ion-label> Prix </ion-label>
+        </ion-list-header>
+        <ion-list>
+          <ion-radio-group class="display-flex">
+            <ion-item *ngFor="let priceMode of priceModes">
+              <ion-label>{{ priceMode.label }}</ion-label>
+              <ion-radio
+                (ionFocus)="onPriceModeSelected(priceMode)"
+                [value]="priceMode.value"
+              ></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-item *ngIf="priceModePaying">
           <ion-label position="floating">Prix</ion-label>
-          <ion-input type="number" min="0" name="price" formControlName="price" required></ion-input>
+          <ion-input
+            type="number"
+            min="0"
+            name="price"
+            formControlName="price"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message" [ngClass]="
+        <p
+          class="error-message"
+          [ngClass]="
 						eventCreateForm.get('price').invalid &&
 						eventCreateForm.get('price').touched
 							? 'show-error'
 							: ''
-					">
+					"
+        >
           Veuillez renseigner un prix
         </p>
 
         <!-- Phone -->
         <ion-item>
           <ion-label position="floating">Téléphone</ion-label>
-          <ion-input type="number" name="phone" formControlName="phone" required></ion-input>
+          <ion-input
+            type="text"
+            name="phone"
+            formControlName="phone"
+            required
+          ></ion-input>
         </ion-item>
-        <p class="error-message" [ngClass]="
+        <p
+          class="error-message"
+          [ngClass]="
 						eventCreateForm.get('phone').invalid &&
 						eventCreateForm.get('phone').touched
 							? 'show-error'
 							: ''
-					">
+					"
+        >
           Veuillez renseigner un numéro de téléphone
         </p>
 
         <!-- Description -->
         <ion-item>
           <ion-label position="floating">Description</ion-label>
-          <ion-textarea rows="6" cols="20" maxlength="500" formControlName="description" required>
+          <ion-textarea
+            rows="6"
+            cols="20"
+            maxlength="500"
+            formControlName="description"
+          >
           </ion-textarea>
         </ion-item>
-        <p class="error-message"
-          [ngClass]="eventCreateForm.get('description').invalid && eventCreateForm.get('description').touched ? 'show-error' : ''">
+        <!-- <p
+          class="error-message"
+          [ngClass]="eventCreateForm.get('description').invalid && eventCreateForm.get('description').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner une description
-        </p>
+        </p> -->
 
         <!-- LINK TYPE -->
         <ion-item lines="none" class="slide-toggle__section">
@@ -91,43 +158,85 @@
         </ion-item>
         <div class="slide-toggle__container">
           <ion-text [color]="isExternalLink ? '' : 'primary'">Interne</ion-text>
-          <ion-toggle class="slide-toggle__input" [color]="isExternalLink ? 'secondary' : 'primary'"
-            formControlName="externalLink" (ionChange)="toggleLinkType($event)">
+          <ion-toggle
+            class="slide-toggle__input"
+            [color]="isExternalLink ? 'secondary' : 'primary'"
+            formControlName="externalLink"
+            (ionChange)="toggleLinkType($event)"
+          >
           </ion-toggle>
-          <ion-text [color]="isExternalLink ? 'secondary' : ''">Externe</ion-text>
+          <ion-text [color]="isExternalLink ? 'secondary' : ''"
+            >Externe</ion-text
+          >
         </div>
 
         <!-- INTERNAL LINK -->
         <ion-item *ngIf="!isExternalLink">
           <ion-label position="floating">Lien</ion-label>
           <ion-select formControlName="link" interface="popover">
-            <ion-select-option *ngFor="let link of internalLinks; let i = index">/lcdq/{{link}}</ion-select-option>
+            <ion-select-option *ngFor="let link of internalLinks; let i = index"
+              >/lcdq/{{link}}</ion-select-option
+            >
           </ion-select>
         </ion-item>
 
         <!-- EXTERNAL LINK -->
         <ion-item *ngIf="isExternalLink">
           <ion-label position="floating">Lien</ion-label>
-          <ion-input type="text" name="link" formControlName="link" required></ion-input>
+          <ion-input
+            type="text"
+            name="link"
+            formControlName="link"
+            required
+          ></ion-input>
         </ion-item>
-        <p *ngIf="isExternalLink" class="error-message"
-          [ngClass]="eventCreateForm.get('link').invalid && eventCreateForm.get('link').touched ? 'show-error' : ''">
+        <p
+          *ngIf="isExternalLink"
+          class="error-message"
+          [ngClass]="eventCreateForm.get('link').invalid && eventCreateForm.get('link').touched ? 'show-error' : ''"
+        >
           Veuillez renseigner un lien
         </p>
 
         <!-- Event Dates -->
         <mat-form-field appearance="fill" class="form__calendar">
           <mat-label>Sélectionnez une/des date(s) :</mat-label>
-          <mat-chip-list #chipList aria-label="Choisir une date" (click)="picker.open()">
-            <mat-chip *ngFor="let value of dates" [selectable]="false" [removable]="true" (removed)="remove(value)">
+          <mat-chip-list
+            #chipList
+            aria-label="Choisir une date"
+            (click)="picker.open()"
+          >
+            <mat-chip
+              *ngFor="let value of dates"
+              [selectable]="false"
+              [removable]="true"
+              (removed)="remove(value)"
+            >
               {{ value | date }}
               <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
             </mat-chip>
-            <input matInput placeholder="Choisir une date" [value]="resetDates" [matDatepicker]="picker" [min]="minDate"
-              [max]="maxDate" [matChipInputFor]="chipList" (dateChange)="dateChanged($event)" required hidden />
+            <input
+              matInput
+              placeholder="Choisir une date"
+              [value]="resetDates"
+              [matDatepicker]="picker"
+              [min]="minDate"
+              [max]="maxDate"
+              [matChipInputFor]="chipList"
+              (dateChange)="dateChanged($event)"
+              required
+              hidden
+            />
           </mat-chip-list>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker
+            [startAt]="init"
+            [dateClass]="dateClass"
+          ></mat-datepicker>
         </mat-form-field>
       </ion-list>
     </form>
@@ -135,7 +244,12 @@
   <!-- CTAs -->
   <div class="ion-padding btn__container">
     <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
-    <ion-button [disabled]="eventCreateForm.invalid || eventCreateForm.pristine" color="primary" (click)="onSubmit()">
+    <ion-button
+      [disabled]="eventCreateForm.invalid || eventCreateForm.pristine"
+      color="primary"
+      fill="outline"
+      (click)="onSubmit()"
+    >
       Créer
     </ion-button>
   </div>

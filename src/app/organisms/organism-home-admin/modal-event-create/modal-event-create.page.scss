@@ -55,4 +55,5 @@ ion-toggle {
 .btn__container {
   display: flex;
   justify-content: flex-end;
+  border-top: 1px solid $color-primary; 
 }

@@ -10,6 +10,7 @@ import { HomeService } from '../../services/home.service';
 
 import { News } from '../../models/news.model';
 import { DayEvents, Event } from '../../models/events.model';
+import { PriceMode } from 'src/app/models/price-mode.enum';
 
 @Component({
   selector: 'app-home',
@@ -52,6 +53,8 @@ export class HomePage implements OnInit {
     'Novembre',
     'Decembre',
   ];
+
+  public priceMode = PriceMode;
 
   public readonly EVENT_CARD_CONTENT_MAX_HEIGHT = '500px';
   public readonly HEADER_TITLE = 'Accueil';

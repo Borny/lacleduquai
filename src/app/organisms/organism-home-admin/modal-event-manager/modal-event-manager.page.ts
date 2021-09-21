@@ -20,6 +20,7 @@ import { MaterialModule } from '../../../angular-material/angular-material.modul
 import { ModalDelete } from '../modal-delete/modal-delete.component';
 
 import { Event } from '../../../models/events.model';
+import { PriceMode } from 'src/app/models/price-mode.enum';
 
 @Component({
   selector: 'modal-event-manager-page',
@@ -41,6 +42,7 @@ export class ModalEventManagerPage implements OnInit {
   public maxDate: Date;
   public resetDates = new Date(0);
   public isExternalLink: boolean;
+  public priceModePaying = false;
 
   public internalLinks: string[] = [
     'accueil',
@@ -54,6 +56,21 @@ export class ModalEventManagerPage implements OnInit {
     'cours-stages',
     'notre-equipe',
     'contact',
+  ];
+
+  public priceModes = [
+    {
+      label: PriceMode.FREE,
+      value: PriceMode.FREE,
+    },
+    {
+      label: PriceMode.OPEN_PRICE,
+      value: PriceMode.OPEN_PRICE,
+    },
+    {
+      label: PriceMode.PAYING,
+      value: PriceMode.PAYING,
+    },
   ];
 
   public minutesRange = [0, 15, 30, 45];
@@ -86,6 +103,7 @@ export class ModalEventManagerPage implements OnInit {
     this.event.timeStart = this.eventEditionForm.get('timeStart').value;
     this.event.timeStart = this.eventEditionForm.get('timeEnd').value;
     this.event.price = this.eventEditionForm.get('price').value;
+    this.event.priceMode = this.eventEditionForm.get('priceMode').value;
     this.event.phone = this.eventEditionForm.get('phone').value;
     this.event.description = this.eventEditionForm.get('description').value;
     this.event.link = this.eventEditionForm.get('link').value;
@@ -189,6 +207,12 @@ export class ModalEventManagerPage implements OnInit {
     this.isExternalLink = !this.isExternalLink;
   }
 
+  public onPriceModeSelected(priceMode: any): void {
+    this.priceModePaying = priceMode.value === PriceMode.PAYING;
+    this.eventEditionForm.get('price').patchValue(priceMode.value);
+    this.eventEditionForm.get('priceMode').patchValue(priceMode.value);
+  }
+
   ////////////
   // PRIVATE
   ////////////
@@ -212,10 +236,11 @@ export class ModalEventManagerPage implements OnInit {
     );
     this.eventEditionForm.addControl(
       'price',
-      new FormControl(
-        this.event.price,
-        Validators.compose([Validators.min(0), Validators.required])
-      )
+      new FormControl(this.event.price, Validators.required)
+    );
+    this.eventEditionForm.addControl(
+      'priceMode',
+      new FormControl(this.event.priceMode, Validators.required)
     );
     this.eventEditionForm.addControl(
       'phone',
@@ -226,7 +251,7 @@ export class ModalEventManagerPage implements OnInit {
     );
     this.eventEditionForm.addControl(
       'description',
-      new FormControl(this.event.description, Validators.required)
+      new FormControl(this.event.description)
     );
     this.eventEditionForm.addControl(
       'externalLink',
@@ -242,6 +267,8 @@ export class ModalEventManagerPage implements OnInit {
     );
     this._addControl('dates', this.event.dates, true);
     this.dates = this.event.dates;
+
+    this.priceModePaying = this.event.priceMode === PriceMode.PAYING;
   }
 
   private _addControl(

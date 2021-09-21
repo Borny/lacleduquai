@@ -18,6 +18,7 @@ import {
 import { MaterialModule } from '../../../angular-material/angular-material.module';
 
 import { Event } from '../../../models/events.model';
+import { PriceMode } from 'src/app/models/price-mode.enum';
 
 @Component({
   selector: 'modal-event-create-page',
@@ -34,7 +35,8 @@ export class ModalEventCreatePage implements OnInit {
   public minDate: Date;
   public maxDate: Date;
   public resetDates = new Date(0);
-  public isExternalLink: boolean = false;
+  public isExternalLink = false;
+  public priceModePaying = false;
 
   public internalLinks: string[] = [
     'accueil',
@@ -48,6 +50,21 @@ export class ModalEventCreatePage implements OnInit {
     'cours-stages',
     'notre-equipe',
     'contact',
+  ];
+
+  public priceModes = [
+    {
+      label: PriceMode.FREE,
+      value: PriceMode.FREE,
+    },
+    {
+      label: PriceMode.OPEN_PRICE,
+      value: PriceMode.OPEN_PRICE,
+    },
+    {
+      label: PriceMode.PAYING,
+      value: PriceMode.PAYING,
+    },
   ];
 
   // public hoursRange = [
@@ -149,6 +166,12 @@ export class ModalEventCreatePage implements OnInit {
     eventDateFormArray.removeAt(index);
   }
 
+  public onPriceModeSelected(priceMode: any): void {
+    this.priceModePaying = priceMode.value === PriceMode.PAYING;
+    this.eventCreateForm.get('price').patchValue(priceMode.value);
+    this.eventCreateForm.get('priceMode').patchValue(priceMode.value);
+  }
+
   ////////////
   // PRIVATE
   ////////////
@@ -159,9 +182,10 @@ export class ModalEventCreatePage implements OnInit {
       timeStart: new FormControl(null, Validators.required),
       timeEnd: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
+      priceMode: new FormControl(null, Validators.required),
       phone: new FormControl(null, Validators.required),
       dates: new FormArray([], Validators.required),
-      description: new FormControl(null, Validators.required),
+      description: new FormControl(null),
       externalLink: new FormControl(false, Validators.required),
       link: new FormControl(null, Validators.required),
     });
