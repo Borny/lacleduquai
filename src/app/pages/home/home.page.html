@@ -43,7 +43,7 @@
     <ion-row>
 
       <!-- NEWS -->
-      <ion-col class="news" size="12" size-md="6" size-lg="4" >
+      <ion-col class="news" size="12" size-md="6" size-lg="4">
         <div class="news__container">
           <div class="news__label">
             <h2>Nouveautés</h2>
@@ -140,8 +140,6 @@
         <lacleduquai-logo-svg class="lcdq-svg ion-hide-md-down"></lacleduquai-logo-svg>
         <!-- EVENTS LOADER -->
         <ion-spinner *ngIf="isDayEventsLoading" class="loader" name="crescent" color="primary"></ion-spinner>
-
-<p *ngFor="let item of daysListTest">{{item.dayDate}} - {{item.todayDate}}</p>
 
         <!-- Event lists -->
         <ng-container *ngIf="!isDayEventsLoading">
