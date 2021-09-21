@@ -2,7 +2,17 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { filter, map } from 'rxjs/operators';
 
-import { trigger, state, style, animate, transition, animateChild, query, group, animation } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  animateChild,
+  query,
+  group,
+  animation,
+} from '@angular/animations';
 
 import { fadeInAnimationView } from '../../animations';
 
@@ -60,7 +70,7 @@ export class HomePage implements OnInit {
   public readonly HEADER_TITLE = 'Accueil';
   public readonly TITLE = 'La Clé Du Quai';
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
     this._getNews();
@@ -75,15 +85,16 @@ export class HomePage implements OnInit {
     if (eventClicked.expanded) {
       eventClicked.expanded = false;
     } else {
-      this.daysList.forEach(
-        day => day.events.map(e => {
+      this.daysList.forEach((day) =>
+        day.events.map((e) => {
           if (eventClicked === e) {
             e.expanded = !e.expanded;
           } else {
             e.expanded = false;
           }
           return e;
-        }))
+        })
+      );
     }
   }
 
@@ -113,7 +124,11 @@ export class HomePage implements OnInit {
           response.daysListFiltered = response.daysListFiltered
             .map((day) => {
               // Sorting the events by ascending time
-              day.events.sort((a, b) => new Date(a.timeStart).getTime() - new Date(b.timeStart).getTime());
+              day.events.sort(
+                (a, b) =>
+                  new Date(a.timeStart).getTime() -
+                  new Date(b.timeStart).getTime()
+              );
               // Adding a label to the day
               day.label = this._setDayEventLabel(day.date);
               return day;
@@ -126,7 +141,9 @@ export class HomePage implements OnInit {
       .subscribe(
         (response) => {
           this.isDayEventsLoading = false;
-          response.daysListFiltered.forEach(day => day.events.forEach(event => event.expanded = false));
+          response.daysListFiltered.forEach((day) =>
+            day.events.forEach((event) => (event.expanded = false))
+          );
           this.daysList = response.daysListFiltered;
         },
         (error) => {
@@ -137,6 +154,7 @@ export class HomePage implements OnInit {
   }
 
   private _setDayEventLabel(date: Date): string {
+    console.log(new Date(date).getDate(), new Date().getDate());
     if (new Date(date).getDate() === new Date().getDate()) {
       return `Aujourd'hui`;
     } else if (new Date(date).getDate() === new Date().getDate() + 1) {
