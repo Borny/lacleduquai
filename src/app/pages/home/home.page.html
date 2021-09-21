@@ -141,6 +141,8 @@
         <!-- EVENTS LOADER -->
         <ion-spinner *ngIf="isDayEventsLoading" class="loader" name="crescent" color="primary"></ion-spinner>
 
+<p *ngFor="let item of daysListTest">{{item.dayDate}} - {{item.todayDate}}</p>
+
         <!-- Event lists -->
         <ng-container *ngIf="!isDayEventsLoading">
           <h2 class="events__container-label">Nos Evenements</h2>
