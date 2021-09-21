@@ -183,7 +183,10 @@ export class ModalEventCreatePage implements OnInit {
       timeEnd: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
       priceMode: new FormControl(null, Validators.required),
-      phone: new FormControl(null, Validators.required),
+      phone: new FormControl(
+        null,
+        Validators.compose([Validators.required, Validators.minLength(10)])
+      ),
       dates: new FormArray([], Validators.required),
       description: new FormControl(null),
       externalLink: new FormControl(false, Validators.required),
