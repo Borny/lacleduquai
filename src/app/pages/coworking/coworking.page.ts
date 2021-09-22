@@ -20,7 +20,6 @@ export class CoworkingPage implements OnInit {
   @ViewChild('picker') _picker: MatDatepicker<Date>;
   @ViewChild('creditCardElement') creditCardElement: ElementRef;
 
-  public cardErrors: any;
   public init = new Date();
   public resetModel = new Date(0);
   public model: Date[] = [];
@@ -33,7 +32,6 @@ export class CoworkingPage implements OnInit {
   public minDateFilter: Date;
   public maxDateFilter: Date;
   public totalPrice = 0;
-  public isCardValid = false;
   public pricePerHour = 6.5;
 
   // TODO: get the real data form the server
@@ -79,13 +77,17 @@ export class CoworkingPage implements OnInit {
   public readonly PAY_BUTTON_TEXT = 'Régler';
   public readonly RELOAD = 'Réessayer';
 
-  // Card number
-  private readonly FRENCH_CARD_NUMBER = 4000002500000003;
-
-  private _close_on_selected = false;
-
+  // STRIPE
+  public isCardValid = false;
+  public cardErrors: string;
   private stripe: any; // : stripe.Stripe;
   private creditCardContainer: any;
+
+  // Card number
+  private readonly FRENCH_CARD_NUMBER = 4000002500000003;
+  private readonly DECLINED_PAYMENT_CARD_NUMBER = 4000000000009995;
+
+  private _close_on_selected = false;
 
   constructor(
     private router: Router,
