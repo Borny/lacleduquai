@@ -11,13 +11,18 @@ export interface Check {
   depositDate?: Date;
 }
 
+interface CourseMember {
+  waitingList: boolean;
+  courseId: string;
+}
+
 export interface Member {
   _id: string;
   lastName: string;
   firstName: string;
   phone: string;
   email: string;
-  courses: string[];
+  courses: CourseMember[];
   workshops: string[];
   refunds?: Refund[];
   totalRefund?: number;
@@ -31,5 +36,4 @@ export interface Member {
   subscriptionRequestDate: Date;
   subscriptionDate: Date;
   season: SeasonEnum;
-  waitingList: boolean;
 }

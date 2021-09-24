@@ -10,6 +10,25 @@
   flex-flow: column;
 }
 
+// COURSES
+.course-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0.5rem;
+}
+
+ion-toggle {
+  --background: rgba(255, 222, 0, 0.5);
+  --handle-background: #ffde00;
+}
+
+.slide-toggle__container {
+  display: flex;
+  align-items: center;
+}
+
+// CHECK
 .check-tab {
   border: 1px solid $color-primary-light;
 

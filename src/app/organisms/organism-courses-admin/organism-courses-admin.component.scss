@@ -15,14 +15,19 @@
 }
 
 // Filter
-.filter__container {
-  display: flex;
-  align-items: center;
-  justify-content: stretch;
-  flex-flow: row wrap;
-  padding: 1rem 0;
-  > * {
-    margin: 0 1rem 0 0;
+.filter {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-flow: row wrap;
+    padding: 1rem 0;
+    > * {
+      margin: 0 1rem 0 0;
+    }
+  }
+  &__select {
+    width: 400px;
   }
 }
 

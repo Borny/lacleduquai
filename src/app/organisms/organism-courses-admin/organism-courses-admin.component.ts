@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { finalize } from 'rxjs/operators';
+import { Course } from 'src/app/models/courses.model';
 import { SeasonEnum } from 'src/app/models/season.enum';
 import { Season } from 'src/app/models/season.model';
 
@@ -19,6 +21,8 @@ import { ModalCourseRefundPage } from './modal-course-refund/modal-course-refund
 export class OrganismCoursesAdminComponent implements OnInit {
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
+  public currentMembersDataWaitingList: Member[] = [];
+  public currentMembersDataMainList: Member[] = [];
   public isLoading = false;
   public memberError = false;
   public matSelect: any;
@@ -72,30 +76,31 @@ export class OrganismCoursesAdminComponent implements OnInit {
   ];
 
   public filterOptions = [
-    {
-      filterName: 'payment',
-      filterLabel: 'Paiement',
-      values: ['Paiement dû', 'Paiement effectué'],
-    },
+    // {
+    //   filterName: 'payment',
+    //   filterLabel: 'Paiement',
+    //   values: ['Paiement dû', 'Paiement effectué'],
+    // },
     {
       filterName: 'course',
       filterLabel: 'Cours',
-      values: [
-        'lundi 18h30',
-        'lundi 20h30',
-        'mardi 18h30',
-        'mardi 20h30',
-        'mercredi 18h30',
-        'mercredi 20h30',
-        'jeudi 18h30',
-        'jeudi 20h30',
-      ],
+      options: [],
+      // values: [
+      //   'lundi 18h30',
+      //   'lundi 20h30',
+      //   'mardi 18h30',
+      //   'mardi 20h30',
+      //   'mercredi 18h30',
+      //   'mercredi 20h30',
+      //   'jeudi 18h30',
+      //   'jeudi 20h30',
+      // ],
     },
-    {
-      filterName: 'alphabeticalOrder',
-      filterLabel: 'Ordre alphabétique',
-      values: ['A - Z', 'Z - A'],
-    },
+    // {
+    //   filterName: 'alphabeticalOrder',
+    //   filterLabel: 'Ordre alphabétique',
+    //   values: ['A - Z', 'Z - A'],
+    // },
   ];
 
   constructor(
@@ -105,8 +110,43 @@ export class OrganismCoursesAdminComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._getMembersData(this.seasonEnum.TWENTY_ONE);
-    this.selectedSeason = this.seasons[1].label;
+    this._getCourses();
+
+    // this._getMembersData(this.seasonEnum.TWENTY_ONE);
+    // this.selectedSeason = this.seasons[1].label;
+  }
+
+  private _getCourses(): void {
+    this.isLoading = true;
+    this.subscriptionService
+      .getCourseList()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe(({ courseList }) => {
+        console.log(courseList);
+        courseList
+          .sort((a: Course, b: Course) => a.position - b.position)
+          .forEach((course) => {
+            const courseData: Course = {
+              _id: course._id,
+              name: course.name,
+              time: course.time,
+              maxAttendee: course.maxAttendee,
+              attendeesCount: course.attendeesCount,
+              day: course.day,
+              level: course.level,
+              professor: course.professor,
+              position: course.position,
+            };
+            let courseLabel = {
+              label: `${courseData.day} - ${courseData.time} - ${courseData.name}`,
+              value: courseData._id,
+            };
+            this.filterOptions[0].options.push(courseLabel);
+          });
+
+        // this.courses.sort((a: Course, b: Course) => a.position - b.position);
+        // console.log(this.filterOptions);
+      });
   }
 
   async onOpenCourseRefundModal(
@@ -205,7 +245,18 @@ export class OrganismCoursesAdminComponent implements OnInit {
           this.originalMembersData = this.originalMembersData.filter(
             (member) => member._id !== updatedMember._id
           );
+
           this.currentMembersData = this.originalMembersData;
+
+          this.currentMembersDataWaitingList =
+            this.currentMembersDataWaitingList.filter(
+              (member) => member._id !== updatedMember._id
+            );
+          this.currentMembersDataMainList =
+            this.currentMembersDataMainList.filter(
+              (member) => member._id !== updatedMember._id
+            );
+
           // show snack bar
           this._presentToast(this.MEMBER_DELETED_SUCCESS, 'success');
         },
@@ -222,6 +273,7 @@ export class OrganismCoursesAdminComponent implements OnInit {
   }
 
   public onSelectedOption(filter: string, value?: string): void {
+    console.log(filter, value);
     this.matSelect = value;
     switch (filter) {
       case 'payment':
@@ -272,27 +324,28 @@ export class OrganismCoursesAdminComponent implements OnInit {
 
   private _getMembersData(season?: string): void {
     this.isLoading = true;
-    this.subscriptionService.getMembersData(season).subscribe(
-      (response) => {
-        this.isLoading = false;
-        this.originalMembersData = response.data;
-        this.currentMembersData = [...this.originalMembersData];
+    this.subscriptionService
+      .getMembersData(season)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe(
+        (response) => {
+          this.originalMembersData = response.data;
+          this.currentMembersData = [...this.originalMembersData];
 
-        this._generateEmailList();
-      },
-      (err) => {
-        this.isLoading = false;
-        this.memberError = true;
-      }
-    );
+          this._generateEmailList();
+        },
+        (err) => {
+          this.memberError = true;
+        }
+      );
   }
 
   private filterPayment(selectValue: string): void {
-    if (selectValue === this.filterOptions[0].values[0]) {
+    if (selectValue === this.filterOptions[0].options[0]) {
       this.currentMembersData = this.originalMembersData.filter(
         (member) => member.paymentReceived === false
       );
-    } else if (selectValue === this.filterOptions[0].values[1]) {
+    } else if (selectValue === this.filterOptions[0].options[1]) {
       this.currentMembersData = this.originalMembersData.filter(
         (member) => member.paymentReceived === true
       );
@@ -305,13 +358,54 @@ export class OrganismCoursesAdminComponent implements OnInit {
     if (selectValue === undefined) {
       return (this.currentMembersData = this.originalMembersData);
     }
-    this.currentMembersData = this.originalMembersData.filter((member) =>
-      member.courses.includes(selectValue)
-    );
+
+    this.subscriptionService
+      .getFilteredMembers(selectValue)
+      .subscribe((data) => {
+        this.originalMembersData = data.data;
+        this.currentMembersData = [...this.originalMembersData];
+
+        // Waiting members
+        const waitingMembs = [];
+        this.currentMembersData.forEach((member) => {
+          if (
+            member.courses.filter(
+              (course) => course.courseId === selectValue && course.waitingList
+            ).length
+          ) {
+            waitingMembs.push(member);
+          }
+          return waitingMembs;
+        });
+        this.currentMembersDataWaitingList = waitingMembs;
+
+        // Main members
+        const mainMembs = [];
+        this.currentMembersData.forEach((member) => {
+          if (
+            member.courses.filter(
+              (course) => course.courseId === selectValue && !course.waitingList
+            ).length
+          ) {
+            mainMembs.push(member);
+          }
+          return mainMembs;
+        });
+        this.currentMembersDataMainList = mainMembs;
+
+        // console.log(
+        //   'this.currentMembersDataWaitingList',
+        //   this.currentMembersDataWaitingList
+        // );
+      });
+    // this.currentMembersData = this.originalMembersData.filter((member) =>
+    // // TODO: fix this
+    //   // member.courses.includes(selectValue)
+    // );
   }
 
   private filterAlphaOrder(selectValue: string): void {
-    if (selectValue === this.filterOptions[2].values[0]) {
+    if (selectValue === this.filterOptions[2].options[0]) {
       this.currentMembersData = this.currentMembersData.sort(function (a, b) {
         const nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.lastName.toUpperCase(); // ignore upper and lowercase
@@ -324,7 +418,7 @@ export class OrganismCoursesAdminComponent implements OnInit {
         // names must be equal
         return 0;
       });
-    } else if (selectValue === this.filterOptions[2].values[1]) {
+    } else if (selectValue === this.filterOptions[2].options[1]) {
       this.currentMembersData = this.currentMembersData.sort((a, b) => {
         const nameA = a.lastName.toUpperCase(); // ignore upper and lowercase
         const nameB = b.lastName.toUpperCase(); // ignore upper and lowercase

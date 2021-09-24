@@ -14,6 +14,8 @@ export class FilterMolecule implements OnChanges {
   @Input() select: any;
   @Input() selectLabel: string;
   @Input() filterOptions: string[];
+  // @Input() filterValues: string[];
+  @Input() isAllEnable: boolean;
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.

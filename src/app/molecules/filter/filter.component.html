@@ -2,9 +2,9 @@
   <mat-form-field>
     <mat-label>{{ selectLabel }}</mat-label>
     <mat-select #matSelect (selectionChange)="onSelectedOption($event.value)">
-      <mat-option>Tous</mat-option>
-      <mat-option *ngFor="let option of filterOptions" [value]="option">
-        {{ option }}
+      <mat-option *ngIf="isAllEnable">Tous</mat-option>
+      <mat-option *ngFor="let option of filterOptions" [value]="option.value">
+        {{ option.label }}
       </mat-option>
     </mat-select>
   </mat-form-field>

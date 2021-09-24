@@ -30,10 +30,15 @@
               >
                 <div
                   class="schedule__item"
-                  *ngFor="let item of activity.properties"
+                  *ngFor="let item of activity.properties; let i = index"
                 >
-                  <p class="schedule__property">{{item.name}}</p>
-                  <p class="schedule__value">{{item.value}}</p>
+                  <p *ngIf="i === 0" class="schedule__property">
+                    <strong>{{item.value}}</strong>
+                  </p>
+                  <p *ngIf="i !== 0" class="schedule__property">
+                    {{item.name}}
+                  </p>
+                  <p *ngIf="i !== 0" class="schedule__value">{{item.value}}</p>
                 </div>
               </div>
             </div>
@@ -62,7 +67,8 @@
             </li>
             <li class="courses__table__item">
               <div class="courses__table__detail">
-                2 ateliers / semaine (2h + 2h) - abonnement annuel danse et théâtre
+                2 ateliers / semaine (2h + 2h) - abonnement annuel danse et
+                théâtre
               </div>
               <div class="courses__table__detail">630€ / an</div>
             </li>

@@ -58,7 +58,25 @@
       <div class="ion-padding-start ion-margin-vertical">
         <p>Cours:</p>
         <ul>
-          <li *ngFor="let course of member.courses">- {{ course }}</li>
+          <li *ngFor="let course of member.courses" class="course-list-item">
+            - {{ course.courseLabel }}
+            <div class="slide-toggle__container">
+              <ion-text [color]="course.waitingList ? 'secondary' : ''"
+                >Liste d'attente</ion-text
+              >
+              <ion-toggle
+                class="slide-toggle__input"
+                [color]="course.waitingList ? 'secondary' : 'primary'"
+                [value]="course"
+                [checked]="!course.waitingList"
+                (ionChange)="toggleWaitingList($event)"
+              >
+              </ion-toggle>
+              <ion-text [color]="course.waitingList ? '' : 'primary'"
+                >Membre</ion-text
+              >
+            </div>
+          </li>
         </ul>
       </div>
 

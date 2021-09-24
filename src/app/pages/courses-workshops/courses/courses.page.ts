@@ -16,16 +16,16 @@ export class CoursesPage implements OnInit {
       activities: [
         {
           properties: [
-            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Atelier', value: 'Théâtre' },
+            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Jérôme Chambon' },
           ],
         },
         {
           properties: [
-            { name: 'Horaires', value: '20h30-22h30' },
             { name: 'Atelier', value: 'Théâtre' },
+            { name: 'Horaires', value: '20h30-22h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Jérôme Chambon' },
           ],
@@ -37,16 +37,16 @@ export class CoursesPage implements OnInit {
       activities: [
         {
           properties: [
-            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Atelier', value: 'Danse contemporaine' },
+            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Côme Tanguy' },
           ],
         },
         {
           properties: [
-            { name: 'Horaires', value: '20h30-23h00' },
             { name: 'Atelier', value: 'Cie Amateur Danse-Théâtre' },
+            { name: 'Horaires', value: '20h30-23h00' },
             { name: 'Niveau', value: 'Avancé' },
             { name: 'Intervenant', value: 'Côme Tanguy' },
           ],
@@ -58,16 +58,16 @@ export class CoursesPage implements OnInit {
       activities: [
         {
           properties: [
-            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Atelier', value: 'Danse-Théâtre' },
+            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Côme Tanguy' },
           ],
         },
         {
           properties: [
-            { name: 'Horaires', value: '20h30-22h30' },
             { name: 'Atelier', value: 'Danse Contemporaine' },
+            { name: 'Horaires', value: '20h30-22h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Côme Tanguy' },
           ],
@@ -79,16 +79,16 @@ export class CoursesPage implements OnInit {
       activities: [
         {
           properties: [
-            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Atelier', value: 'Théâtre' },
+            { name: 'Horaires', value: '18h30-20h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Julien Jamet' },
           ],
         },
         {
           properties: [
-            { name: 'Horaires', value: '20h30-22h30' },
             { name: 'Atelier', value: 'Théâtre - Improvisation' },
+            { name: 'Horaires', value: '20h30-22h30' },
             { name: 'Niveau', value: 'Tout niveau' },
             { name: 'Intervenant', value: 'Julien Jamet' },
           ],

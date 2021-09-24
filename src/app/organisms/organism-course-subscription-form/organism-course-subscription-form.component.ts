@@ -30,79 +30,8 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
     PaymentMethods.THIRD,
   ];
 
-  public courses: Course[] = [
-    {
-      id: '1',
-      detail: 'Lundi 18h30 / Théâtre',
-      name: 'lundi 18h30',
-    },
-    {
-      id: '2',
-      detail: 'Lundi 20h30 / Théâtre',
-      name: 'lundi 20h30',
-    },
-    {
-      id: '3',
-      detail: 'Mardi 18h30 / Danse contemporaine',
-      name: 'mardi 18h30',
-    },
-    {
-      id: '4',
-      detail: 'Mardi 20h30 / Cie Amateur',
-      name: 'mardi 20h30',
-    },
-    {
-      id: '5',
-      detail: 'Mercredi 18h30 / Danse-théâtre',
-      name: 'mercredi 18h30',
-    },
-    {
-      id: '6',
-      detail: 'Mercredi 20h30 / Danse contemporaine',
-      name: 'mercredi 20h30',
-    },
-    {
-      id: '7',
-      detail: 'Jeudi 18h30 / Théâtre',
-      name: 'jeudi 18h30',
-    },
-    {
-      id: '8',
-      detail: 'Jeudi 20h30 / Improvisation',
-      name: 'jeudi 20h30',
-    },
-  ];
-
-  public workshops: Workshop[] = [
-    {
-      id: 'nov7',
-      date: '7 novembre',
-    },
-    {
-      id: 'dec5',
-      date: '5 décembre',
-    },
-    {
-      id: 'jan16',
-      date: '16 janvier',
-    },
-    {
-      id: 'fev6',
-      date: '6 février',
-    },
-    {
-      id: 'mar6',
-      date: '6 mars',
-    },
-    {
-      id: 'apr17',
-      date: '17 avril',
-    },
-    {
-      id: 'may15',
-      date: '15 mai',
-    },
-  ];
+  public courses: Course[] = [];
+  public workshops: Workshop[] = [];
 
   get coursesFormArray() {
     return this.subscriptionForm.get('courses') as FormArray;
@@ -115,45 +44,7 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
   constructor(private subscriptionService: SubscriptionService) {}
 
   ngOnInit() {
-    this.subscriptionForm.addControl(
-      'lastName',
-      new FormControl(null, Validators.required)
-    );
-    this.subscriptionForm.addControl(
-      'firstName',
-      new FormControl(null, Validators.required)
-    );
-    this.subscriptionForm.addControl(
-      'phone',
-      new FormControl(null, Validators.required)
-    );
-    this.subscriptionForm.addControl(
-      'email',
-      new FormControl(null, [Validators.required, Validators.email])
-    );
-    this.subscriptionForm.addControl(
-      'courses',
-      new FormArray([], requireCheckboxesToBeCheckedValidator())
-    );
-    this.subscriptionForm.addControl('workshops', new FormArray([]));
-    this.subscriptionForm.addControl(
-      'previouslyEnrolled',
-      new FormControl(false, Validators.required)
-    );
-    this.subscriptionForm.addControl(
-      'paymentMethod',
-      new FormControl(null, Validators.required)
-    );
-    this.subscriptionForm.addControl(
-      'subscriptionRequestDate',
-      new FormControl(new Date(), Validators.required)
-    );
-    this.subscriptionForm.addControl(
-      'season',
-      new FormControl(SeasonEnum.TWENTY_ONE, Validators.required)
-    );
-    this._addControl('courses', this.courses, false);
-    this._addControl('workshops', this.workshops, false);
+    this._getCourses();
   }
 
   public onSubmit(): void {
@@ -163,7 +54,7 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
     // Filtering the choosen course
     const selectedCourseNames = this.subscriptionForm.value.courses
       .map((checked: boolean, i: number) =>
-        checked ? this.courses[i].name : null
+        checked ? this.courses[i]._id : null
       )
       .filter((v) => v !== null);
 
@@ -178,6 +69,8 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
     formData.courses = selectedCourseNames;
     formData.workshops = selectedWorkshopDates;
 
+    console.log(formData);
+
     this.subscriptionService.createMember(formData).subscribe(
       (response) => {
         this.isLoading = false;
@@ -185,6 +78,7 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
         this.subscriptionForm.reset();
       },
       (error) => {
+        console.log(error);
         this.isLoading = false;
         this.formSentFail = true;
       }
@@ -214,9 +108,83 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
     required?: boolean
   ): void {
     controls.forEach(() => {
-      (<FormArray>this.subscriptionForm.controls[controlsName]).push(
+      (this.subscriptionForm.controls[controlsName] as FormArray).push(
         new FormControl(null)
       );
     });
+  }
+
+  private _getCourses(): void {
+    this.isLoading = true;
+    this.subscriptionService.getCourseList().subscribe(({ courseList }) => {
+      console.log(courseList);
+      courseList.forEach((course) => {
+        const courseData: Course = {
+          _id: course._id,
+          name: course.name,
+          time: course.time,
+          maxAttendee: course.maxAttendee,
+          attendeesCount: course.attendeesCount,
+          day: course.day,
+          level: course.level,
+          professor: course.professor,
+          position: course.position,
+        };
+        this.courses.push(courseData);
+      });
+
+      this.courses.sort((a: Course, b: Course) => a.position - b.position);
+      console.log(this.courses);
+
+      this._initForm();
+    });
+  }
+
+  private _initForm(): void {
+    this.subscriptionForm.addControl(
+      'lastName',
+      new FormControl(null, Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'firstName',
+      new FormControl(null, Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'phone',
+      new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+        Validators.minLength(10),
+      ])
+    );
+    this.subscriptionForm.addControl(
+      'email',
+      new FormControl(null, [Validators.required, Validators.email])
+    );
+    this.subscriptionForm.addControl(
+      'courses',
+      new FormArray([], requireCheckboxesToBeCheckedValidator())
+    );
+    this.subscriptionForm.addControl('workshops', new FormArray([]));
+    this.subscriptionForm.addControl(
+      'previouslyEnrolled',
+      new FormControl(false, Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'paymentMethod',
+      new FormControl(null, Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'subscriptionRequestDate',
+      new FormControl(new Date(), Validators.required)
+    );
+    this.subscriptionForm.addControl(
+      'season',
+      new FormControl(SeasonEnum.TWENTY_ONE, Validators.required)
+    );
+    this._addControl('courses', this.courses, false);
+    this._addControl('workshops', this.workshops, false);
+
+    this.isLoading = false;
   }
 }

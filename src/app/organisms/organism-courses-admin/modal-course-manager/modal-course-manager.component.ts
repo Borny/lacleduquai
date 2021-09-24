@@ -41,48 +41,48 @@ export class ModalCourseManagerPage implements OnInit {
   public readonly CANCEL = 'cancel';
 
   public courseList: Course[] = [
-    {
-      id: '1',
-      detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
-      name: 'lundi 18h30',
-    },
-    {
-      id: '2',
-      detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
-      name: 'lundi 20h30',
-    },
-    {
-      id: '3',
-      detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
-      name: 'mardi 18h30',
-    },
-    {
-      id: '4',
-      detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
-      name: 'mardi 20h30',
-    },
-    {
-      id: '5',
-      detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
-      name: 'mercredi 18h30',
-    },
-    {
-      id: '6',
-      detail:
-        'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
-      name: 'mercredi 20h30',
-    },
-    {
-      id: '7',
-      detail:
-        'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
-      name: 'jeudi 18h30',
-    },
-    {
-      id: '8',
-      detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
-      name: 'jeudi 20h30',
-    },
+    // {
+    //   id: '1',
+    //   detail: 'Lundi 18h30-20h30 : Théâtre avec Jérôme Chambon',
+    //   name: 'lundi 18h30',
+    // },
+    // {
+    //   id: '2',
+    //   detail: 'Lundi 20h30-22h30 : Théâtre avec Jérôme Chambon',
+    //   name: 'lundi 20h30',
+    // },
+    // {
+    //   id: '3',
+    //   detail: 'Mardi 18h30-20h30 : Chœur de femme avec Charlotte Lasnier',
+    //   name: 'mardi 18h30',
+    // },
+    // {
+    //   id: '4',
+    //   detail: 'Mardi 20h30-23h : Cie Amateur avec Côme Tanguy (danse-théâtre)',
+    //   name: 'mardi 20h30',
+    // },
+    // {
+    //   id: '5',
+    //   detail: 'Mercredi 18h30-20h30 : Danse-théâtre avec Côme Tanguy',
+    //   name: 'mercredi 18h30',
+    // },
+    // {
+    //   id: '6',
+    //   detail:
+    //     'Mercredi 20h30-22h30 : Danse contemporaine et improvisation avec Côme Tanguy',
+    //   name: 'mercredi 20h30',
+    // },
+    // {
+    //   id: '7',
+    //   detail:
+    //     'Jeudi 18h30-20h30 : Théâtre avec Laurine Clochard et Juliette Morin',
+    //   name: 'jeudi 18h30',
+    // },
+    // {
+    //   id: '8',
+    //   detail: 'Jeudi 20h30-22h30 : Théâtre avec Julie Hercberg',
+    //   name: 'jeudi 20h30',
+    // },
   ];
 
   constructor(
@@ -91,6 +91,7 @@ export class ModalCourseManagerPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.member);
     this.isLoading = true;
     this._initMemberEditionForm();
   }
@@ -156,6 +157,14 @@ export class ModalCourseManagerPage implements OnInit {
     this.modalCtrl.dismiss({
       dismissed: this.CANCEL,
     });
+  }
+
+  // WAITING LIST
+  public toggleWaitingList(event: CustomEvent): void {
+    const courseItem = this.member.courses.find(
+      (course) => course.courseId === event.detail.value.courseId
+    );
+    courseItem.waitingList = !courseItem.waitingList;
   }
 
   ////////////

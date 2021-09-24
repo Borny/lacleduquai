@@ -160,7 +160,10 @@
             lines="none"
             *ngFor="let course of coursesFormArray.controls; let i = index"
           >
-            <ion-label>{{ courses[i].detail }}</ion-label>
+            <ion-label
+              >{{ courses[i].day }} {{ courses[i].time.split('-')[0] }} /
+              {{ courses[i].name }}</ion-label
+            >
             <ion-checkbox slot="start" [formControlName]="i"> </ion-checkbox>
           </ion-item>
         </ion-list>
