@@ -1,0 +1,114 @@
+@import '../../../styles/tools/variables';
+@import '../../../styles/tools/mixins';
+
+// CALENDAR OVERRIDE
+// TODO: find a way to fix the popover zindex
+::ng-deep {
+  .cal-drag-active {
+    z-index: 1000;
+  }
+}
+
+::ng-deep {
+  .cal-week-view {
+    // Current time (Red line)
+    .cal-current-time-marker {
+      z-index: 0;
+    }
+
+    .event--title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cal-header {
+      &.cal-today {
+        // background-color: color.$primary-color;
+      }
+    }
+
+    // HOUR START COLUMN
+    .cal-time-label-column {
+      .cal-hour {
+        background: $white !important;
+        .cal-hour-segment {
+          background: $white !important;
+          cursor: default;
+        }
+      }
+    }
+
+    // .cal-day-column {
+    //   margin-right: 40px;
+    // }
+
+    // .cal-hour {
+    //   width: calc(100% + 40px);
+    //   background: $white;
+    // }
+
+    .cal-hour-odd {
+      background: #fafafa;
+    }
+
+    .cal-hour-segment {
+      transition: 0.2s ease-in;
+
+      &:after {
+        content: '+';
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        color: transparent;
+        font-size: 1.8rem;
+        font-weight: bold;
+        transform: translateY(-50%);
+        transition: color 0.2s ease-in;
+      }
+
+      &:hover {
+        &:not(.cal--disabled) {
+          background: $color-primary-light !important;
+          cursor: pointer;
+          &:after {
+            color: $color-primary;
+          }
+        }
+      }
+    }
+
+    .cal--disabled {
+      background-color: $grey-calendar-disabled;
+      pointer-events: none;
+      position: relative;
+    }
+  }
+
+  .cal-event-title {
+    color: $black;
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+
+  // Icons
+  .cal-event {
+    &-actions {
+      display: flex;
+    }
+
+    &-action {
+      .fas {
+        color: $black;
+        &:hover {
+          &.fa-pencil-alt {
+            // color: $blue;
+          }
+          &.fa-trash-alt {
+            // color: $danger;
+          }
+        }
+      }
+    }
+  }
+}

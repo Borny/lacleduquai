@@ -1,0 +1,168 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title
+        >{{dialogTitle}} pour le {{time | date}} - {{time | date : 'HH:mm'}} /
+        {{bookingForm.get('endTime').value | date : 'HH:mm' }}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Event info -->
+  <ion-content class="ion-padding">
+    <form
+      class="news-edition-form"
+      [formGroup]="bookingForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <ion-list>
+        <!-- First Name -->
+        <ion-item>
+          <ion-label position="floating">Prénom</ion-label>
+          <ion-input
+            type="text"
+            name="firstName"
+            formControlName="firstName"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="
+						bookingForm.get('firstName').invalid &&
+						bookingForm.get('firstName').touched
+							? 'show-error'
+							: ''
+              "
+        >
+          Veuillez renseigner un prénom
+        </p>
+
+        <!-- Last Name -->
+        <ion-item>
+          <ion-label position="floating">Nom</ion-label>
+          <ion-input
+            type="text"
+            name="lastName"
+            formControlName="lastName"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="
+						bookingForm.get('lastName').invalid &&
+						bookingForm.get('lastName').touched
+							? 'show-error'
+							: ''
+              "
+        >
+          Veuillez renseigner un nom
+        </p>
+
+        <!-- Email -->
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input
+            type="text"
+            name="email"
+            formControlName="email"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="
+						bookingForm.get('email').invalid &&
+						bookingForm.get('email').touched
+							? 'show-error'
+							: ''
+              "
+        >
+          Veuillez renseigner un email
+        </p>
+
+        <!-- Phone -->
+        <ion-item>
+          <ion-label position="floating">Téléphone</ion-label>
+          <ion-input
+            type="text"
+            name="phone"
+            formControlName="phone"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="
+						bookingForm.get('phone').invalid &&
+						bookingForm.get('phone').touched
+							? 'show-error'
+							: ''
+              "
+        >
+          Veuillez renseigner un numéro de téléphone
+        </p>
+
+        <!-- Activity -->
+        <ion-item>
+          <ion-label position="floating">Activité</ion-label>
+          <ion-input
+            type="text"
+            name="activity"
+            formControlName="activity"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="
+						bookingForm.get('activity').invalid &&
+						bookingForm.get('activity').touched
+							? 'show-error'
+							: ''
+              "
+        >
+          Veuillez renseigner une activité
+        </p>
+
+        <!-- Paid activity -->
+        <ion-item class="check-row__deposited">
+          <ion-label>Activité avec participants payants</ion-label>
+          <ion-checkbox
+            slot="end"
+            formControlName="paidActivity"
+            [checked]="bookingForm.value.paidActivity"
+          >
+          </ion-checkbox>
+        </ion-item>
+
+        <!-- End time -->
+        <ion-item>
+          <ion-label>Horaire fin</ion-label>
+          <ion-datetime
+            displayFormat="HH:mm"
+            [value]="bookingForm.get('endTime')?.value"
+            (ionChange)="onTimeEndChange($event)"
+            hourValues="7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
+            minuteValues="0,30"
+            min="time"
+          ></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
+  <!-- CTAs -->
+  <div class="ion-padding btn__container">
+    <!-- <ion-button class="btn--delete" color="danger" (click)="onOpenDeleteModal()">
+      Supprimer
+    </ion-button> -->
+    <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
+    <ion-button
+      [disabled]="bookingForm.invalid"
+      color="primary"
+      (click)="onSubmit()"
+    >
+      Réserver
+    </ion-button>
+  </div>
+</div>
