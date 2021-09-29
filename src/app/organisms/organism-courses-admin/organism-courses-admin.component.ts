@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
-import { finalize } from 'rxjs/operators';
-import { Course } from 'src/app/models/courses.model';
-import { SeasonEnum } from 'src/app/models/season.enum';
-import { Season } from 'src/app/models/season.model';
+import { Component, OnInit } from "@angular/core";
+import { ModalController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
+import { finalize } from "rxjs/operators";
+import { Course } from "src/app/models/courses.model";
+import { SeasonEnum } from "src/app/models/season.enum";
+import { Season } from "src/app/models/season.model";
 
-import { Member } from '../../models/member.model';
-import { PaymentMethods } from '../../models/payment-methods.enum';
-import { SubscriptionService } from '../../services/subscription.service';
-import { ModalCourseManagerPage } from './modal-course-manager/modal-course-manager.component';
-import { ModalCoursePaymentReceivedPage } from './modal-course-payment-received/modal-course-payment-received.component';
-import { ModalCourseRefundPage } from './modal-course-refund/modal-course-refund.component';
+import { Member } from "../../models/member.model";
+import { PaymentMethods } from "../../models/payment-methods.enum";
+import { SubscriptionService } from "../../services/subscription.service";
+import { ModalCourseManagerPage } from "./modal-course-manager/modal-course-manager.component";
+import { ModalCoursePaymentReceivedPage } from "./modal-course-payment-received/modal-course-payment-received.component";
+import { ModalCourseRefundPage } from "./modal-course-refund/modal-course-refund.component";
 
 @Component({
-  selector: 'organism-courses-admin',
-  templateUrl: './organism-courses-admin.component.html',
-  styleUrls: ['./organism-courses-admin.component.scss'],
+  selector: "organism-courses-admin",
+  templateUrl: "./organism-courses-admin.component.html",
+  styleUrls: ["./organism-courses-admin.component.scss"],
 })
 export class OrganismCoursesAdminComponent implements OnInit {
   public originalMembersData: Member[] = [];
@@ -29,20 +29,24 @@ export class OrganismCoursesAdminComponent implements OnInit {
   public emailList: string;
   public selectedSeason: string;
   public seasonEnum = SeasonEnum;
+  public courseTitle = "!! Choisissez un cours dans la liste !!";
+  public attendees: number;
+  public maxCapacity: number;
+  public courseChoosen: boolean;
 
   public seasons: Season[] = [
     {
-      label: '2020-2021',
+      label: "2020-2021",
       value: SeasonEnum.TWENTY,
     },
     {
-      label: '2021-2022',
+      label: "2021-2022",
       value: SeasonEnum.TWENTY_ONE,
     },
   ];
 
   public readonly CONFIRM = `confirm`;
-  public readonly CONFIRM_DELETE = 'confirm-delete';
+  public readonly CONFIRM_DELETE = "confirm-delete";
   public readonly CANCEL = `cancel`;
   public readonly PAYMENT_UPDATED_SUCCESS = `Paiement mis à jour`;
   public readonly REFUND_UPDATED_SUCCESS = `Remboursement mis à jour`;
@@ -50,8 +54,8 @@ export class OrganismCoursesAdminComponent implements OnInit {
   public readonly MEMBER_UPDATED_FAIL = `Problème de mise à jour`;
   public readonly MEMBER_DELETED_SUCCESS = `Adhérent supprimer`;
   public readonly MEMBER_DELETED_FAIL = `Erreur suppression adhérent`;
-  public readonly LOADING_TEXT = 'Chargement des données...';
-  public readonly EMAIL_LIST_COPIED = 'Emails copiés';
+  public readonly LOADING_TEXT = "Chargement des données...";
+  public readonly EMAIL_LIST_COPIED = "Emails copiés";
 
   public paymentMethods: PaymentMethods[] = [
     PaymentMethods.FIRST,
@@ -60,19 +64,19 @@ export class OrganismCoursesAdminComponent implements OnInit {
   ];
 
   public tableHeaderSubscriptionCells: string[] = [
-    'Nom',
-    'Prénom',
-    'Téléphone',
-    'Email',
-    'Cours',
-    'Moyen de paiement',
-    'Réglement reçu',
-    'Montant du réglement',
-    'Encaissement chèques',
-    'Remboursement',
-    'Inscrit 2019/2020',
-    'Cours 2019/2020',
-    'Extra info',
+    "Nom",
+    "Prénom",
+    "Téléphone",
+    "Email",
+    "Cours",
+    "Moyen de paiement",
+    "Réglement reçu",
+    "Montant du réglement",
+    "Encaissement chèques",
+    "Remboursement",
+    "Inscrit 2019/2020",
+    "Cours 2019/2020",
+    "Extra info",
   ];
 
   public filterOptions = [

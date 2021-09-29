@@ -37,20 +37,30 @@
 
   <!-- FILTER -->
   <ion-row *ngIf="!isLoading">
-    <ion-col>
+    <ion-col size="4">
       <div class="filter__container">
         <!-- <ion-button color="secondary" (click)="onResetFilters()">
           Réinitialiser
         </ion-button> -->
         <filter-molecule
           class="filter__select"
-          *ngFor="let filter of filterOptions"
+          *ngFor="let filter of filterOptions; let idx = index"
           [selectLabel]="filter.filterLabel"
           [filterOptions]="filter.options"
           [select]="matSelect"
-          (selectedFilterOption)="onSelectedOption(filter.filterName, $event)"
+          (selectedFilterOption)="onSelectedOption(filter, $event)"
         >
         </filter-molecule>
+      </div>
+    </ion-col>
+    <ion-col size="8">
+      <div class="display-flex align-center full-height">
+        <h2>
+          {{ courseTitle }}
+          <span *ngIf="courseChoosen" class="margin-left-2">
+            {{ attendees }} / {{ maxCapacity }}
+          </span>
+        </h2>
       </div>
     </ion-col>
   </ion-row>

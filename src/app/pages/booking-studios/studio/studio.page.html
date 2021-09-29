@@ -1,4 +1,8 @@
-<ion-header-component [headerTitle]="HEADER_TITLE" [showBackButton]="true" [defaultTarget]="'/lcdq/reservation-salles'">
+<ion-header-component
+  [headerTitle]="HEADER_TITLE"
+  [showBackButton]="true"
+  [defaultTarget]="'/lcdq/reservation-salles'"
+>
 </ion-header-component>
 
 <ion-content>
@@ -13,16 +17,41 @@
         <ul class="description">
           <li *ngFor="let item of descriptionItems" class="description-item">
             <two-triangle-svg class="description-item--icon"></two-triangle-svg>
-            <p class="description-item--content">
-              {{item}}
-            </p>
+            <p class="description-item--content">{{item}}</p>
           </li>
         </ul>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size="12" size-md="6" offset-md="3" class="ion-justify-content-center ion-margin-vertical">
-        <ion-nav-link class="ion-text-center" [routerLink]="'/lcdq/contact'" routerDirection="forward">
+      <ion-col
+        size="12"
+        size-md="6"
+        offset-md="3"
+        class="ion-justify-content-center ion-margin-vertical"
+      >
+        <ion-button
+          href="https://urlz.fr/fX5C"
+          target="_blank"
+          size="small"
+          expand="block"
+          color="secondary"
+        >
+          Consulter le calendrier
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        size="12"
+        size-md="6"
+        offset-md="3"
+        class="ion-justify-content-center ion-margin-vertical"
+      >
+        <ion-nav-link
+          class="ion-text-center"
+          [routerLink]="'/lcdq/contact'"
+          routerDirection="forward"
+        >
           <ion-button size="small" expand="block" color="primary">
             Contactez-nous
           </ion-button>
