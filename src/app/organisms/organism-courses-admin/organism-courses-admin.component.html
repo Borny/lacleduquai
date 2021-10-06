@@ -1,29 +1,13 @@
 <ion-grid>
-  <!-- <p *ngIf="memberError">
+  <p *ngIf="courseError">
     Impossible de récupérer les données, veuillez réessayer
-  </p> -->
+  </p>
 
   <!-- TITLE -->
   <ion-row>
-    <ion-col size="5">
-      <ion-list>
-        <ion-radio-group [value]="seasonEnum.TWENTY_ONE" class="display-flex">
-          <ion-item *ngFor="let season of seasons">
-            <ion-label>{{ season.label }}</ion-label>
-            <ion-radio
-              (ionFocus)="onSeasonSelected(season)"
-              [value]="season.value"
-            ></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-      </ion-list>
-    </ion-col>
-    <ion-col size="7">
+    <ion-col>
       <div class="title__container">
-        <h2 class="ion-text-center">
-          Inscriptions Cours
-          <span class="color-primary">{{ selectedSeason }}</span>
-        </h2>
+        <h2 class="ion-text-center">Cours</h2>
       </div>
     </ion-col>
   </ion-row>
@@ -35,172 +19,7 @@
     </ion-col>
   </ion-row>
 
-  <!-- FILTER -->
-  <ion-row *ngIf="!isLoading">
-    <ion-col size="4">
-      <div class="filter__container">
-        <!-- <ion-button color="secondary" (click)="onResetFilters()">
-          Réinitialiser
-        </ion-button> -->
-        <filter-molecule
-          class="filter__select"
-          *ngFor="let filter of filterOptions; let idx = index"
-          [selectLabel]="filter.filterLabel"
-          [filterOptions]="filter.options"
-          [select]="matSelect"
-          (selectedFilterOption)="onSelectedOption(filter, $event)"
-        >
-        </filter-molecule>
-      </div>
-    </ion-col>
-    <ion-col size="8">
-      <div class="display-flex align-center full-height">
-        <h2>
-          {{ courseTitle }}
-          <span *ngIf="courseChoosen" class="margin-left-2">
-            {{ attendees }} / {{ maxCapacity }}
-          </span>
-        </h2>
-      </div>
-    </ion-col>
-  </ion-row>
-
-  <!-- COPY TO CLIPBOARD -->
-  <!-- <ion-row *ngIf="!isLoading">
-    <ion-col>
-      <copy-to-clipboard-molecule
-        [list]="emailList"
-        (copySuccessMessage)="onCopyToClipBoard()"
-      >
-      </copy-to-clipboard-molecule>
-    </ion-col>
-  </ion-row> -->
-
-  <!-- WAITING LIST -->
-  <ion-row *ngIf="!isLoading">
-    <ion-col>
-      <div class="course__label">
-        <ion-text color="primary">
-          <h3 class="ion-margin-vertical">Liste d'attente</h3>
-        </ion-text>
-      </div>
-
-      <!-- TABLE -->
-      <ul class="data-table__container">
-        <!-- TABLE HEADER -->
-        <li class="data-table__item data-table__item__header">
-          <div class="first-column"></div>
-          <div></div>
-          <div>Nom</div>
-          <div>Prénom</div>
-          <div>Téléphone</div>
-          <div>Email</div>
-          <!-- <div>Cours</div> -->
-          <div>Moyen de paiement</div>
-          <div>Réglement reçu</div>
-          <div>Montant du réglement</div>
-          <div>Encaissement chèques</div>
-          <div>Remboursement</div>
-          <div>Inscrit 2020/2021</div>
-          <div>Cours 2020/2021</div>
-          <div>Extra info</div>
-          <div></div>
-        </li>
-
-        <!-- NO RESULTS -->
-        <li
-          class="data-table__item data-table__item-no-result"
-          *ngIf="!currentMembersDataWaitingList.length"
-        >
-          No results...
-        </li>
-
-        <!-- DATA -->
-        <li
-          class="data-table__item"
-          [ngClass]="{ odd: odd, even: even }"
-          *ngFor="
-            let member of currentMembersDataWaitingList;
-            let even = even;
-            let odd = odd;
-            let i = index
-          "
-        >
-          <div class="first-column">{{ i + 1 }}</div>
-          <div>
-            <ion-button (click)="onOpenCourseManagerModal(member, i)">
-              <ion-icon name="create-outline"></ion-icon>
-            </ion-button>
-          </div>
-          <div>{{ member.lastName }}</div>
-          <div>{{ member.firstName }}</div>
-          <div>{{ member.phone }}</div>
-          <div>{{ member.email }}</div>
-          <!-- <div class="data-table__item-course">
-            <span *ngFor="let course of member.courses; let last = last">
-              {{ course }}
-              {{ last ? '' : ' / ' }}
-            </span>
-          </div> -->
-          <div>{{ member.paymentMethod }}</div>
-          <div>
-            <ion-button
-              size="small"
-              [color]="member.paymentReceived ? 'primary' : 'secondary'"
-              (click)="onOpenCoursePaymentReceivedModal(member, i)"
-            >
-              {{ member.paymentReceived ? 'Oui' : 'Non' }}
-            </ion-button>
-          </div>
-          <div>{{ member.paymentAmount ? member.paymentAmount : '-' }}</div>
-          <div>
-            <div
-              *ngIf="
-                member.paymentMethod === paymentMethods[1];
-                else noContentBlock
-              "
-            >
-              <mat-checkbox
-                *ngFor="let check of member.checks"
-                [checked]="check.depositMade"
-                disabled
-              >
-              </mat-checkbox>
-            </div>
-            <ng-template #noContentBlock>
-              <div>-</div>
-            </ng-template>
-          </div>
-
-          <!-- Refund -->
-          <div>
-            <ion-button
-              [color]="member.totalRefund ? 'primary' : 'secondary'"
-              (click)="onOpenCourseRefundModal(member, i)"
-              >{{ member.totalRefund }}€</ion-button
-            >
-          </div>
-          <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
-            {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
-          </div>
-          <div>
-            {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
-          </div>
-          <div>
-            {{ member.extraInfo ? member.extraInfo : '-' }}
-          </div>
-          <div>
-            <ion-button (click)="onOpenCourseManagerModal(member, i)">
-              <ion-icon name="create-outline"></ion-icon>
-            </ion-button>
-          </div>
-        </li>
-      </ul>
-    </ion-col>
-  </ion-row>
-
-  <!-- MAIN LIST -->
-
+  <!-- COURSE LIST -->
   <ion-row *ngIf="!isLoading">
     <ion-col>
       <div class="course__label">
@@ -216,25 +35,20 @@
           <div class="first-column"></div>
           <div></div>
           <div>Nom</div>
-          <div>Prénom</div>
-          <div>Téléphone</div>
-          <div>Email</div>
-          <!-- <div>Cours</div> -->
-          <div>Moyen de paiement</div>
-          <div>Réglement reçu</div>
-          <div>Montant du réglement</div>
-          <div>Encaissement chèques</div>
-          <div>Remboursement</div>
-          <div>Inscrit 2020/2021</div>
-          <div>Cours 2020/2021</div>
-          <div>Extra info</div>
+          <div>Heure</div>
+          <div>Jour</div>
+          <div>Niveau</div>
+          <div>Prof</div>
+          <div>Position</div>
+          <div>Nombre d'élèves</div>
+          <div>Capacité max</div>
           <div></div>
         </li>
 
         <!-- NO RESULTS -->
         <li
           class="data-table__item data-table__item-no-result"
-          *ngIf="!currentMembersDataMainList.length"
+          *ngIf="!courseList.length"
         >
           No results...
         </li>
@@ -244,7 +58,7 @@
           class="data-table__item"
           [ngClass]="{ odd: odd, even: even }"
           *ngFor="
-            let member of currentMembersDataMainList;
+            let course of courseList;
             let even = even;
             let odd = odd;
             let i = index
@@ -252,69 +66,20 @@
         >
           <div class="first-column">{{ i + 1 }}</div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member, i)">
+            <ion-button (click)="onOpenCourseManagerModal(course, i)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
-          <div>{{ member.lastName }}</div>
-          <div>{{ member.firstName }}</div>
-          <div>{{ member.phone }}</div>
-          <div>{{ member.email }}</div>
-          <!-- <div class="data-table__item-course">
-            <span *ngFor="let course of member.courses; let last = last">
-              {{ course }}
-              {{ last ? '' : ' / ' }}
-            </span>
-          </div> -->
-          <div>{{ member.paymentMethod }}</div>
+          <div>{{ course.name }}</div>
+          <div>{{ course.time }}</div>
+          <div>{{ course.day }}</div>
+          <div>{{ course.level }}</div>
+          <div>{{ course.professor }}</div>
+          <div>{{ course.position }}</div>
+          <div>{{ course.attendeesCount }}</div>
+          <div>{{ course.maxAttendee }}</div>
           <div>
-            <ion-button
-              size="small"
-              [color]="member.paymentReceived ? 'primary' : 'secondary'"
-              (click)="onOpenCoursePaymentReceivedModal(member, i)"
-            >
-              {{ member.paymentReceived ? 'Oui' : 'Non' }}
-            </ion-button>
-          </div>
-          <div>{{ member.paymentAmount ? member.paymentAmount : '-' }}</div>
-          <div>
-            <div
-              *ngIf="
-                member.paymentMethod === paymentMethods[1];
-                else noContentBlock
-              "
-            >
-              <mat-checkbox
-                *ngFor="let check of member.checks"
-                [checked]="check.depositMade"
-                disabled
-              >
-              </mat-checkbox>
-            </div>
-            <ng-template #noContentBlock>
-              <div>-</div>
-            </ng-template>
-          </div>
-
-          <!-- Refund -->
-          <div>
-            <ion-button
-              [color]="member.totalRefund ? 'primary' : 'secondary'"
-              (click)="onOpenCourseRefundModal(member, i)"
-              >{{ member.totalRefund }}€</ion-button
-            >
-          </div>
-          <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
-            {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
-          </div>
-          <div>
-            {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
-          </div>
-          <div>
-            {{ member.extraInfo ? member.extraInfo : '-' }}
-          </div>
-          <div>
-            <ion-button (click)="onOpenCourseManagerModal(member, i)">
+            <ion-button (click)="onOpenCourseManagerModal(course, i)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>

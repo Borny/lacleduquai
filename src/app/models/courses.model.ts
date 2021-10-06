@@ -7,6 +7,7 @@ export interface Course {
   time: string;
   maxAttendee: number;
   attendeesCount: number;
+  waitingList?: string[];
   day: string;
   level: string;
   professor: string;

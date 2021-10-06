@@ -1,223 +1,116 @@
 <div class="ion-page">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>{{ member.firstName }} {{ member.lastName }}</ion-title>
+      <ion-title
+        >{{ course.name }} {{ course.day }} {{ course.time }}</ion-title
+      >
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding" *ngIf="!isLoading">
     <form
       class="member-edition-form"
-      [formGroup]="memberEditionForm"
+      [formGroup]="courseEditionForm"
       (ngSubmit)="onSubmit()"
     >
-      <!-- FIRST NAME -->
-      <ion-item>
-        <ion-label position="floating">Prénom</ion-label>
-        <ion-input
-          type="text"
-          name="firstName"
-          formControlName="firstName"
-          required
-        ></ion-input>
-      </ion-item>
-
-      <!-- LAST NAME -->
+      <!-- NAME -->
       <ion-item>
         <ion-label position="floating">Nom</ion-label>
         <ion-input
           type="text"
-          name="lastName"
-          formControlName="lastName"
+          name="name"
+          formControlName="name"
           required
         ></ion-input>
       </ion-item>
 
-      <!-- PHONE -->
+      <!-- TIME -->
       <ion-item>
-        <ion-label position="floating">Téléphone</ion-label>
+        <ion-label position="floating">Heure</ion-label>
         <ion-input
           type="text"
-          name="phone"
-          formControlName="phone"
+          name="time"
+          formControlName="time"
           required
         ></ion-input>
       </ion-item>
 
-      <!-- EMAIL -->
+      <!-- DAY -->
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating">Jour</ion-label>
         <ion-input
           type="text"
-          name="email"
-          formControlName="email"
+          name="day"
+          formControlName="day"
           required
         ></ion-input>
       </ion-item>
 
-      <!-- CLASSES -->
-      <div class="ion-padding-start ion-margin-vertical">
-        <p>Cours:</p>
-        <ul>
-          <li *ngFor="let course of member.courses" class="course-list-item">
-            - {{ course.courseLabel }}
-            <div class="slide-toggle__container">
-              <ion-text [color]="course.waitingList ? 'secondary' : ''"
-                >Liste d'attente</ion-text
-              >
-              <ion-toggle
-                class="slide-toggle__input"
-                [color]="course.waitingList ? 'secondary' : 'primary'"
-                [value]="course"
-                [checked]="!course.waitingList"
-                (ionChange)="toggleWaitingList($event)"
-              >
-              </ion-toggle>
-              <ion-text [color]="course.waitingList ? '' : 'primary'"
-                >Membre</ion-text
-              >
-            </div>
-          </li>
-        </ul>
-      </div>
-
+      <!-- LEVEL -->
       <ion-item>
-        <ion-label>Sélectionnez des cours</ion-label>
-        <ion-select formControlName="courses" multiple name="courses">
-          <ion-select-option
-            *ngFor="let course of courseList"
-            [value]="course.name"
-          >
-            {{ course.name }}
-          </ion-select-option>
-        </ion-select>
+        <ion-label position="floating">Niveau</ion-label>
+        <ion-input
+          type="text"
+          name="level"
+          formControlName="level"
+          required
+        ></ion-input>
       </ion-item>
 
-      <!-- PAYMENT METHOD -->
+      <!-- PROF -->
       <ion-item>
-        <ion-label>Moyen de paiement</ion-label>
-        <ion-select formControlName="paymentMethod">
-          <ion-select-option
-            *ngFor="let paymentMethod of paymentMethods | keyvalue"
-            [value]="paymentMethod.value"
-          >
-            {{ paymentMethod.value }}
-          </ion-select-option>
-        </ion-select>
+        <ion-label position="floating">Prof</ion-label>
+        <ion-input
+          type="text"
+          name="prof"
+          formControlName="professor"
+          required
+        ></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="member.paymentAmount">
-        <ion-label position="floating">Montant du réglement</ion-label>
+      <!-- POSITION -->
+      <ion-item>
+        <ion-label position="floating">Position</ion-label>
+        <ion-input
+          min="1"
+          type="number"
+          name="position"
+          formControlName="position"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <!-- MAX CAPACITY -->
+      <ion-item>
+        <ion-label position="floating">Capacité Max</ion-label>
+        <ion-input
+          min="1"
+          type="number"
+          name="maxCapacity"
+          formControlName="maxCapacity"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <!-- ATTENDEES COUNT -->
+      <ion-item>
+        <ion-label position="floating">Nombre d'élèves</ion-label>
+        <ion-input
+          min="0"
+          type="number"
+          name="attendeesCount"
+          formControlName="attendeesCount"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <!-- WAITING LIST -->
+      <ion-item>
+        <ion-label position="floating">Liste d'attente</ion-label>
         <ion-input
           type="number"
-          name="paymentAmount"
-          formControlName="paymentAmount"
-        ></ion-input>
-      </ion-item>
-
-      <!-- CHECKS -->
-      <div
-        *ngIf="
-          checkList.length && member.paymentMethod === paymentMethods.SECOND
-        "
-        class="check-tab"
-      >
-        <div>
-          <p class="check-tab__title">Chèques ({{ checkList.length }}):</p>
-          <div
-            *ngFor="
-              let check of checkForm.controls;
-              let i = index;
-              let even = even;
-              let odd = odd
-            "
-            [ngClass]="{ odd: odd, even: even }"
-            class="check-row"
-          >
-            <ng-container [formGroup]="check">
-              <!-- CHECK -->
-              <div class="check-row__top">
-                <p class="check-row__amount">{{ checkList[i].amount }} €</p>
-                <ion-item class="check-row__deposited">
-                  <ion-label>Encaissé ?</ion-label>
-                  <ion-checkbox
-                    slot="end"
-                    formControlName="depositMade"
-                    [checked]="checkList[i].depositMade"
-                    (ionChange)="onDepositMade($event, i)"
-                  >
-                  </ion-checkbox>
-                </ion-item>
-              </div>
-
-              <!-- CHECK CALENDAR -->
-              <div *ngIf="checkList[i].depositMade" class="check-row__date">
-                <mat-form-field appearance="fill">
-                  <mat-label>Date d'encaissement :</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="picker"
-                    formControlName="depositDate"
-                  />
-                  <mat-datepicker-toggle matSuffix [for]="picker">
-                  </mat-datepicker-toggle>
-                  <mat-datepicker #picker disabled="false"></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-
-      <!-- REFUNDS -->
-      <div *ngIf="member.refunds.length" class="existing-refund__container">
-        <p class="existing-refund__title">Remboursements effectués</p>
-        <div class="existing-refund__header">
-          <p>Montant</p>
-          <p>Date</p>
-        </div>
-        <div
-          class="existing-refund__content"
-          *ngFor="let refund of member.refunds"
-        >
-          <p>{{ refund.amount }}€</p>
-          <p>
-            {{ refund.date | date }}
-          </p>
-        </div>
-      </div>
-
-      <!-- EXTRA INFO -->
-      <ion-item>
-        <ion-label position="floating">Extra info</ion-label>
-        <ion-textarea
-          placeholder="Extra info"
-          name="extraInfo"
-          formControlName="extraInfo"
-        ></ion-textarea>
-      </ion-item>
-
-      <!-- Subscription Request date -->
-      <ion-item>
-        <ion-label position="floating"
-          >Date de pré-inscription<atom-asterisk></atom-asterisk>
-        </ion-label>
-        <ion-input
-          type="text"
-          name="subscriptionRequestDate"
-          formControlName="subscriptionRequestDate"
+          name="waitingList"
+          formControlName="waitingList"
           required
-        ></ion-input>
-      </ion-item>
-
-      <!-- Subscription date -->
-      <ion-item>
-        <ion-label position="floating"
-          >Date d'inscription<atom-asterisk></atom-asterisk>
-        </ion-label>
-        <ion-input
-          type="text"
-          name="subscriptionDate"
-          formControlName="subscriptionDate"
         ></ion-input>
       </ion-item>
     </form>
@@ -225,16 +118,16 @@
 
   <!-- CTAs -->
   <div class="ion-padding btn__container">
-    <ion-button
+    <!-- <ion-button
       class="btn--delete"
       color="danger"
       (click)="onOpenDeleteModal()"
     >
       Supprimer
-    </ion-button>
+    </ion-button> -->
     <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
     <ion-button
-      [disabled]="memberEditionForm.invalid"
+      [disabled]="courseEditionForm.invalid"
       color="primary"
       (click)="onSubmit()"
     >

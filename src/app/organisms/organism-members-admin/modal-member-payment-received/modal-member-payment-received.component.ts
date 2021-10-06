@@ -1,7 +1,14 @@
 import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormArray } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormsModule,
+  FormArray,
+} from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
@@ -11,11 +18,10 @@ import { PaymentMethods } from '../../../models/payment-methods.enum';
 
 @Component({
   selector: 'payment-received-dialog',
-  templateUrl: './modal-course-payment-received.component.html',
-  styleUrls: ['./modal-course-payment-received.component.scss']
+  templateUrl: './modal-member-payment-received.component.html',
+  styleUrls: ['./modal-member-payment-received.component.scss'],
 })
-export class ModalCoursePaymentReceivedPage implements OnInit {
-
+export class ModalMemberPaymentReceivedPage implements OnInit {
   public isPaymentReceived: boolean;
   public member: Member;
   public memberPaymentForm: FormGroup = new FormGroup({});
@@ -24,14 +30,13 @@ export class ModalCoursePaymentReceivedPage implements OnInit {
 
   public paymentMethods = PaymentMethods;
 
-  public payment_received_title = `Vous confirmez avoir reçu le paiement : `
-  public payment_not_received_title = `Attention, annuler le paiement ? `
+  public payment_received_title = `Vous confirmez avoir reçu le paiement : `;
+  public payment_not_received_title = `Attention, annuler le paiement ? `;
 
   public readonly CONFIRM = 'confirm';
   public readonly CANCEL = 'cancel';
 
-  constructor(public modalCtrl: ModalController) {
-  }
+  constructor(public modalCtrl: ModalController) {}
 
   ngOnInit(): void {
     console.log(this.member);
@@ -42,7 +47,10 @@ export class ModalCoursePaymentReceivedPage implements OnInit {
 
     this.member.paymentMethod === this.paymentMethods.SECOND
       ? this.memberPaymentForm.addControl('checks', this.checkArray)
-      : this.memberPaymentForm.addControl('amount', new FormControl('', Validators.required));
+      : this.memberPaymentForm.addControl(
+          'amount',
+          new FormControl('', Validators.required)
+        );
   }
 
   public onSubmit(): void {
@@ -52,8 +60,8 @@ export class ModalCoursePaymentReceivedPage implements OnInit {
       this.checkArray.value.forEach((value: string) => {
         this.member.checks.push({
           amount: value,
-          depositMade: false
-        })
+          depositMade: false,
+        });
         checkSum += +value;
       });
       this.member.paymentAmount = checkSum;
@@ -64,14 +72,14 @@ export class ModalCoursePaymentReceivedPage implements OnInit {
     this.member.paymentReceived = !this.member.paymentReceived;
 
     this.modalCtrl.dismiss({
-      'dismissed': this.CONFIRM,
-      'member': { ...this.member }
-    })
+      dismissed: this.CONFIRM,
+      member: { ...this.member },
+    });
   }
 
   public onCancel(): void {
     this.modalCtrl.dismiss({
-      'dismissed': this.CANCEL
+      dismissed: this.CANCEL,
     });
   }
 
@@ -85,16 +93,16 @@ export class ModalCoursePaymentReceivedPage implements OnInit {
 }
 
 @NgModule({
-  declarations: [ModalCoursePaymentReceivedPage],
+  declarations: [ModalMemberPaymentReceivedPage],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,
     IonicModule,
-    AtomAsteriskModule
+    AtomAsteriskModule,
   ],
   exports: [],
   providers: [],
 })
-class ModalMemberManagerModule { }
+class ModalMemberManagerModule {}

@@ -17,13 +17,28 @@ export class SubscriptionService {
   private readonly GET_FILTERED_MEMBERS_URL = `/subscription/filtered-members`;
   private readonly GET_MEMBERS_URL = `/subscription/members`;
   private readonly GET_COURSES_URL_ALL = `/course/course`;
+  private readonly COURSE_URL = `/course`;
 
   constructor(private http: HttpClient) {}
 
   // COURSES
   public getCourseList(): Observable<{ courseList: Course[] }> {
+    console.log('get course list');
     return this.http.get<{ courseList: Course[] }>(
       `${this.API_URL}${this.GET_COURSES_URL_ALL}`
+    );
+  }
+
+  public updateCourse(courseInfo: Course): Observable<any> {
+    return this.http.put<any>(
+      `${this.API_URL}${this.COURSE_URL}/${courseInfo._id}`,
+      { course: courseInfo }
+    );
+  }
+
+  public deleteCourse(course: Course): Observable<any> {
+    return this.http.delete<any>(
+      `${this.API_URL}${this.COURSE_URL}/${course._id}`
     );
   }
 
