@@ -108,6 +108,8 @@ export class OrganismMembersAdminComponent implements OnInit {
     // },
   ];
 
+  private _selectedCourseId: string;
+
   constructor(
     private subscriptionService: SubscriptionService,
     public modalController: ModalController,
@@ -219,10 +221,7 @@ export class OrganismMembersAdminComponent implements OnInit {
     }
   }
 
-  async onOpenCourseManagerModal(
-    memberData: Member,
-    index: number
-  ): Promise<void> {
+  async onOpenCourseManagerModal(memberData: Member): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalMemberManagerPage,
       componentProps: {
@@ -234,20 +233,29 @@ export class OrganismMembersAdminComponent implements OnInit {
     if (!data) {
       return;
     }
+
     // On dismiss
     let updatedMember = data.member;
     if (data.dismissed === this.CONFIRM) {
-      this.subscriptionService.updateMember(updatedMember).subscribe(
-        (result) => {
-          this.currentMembersData[index] = updatedMember;
+      this.isLoading = true;
+      this.subscriptionService
+        .updateMember(updatedMember)
+        .pipe(finalize(() => (this.isLoading = false)))
+        .subscribe(
+          (result) => {
+            const memberIdx = this.currentMembersData.indexOf(memberData);
+            this.currentMembersData[memberIdx] = updatedMember;
 
-          // show snack bar
-          this._presentToast(this.MEMBER_UPDATED_SUCCESS, 'success');
-        },
-        (err) => {
-          this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
-        }
-      );
+            this._setWaitingList(this._selectedCourseId);
+            this._setMainList(this._selectedCourseId);
+
+            // show snack bar
+            this._presentToast(this.MEMBER_UPDATED_SUCCESS, 'success');
+          },
+          (err) => {
+            this._presentToast(this.MEMBER_UPDATED_FAIL, 'warning');
+          }
+        );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
       console.log('delete', updatedMember);
       this.subscriptionService.deleteMember(updatedMember).subscribe(
@@ -291,12 +299,13 @@ export class OrganismMembersAdminComponent implements OnInit {
     this.maxCapacity = option.capacity;
     this.attendees = option.attendees;
     this.matSelect = option.value;
+    this._selectedCourseId = option.value;
     switch (name) {
       // case 'payment':
       //   this.filterPayment(option.value);
       //   break;
       case 'course':
-        this.filterCourses(courseName, option.value);
+        this._filterCourses(courseName, option.value);
         break;
       // case 'alphabeticalOrder':
       //   this.filterAlphaOrder(option.value);
@@ -338,7 +347,36 @@ export class OrganismMembersAdminComponent implements OnInit {
     toast.present();
   }
 
+  private _setWaitingList(courseId: string): void {
+    this.currentMembersDataWaitingList = this.currentMembersData.filter(
+      (member) => {
+        if (
+          member.courses.some(
+            (course) => course.courseId === courseId && course.waitingList
+          )
+        ) {
+          return member;
+        }
+      }
+    );
+  }
+
+  private _setMainList(courseId: string): void {
+    this.currentMembersDataMainList = this.currentMembersData.filter(
+      (member) => {
+        if (
+          member.courses.some(
+            (course) => course.courseId === courseId && !course.waitingList
+          )
+        ) {
+          return member;
+        }
+      }
+    );
+  }
+
   private _getMembersData(season?: string): void {
+    console.log('getmemeberdata');
     this.isLoading = true;
     this.subscriptionService
       .getMembersData(season)
@@ -371,59 +409,29 @@ export class OrganismMembersAdminComponent implements OnInit {
     }
   }
 
-  private filterCourses(name: string, selectValue: string): Member[] | void {
-    if (selectValue === undefined) {
+  private _filterCourses(
+    name: string,
+    selectedCourseId: string
+  ): Member[] | void {
+    if (selectedCourseId === undefined) {
       return (this.currentMembersData = this.originalMembersData);
     }
 
     this.isLoading = true;
 
     this.subscriptionService
-      .getFilteredMembers(selectValue)
+      .getFilteredMembers(selectedCourseId, this.selectedSeason)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((data) => {
         this.originalMembersData = data.data;
         this.currentMembersData = [...this.originalMembersData];
 
-        // Waiting members
-        const waitingMembs = [];
-        this.currentMembersData.forEach((member) => {
-          if (
-            member.courses.filter(
-              (course) => course.courseId === selectValue && course.waitingList
-            ).length
-          ) {
-            waitingMembs.push(member);
-          }
-          return waitingMembs;
-        });
-        this.currentMembersDataWaitingList = waitingMembs;
+        this._setWaitingList(selectedCourseId);
+        this._setMainList(selectedCourseId);
 
-        // Main members
-        const mainMembs = [];
-        this.currentMembersData.forEach((member) => {
-          if (
-            member.courses.filter(
-              (course) => course.courseId === selectValue && !course.waitingList
-            ).length
-          ) {
-            mainMembs.push(member);
-          }
-          return mainMembs;
-        });
-        this.currentMembersDataMainList = mainMembs;
         this.courseTitle = name;
         this.courseChoosen = true;
-
-        // console.log(
-        //   'this.currentMembersDataWaitingList',
-        //   this.currentMembersDataWaitingList
-        // );
       });
-    // this.currentMembersData = this.originalMembersData.filter((member) =>
-    // // TODO: fix this
-    //   // member.courses.includes(selectValue)
-    // );
   }
 
   private filterAlphaOrder(selectValue: string): void {
