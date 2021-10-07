@@ -19,6 +19,17 @@ import { ModalMemberRefundPage } from './modal-member-refund/modal-member-refund
   styleUrls: ['./organism-members-admin.component.scss'],
 })
 export class OrganismMembersAdminComponent implements OnInit {
+  public seasons: Season[] = [
+    {
+      label: '2020-2021',
+      value: SeasonEnum.TWENTY,
+    },
+    {
+      label: '2021-2022',
+      value: SeasonEnum.TWENTY_ONE,
+    },
+  ];
+
   public originalMembersData: Member[] = [];
   public currentMembersData: Member[] = [];
   public currentMembersDataWaitingList: Member[] = [];
@@ -33,17 +44,7 @@ export class OrganismMembersAdminComponent implements OnInit {
   public attendees: number;
   public maxCapacity: number;
   public courseChoosen: boolean;
-
-  public seasons: Season[] = [
-    {
-      label: '2020-2021',
-      value: SeasonEnum.TWENTY,
-    },
-    {
-      label: '2021-2022',
-      value: SeasonEnum.TWENTY_ONE,
-    },
-  ];
+  public selectedSeasonLabel = this.seasons[1].label;
 
   public readonly CONFIRM = `confirm`;
   public readonly CONFIRM_DELETE = 'confirm-delete';
@@ -115,9 +116,9 @@ export class OrganismMembersAdminComponent implements OnInit {
 
   ngOnInit() {
     this._getCourses();
+    this.selectedSeason = SeasonEnum.TWENTY_ONE;
 
     // this._getMembersData(this.seasonEnum.TWENTY_ONE);
-    // this.selectedSeason = this.seasons[1].label;
   }
 
   private _getCourses(): void {
@@ -239,6 +240,7 @@ export class OrganismMembersAdminComponent implements OnInit {
       this.subscriptionService.updateMember(updatedMember).subscribe(
         (result) => {
           this.currentMembersData[index] = updatedMember;
+
           // show snack bar
           this._presentToast(this.MEMBER_UPDATED_SUCCESS, 'success');
         },
@@ -276,8 +278,11 @@ export class OrganismMembersAdminComponent implements OnInit {
   }
 
   public onSeasonSelected(season: Season): void {
-    this.selectedSeason = season.label;
-    this._getMembersData(season.value);
+    this.selectedSeason = season.label.split('-')[0].trim();
+    this.selectedSeasonLabel = season.label;
+
+    this.courseChoosen = false;
+    // this._getMembersData(season.value);
   }
 
   public onSelectedOption(filter: any, option?: any): void {
@@ -287,20 +292,20 @@ export class OrganismMembersAdminComponent implements OnInit {
     this.attendees = option.attendees;
     this.matSelect = option.value;
     switch (name) {
-      case 'payment':
-        this.filterPayment(option.value);
-        break;
+      // case 'payment':
+      //   this.filterPayment(option.value);
+      //   break;
       case 'course':
         this.filterCourses(courseName, option.value);
         break;
-      case 'alphabeticalOrder':
-        this.filterAlphaOrder(option.value);
-        break;
-      default:
-        this.currentMembersData = this.originalMembersData;
-        break;
+      // case 'alphabeticalOrder':
+      //   this.filterAlphaOrder(option.value);
+      //   break;
+      // default:
+      //   this.currentMembersData = this.originalMembersData;
+      //   break;
     }
-    this._generateEmailList();
+    // this._generateEmailList();
   }
 
   public onResetFilters(): void {

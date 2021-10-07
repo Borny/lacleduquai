@@ -23,7 +23,6 @@ export class SubscriptionService {
 
   // COURSES
   public getCourseList(): Observable<{ courseList: Course[] }> {
-    console.log('get course list');
     return this.http.get<{ courseList: Course[] }>(
       `${this.API_URL}${this.GET_COURSES_URL_ALL}`
     );
@@ -59,10 +58,11 @@ export class SubscriptionService {
   }
 
   public getFilteredMembers(
-    courseId: string
+    courseId: string,
+    selectedSeason: string
   ): Observable<{ message: string; data: Member[] }> {
     return this.http.get<{ message: string; data: Member[] }>(
-      `${this.API_URL}${this.GET_FILTERED_MEMBERS_URL}/${courseId}`
+      `${this.API_URL}${this.GET_FILTERED_MEMBERS_URL}/${courseId}/${selectedSeason}`
     );
   }
 
