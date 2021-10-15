@@ -11,9 +11,10 @@ export interface Check {
   depositDate?: Date;
 }
 
-interface CourseMember {
+export interface CourseMember {
   waitingList: boolean;
   courseId: string;
+  courseLabel: string;
 }
 
 export interface Member {

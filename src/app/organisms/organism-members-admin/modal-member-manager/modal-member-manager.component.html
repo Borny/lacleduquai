@@ -80,14 +80,31 @@
         </ul>
       </div>
 
+      <ion-item>
+        <ion-label>Sélectionnez des cours</ion-label>
+        <ion-select
+          multiple
+          name="courses"
+          [value]="memberCoursesId"
+          (ionChange)="onSelectCourse($event)"
+        >
+          <ion-select-option
+            *ngFor="let course of courseList"
+            [value]="course._id"
+          >
+            {{ course.day }} - {{ course.time }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <!-- <ion-item>
         <ion-label>Sélectionnez des cours</ion-label>
         <ion-select formControlName="courses" multiple name="courses">
           <ion-select-option
             *ngFor="let course of courseList"
-            [value]="course.name"
+            [value]="course._id"
           >
-            {{ course.name }}
+            {{ course.day }} - {{ course.time }}
           </ion-select-option>
         </ion-select>
       </ion-item> -->

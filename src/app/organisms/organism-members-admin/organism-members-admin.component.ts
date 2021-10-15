@@ -64,21 +64,21 @@ export class OrganismMembersAdminComponent implements OnInit {
     PaymentMethods.THIRD,
   ];
 
-  public tableHeaderSubscriptionCells: string[] = [
-    'Nom',
-    'Prénom',
-    'Téléphone',
-    'Email',
-    'Cours',
-    'Moyen de paiement',
-    'Réglement reçu',
-    'Montant du réglement',
-    'Encaissement chèques',
-    'Remboursement',
-    'Inscrit 2019/2020',
-    'Cours 2019/2020',
-    'Extra info',
-  ];
+  // public tableHeaderSubscriptionCells: string[] = [
+  //   'Nom',
+  //   'Prénom',
+  //   'Téléphone',
+  //   'Email',
+  //   'Cours',
+  //   'Moyen de paiement',
+  //   'Réglement reçu',
+  //   'Montant du réglement',
+  //   'Encaissement chèques',
+  //   'Remboursement',
+  //   'Inscrit 2019/2020',
+  //   'Cours 2019/2020',
+  //   'Extra info',
+  // ];
 
   public filterOptions = [
     // {
@@ -109,6 +109,7 @@ export class OrganismMembersAdminComponent implements OnInit {
   ];
 
   private _selectedCourseId: string;
+  private _courseList: Course[];
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -121,42 +122,6 @@ export class OrganismMembersAdminComponent implements OnInit {
     this.selectedSeason = SeasonEnum.TWENTY_ONE;
 
     // this._getMembersData(this.seasonEnum.TWENTY_ONE);
-  }
-
-  private _getCourses(): void {
-    this.isLoading = true;
-    this.subscriptionService
-      .getCourseList()
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe(({ courseList }) => {
-        console.log('courseList', courseList);
-        courseList
-          .sort((a: Course, b: Course) => a.position - b.position)
-          .forEach((course) => {
-            const courseData: Course = {
-              _id: course._id,
-              name: course.name,
-              time: course.time,
-              maxAttendee: course.maxAttendee,
-              attendeesCount: course.attendeesCount,
-              waitingList: course.waitingList,
-              day: course.day,
-              level: course.level,
-              professor: course.professor,
-              position: course.position,
-            };
-            let courseLabel = {
-              label: `${courseData.day} - ${courseData.time} - ${courseData.name}`,
-              value: courseData._id,
-              attendees: courseData.attendeesCount,
-              capacity: courseData.maxAttendee,
-            };
-            this.filterOptions[0].options.push(courseLabel);
-          });
-
-        // this.courses.sort((a: Course, b: Course) => a.position - b.position);
-        // console.log(this.filterOptions);
-      });
   }
 
   async onOpenCourseRefundModal(
@@ -226,6 +191,7 @@ export class OrganismMembersAdminComponent implements OnInit {
       component: ModalMemberManagerPage,
       componentProps: {
         member: memberData,
+        courseList: this._courseList,
       },
     });
     await modal.present();
@@ -236,6 +202,8 @@ export class OrganismMembersAdminComponent implements OnInit {
 
     // On dismiss
     let updatedMember = data.member;
+
+    console.log('updated member', updatedMember);
     if (data.dismissed === this.CONFIRM) {
       this.isLoading = true;
       this.subscriptionService
@@ -338,6 +306,42 @@ export class OrganismMembersAdminComponent implements OnInit {
   ////////////
   // PRIVATE
   ////////////
+  private _getCourses(): void {
+    this.isLoading = true;
+    this.subscriptionService
+      .getCourseList()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe(({ courseList }) => {
+        console.log('courseList', courseList);
+        courseList
+          .sort((a: Course, b: Course) => a.position - b.position)
+          .forEach((course) => {
+            const courseData: Course = {
+              _id: course._id,
+              name: course.name,
+              time: course.time,
+              maxAttendee: course.maxAttendee,
+              attendeesCount: course.attendeesCount,
+              waitingList: course.waitingList,
+              day: course.day,
+              level: course.level,
+              professor: course.professor,
+              position: course.position,
+            };
+            let courseLabel = {
+              label: `${courseData.day} - ${courseData.time} - ${courseData.name}`,
+              value: courseData._id,
+              attendees: courseData.attendeesCount,
+              capacity: courseData.maxAttendee,
+            };
+            this.filterOptions[0].options.push(courseLabel);
+          });
+
+        this._courseList = [...courseList];
+        // console.log(this.filterOptions);
+      });
+  }
+
   private async _presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message,
