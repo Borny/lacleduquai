@@ -56,8 +56,8 @@ export class ModalMemberManagerPage implements OnInit {
     this._initMemberEditionForm();
   }
 
-  public onSelectCourse(event: IonSelect, value: any): void {
-    console.log(event, value);
+  public onSelectCourse(event: IonSelect): void {
+    console.log(event);
   }
 
   public onSubmit(): void {

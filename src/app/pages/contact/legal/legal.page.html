@@ -1,4 +1,8 @@
-<ion-header-component [headerTitle]="HEADER_TITLE" [showBackButton]="true" [defaultTarget]="'/lcdq/contact'">
+<ion-header-component
+  [headerTitle]="HEADER_TITLE"
+  [showBackButton]="true"
+  [defaultTarget]="'/lcdq/contact'"
+>
 </ion-header-component>
 
 <ion-content>
@@ -6,7 +10,10 @@
     <!-- TITLE -->
     <ion-row>
       <ion-col>
-        <squared-shapes-svg [title]="HEADER_TITLE" class="squared-shapes"></squared-shapes-svg>
+        <squared-shapes-svg
+          [title]="HEADER_TITLE"
+          class="squared-shapes"
+        ></squared-shapes-svg>
       </ion-col>
     </ion-row>
 
@@ -35,28 +42,29 @@
         </p>
         <br />
         <ion-text color="primary">
-          <p>
-            Hébergeur
-          </p>
+          <p>Hébergeur</p>
         </ion-text>
         <p>
           Infomaniak Network SA
-          <br>
+          <br />
           Rue Eugène-Marziano, 25
-          <br>
+          <br />
           CH - 1227 Genève - Suisse
         </p>
         <br />
 
         <ion-text color="primary">
-          <p>
-            Développeur
-          </p>
+          <p>Développeur</p>
         </ion-text>
         <p>
           Tristan DELORIS
-          <br>
-          <a href="https://tritandeloris.com">tristandeloris.com</a>
+          <!-- <br /> -->
+          <a
+            href="https://tristandeloris.com"
+            target="_blank"
+            class="color-primary"
+            >tristandeloris.com</a
+          >
         </p>
       </ion-col>
     </ion-row>
