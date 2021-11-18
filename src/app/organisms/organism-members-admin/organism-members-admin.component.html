@@ -44,8 +44,131 @@
     </ion-col>
   </ion-row>
 
+  <!-- 2020 SEASON -->
+  <ion-row *ngIf="!isLoading && this.selectedSeason === seasonEnum.TWENTY">
+    <ion-col>
+      <div class="course__label">
+        <ion-text color="primary">
+          <h3 class="ion-margin-vertical">Saison 2020-2021</h3>
+        </ion-text>
+      </div>
+
+      <!-- TABLE -->
+      <ul class="data-table__container">
+        <!-- TABLE HEADER -->
+        <li class="data-table__item data-table__item__header">
+          <div class="first-column"></div>
+          <div></div>
+          <div>Nom</div>
+          <div>Prénom</div>
+          <div>Téléphone</div>
+          <div>Email</div>
+          <!-- <div>Cours</div> -->
+          <div>Moyen de paiement</div>
+          <div>Réglement reçu</div>
+          <div>Montant du réglement</div>
+          <div>Encaissement chèques</div>
+          <div>Remboursement</div>
+          <div>Inscrit 2020/2021</div>
+          <div>Cours 2020/2021</div>
+          <div>Extra info</div>
+          <div></div>
+        </li>
+
+        <!-- NO RESULTS -->
+        <li
+          class="data-table__item data-table__item-no-result"
+          *ngIf="!members2020?.length"
+        >
+          No results...
+        </li>
+
+        <!-- DATA -->
+        <li
+          class="data-table__item"
+          [ngClass]="{ odd: odd, even: even }"
+          *ngFor="
+            let member of members2020;
+            let even = even;
+            let odd = odd;
+            let i = index
+          "
+        >
+          <div class="first-column">{{ i + 1 }}</div>
+          <div>
+            <ion-button (click)="onOpenCourseManagerModal(member)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <div>{{ member.lastName }}</div>
+          <div>{{ member.firstName }}</div>
+          <div>{{ member.phone }}</div>
+          <div>{{ member.email }}</div>
+          <!-- <div class="data-table__item-course">
+            <span *ngFor="let course of member.courses; let last = last">
+              {{ course }}
+              {{ last ? '' : ' / ' }}
+            </span>
+          </div> -->
+          <div>{{ member.paymentMethod }}</div>
+          <div>
+            <ion-button
+              size="small"
+              [color]="member.paymentReceived ? 'primary' : 'secondary'"
+              (click)="onOpenCoursePaymentReceivedModal(member, i)"
+            >
+              {{ member.paymentReceived ? 'Oui' : 'Non' }}
+            </ion-button>
+          </div>
+          <div>{{ member.paymentAmount ? member.paymentAmount : '-' }}</div>
+          <div>
+            <div
+              *ngIf="
+                member.paymentMethod === paymentMethods[1];
+                else noContentBlock
+              "
+            >
+              <mat-checkbox
+                *ngFor="let check of member.checks"
+                [checked]="check.depositMade"
+                disabled
+              >
+              </mat-checkbox>
+            </div>
+            <ng-template #noContentBlock>
+              <div>-</div>
+            </ng-template>
+          </div>
+
+          <!-- Refund -->
+          <div>
+            <ion-button
+              [color]="member.totalRefund ? 'primary' : 'secondary'"
+              (click)="onOpenCourseRefundModal(member, i)"
+              >{{ member.totalRefund }}€</ion-button
+            >
+          </div>
+          <div [ngClass]="member.previouslyEnrolled ? 'primary-color' : ''">
+            {{ member.previouslyEnrolled ? 'Oui' : 'Non' }}
+          </div>
+          <div>
+            {{ member.previousCourseInfo ? member.previousCourseInfo : '-' }}
+          </div>
+          <div>
+            {{ member.extraInfo ? member.extraInfo : '-' }}
+          </div>
+          <div>
+            <ion-button (click)="onOpenCourseManagerModal(member)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </li>
+      </ul>
+    </ion-col>
+  </ion-row>
+
   <!-- FILTER -->
-  <ion-row>
+  <ion-row *ngIf="this.selectedSeason === seasonEnum.TWENTY_ONE">
     <ion-col size="4">
       <div class="filter__container">
         <!-- <ion-button color="secondary" (click)="onResetFilters()">
@@ -212,7 +335,6 @@
   </ion-row>
 
   <!-- MAIN LIST -->
-
   <ion-row *ngIf="!isLoading && courseChoosen">
     <ion-col>
       <div class="course__label">

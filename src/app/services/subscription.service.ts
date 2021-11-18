@@ -16,6 +16,7 @@ export class SubscriptionService {
   private readonly GET_MEMBERS_URL_ALL = `/subscription/members_all`;
   private readonly GET_FILTERED_MEMBERS_URL = `/subscription/filtered-members`;
   private readonly GET_MEMBERS_URL = `/subscription/members`;
+  private readonly GET_MEMBERS_2020 = `/subscription/season-2020`;
   private readonly GET_COURSES_URL_ALL = `/course/course`;
   private readonly COURSE_URL = `/course`;
 
@@ -58,11 +59,17 @@ export class SubscriptionService {
   }
 
   public getFilteredMembers(
-    courseId: string,
-    selectedSeason: string
+    selectedSeason: string,
+    courseId?: string
   ): Observable<{ message: string; data: Member[] }> {
     return this.http.get<{ message: string; data: Member[] }>(
       `${this.API_URL}${this.GET_FILTERED_MEMBERS_URL}/${courseId}/${selectedSeason}`
+    );
+  }
+
+  public get2020Season(): Observable<{ message: string; data: Member[] }> {
+    return this.http.get<{ message: string; data: Member[] }>(
+      `${this.API_URL}${this.GET_MEMBERS_2020}`
     );
   }
 

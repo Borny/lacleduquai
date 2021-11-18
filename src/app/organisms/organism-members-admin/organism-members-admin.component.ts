@@ -34,6 +34,7 @@ export class OrganismMembersAdminComponent implements OnInit {
   public currentMembersData: Member[] = [];
   public currentMembersDataWaitingList: Member[] = [];
   public currentMembersDataMainList: Member[] = [];
+  public members2020: Member[] = [];
   public isLoading = false;
   public memberError = false;
   public matSelect: any;
@@ -258,7 +259,10 @@ export class OrganismMembersAdminComponent implements OnInit {
     this.selectedSeasonLabel = season.label;
 
     this.courseChoosen = false;
-    // this._getMembersData(season.value);
+
+    if (this.selectedSeason === this.seasonEnum.TWENTY) {
+      this._getSeason2020();
+    }
   }
 
   public onSelectedOption(filter: any, option?: any): void {
@@ -413,6 +417,16 @@ export class OrganismMembersAdminComponent implements OnInit {
     }
   }
 
+  private _getSeason2020(): void {
+    this.isLoading = true;
+    this.subscriptionService
+      .get2020Season()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe(({ data }) => {
+        this.members2020 = data;
+      });
+  }
+
   private _filterCourses(
     name: string,
     selectedCourseId: string
@@ -424,7 +438,7 @@ export class OrganismMembersAdminComponent implements OnInit {
     this.isLoading = true;
 
     this.subscriptionService
-      .getFilteredMembers(selectedCourseId, this.selectedSeason)
+      .getFilteredMembers(this.selectedSeason, selectedCourseId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((data) => {
         this.originalMembersData = data.data;
