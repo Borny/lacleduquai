@@ -37,13 +37,6 @@
     </ion-col>
   </ion-row>
 
-  <!-- Loader -->
-  <ion-row *ngIf="isLoading">
-    <ion-col class="ion-text-center spinner">
-      <ion-spinner color="primary"></ion-spinner>
-    </ion-col>
-  </ion-row>
-
   <!-- 2020 SEASON -->
   <ion-row *ngIf="!isLoading && this.selectedSeason === seasonEnum.TWENTY">
     <ion-col>
@@ -197,6 +190,13 @@
           </span>
         </h2>
       </div>
+    </ion-col>
+  </ion-row>
+
+  <!-- Loader -->
+  <ion-row *ngIf="isLoading">
+    <ion-col class="ion-text-center spinner">
+      <ion-spinner color="primary"></ion-spinner>
     </ion-col>
   </ion-row>
 

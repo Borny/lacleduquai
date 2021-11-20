@@ -84,11 +84,11 @@ export class OrganismHomeAdminComponent implements OnInit {
           this.isNewsLoading = false;
           this.currentNewsData.push(createdNews);
           // show snack bar
-          this._presentToast(this.NEWS_CREATED_SUCCESS);
+          this._presentToast(this.NEWS_CREATED_SUCCESS, 'success');
           this._getNews();
         },
         (error) => {
-          this._presentToast(this.NEWS_CREATED_FAIL);
+          this._presentToast(this.NEWS_CREATED_FAIL, 'warning');
         }
       );
     }
@@ -117,11 +117,11 @@ export class OrganismHomeAdminComponent implements OnInit {
           // this.currentEventsData[index] = data.event;
           this.currentNewsData[index] = data.news;
           // show snack bar
-          this._presentToast(this.NEWS_UPDATED_SUCCESS);
+          this._presentToast(this.NEWS_UPDATED_SUCCESS, 'success');
           this._getNews();
         },
         (err) => {
-          this._presentToast(this.NEWS_UPDATED_FAIL);
+          this._presentToast(this.NEWS_UPDATED_FAIL, 'warning');
         }
       );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
@@ -133,11 +133,11 @@ export class OrganismHomeAdminComponent implements OnInit {
           );
           this.currentNewsData = this.originalNewsData;
           // show snack bar
-          this._presentToast(this.NEWS_DELETED_SUCCESS);
+          this._presentToast(this.NEWS_DELETED_SUCCESS, 'success');
         },
         (err) => {
           // show snack bar
-          this._presentToast(this.NEWS_DELETED_FAIL);
+          this._presentToast(this.NEWS_DELETED_FAIL, 'warning');
         }
       );
     }
@@ -163,11 +163,11 @@ export class OrganismHomeAdminComponent implements OnInit {
           this.isEventsLoading = false;
           this.currentEventsData.push(createdEvent);
           // show snack bar
-          this._presentToast(this.EVENT_CREATED_SUCCESS);
+          this._presentToast(this.EVENT_CREATED_SUCCESS, 'success');
           this._getEvents();
         },
         (error) => {
-          this._presentToast(this.EVENT_CREATED_FAIL);
+          this._presentToast(this.EVENT_CREATED_FAIL, 'warning');
         }
       );
     }
@@ -197,11 +197,11 @@ export class OrganismHomeAdminComponent implements OnInit {
           // this.currentEventsData[index] = data.event;
           this.currentEventsData[index] = data.event;
           // show snack bar
-          this._presentToast(this.EVENT_UPDATED_SUCCESS);
+          this._presentToast(this.EVENT_UPDATED_SUCCESS, 'success');
           this._getEvents();
         },
         (err) => {
-          this._presentToast(this.EVENT_UPDATED_FAIL);
+          this._presentToast(this.EVENT_UPDATED_FAIL, 'warning');
           console.log(err);
         }
       );
@@ -214,10 +214,10 @@ export class OrganismHomeAdminComponent implements OnInit {
           );
           this.currentEventsData = this.originalEventsData;
           // show snack bar
-          this._presentToast(this.EVENT_DELETED_SUCCESS);
+          this._presentToast(this.EVENT_DELETED_SUCCESS, 'success');
         },
         (err) => {
-          this._presentToast(this.EVENT_DELETED_FAIL);
+          this._presentToast(this.EVENT_DELETED_FAIL, 'warning');
         }
       );
     }
@@ -226,8 +226,9 @@ export class OrganismHomeAdminComponent implements OnInit {
   ////////////
   // PRIVATE
   ////////////
-  async _presentToast(message: string) {
+  async _presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
+      color,
       message,
       duration: 2000,
     });

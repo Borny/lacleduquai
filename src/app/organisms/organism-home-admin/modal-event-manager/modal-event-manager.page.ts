@@ -98,15 +98,16 @@ export class ModalEventManagerPage implements OnInit {
     if (this.eventEditionForm.invalid) {
       return;
     }
-    this.event.name = this.eventEditionForm.get('name').value;
-    this.event.prof = this.eventEditionForm.get('prof').value;
-    this.event.timeStart = this.eventEditionForm.get('timeStart').value;
-    this.event.timeStart = this.eventEditionForm.get('timeEnd').value;
-    this.event.price = this.eventEditionForm.get('price').value;
-    this.event.priceMode = this.eventEditionForm.get('priceMode').value;
-    this.event.phone = this.eventEditionForm.get('phone').value;
-    this.event.description = this.eventEditionForm.get('description').value;
-    this.event.link = this.eventEditionForm.get('link').value;
+
+    this.event.name = this.eventEditionForm.value.name;
+    this.event.prof = this.eventEditionForm.value.prof;
+    this.event.timeStart = this.eventEditionForm.value.timeStart;
+    this.event.timeEnd = this.eventEditionForm.value.timeEnd;
+    this.event.price = this.eventEditionForm.value.price;
+    this.event.priceMode = this.eventEditionForm.value.priceMode;
+    this.event.phone = this.eventEditionForm.value.phone;
+    this.event.description = this.eventEditionForm.value.description;
+    this.event.link = this.eventEditionForm.value.link;
     this.event.linkType = this.eventEditionForm.value.externalLink
       ? this.EXTERNAL_LINK
       : this.INTERNAL_LINK;
