@@ -30,6 +30,7 @@
 						<form
 							*ngIf="!isLoading && !loginFailed"
 							class="login-form"
+							(keyup.enter)="onLogin(loginForm)"
 							(submit)="onLogin(loginForm)"
 							#loginForm="ngForm"
 						>

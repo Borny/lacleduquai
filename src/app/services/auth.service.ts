@@ -8,10 +8,9 @@ import { environment } from '../../environments/environment';
 import { AdminAuth } from '../models/admin-login.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private _token: string;
   private _isAuth = false;
   private _authStatusListener: Subject<boolean> = new Subject<boolean>();
@@ -19,11 +18,7 @@ export class AuthService {
 
   private readonly ADMIN_LOGIN_URL = environment.apiUrl + '/admin-login';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   public getToken() {
     return this._token;
@@ -38,9 +33,13 @@ export class AuthService {
   }
 
   public adminLogin(adminLoginFormValue: AdminAuth): void {
-    this.http.post<{ token: string, expiresIn: number }>(this.ADMIN_LOGIN_URL, adminLoginFormValue)
+    this.http
+      .post<{ token: string; expiresIn: number }>(
+        this.ADMIN_LOGIN_URL,
+        adminLoginFormValue
+      )
       .subscribe(
-        response => {
+        (response) => {
           const token = response.token;
           this._token = token;
           if (token) {
@@ -54,7 +53,7 @@ export class AuthService {
             this.router.navigateByUrl('/admin');
           }
         },
-        error => {
+        (error) => {
           console.log('login error :', error);
           // this.errorLogin = true;
         }
@@ -95,7 +94,7 @@ export class AuthService {
     localStorage.removeItem('expiration');
   }
 
-  private _getAuthData(): null | { token: string, expirationDate: Date } {
+  private _getAuthData(): null | { token: string; expirationDate: Date } {
     const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expiration');
     if (!token || !expirationDate) {
@@ -103,15 +102,13 @@ export class AuthService {
     }
     return {
       token,
-      expirationDate: new Date(expirationDate)
+      expirationDate: new Date(expirationDate),
     };
   }
 
   private _setAuthTimeout(duration: number): void {
     this._tokenTimer = setTimeout(() => {
       this.logout();
-    },
-      duration
-    );
+    }, duration);
   }
 }

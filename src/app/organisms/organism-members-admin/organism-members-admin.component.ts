@@ -187,11 +187,11 @@ export class OrganismMembersAdminComponent implements OnInit {
     }
   }
 
-  async onOpenCourseManagerModal(memberData: Member): Promise<void> {
+  async onOpenMemberManagerModal(memberData: Member): Promise<void> {
     const modal = await this.modalController.create({
       component: ModalMemberManagerPage,
       componentProps: {
-        member: memberData,
+        member: { ...memberData },
         courseList: this._courseList,
       },
     });
@@ -316,7 +316,7 @@ export class OrganismMembersAdminComponent implements OnInit {
       .getCourseList()
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe(({ courseList }) => {
-        console.log('courseList', courseList);
+        // console.log('courseList', courseList);
         courseList
           .sort((a: Course, b: Course) => a.position - b.position)
           .forEach((course) => {

@@ -13,7 +13,7 @@ import {
 import { IonicModule, IonSelect, ModalController } from '@ionic/angular';
 
 import { MaterialModule } from '../../../angular-material/angular-material.module';
-import { Check, Member } from '../../../models/member.model';
+import { Check, Member, CourseMember } from '../../../models/member.model';
 // import { SubscriptionService } from '../../../services/subscription.service';
 import { PaymentMethods } from '../../../models/payment-methods.enum';
 import { Course } from '../../../models/courses.model';
@@ -43,6 +43,9 @@ export class ModalMemberManagerPage implements OnInit {
   public readonly CONFIRM_DELETE = 'confirm-delete';
   public readonly CANCEL = 'cancel';
 
+  private _originalMember: Member;
+  private _memberCoursesId: string[];
+
   constructor(
     private fb: FormBuilder,
     // private subscriptionService: SubscriptionService,
@@ -50,14 +53,43 @@ export class ModalMemberManagerPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.member', this.member.courses);
-    console.log('this.member', this.courseList);
+    this._originalMember = { ...this.member };
+    console.log('this.member courses', this.member.courses);
+    console.log('this.courselist', this.courseList);
     this.isLoading = true;
     this._initMemberEditionForm();
   }
 
-  public onSelectCourse(event: IonSelect): void {
-    console.log(event);
+  public onSelectCourse(event: any, value?: any): void {
+    // console.log('select course :', event);
+    // console.log('this.courseList :', this.courseList);
+
+    const existingCourses = [...this.member.courses];
+    const selectedIds = event.detail.value;
+
+    this.member.courses = [];
+
+    this.courseList.forEach(({ _id, day, time }) => {
+      selectedIds.forEach((crsId) => {
+        if (_id === crsId) {
+          // Checking for existing member course
+          const existingCourse = existingCourses.find(
+            ({ courseId }) => courseId === crsId
+          );
+          const newCourse: CourseMember = {
+            waitingList: true,
+            courseId: crsId,
+            courseLabel: `${day} - ${time}`,
+          };
+
+          existingCourse
+            ? this.member.courses.push(existingCourse)
+            : this.member.courses.push(newCourse);
+        }
+      });
+    });
+
+    console.log('this member courses', this.member.courses);
   }
 
   public onSubmit(): void {
@@ -70,25 +102,13 @@ export class ModalMemberManagerPage implements OnInit {
       });
     }
 
-    // if (this.courseForm.value.length) {
-    //   this.checkForm.value.forEach((value: Check, index: number) => {
-    //     this.member.checks[index].depositMade = value.depositMade;
-    //     this.member.checks[index].depositDate = value.depositMade
-    //       ? value.depositDate
-    //       : null;
-    //   });
-    // }
-
-    this.member.firstName = this.memberEditionForm.get('firstName').value;
-    this.member.lastName = this.memberEditionForm.get('lastName').value;
-    this.member.phone = this.memberEditionForm.get('phone').value;
-    this.member.email = this.memberEditionForm.get('email').value;
-    this.member.courses = this.memberEditionForm.get('courses').value;
-    this.member.paymentMethod =
-      this.memberEditionForm.get('paymentMethod').value;
-    this.member.paymentAmount =
-      this.memberEditionForm.get('paymentAmount').value;
-    this.member.extraInfo = this.memberEditionForm.get('extraInfo').value;
+    this.member.firstName = this.memberEditionForm.value.firstName;
+    this.member.lastName = this.memberEditionForm.value.lastName;
+    this.member.phone = this.memberEditionForm.value.phone;
+    this.member.email = this.memberEditionForm.value.email;
+    this.member.paymentMethod = this.memberEditionForm.value.paymentMethod;
+    this.member.paymentAmount = this.memberEditionForm.value.paymentAmount;
+    this.member.extraInfo = this.memberEditionForm.value.extraInfo;
 
     console.log('submit member', this.member);
 
@@ -130,6 +150,8 @@ export class ModalMemberManagerPage implements OnInit {
   }
 
   public onCancel(): void {
+    this.member = { ...this._originalMember };
+    this.memberEditionForm.reset();
     this.modalCtrl.dismiss({
       dismissed: this.CANCEL,
     });
@@ -144,28 +166,31 @@ export class ModalMemberManagerPage implements OnInit {
   }
 
   // Getting the courses control
-  get coursesFormArray(): FormArray {
-    return this.memberEditionForm.get('courses') as FormArray;
-  }
+  // get coursesFormArray(): FormArray {
+  //   return this.memberEditionForm.value.courses as FormArray;
+  // }
 
   get memberCoursesId(): string[] {
-    return this.member.courses.map(({ courseId }) => courseId);
+    return this._memberCoursesId;
   }
 
   ////////////
   // PRIVATE
   ////////////
   private _initMemberEditionForm(): void {
-    // this.courseList = this.member.course;
-    // this.artisticPractices.forEach((pra) => {
-    //   this.practiceList.find((practice) => pra === practice)
-    //     ? this.practiceForm.push(
+    // this.courseList.forEach((course) => {
+    //   this.courseList.find((practice) => course === )
+    //     ? this.coursesForm.push(
     //         this.fb.control(
-    //           this.practiceList.find((practice) => pra === practice)
+    //           this.courseList.find((practice) => course === practice)
     //         )
     //       )
-    //     : this.practiceForm.push(this.fb.control(null));
+    //     : this.coursesForm.push(this.fb.control(null));
     // });
+
+    console.log('this.member on init form :', this.member);
+
+    this._memberCoursesId = this.member.courses.map(({ courseId }) => courseId);
 
     if (this.member.checks.length) {
       this.checkList = this.member.checks;
@@ -191,6 +216,10 @@ export class ModalMemberManagerPage implements OnInit {
       });
     }
 
+    //////////////////////////////////////////
+    //!\ CHECK FOR THE COURSE MEMBERS ID /!\
+    //////////////////////////////////////////
+
     // FORMATED DATES
     const formatedSubscriptionRequestDate = new Date(
       this.member.subscriptionRequestDate
@@ -212,7 +241,7 @@ export class ModalMemberManagerPage implements OnInit {
       ]),
       phone: this.fb.control(this.member.phone, Validators.required),
       // this.fb.control(this.member.courses)
-      courses: this.coursesForm,
+      // courses: this.coursesForm,
       paymentMethod: this.fb.control(
         this.member.paymentMethod,
         Validators.required
@@ -231,7 +260,7 @@ export class ModalMemberManagerPage implements OnInit {
       ),
     });
 
-    console.log(this.member, this.memberEditionForm.value.courses);
+    // console.log('COURSES FORM :', this.memberEditionForm.value.courses);
 
     this.isLoading = false;
   }

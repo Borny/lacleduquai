@@ -58,6 +58,14 @@
       <div class="ion-padding-start ion-margin-vertical">
         <p>Cours:</p>
         <ul>
+          <!-- ERROR NO COURSE -->
+          <li
+            class="error-message"
+            [ngClass]="member.courses.length ? '' : 'show-error'"
+          >
+            Aucun cours de sélectionné !
+          </li>
+          <!-- COURSE ITEMS -->
           <li *ngFor="let course of member.courses" class="course-list-item">
             - {{ course.courseLabel }}
             <div class="slide-toggle__container">
@@ -251,7 +259,7 @@
     </ion-button>
     <ion-button color="warning" (click)="onCancel()">Annuler</ion-button>
     <ion-button
-      [disabled]="memberEditionForm.invalid"
+      [disabled]="memberEditionForm.invalid || !member.courses.length"
       color="primary"
       (click)="onSubmit()"
     >

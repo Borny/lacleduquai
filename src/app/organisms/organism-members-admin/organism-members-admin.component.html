@@ -89,7 +89,7 @@
         >
           <div class="first-column">{{ i + 1 }}</div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member)">
+            <ion-button (click)="onOpenMemberManagerModal(member)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
@@ -151,7 +151,7 @@
             {{ member.extraInfo ? member.extraInfo : '-' }}
           </div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member)">
+            <ion-button (click)="onOpenMemberManagerModal(member)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
@@ -186,7 +186,8 @@
             >{{ courseTitle }}</span
           >
           <span *ngIf="courseChoosen" class="margin-left-2">
-            {{ attendees }} / {{ maxCapacity }} max
+            <!-- {{ attendees }} / {{ maxCapacity }} max -->
+            {{ maxCapacity }} max
           </span>
         </h2>
       </div>
@@ -226,8 +227,8 @@
         <li class="data-table__item data-table__item__header">
           <div class="first-column"></div>
           <div></div>
-          <div>Nom</div>
           <div>Prénom</div>
+          <div>Nom</div>
           <div>Téléphone</div>
           <div>Email</div>
           <!-- <div>Cours</div> -->
@@ -263,12 +264,12 @@
         >
           <div class="first-column">{{ i + 1 }}</div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member)">
+            <ion-button (click)="onOpenMemberManagerModal(member)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
-          <div>{{ member.lastName }}</div>
           <div>{{ member.firstName }}</div>
+          <div>{{ member.lastName }}</div>
           <div>{{ member.phone }}</div>
           <div>{{ member.email }}</div>
           <!-- <div class="data-table__item-course">
@@ -325,7 +326,7 @@
             {{ member.extraInfo ? member.extraInfo : '-' }}
           </div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member)">
+            <ion-button (click)="onOpenMemberManagerModal(member)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
@@ -386,12 +387,12 @@
         >
           <div class="first-column">{{ i + 1 }}</div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member)">
+            <ion-button (click)="onOpenMemberManagerModal(member)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
-          <div>{{ member.lastName }}</div>
           <div>{{ member.firstName }}</div>
+          <div>{{ member.lastName }}</div>
           <div>{{ member.phone }}</div>
           <div>{{ member.email }}</div>
           <!-- <div class="data-table__item-course">
@@ -448,7 +449,7 @@
             {{ member.extraInfo ? member.extraInfo : '-' }}
           </div>
           <div>
-            <ion-button (click)="onOpenCourseManagerModal(member)">
+            <ion-button (click)="onOpenMemberManagerModal(member)">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </div>
