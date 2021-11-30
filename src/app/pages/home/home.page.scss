@@ -1,6 +1,17 @@
 @import '../../../styles/tools/variables';
 @import '../../../styles/tools/mixins';
 
+//////////////
+.block-info {
+  padding: 1rem;
+  background: #fff4b0;
+  border-radius: 8px;
+  margin: 3rem 1rem 1rem;
+  border: 5px solid #ffde00;
+  box-shadow: 1px 4px 6px 0px rgb(0 0 0 / 70%);
+}
+//////////////
+
 // LOADER
 .loader {
   display: block;
@@ -205,11 +216,14 @@
   margin: 1rem auto;
 
   @include screen-sm {
-    // width: 300px;
-    height: 100px;
-    height: 200px;
-    width: 66px;
+    // height: 200px;
+    // width: 66px;
+    // margin: 0 auto 2rem;
+    height: 350px;
+    width: 106px;
     margin: 0 auto 2rem;
+    position: sticky;
+    top: 0;
   }
 }
 
