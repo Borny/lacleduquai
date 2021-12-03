@@ -4,11 +4,18 @@
 //////////////
 .block-info {
   padding: 1rem;
-  background: #fff4b0;
   border-radius: 8px;
   margin: 3rem 1rem 1rem;
-  border: 5px solid #ffde00;
   box-shadow: 1px 4px 6px 0px rgb(0 0 0 / 70%);
+
+  &--blue {
+    background: #ceecea;
+    border: 5px solid #5dbeba;
+  }
+  &--yellow {
+    background: #fff4b0;
+    border: 5px solid #ffde00;
+  }
 }
 //////////////
 
