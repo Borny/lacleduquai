@@ -295,62 +295,62 @@
         ></ion-spinner>
 
         <!-- Event lists -->
-        <div class="hidden">
-          <ng-container *ngIf="!isDayEventsLoading">
-            <h2 class="events__container-label">Nos Evenements</h2>
-            <div
-              class="event-day"
-              *ngFor="let day of daysList; trackBy: trackElement"
-            >
-              <div class="events__label">
-                <h2>{{day.label}}</h2>
-                <span class="events__label__line"></span>
-              </div>
-              <div class="events__list">
-                <ion-card *ngFor="let event of day.events" class="events__card">
-                  <ion-card-header
-                    class="events__card__header"
-                    (click)="toggleCollapse(event)"
-                  >
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-card-title
-                      color="medium"
-                      class="ion-text-center events__card__title"
-                    >
-                      <strong>{{event.name}}</strong> - {{event.prof}}
-                      <ion-icon
-                        class="events__card__title__icon"
-                        [name]="event.expanded ? 'chevron-up-outline': 'chevron-down-outline'"
-                      ></ion-icon>
-                      <small class="event__details"
-                        >{{event.timeStart | date:"HH"}}h{{event.timeStart |
-                        date:"mm"}} - {{event.timeEnd |
-                        date:"HH"}}h{{event.timeEnd | date:"mm"}}
-                        <span class="spacer--round"></span>
-                        <span *ngIf="event.priceMode !== priceMode.PAYING"
-                          >{{event.price}}</span
-                        >
-                        <span *ngIf="event.priceMode === priceMode.PAYING"
-                          >{{event.price | currency}}</span
-                        >
-                        <span class="spacer--round"></span>
-                        {{event.phone}}
-                      </small>
-                    </ion-card-title>
-                  </ion-card-header>
-                  <ion-card-content class="events__card__content">
-                    <molecule-event-card-content
-                      [expandHeight]="EVENT_CARD_CONTENT_MAX_HEIGHT"
-                      [expanded]="event.expanded"
-                      [event]="event"
-                    >
-                    </molecule-event-card-content>
-                  </ion-card-content>
-                </ion-card>
-              </div>
+        <!-- <div class="hidden"> -->
+        <ng-container *ngIf="!isDayEventsLoading">
+          <h2 class="events__container-label">Nos Evenements</h2>
+          <div
+            class="event-day"
+            *ngFor="let day of daysList; trackBy: trackElement"
+          >
+            <div class="events__label">
+              <h2>{{day.label}}</h2>
+              <span class="events__label__line"></span>
             </div>
-          </ng-container>
-        </div>
+            <div class="events__list">
+              <ion-card *ngFor="let event of day.events" class="events__card">
+                <ion-card-header
+                  class="events__card__header"
+                  (click)="toggleCollapse(event)"
+                >
+                  <ion-ripple-effect></ion-ripple-effect>
+                  <ion-card-title
+                    color="medium"
+                    class="ion-text-center events__card__title"
+                  >
+                    <strong>{{event.name}}</strong> - {{event.prof}}
+                    <ion-icon
+                      class="events__card__title__icon"
+                      [name]="event.expanded ? 'chevron-up-outline': 'chevron-down-outline'"
+                    ></ion-icon>
+                    <small class="event__details"
+                      >{{event.timeStart | date:"HH"}}h{{event.timeStart |
+                      date:"mm"}} - {{event.timeEnd |
+                      date:"HH"}}h{{event.timeEnd | date:"mm"}}
+                      <span class="spacer--round"></span>
+                      <span *ngIf="event.priceMode !== priceMode.PAYING"
+                        >{{event.price}}</span
+                      >
+                      <span *ngIf="event.priceMode === priceMode.PAYING"
+                        >{{event.price | currency}}</span
+                      >
+                      <span class="spacer--round"></span>
+                      {{event.phone}}
+                    </small>
+                  </ion-card-title>
+                </ion-card-header>
+                <ion-card-content class="events__card__content">
+                  <molecule-event-card-content
+                    [expandHeight]="EVENT_CARD_CONTENT_MAX_HEIGHT"
+                    [expanded]="event.expanded"
+                    [event]="event"
+                  >
+                  </molecule-event-card-content>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+        </ng-container>
+        <!-- </div> -->
       </ion-col>
 
       <!-- SOCIAL -->

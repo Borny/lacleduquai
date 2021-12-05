@@ -223,14 +223,16 @@
   margin: 1rem auto;
 
   @include screen-sm {
-    // height: 200px;
-    // width: 66px;
-    // margin: 0 auto 2rem;
-    height: 350px;
-    width: 106px;
+    height: 200px;
+    width: 66px;
     margin: 0 auto 2rem;
-    position: sticky;
-    top: 0;
+
+    // When the events are not displayed
+    // height: 350px;
+    // width: 106px;
+    // margin: 0 auto 2rem;
+    // position: sticky;
+    // top: 0;
   }
 }
 
