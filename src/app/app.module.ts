@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.routing';
 import { AuthInterceptor } from './interceptors/auth-interceptors';
 import { SharedModule } from './shared/shared.module';
 

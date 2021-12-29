@@ -4,7 +4,10 @@
     <!-- TITLE -->
     <ion-row>
       <ion-col>
-        <squared-shapes-svg [title]="TITLE" class="squared-shapes"></squared-shapes-svg>
+        <squared-shapes-svg
+          [title]="TITLE"
+          class="squared-shapes"
+        ></squared-shapes-svg>
       </ion-col>
     </ion-row>
 
@@ -76,94 +79,174 @@
             <div *ngIf="!isLoading && isFormSent" class="message-sent--success">
               <p>Merci, votre réservation a bien été effectuée.</p>
               <div class="btn__container--flex">
-                <ion-button (click)="onNavigateHome()">{{HOME_BTN_TEXT}}</ion-button>
+                <ion-button (click)="onNavigateHome()"
+                  >{{HOME_BTN_TEXT}}</ion-button
+                >
               </div>
             </div>
 
             <!-- Coworking Form -->
-            <form *ngIf="!isLoading && !isFormSent && !isFormFailed" class="form" [formGroup]="coworkingForm"
-              (ngSubmit)="onSubmit()">
+            <form
+              *ngIf="!isLoading && !isFormSent && !isFormFailed"
+              class="form"
+              [formGroup]="coworkingForm"
+              (ngSubmit)="onSubmit()"
+            >
               <ion-list>
                 <!-- People count -->
                 <ion-item>
-                  <ion-label>Personne(s)<atom-asterisk></atom-asterisk>
+                  <ion-label
+                    >Personne(s)<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-select formControlName="personsNumber" interface="popover" (ionChange)="onSelectChange($event)">
-                    <ion-select-option *ngFor="let number of getCount(maxPersonsAllowed); let i = index"
-                      [value]="i + 1">{{i + 1}}</ion-select-option>
+                  <ion-select
+                    formControlName="personsNumber"
+                    interface="popover"
+                    (ionChange)="onSelectChange($event)"
+                  >
+                    <ion-select-option
+                      *ngFor="let number of getCount(maxPersonsAllowed); let i = index"
+                      [value]="i + 1"
+                      >{{i + 1}}</ion-select-option
+                    >
                   </ion-select>
                 </ion-item>
 
                 <!-- Booking Date -->
                 <div class="calendar">
                   <mat-form-field appearance="fill">
-                    <mat-label>Sélectionnez une/des date(s)<atom-asterisk></atom-asterisk>
+                    <mat-label
+                      >Sélectionnez une/des date(s)<atom-asterisk
+                      ></atom-asterisk>
                     </mat-label>
-                    <mat-chip-list #chipList aria-label="Choisir une date" (click)="picker.open()">
-                      <mat-chip *ngFor="let value of model" [selectable]="false" [removable]="true"
-                        (removed)="remove(value)">
+                    <mat-chip-list
+                      #chipList
+                      aria-label="Choisir une date"
+                      (click)="picker.open()"
+                    >
+                      <mat-chip
+                        *ngFor="let value of model"
+                        [selectable]="false"
+                        [removable]="true"
+                        (removed)="remove(value)"
+                      >
                         {{ value | date }}
                         <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                       </mat-chip>
-                      <input matInput placeholder="Choisir une date" [value]="resetModel" [matDatepicker]="picker"
-                        [min]="minDateFilter" [max]="maxDateFilter" [matDatepickerFilter]="dateFilter"
-                        [matChipInputFor]="chipList" (dateChange)="dateChanged($event)" required hidden />
+                      <input
+                        matInput
+                        placeholder="Choisir une date"
+                        [value]="resetModel"
+                        [matDatepicker]="picker"
+                        [min]="minDateFilter"
+                        [max]="maxDateFilter"
+                        [matDatepickerFilter]="dateFilter"
+                        [matChipInputFor]="chipList"
+                        (dateChange)="dateChanged($event)"
+                        required
+                        hidden
+                      />
                     </mat-chip-list>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker [disabled]="coworkingForm.get('personsNumber').invalid" [startAt]="init"
-                      [dateClass]="dateClass"></mat-datepicker>
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker
+                      #picker
+                      [disabled]="coworkingForm.get('personsNumber').invalid"
+                      [startAt]="init"
+                      [dateClass]="dateClass"
+                    ></mat-datepicker>
                   </mat-form-field>
                 </div>
 
                 <!-- Name -->
                 <ion-item>
-                  <ion-label position="floating">Nom<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating"
+                    >Nom<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input type="text" name="name" formControlName="name" required></ion-input>
+                  <ion-input
+                    type="text"
+                    name="name"
+                    formControlName="name"
+                    required
+                  ></ion-input>
                 </ion-item>
-                <p class="error-message"
-                  [ngClass]="coworkingForm.get('name').invalid && coworkingForm.get('name').touched ? 'show-error' : ''">
+                <p
+                  class="error-message"
+                  [ngClass]="coworkingForm.get('name').invalid && coworkingForm.get('name').touched ? 'show-error' : ''"
+                >
                   Veuillez renseigner votre nom
                 </p>
 
                 <!-- Phone -->
                 <ion-item>
-                  <ion-label position="floating">Téléphone<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating"
+                    >Téléphone<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input type="text" name="phone" formControlName="phone" required></ion-input>
+                  <ion-input
+                    type="text"
+                    name="phone"
+                    formControlName="phone"
+                    required
+                  ></ion-input>
                 </ion-item>
-                <p class="error-message"
-                  [ngClass]="coworkingForm.get('phone').invalid && coworkingForm.get('phone').touched ? 'show-error' : ''">
+                <p
+                  class="error-message"
+                  [ngClass]="coworkingForm.get('phone').invalid && coworkingForm.get('phone').touched ? 'show-error' : ''"
+                >
                   Veuillez renseigner un numéro de téléphone
                 </p>
 
                 <!-- Email -->
                 <ion-item>
-                  <ion-label position="floating">E-mail<atom-asterisk></atom-asterisk>
+                  <ion-label position="floating"
+                    >E-mail<atom-asterisk></atom-asterisk>
                   </ion-label>
-                  <ion-input type="email" name="email" formControlName="email" required></ion-input>
+                  <ion-input
+                    type="email"
+                    name="email"
+                    formControlName="email"
+                    required
+                  ></ion-input>
                 </ion-item>
-                <p class="error-message"
-                  [ngClass]="coworkingForm.get('email').invalid && coworkingForm.get('email').touched ? 'show-error' : ''">
+                <p
+                  class="error-message"
+                  [ngClass]="coworkingForm.get('email').invalid && coworkingForm.get('email').touched ? 'show-error' : ''"
+                >
                   Veuillez renseigner votre email
                 </p>
 
                 <!-- Credit Card  -->
                 <ion-item lines="none" class="credit-card__label">
-                  <ion-label>Informations de carte<atom-asterisk></atom-asterisk>
+                  <ion-label
+                    >Informations de carte<atom-asterisk></atom-asterisk>
                   </ion-label>
                 </ion-item>
                 <div class="credit-card__input" #creditCardElement></div>
 
                 <!-- Submit button -->
-                <div class="btn__container btn__container--block btn__container--submit">
-                  <ion-button class="ion-margin-vertical" type="submit" color="secondary" expand="block"
-                    [disabled]="coworkingForm.invalid || totalPrice === 0 || coworkingForm.get('bookingDateList').value.length === 0 || !isCardValid">
+                <div
+                  class="
+                    btn__container btn__container--block btn__container--submit
+                  "
+                >
+                  <ion-button
+                    class="ion-margin-vertical"
+                    type="submit"
+                    color="secondary"
+                    expand="block"
+                    [disabled]="coworkingForm.invalid || totalPrice === 0 || coworkingForm.get('bookingDateList').value.length === 0 || !isCardValid"
+                  >
                     {{PAY_BUTTON_TEXT}} {{totalPrice | currency}}
                   </ion-button>
 
                   <!-- Loading button -->
-                  <ion-button *ngIf="isLoading" type="button" color="secondary" expand="block">
+                  <ion-button
+                    *ngIf="isLoading"
+                    type="button"
+                    color="secondary"
+                    expand="block"
+                  >
                     <loader></loader>
                   </ion-button>
                 </div>
