@@ -107,13 +107,11 @@ export class OrganismHomeAdminComponent implements OnInit {
     if (!data) {
       return;
     }
-    console.log(data);
     // On dismiss
     let updatedNews = data.news;
     if (data.dismissed === this.CONFIRM) {
       this.homeService.updateNews(updatedNews).subscribe(
         (updateData) => {
-          console.log('updateData:', updateData);
           // this.currentEventsData[index] = data.event;
           this.currentNewsData[index] = data.news;
           // show snack bar
@@ -125,7 +123,6 @@ export class OrganismHomeAdminComponent implements OnInit {
         }
       );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
-      console.log('deleted');
       this.homeService.deleteNews(data.news).subscribe(
         (result) => {
           this.originalNewsData = this.originalNewsData.filter(
@@ -187,13 +184,11 @@ export class OrganismHomeAdminComponent implements OnInit {
     if (!data) {
       return;
     }
-    console.log(data);
     // On dismiss
     let updatedEvent = data.event;
     if (data.dismissed === this.CONFIRM) {
       this.homeService.updateEvent(updatedEvent).subscribe(
         (updateData) => {
-          console.log('updateData:', updateData);
           // this.currentEventsData[index] = data.event;
           this.currentEventsData[index] = data.event;
           // show snack bar
@@ -202,11 +197,10 @@ export class OrganismHomeAdminComponent implements OnInit {
         },
         (err) => {
           this._presentToast(this.EVENT_UPDATED_FAIL, 'warning');
-          console.log(err);
+          console.error(err);
         }
       );
     } else if (data.dismissed === this.CONFIRM_DELETE) {
-      console.log('deleted');
       this.homeService.deleteEvent(data.event).subscribe(
         (result) => {
           this.originalEventsData = this.originalEventsData.filter(
@@ -240,13 +234,12 @@ export class OrganismHomeAdminComponent implements OnInit {
     this.homeService.getNews().subscribe(
       (response) => {
         this.isNewsLoading = false;
-        // console.log('news list:', response.data);
         this.originalNewsData = response.data;
         this.currentNewsData = this.originalNewsData;
       },
       (error) => {
         this.isNewsLoading = false;
-        console.log('news error:', error);
+        console.error('news error:', error);
       }
     );
   }
@@ -256,13 +249,12 @@ export class OrganismHomeAdminComponent implements OnInit {
     this.homeService.getEvents().subscribe(
       (response) => {
         this.isEventsLoading = false;
-        // console.log('events:', response);
         this.originalEventsData = response.events;
         this.currentEventsData = this.originalEventsData;
       },
       (error) => {
         this.isEventsLoading = false;
-        console.log('events error:', error);
+        console.error('events error:', error);
       }
     );
   }
