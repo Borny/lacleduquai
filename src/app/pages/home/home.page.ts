@@ -126,8 +126,8 @@ export class HomePage implements OnInit {
               // Sorting the events by ascending time
               day.events.sort(
                 (a, b) =>
-                  new Date(a.timeStart).getTime() -
-                  new Date(b.timeStart).getTime()
+                  new Date(a.timeStart).getHours() -
+                  new Date(b.timeStart).getHours()
               );
               // Adding a label to the day
               day.label = this._setDayEventLabel(day.date);
