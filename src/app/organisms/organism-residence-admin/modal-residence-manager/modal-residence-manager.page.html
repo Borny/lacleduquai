@@ -209,7 +209,25 @@
         </ion-list>
 
         <!-- Availability -->
-        <ion-list formArrayName="availability">
+        <ion-item>
+          <ion-label position="floating"
+            >Sur quelle(s) période(s) souhaiteriez-vous venir travailler chez
+            nous ?<span class="label-asterisk">*</span></ion-label
+          >
+          <ion-input
+            type="text"
+            name="availabilityText"
+            formControlName="availabilityText"
+            required
+          ></ion-input>
+        </ion-item>
+        <p
+          class="error-message"
+          [ngClass]="residenceEditionForm.get('availabilityText').invalid && residenceEditionForm.get('availabilityText').touched ? 'show-error' : ''"
+        >
+          Veuillez renseigner une période
+        </p>
+        <!-- <ion-list formArrayName="availability">
           <ion-list-header>
             <ion-label
               >Sur quelles périodes êtes-vous disponibles pour travailler chez
@@ -223,7 +241,7 @@
             <ion-label>{{ availabilities[i] }}</ion-label>
             <ion-checkbox slot="start" [formControlName]="i"></ion-checkbox>
           </ion-item>
-        </ion-list>
+        </ion-list> -->
 
         <!-- Project Team -->
         <ion-list formArrayName="projectTeam">
