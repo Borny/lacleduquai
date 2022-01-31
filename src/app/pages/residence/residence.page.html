@@ -18,13 +18,20 @@
         <div class="description-container">
           <ul class="description">
             <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
               <p class="description-item--content">
-                Pour les artistes et compagnies du spectacle vivant, plus
-                spécifiquement en danse contemporaine et en théâtre, en priorité
-                aux compagnies et artistes installés dans la région bordelaise.
+                La Compagnie Bela & Côme - Association La Clé du Quai propose
+                des accueils en résidence pour les artistes et compagnies du
+                spectacle vivant et des arts plastiques : danse, théâtre,
+                musique, cirque, photo, sculpture, peinture...
+              </p>
+            </li>
+            <li class="description-item">
+              <p class="description-item--content">
+                Après plusieurs années d'accueil dans le centre ville de
+                Bordeaux, ces accueils en résidence se font désormais dans un
+                cadre beaucoup plus paisible, hors de la ville, dans les Landes,
+                près du charmant village de Belhade (à 1h de Bordeaux, vers le
+                Sud).
               </p>
             </li>
             <li class="description-item">
@@ -32,8 +39,22 @@
                 class="description-item--icon"
               ></two-triangle-svg>
               <p class="description-item--content">
-                Accueil en résidence pendant 5 jours, du lundi au vendredi, 9h à
-                16h.
+                Vous avez à disposition une salle composée d’un grand espace de
+                200m2 (carrelage) et d’une petite scène de 35m2 (parquet collé).
+                Nous pouvons aménager un espace de travail de 60m2
+                spécifiquement pour la danse (tapis mou + tapis de danse) et à
+                votre de demande.
+              </p>
+            </li>
+            <li class="description-item">
+              <two-triangle-svg
+                class="description-item--icon"
+              ></two-triangle-svg>
+              <p class="description-item--content">
+                Vous pouvez être hébergé.e.s sur place dans une grande maison
+                commune, à cinq minutes en voiture de l'espace de travail (15
+                min en vélo). Si vous souhaitez y loger, une participation au
+                frais sera demandé (voir document joint ci-dessous).
               </p>
             </li>
             <li class="description-item">
@@ -50,18 +71,9 @@
                 class="description-item--icon"
               ></two-triangle-svg>
               <p class="description-item--content">
-                Présentation en fin de semaine auprès d’un public restreint
-                d’une étape de travail, extrait, lecture, selon l’envie des
-                artistes.
-              </p>
-            </li>
-            <li class="description-item">
-              <two-triangle-svg
-                class="description-item--icon"
-              ></two-triangle-svg>
-              <p class="description-item--content">
-                L’espace de travail est de 50m2 et ne permet pas d’accueillir de
-                grands groupes.<br />
+                Pendant la résidence, un temps de partage avec le public local
+                sera nécessaire. Il peut prendre de multiples formes : ateliers,
+                présentation d'un extrait, lecture...
               </p>
             </li>
 
@@ -77,8 +89,32 @@
                 class="description-item--icon"
               ></two-triangle-svg>
               <p class="description-item--content">
-                Possibilité de stocker, le temps de la résidence, une très
-                petite quantité de matériel.
+                Un véhicule est fortement recommandé.
+              </p>
+            </li>
+
+            <li class="description-item">
+              <p>
+                Le village de Belhade se trouve
+                <a
+                  class="color-primary"
+                  href="https://goo.gl/maps/ESR4Jn91KrxKej5v5"
+                  target="blank"
+                >
+                  ici</a
+                >.
+              </p>
+            </li>
+
+            <li class="description-item">
+              <p>
+                Vous trouverez un récapitulatif de toutes les informations
+                <a
+                  class="color-primary"
+                  href="./assets/pdf/Accueil_en_résidence_Belhade.pdf"
+                  target="blank"
+                  >ici</a
+                >
               </p>
             </li>
           </ul>
@@ -359,10 +395,28 @@
                 </ion-list>
 
                 <!-- Availability -->
-                <ion-list formArrayName="availability">
+                <ion-item>
+                  <ion-label position="floating"
+                    >Sur quelle(s) période(s) souhaiteriez-vous venir travailler
+                    chez nous ?<span class="label-asterisk">*</span></ion-label
+                  >
+                  <ion-input
+                    type="text"
+                    name="availabilityText"
+                    formControlName="availabilityText"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="error-message"
+                  [ngClass]="residenceForm.get('availabilityText').invalid && residenceForm.get('availabilityText').touched ? 'show-error' : ''"
+                >
+                  Veuillez renseigner une période
+                </p>
+                <!-- <ion-list formArrayName="availability">
                   <ion-list-header>
                     <ion-label
-                      >Sur quelles périodes êtes-vous disponibles pour
+                      >Sur quelle(s) période(s) souhaiteriez-vous venir
                       travailler chez nous ?<atom-asterisk></atom-asterisk>
                     </ion-label>
                   </ion-list-header>
@@ -380,7 +434,7 @@
                   [ngClass]="residenceForm.get('availability').invalid && residenceForm.get('availability').touched ? 'show-error' : ''"
                 >
                   Veuillez renseigner une disponibilité
-                </p>
+                </p> -->
 
                 <!-- Project Team -->
                 <ion-list formArrayName="projectTeam">

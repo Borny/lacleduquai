@@ -19,7 +19,9 @@ export class ResidencePage implements OnInit {
 
   public locations: string[] = [
     'Bordeaux Métropole',
-    'Région Nouvelle-Aquitaine',
+    'Gironde',
+    'Landes',
+    'Pays Basque',
     'France',
     'Au-delà...',
   ];
@@ -28,6 +30,8 @@ export class ResidencePage implements OnInit {
     'Danse contemporaine',
     'Théâtre',
     'Danse - théâtre',
+    'Musique',
+    'Cirque',
     'Autre',
   ];
 
@@ -85,15 +89,16 @@ export class ResidencePage implements OnInit {
         .filter((value) => value !== null);
 
     // Filtering the choosen availability
-    const selectedAvailability = this.residenceForm.value.availability
-      .map((checked: boolean, index: number) =>
-        checked ? this.availabilities[index] : null
-      )
-      .filter((value) => value !== null);
+    // TODO: uncomment when availability dates are set
+    // const selectedAvailability = this.residenceForm.value.availability
+    //   .map((checked: boolean, index: number) =>
+    //     checked ? this.availabilities[index] : null
+    //   )
+    //   .filter((value) => value !== null);
 
     // Updating the form values
     const formValues: Residence = this.residenceForm.value;
-    formValues.availability = selectedAvailability;
+    // formValues.availability = selectedAvailability;
     formValues.artisticPractice = selectedArtisticPracticeNames;
 
     // Sending the message
@@ -107,8 +112,8 @@ export class ResidencePage implements OnInit {
       (error) => {
         this.isLoading = false;
         this.isFormFailed = true;
-        console.log(error);
-        console.log(error.error.message);
+        console.error(error);
+        console.error(error.error.message);
       }
     );
   }
@@ -181,13 +186,18 @@ export class ResidencePage implements OnInit {
         [],
         requireCheckboxesToBeCheckedValidator()
       ),
-      availability: new FormArray([], requireCheckboxesToBeCheckedValidator()),
+
+      // TODO: delete when availability dates are set
+      availabilityText: new FormControl(null, Validators.required),
+      // TODO: uncomment when availability dates are set
+      // availability: new FormArray([], requireCheckboxesToBeCheckedValidator()),
       videoLink: new FormControl(null),
       website: new FormControl(null),
       partners: new FormControl(null),
     });
     this._addControl('artisticPractice', this.artisticPractices);
-    this._addControl('availability', this.availabilities);
+    // TODO: uncomment when availability dates are set
+    // this._addControl('availability', this.availabilities);
   }
 
   // Add control to the residence form control array
