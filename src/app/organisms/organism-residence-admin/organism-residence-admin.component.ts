@@ -66,8 +66,6 @@ export class OrganismResidenceAdminComponent implements OnInit {
     if (data.dismissed === this.CONFIRM) {
       this.residenceService.updateResidence(updatedResidence).subscribe(
         (updateData) => {
-          console.log(this.currentResidenceData);
-          console.log(this.originalResidenceData);
           this.currentResidenceData[index] = updatedResidence;
 
           this.candidates = this.currentResidenceData.filter(
@@ -77,7 +75,6 @@ export class OrganismResidenceAdminComponent implements OnInit {
             (residence) => residence.booked
           );
 
-          // residenceData = updatedResidence;
           // show snack bar
           this._presentToast(this.RESIDENCE_UPDATED_SUCCESS, 'success');
         },
