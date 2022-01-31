@@ -17,6 +17,4 @@ export interface Residence {
   partners: string;
 }
 
-interface ProjectMember {
-
-}
+interface ProjectMember {}

@@ -39,7 +39,9 @@ export class ModalResidenceManagerPage implements OnInit {
 
   public locations: string[] = [
     'Bordeaux Métropole',
-    'Région Nouvelle-Aquitaine',
+    'Gironde',
+    'Landes',
+    'Pays Basque',
     'France',
     'Au-delà...',
   ];
@@ -48,6 +50,8 @@ export class ModalResidenceManagerPage implements OnInit {
     'Danse contemporaine',
     'Théâtre',
     'Danse - théâtre',
+    'Musique',
+    'Cirque',
     'Autre',
   ];
 
@@ -90,15 +94,22 @@ export class ModalResidenceManagerPage implements OnInit {
         .filter((value) => value !== null);
 
     // Filtering the choosen availability
-    const selectedAvailability = this.residenceEditionForm.value.availability
-      .map((checked: boolean, index: number) =>
-        checked ? this.availabilities[index] : null
-      )
-      .filter((value) => value !== null);
+    // TODO: uncomment when availability dates are set
+    // const selectedAvailability = this.residenceEditionForm.value.availability
+    //   .map((checked: boolean, index: number) =>
+    //     checked ? this.availabilities[index] : null
+    //   )
+    //   .filter((value) => value !== null);
 
     // Updating the form values
     const formValues: Residence = this.residenceEditionForm.value;
-    formValues.availability = selectedAvailability;
+    // TODO: uncomment when availability dates are set
+    // formValues.availability = selectedAvailability;
+    // TODO: delete when availability dates are set
+    formValues.availability = [];
+    formValues.availability.push(
+      this.residenceEditionForm.get('availabilityText').value
+    );
     formValues.artisticPractice = selectedArtisticPracticeNames;
 
     this.residence.projectName = this.residenceEditionForm.value.projectName;
@@ -256,7 +267,10 @@ export class ModalResidenceManagerPage implements OnInit {
       partners: new FormControl(this.residence.partners),
       location: new FormControl(this.residence.location, Validators.required),
       artisticPractice: this.practiceForm,
-      availability: this.availabilityForm,
+      // TODO: uncomment when availability dates are set
+      // availability: this.availabilityForm,
+      // TODO: delete when availability dates are set
+      availabilityText: new FormControl(this.residence.availability),
       projectTeam: this.teamForm,
       booked: new FormControl(this.residence.booked),
     });

@@ -99,6 +99,13 @@ export class ResidencePage implements OnInit {
     // Updating the form values
     const formValues: Residence = this.residenceForm.value;
     // formValues.availability = selectedAvailability;
+    // TODO: uncomment when availability dates are set
+    // formValues.availability = selectedAvailability;
+    // TODO: delete when availability dates are set
+    formValues.availability = [];
+    formValues.availability.push(
+      this.residenceForm.get('availabilityText').value
+    );
     formValues.artisticPractice = selectedArtisticPracticeNames;
 
     // Sending the message
