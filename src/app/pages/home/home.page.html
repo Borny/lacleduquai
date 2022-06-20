@@ -54,60 +54,7 @@
     <ion-row>
       <!-- NEWS -->
       <ion-col class="news" size="12" size-md="6" size-lg="4">
-        <!-- APPEL AUX DONS -->
-        <div class="block-info block-info--yellow">
-          <p>
-            📍
-            <strong>
-              La Clé du Quai est fermée pour une durée indéterminée</strong
-            >
-          </p>
-          <br />
-          <p>
-            Le jeudi 25 novembre 2021, à 11h30, nous avons subi un départ de feu
-            au niveau du compteur/tableau électrique de notre joli café
-            culturel.
-          </p>
-          <p>Heureusement, personne n'a été blessé.</p>
-          <br />
-          <p>Merci aux pompiers pour leur intervention rapide et efficace.</p>
-          <p>Pensées pour nos salarié.e.s.</p>
-          <p>
-            Pensées pour notre propriétaire et sa fille si attachés à ce bien.
-          </p>
-          <p>
-            Pensées pour les locataires de l'immeuble désormais sans logement.
-          </p>
-          <p>
-            Pensées pour celles et ceux qui voient leurs événements,
-            expositions, conférences, ateliers, etc. annulés.
-          </p>
-          <br />
-          <p>
-            C'est un choc pour nous et une grande incompréhension car
-            l'installation électrique était récente et aux normes. Mais c'est
-            aussi sûrement ce qui nous aidera dans nos démarches pour
-            reconstruire ce lieu qui nous est si cher.
-          </p>
-          <br />
-          <p>
-            Merci adhérents, familles, amis, pour votre soutien. Nous gardons
-            précieusement vos messages et stories en mémoire de ce que notre
-            lieu rendait possible.
-          </p>
-          <br />
-          <p>
-            Pour la suite, suivez-nous sur les réseaux. Nous y communiquerons
-            les nouvelles et nos besoins divers (gros bras, petites mains,
-            partage, ...)
-          </p>
-          <br />
-          <p>Merci du fond du coeur,</p>
-          <br />
-          <p>Bela & Côme</p>
-        </div>
-
-        <div class="hidden news__container">
+        <div class="news__container">
           <div class="news__label">
             <h2>Nouveautés</h2>
             <span class="news__label__line"></span>
@@ -155,7 +102,7 @@
             </ng-container>
 
             <!-- MENU DU JOUR -->
-            <ion-card routerLink="/lcdq/cafe" class="todays-special__card">
+            <ion-card routerLink="/lcdq/cafe" class="hidden todays-special__card">
               <ion-item lines="none" class="ion-text-center" detail>
                 <ion-label class="todays-special__text ion-text-center">
                   <ion-text> Menu du jour </ion-text>
@@ -313,7 +260,7 @@
       <!-- SOCIAL -->
       <ion-col size="0" size-lg="3" size-xl="4">
         <!-- SOCIAL -->
-        <div class="social">
+        <div class="hidden social">
           <div class="social__container">
             <div class="social__item">
               <a
@@ -340,6 +287,59 @@
             [fill]="'primary-dark'"
             class="triangle-blue--large"
           ></triangle-blue-svg>
+        </div>
+
+        <!-- APPEL AUX DONS -->
+        <div class="block-info block-info--yellow">
+          <p>
+            📍
+            <strong>
+              La Clé du Quai est fermée pour une durée indéterminée</strong
+            >
+          </p>
+          <br />
+          <p>
+            Le jeudi 25 novembre 2021, à 11h30, nous avons subi un départ de feu
+            au niveau du compteur/tableau électrique de notre joli café
+            culturel.
+          </p>
+          <p>Heureusement, personne n'a été blessé.</p>
+          <br />
+          <p>Merci aux pompiers pour leur intervention rapide et efficace.</p>
+          <p>Pensées pour nos salarié.e.s.</p>
+          <p>
+            Pensées pour notre propriétaire et sa fille si attachés à ce bien.
+          </p>
+          <p>
+            Pensées pour les locataires de l'immeuble désormais sans logement.
+          </p>
+          <p>
+            Pensées pour celles et ceux qui voient leurs événements,
+            expositions, conférences, ateliers, etc. annulés.
+          </p>
+          <br />
+          <p>
+            C'est un choc pour nous et une grande incompréhension car
+            l'installation électrique était récente et aux normes. Mais c'est
+            aussi sûrement ce qui nous aidera dans nos démarches pour
+            reconstruire ce lieu qui nous est si cher.
+          </p>
+          <br />
+          <p>
+            Merci adhérents, familles, amis, pour votre soutien. Nous gardons
+            précieusement vos messages et stories en mémoire de ce que notre
+            lieu rendait possible.
+          </p>
+          <br />
+          <p>
+            Pour la suite, suivez-nous sur les réseaux. Nous y communiquerons
+            les nouvelles et nos besoins divers (gros bras, petites mains,
+            partage, ...)
+          </p>
+          <br />
+          <p>Merci du fond du coeur,</p>
+          <br />
+          <p>Bela & Côme</p>
         </div>
       </ion-col>
     </ion-row>
