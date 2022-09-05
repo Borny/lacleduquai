@@ -9,26 +9,75 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
+      <ion-col size="12" class="ion-padding-horizontal">
+        <!-- APPEL AUX DONS -->
+        <div class="block-info block-info--yellow">
+          <p>
+            📍
+            <strong>
+              Le Café de la Clé du Quai est fermée pour une durée indéterminée</strong
+            >
+          </p>
+          <br />
+          <p>
+            Le jeudi 25 novembre 2021, à 11h30, nous avons subi un départ de feu
+            au niveau du compteur/tableau électrique de notre joli café
+            culturel.
+          </p>
+          <p>Heureusement, personne n'a été blessé.</p>
+          <br />
+          <p>Merci aux pompiers pour leur intervention rapide et efficace.</p>
+          <p>Pensées pour nos salarié.e.s.</p>
+          <p>
+            Pensées pour notre propriétaire et sa fille si attachés à ce bien.
+          </p>
+          <p>
+            Pensées pour les locataires de l'immeuble désormais sans logement.
+          </p>
+          <p>
+            Pensées pour celles et ceux qui voient leurs événements,
+            expositions, conférences, ateliers, etc. annulés.
+          </p>
+          <br />
+          <p>
+            C'est un choc pour nous et une grande incompréhension car
+            l'installation électrique était récente et aux normes. Mais c'est
+            aussi sûrement ce qui nous aidera dans nos démarches pour
+            reconstruire ce lieu qui nous est si cher.
+          </p>
+          <br />
+          <p>
+            Merci adhérents, familles, amis, pour votre soutien. Nous gardons
+            précieusement vos messages et stories en mémoire de ce que notre
+            lieu rendait possible.
+          </p>
+          <br />
+          <p>
+            Pour la suite, suivez-nous sur les réseaux. Nous y communiquerons
+            les nouvelles et nos besoins divers (gros bras, petites mains,
+            partage, ...)
+          </p>
+          <br />
+          <p>Merci du fond du coeur,</p>
+          <br />
+          <p>Bela & Côme</p>
+        </div>
+</ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding-horizontal">
       <ion-col size="12" size-sm="6" class="ion-padding-horizontal">
         <div class="chai__container">
-          <h3 class="chai__text--intro">
-            Et son incontournable thé Chaï fait maison !
-          </h3>
+          <h3 class="chai__text--intro">Et son incontournable thé Chaï fait maison !</h3>
           <div class="chai__image__container">
             <img class="img" src="./assets/img/chai-pie.jpg" alt="ingredient chai" />
           </div>
           <p class="chai__text--description">
-            Situé en plein centre de Bordeaux, cet endoit chaleureux est le lieu
-            de rassemblement de nos activités. Un lieu de partage, d'échanges et
-            de rencontres. Offre salée et sucrée ainsi qu'un large choix de
-            boissons, le tout préparé par nos soins.
+            Situé en plein centre de Bordeaux, cet endoit chaleureux est le lieu de rassemblement de nos activités. Un lieu de partage, d'échanges et de rencontres. Offre
+            salée et sucrée ainsi qu'un large choix de boissons, le tout préparé par nos soins.
           </p>
         </div>
         <multi-triangle-svg class="multi-triangles"></multi-triangle-svg>
-        <p class="discount-text color-primary">
-          Ici, 30% du prix affiché constitue un don pour le développement de
-          l’art et de la culture au sein de l'association.
-        </p>
+        <p class="discount-text color-primary">Ici, 30% du prix affiché constitue un don pour le développement de l’art et de la culture au sein de l'association.</p>
       </ion-col>
 
       <!-- CHALKBOARD -->
@@ -42,15 +91,11 @@
           <div *ngIf="chalkboard" class="todays-special__main-course">
             <p class="ion-text-center">{{chalkboard.mainCourse}}</p>
             <p class="ion-text-center">{{chalkboard.mainCourseSide}}</p>
-            <p *ngIf="chalkboard.mainCoursePrice > 0" class="ion-text-center">
-              {{chalkboard.mainCoursePrice | currency}}
-            </p>
+            <p *ngIf="chalkboard.mainCoursePrice > 0" class="ion-text-center">{{chalkboard.mainCoursePrice | currency}}</p>
           </div>
           <div *ngIf="chalkboard" class="todays-special__dessert">
             <p class="ion-text-center">{{chalkboard.dessert}}</p>
-            <p *ngIf="chalkboard.dessertPrice > 0" class="ion-text-center">
-              {{chalkboard.dessertPrice | currency}}
-            </p>
+            <p *ngIf="chalkboard.dessertPrice > 0" class="ion-text-center">{{chalkboard.dessertPrice | currency}}</p>
           </div>
         </div>
       </ion-col>
@@ -76,21 +121,12 @@
             <div *ngFor="let category of card.categories">
               <div class="drinks-card--intro" *ngIf="i === 0">
                 <p class="drinks-card__category--drink--label">Le Chaï</p>
-                <p>
-                  Thé noir indien épicé. Concocté chaque jour avec des épices
-                  fraîches. Servi chaud ou froid Petit ou Grand format.
-                </p>
+                <p>Thé noir indien épicé. Concocté chaque jour avec des épices fraîches. Servi chaud ou froid Petit ou Grand format.</p>
               </div>
-              <p *ngIf="category.label" class="drinks-card__category--label">
-                {{category.label}}
-              </p>
+              <p *ngIf="category.label" class="drinks-card__category--label">{{category.label}}</p>
               <div *ngFor="let drink of category.drinks" class="drinks-card__category--drinks">
-                <p class="drinks-card__category--drink--label">
-                  {{drink.label}}
-                </p>
-                <p class="drinks-card__category--drink--price">
-                  {{drink.price}}€
-                </p>
+                <p class="drinks-card__category--drink--label">{{drink.label}}</p>
+                <p class="drinks-card__category--drink--price">{{drink.price}}€</p>
               </div>
             </div>
           </ion-card-content>

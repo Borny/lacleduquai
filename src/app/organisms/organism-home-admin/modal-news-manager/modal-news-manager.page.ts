@@ -23,15 +23,16 @@ export class ModalNewsManagerPage implements OnInit {
   public isExternalLink: boolean;
 
   public internalLinks: string[] = [
-    'accueil',
-    'cafe',
-    'reservation-salles',
-    'a-emporter',
+    // 'accueil',
+    // 'cafe',
+    // 'reservation-salles',
+    // 'a-emporter',
     'galerie',
     'belaetcome',
     'residence',
-    'coworking',
-    'cours-stages',
+    // 'coworking',
+    // 'cours-stages',
+    'cours-stages/cours',
     'notre-equipe',
     'contact'
   ]
