@@ -33,6 +33,10 @@ export class CafeSubscriptionAdminOrganismComponent implements OnInit {
       label: '2021-2022',
       value: SeasonEnum.TWENTY_ONE,
     },
+    {
+      label: '2022-2023',
+      value: SeasonEnum.TWENTY_TWO,
+    },
   ];
 
   public readonly CONFIRM = `confirm`;

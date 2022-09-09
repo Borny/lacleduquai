@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.page.scss'],
 })
 export class CoursesPage implements OnInit {
-  public readonly HEADER_TITLE = 'Cours 2021-2022';
+  public readonly HEADER_TITLE = 'Cours 2022-2023';
   public readonly TITLE =
-    'Programme des ateliers hebdomadaires La Clé du Quai 2021-2022';
+    'Programme des ateliers hebdomadaires La Clé du Quai 2022-2023';
 
   public schedules = [
     // {

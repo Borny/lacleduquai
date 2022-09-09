@@ -180,7 +180,7 @@ export class OrganismCourseSubscriptionFormComponent implements OnInit {
     );
     this.subscriptionForm.addControl(
       'season',
-      new FormControl(SeasonEnum.TWENTY_ONE, Validators.required)
+      new FormControl(SeasonEnum.TWENTY_TWO, Validators.required)
     );
     this._addControl('courses', this.courses, false);
     this._addControl('workshops', this.workshops, false);

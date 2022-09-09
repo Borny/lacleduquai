@@ -28,6 +28,10 @@ export class OrganismMembersAdminComponent implements OnInit {
       label: '2021-2022',
       value: SeasonEnum.TWENTY_ONE,
     },
+    {
+      label: '2022-2023',
+      value: SeasonEnum.TWENTY_TWO,
+    },
   ];
 
   public originalMembersData: Member[] = [];
@@ -45,7 +49,7 @@ export class OrganismMembersAdminComponent implements OnInit {
   public attendees: number;
   public maxCapacity: number;
   public courseChoosen: boolean;
-  public selectedSeasonLabel = this.seasons[1].label;
+  public selectedSeasonLabel = this.seasons[2].label;
 
   public readonly CONFIRM = `confirm`;
   public readonly CONFIRM_DELETE = 'confirm-delete';
