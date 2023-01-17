@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://lacleduquai.herokuapp.com/api'
+  apiUrl: 'http://lcdq-api.eu-central-1.elasticbeanstalk.com/api',
 };

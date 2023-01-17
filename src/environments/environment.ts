@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:7000/api',
+  // apiUrl: 'http://lcdq-api.eu-central-1.elasticbeanstalk.com/api',
   // apiUrl: 'http://localhost:8000/api',
 };
 
