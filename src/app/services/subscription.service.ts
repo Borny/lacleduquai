@@ -53,6 +53,7 @@ export class SubscriptionService {
   public getMembersData(
     season: string
   ): Observable<{ message: string; data: Member[] }> {
+    console.log(season)
     return this.http.get<{ message: string; data: Member[] }>(
       `${this.API_URL}${this.GET_MEMBERS_URL_ALL}/${season}`
     );

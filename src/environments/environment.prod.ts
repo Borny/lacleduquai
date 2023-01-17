@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://lcdq-api.eu-central-1.elasticbeanstalk.com/api',
+  apiUrl: 'https://lcdq-api.onrender.com/api'
 };

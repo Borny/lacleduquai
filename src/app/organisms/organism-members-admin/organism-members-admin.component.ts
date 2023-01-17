@@ -271,6 +271,8 @@ export class OrganismMembersAdminComponent implements OnInit {
     if (this.selectedSeason === this.seasonEnum.TWENTY) {
       this._getSeason2020();
     }
+
+    console.log(this.selectedSeason)
   }
 
   public onSelectedOption(filter: any, option?: any): void {
