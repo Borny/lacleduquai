@@ -36,8 +36,12 @@ const routes: Routes = [
         path: 'belaetcome',
         loadChildren: () => import('../pages/belaetcome/belaetcome.module').then(m => m.BelaetcomePageModule)
       },
+      // {
+      //   path: 'cours-stages',
+      //   loadChildren: () => import('../pages/courses-workshops/courses-workshops.module').then(m => m.CoursesWorkshopsPageModule)
+      // },
       {
-        path: 'cours-stages',
+        path: 'activites',
         loadChildren: () => import('../pages/courses-workshops/courses-workshops.module').then(m => m.CoursesWorkshopsPageModule)
       },
       {

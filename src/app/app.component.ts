@@ -24,21 +24,21 @@ export class AppComponent implements OnInit, OnDestroy {
       label: 'Accueil en résidence',
       link: '/lcdq/residence'
     },
-    {
-      icon: 'bulb-outline',
-      label: 'Coworking',
-      link: '/lcdq/coworking'
-    },
-    {
-      icon: 'accessibility-outline',
-      label: 'Cours et Stages',
-      link: '/lcdq/cours-stages'
-    },
-    {
-      icon: 'people-outline',
-      label: 'L\'Equipe',
-      link: '/lcdq/notre-equipe'
-    },
+    // {
+    //   icon: 'bulb-outline',
+    //   label: 'Coworking',
+    //   link: '/lcdq/coworking'
+    // },
+    // {
+    //   icon: 'accessibility-outline',
+    //   label: 'Cours et Stages',
+    //   link: '/lcdq/cours-stages'
+    // },
+    // {
+    //   icon: 'people-outline',
+    //   label: 'L\'Equipe',
+    //   link: '/lcdq/notre-equipe'
+    // },
     {
       icon: 'mail-outline',
       label: 'Contact',

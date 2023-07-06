@@ -8,16 +8,19 @@
 // CARDS
 .cours-card {
   position: relative;
+
   .icon-triangle-blue,
   .icon-triangle-yellow {
     position: absolute;
     z-index: -1;
   }
+
   .icon-triangle-blue {
     width: 75px;
     height: 140px;
     top: -20px;
     left: -30px;
+
     @include screen-sm {
       width: 140px;
       height: 270px;
@@ -25,6 +28,7 @@
       left: -70px;
     }
   }
+
   .icon-triangle-yellow {
     width: 723px;
     height: 176px;
@@ -64,9 +68,10 @@
     }
 
     .card__img__container,
-    > .ion-card-title {
+    >.ion-card-title {
       opacity: 0.5;
     }
+
     .inner-card {
       top: 25%;
       opacity: 1;
@@ -91,17 +96,173 @@
 // ACTIVITIES
 .activities__container {
   background: var(--color-primary, #fff4b0);
-  margin: 7rem auto 0;
+  margin: 2rem auto 0;
   padding: 0 0 4rem;
+
   .activity {
     display: flex;
+
     @include screen-sm {
       margin-top: -2.3rem;
     }
+
     text-align: center;
   }
 }
 
 .warning-color {
   color: #ff8800;
+}
+
+
+//////////
+// COURS
+//////////
+
+ion-grid,
+ion-col {
+  padding: 0;
+}
+
+.schedule {
+  &.odd {
+    background: $color-primary;
+
+    .schedule__heading,
+    .schedule__property,
+    .schedule__value {
+      color: $white;
+    }
+  }
+
+  &__content {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  &__heading {
+    color: $color-primary;
+    font-weight: $fontWeightBold;
+    margin: 0 0 1rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1rem;
+  }
+
+  &__item {
+    display: flex;
+  }
+
+  &__property {
+    flex: 1;
+    color: $color-primary;
+  }
+
+  &__value {
+    flex: 2;
+    color: $grey-dark;
+  }
+}
+
+// .mobile-hidden--flex {
+.stages__table {
+  margin: 0 auto 2rem;
+
+  &__list {
+    display: flex;
+  }
+
+  &__header {
+    background: $color-primary;
+    color: $white;
+    font-weight: $fontWeightBold;
+  }
+
+  &__item {
+    // border: 1px solid $color-primary-dark;
+    border-bottom: none;
+    padding: 1rem;
+    flex: 1;
+    text-align: center;
+
+    &--header {
+      .stages__table__detail {
+        font-weight: $fontWeightBold;
+        color: $color-primary;
+        text-align: left;
+      }
+
+      border-top: none;
+    }
+
+    // &:last-child {
+    //   border-bottom: 1px solid $color-primary-dark;
+    // }
+    // &:not(:last-child) {
+    //   border-right: 1px solid $color-primary-dark;
+    // }
+    border-bottom: 1px solid $color-primary-dark;
+    &:first-child {
+      border-left: 1px solid $color-primary-dark;
+    }
+    &:last-child {
+      border-right: 1px solid $color-primary-dark;
+    }
+    // &:not(:last-child) {
+    //   border-right: 1px solid $color-primary-dark;
+    // }
+  }
+}
+
+// TARIFS
+.courses__table {
+  margin: 2rem auto 0;
+
+  &__header {
+    background: $color-primary;
+
+    .courses__table__detail {
+      color: $white;
+      background: $color-primary;
+      font-weight: $fontWeightBold;
+    }
+  }
+
+  &__item {
+    display: flex;
+    border: 1px solid $grey-light;
+    border-bottom: none;
+
+    &--header {
+      .courses__table__detail {
+        font-weight: $fontWeightBold;
+        color: $color-primary;
+        text-align: left;
+      }
+
+      border-top: none;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $grey-light;
+    }
+  }
+
+  &__detail {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+
+    &:first-child {
+      color: $color-primary;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid $grey-light;
+    }
+  }
 }
