@@ -147,7 +147,7 @@ export class CoursesWorkshopsPage implements OnInit {
       headers: ['Cours hebdomadaire Bordeaux'],
       content: [
         ['Quantité', '1', '2'],
-        ['Prix', '430€', '774€ (-20%)'],
+        ['Prix', '430€', '730€ (-15%)'],
         ['A la carte', '20€'],
       ]
     },
