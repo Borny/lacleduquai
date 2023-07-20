@@ -57,17 +57,36 @@ export class CoursesWorkshopsPage implements OnInit {
     //   ],
     // },
     {
-      heading: 'Vendredi',
+      heading: 'Jeudi',
       activities: [
         {
           properties: [
-            { name: 'Atelier', value: 'Danse Contemporaine - Impro' },
-            { name: 'Horaires', value: '18h30-20h' },
-        { name: 'Lieu', value: 'Sore' },
+            { name: 'Atelier', value: 'Danse contemporaine - Enfants' },
+            { name: 'Horaires', value: '18h-19h' },
+            { name: 'Lieu', value: 'Sore' },
+          ],
+        },
+        {
+          properties: [
+            { name: 'Atelier', value: 'Danse contemporaine - Adultes' },
+            { name: 'Horaires', value: '19h15-20h45' },
+            { name: 'Lieu', value: 'Sore' },
           ],
         },
       ],
     },
+    // {
+    //   heading: 'Vendredi',
+    //   activities: [
+    //     {
+    //       properties: [
+    //         { name: 'Atelier', value: 'Danse Contemporaine - Impro' },
+    //         { name: 'Horaires', value: '18h30-20h' },
+    //     { name: 'Lieu', value: 'Sore' },
+    //       ],
+    //     },
+    //   ],
+    // },
   ];
 
   public compagnieAmateur = [
@@ -79,7 +98,7 @@ export class CoursesWorkshopsPage implements OnInit {
       heading: 'Dates',
       content: [
         '7-8 Octobre 2023',
-        '4-5 Novembre 2023',
+        '11-12 Novembre 2023',
         '9-10 Décembre 2023',
         // '13-14 Janvier 2024',
         // '10-11 Février 2024',
@@ -93,16 +112,16 @@ export class CoursesWorkshopsPage implements OnInit {
       content: ['LalaLandes']
     },
   ]
-  
+
   public stages = [
     {
-      headers: ['Evènement','Date','Horaire','Lieu'],
+      headers: ['Evènement', 'Date', 'Horaire', 'Lieu'],
       content: [
-        ['Stages Eté 2023', '10-14 Juillet 2023','10h - 17h','LalaLandes'],
-        ['Stage w-e 1', '14-15 Octobre 2023','10h - 17h','LalaLandes'],
-        ['Stage w-e 2', 'Le samedi 18 Novembre 2023','10h - 17h','LalaLandes'],
+        // ['Stages Eté 2023', '10-14 Juillet 2023', '10h - 17h', 'LalaLandes'],
+        ['Stage w-e 1', '14-15 Octobre 2023', '10h - 17h', 'LalaLandes'],
+        ['Stage w-e 2', '25-26 Novembre 2023', '10h - 17h', 'Bordeaux'],
         // ['Stage mi-long 1', '23-24-25-26 Novembre 2023','10h - 17h','LalaLandes'],
-        ['Stage w-e 3', 'Le 17 décembre 2023','10h - 17h','Bordeaux'],
+        ['Stage w-e 3', 'Le 17 décembre 2023', '10h - 17h', 'Bordeaux'],
         // ['Stage w-e 4', 'Le 28 Janvier 2024','10h - 17h','Bordeaux'],
         // ['Stage long 1 :', 'Du 26 Février au 1er Mars 2024','10h - 17h','Bordeaux'],
         // ['Stage w-e 5', '23-24 Mars 2024','10h - 17h','LalaLandes'],
@@ -114,27 +133,30 @@ export class CoursesWorkshopsPage implements OnInit {
 
   public expressiv = [
     {
-      headers: ['Date','Horaire','Lieu'],
+      headers: ['Date', 'Horaire', 'Lieu'],
       content: [
-        ['13 septembre 2023','Soirée','Bordeaux'],
-        ['25 novembre 2023','Soirée','Bordeaux'],
-        ['16 décembre 2023','Soirée','Bordeaux'],
+        ['13 septembre 2023', 'Soirée', 'Bordeaux'],
+        ['25 novembre 2023', 'Soirée', 'Bordeaux'],
+        ['16 décembre 2023', 'Soirée', 'Bordeaux'],
       ]
     },
   ]
 
   public tarifs = [
     {
-      headers: ['Cours hebdomadaire'],
+      headers: ['Cours hebdomadaire Bordeaux'],
       content: [
-        ['Quantité','1','2','3','4'],
-        ['Prix', '430€','774€ (-20%)','1075€ (-30%)','1333€ (-40%)',],
+        ['Quantité', '1', '2'],
+        ['Prix', '430€', '774€ (-20%)'],
+        ['A la carte', '20€'],
       ]
     },
     {
-      headers: ['Cours à la carte'],
+      headers: ['Cours hebdomadaire Sore'],
       content: [
-        ['Prix','20€'],
+        ['Enfants', '250€'],
+        ['Adultes', '350€'],
+        ['A la carte', '15€'],
       ]
     },
     // {
@@ -150,7 +172,7 @@ export class CoursesWorkshopsPage implements OnInit {
     {
       headers: ['Stages'],
       content: [
-        ['Semaine', '450€',],
+        ['Semaine', '400€ + logement 50€',],
         ['Weekend', '150€',],
         ['Journée', '90€',],
         // ['Pack (3 stages weekend ou journée dans l\'année)', '90€',],

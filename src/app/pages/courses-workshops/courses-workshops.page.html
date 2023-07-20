@@ -301,8 +301,8 @@
         </div>
       </ion-col>
     </ion-row>
-    
-    
+
+
     <!-- TARIFS -->
     <ion-row>
       <ion-col>
@@ -322,10 +322,40 @@
             <li *ngFor="let content of item.content" class="stages__table__list">
               <div *ngFor="let cont of content" class="stages__table__item">
                 {{cont}}
-              </div>  
+              </div>
             </li>
           </ul>
         </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- INSCRIPTIONS -->
+    <ion-row>
+      <ion-col>
+        <h2 class="title-xl">Inscriptions</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="6" offset-md="3">
+        <div class="stages__table">
+          <p class="ion-text-center">Inscriptions par mail:</p>
+          <p class="ion-text-center color-primary">lacleduquai@gmail.com</p>
+        </div>
+        <!-- <div class="stages__table">
+          <ul *ngFor="let item of tarifs, let i = index">
+            <li class="stages__table__list stages__table__header">
+              <div *ngFor="let header of item.headers" class="stages__table__item">
+                {{header}}
+              </div>
+            </li>
+            <li *ngFor="let content of item.content" class="stages__table__list">
+              <div *ngFor="let cont of content" class="stages__table__item">
+                {{cont}}
+              </div>  
+            </li>
+          </ul>
+        </div> -->
       </ion-col>
     </ion-row>
   </ion-grid>
