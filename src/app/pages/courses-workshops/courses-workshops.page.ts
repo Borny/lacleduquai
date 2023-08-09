@@ -33,29 +33,18 @@ export class CoursesWorkshopsPage implements OnInit {
         },
       ],
     },
-    // {
-    //   heading: 'Mercredi',
-    //   activities: [
-    //     {
-    //       properties: [
-    //         { name: 'Atelier', value: 'Danse Contemporaine - Impro' },
-    //         { name: 'Horaires', value: '18h30-20h30' },
-    //         // { name: 'Niveau', value: 'Tout niveau' },
-    //         // { name: 'Intervenant', value: 'Côme Tanguy' },
-    //         { name: 'Lieu', value: 'Salle à valider' },
-    //       ],
-    //     },
-    //     {
-    //       properties: [
-    //         { name: 'Atelier', value: 'Danse Contemporaine - écriture chorégraphique' },
-    //         { name: 'Horaires', value: '20h30-22h30' },
-    //         // { name: 'Niveau', value: 'Tout niveau' },
-    //         // { name: 'Intervenant', value: 'Côme Tanguy' },
-    //         { name: 'Lieu', value: 'Salle à valider' },
-    //       ],
-    //     },
-    //   ],
-    // },
+    {
+      heading: 'Mercredi',
+      activities: [
+        {
+          properties: [
+            { name: 'Atelier', value: 'Danse Contemporaine - Pratique intensive' },
+            { name: 'Horaires', value: '19h-22h' },
+            { name: 'Lieu', value: 'Ecole Simone Veil, rue du Jardin de l\'Ars, Bordeaux' },
+          ],
+        },
+      ],
+    },
     {
       heading: 'Jeudi',
       activities: [
