@@ -89,11 +89,11 @@ export class CoursesWorkshopsPage implements OnInit {
         '7-8 Octobre 2023',
         '11-12 Novembre 2023',
         '9-10 Décembre 2023',
-        // '13-14 Janvier 2024',
-        // '10-11 Février 2024',
-        // '9-10 Mars 2024',
-        // '6-7 Avril 2024',
-        // '4-5 Mai 2024',
+        '13-14 Janvier 2024',
+        '10-11 Février 2024',
+        '9-10 Mars 2024',
+        '6-7 Avril 2024',
+        '27-28 Avril 2024',
       ]
     },
     {
@@ -107,15 +107,16 @@ export class CoursesWorkshopsPage implements OnInit {
       headers: ['Evènement', 'Date', 'Horaire', 'Lieu'],
       content: [
         // ['Stages Eté 2023', '10-14 Juillet 2023', '10h - 17h', 'LalaLandes'],
-        ['Stage w-e 1', '14-15 Octobre 2023', '10h - 17h', 'LalaLandes'],
-        ['Stage w-e 2', '25-26 Novembre 2023', '10h - 17h', 'Bordeaux'],
+        ['Stage weekend 1', '14-15 Octobre 2023', '10h - 17h', 'LalaLandes'],
+        ['Stage weekend 2 - Adult', '25-26 Novembre 2023', '10h - 12h', 'Bordeaux'],
+        ['Stage weekend 2 - Enfant', '25-26 Novembre 2023', '14h - 17h', 'Bordeaux'],
         // ['Stage mi-long 1', '23-24-25-26 Novembre 2023','10h - 17h','LalaLandes'],
-        ['Stage w-e 3', 'Le 17 décembre 2023', '10h - 17h', 'Bordeaux'],
-        // ['Stage w-e 4', 'Le 28 Janvier 2024','10h - 17h','Bordeaux'],
-        // ['Stage long 1 :', 'Du 26 Février au 1er Mars 2024','10h - 17h','Bordeaux'],
-        // ['Stage w-e 5', '23-24 Mars 2024','10h - 17h','LalaLandes'],
-        // ['Stage w-e 6', '25-26 Mai 2024','10h - 17h','LalaLandes'],
-        // ['Stage été 2024', 'du 8 au 12 Juillet 2024','10h - 17h','LalaLandes'],
+        ['Stage journée', 'Le 17 décembre 2023', '10h - 17h', 'Bordeaux'],
+        ['Stage weekend 3', 'Le 27-28 Janvier 2024','10h - 17h','Bordeaux'],
+        ['Stage semaine', 'Du 26 Février au 1er Mars 2024','10h - 17h','Bordeaux'],
+        ['Stage weekend 4', '13-14 Avril 2024','10h - 17h','LalaLandes'],
+        ['Stage weekend 5', '25-26 Mai 2024','10h - 17h','LalaLandes'],
+        ['Stage été 2024', 'du 8 au 12 Juillet 2024','10h - 17h','LalaLandes'],
       ]
     },
   ]
@@ -127,6 +128,8 @@ export class CoursesWorkshopsPage implements OnInit {
         ['13 septembre 2023', 'Soirée', 'Bordeaux'],
         ['25 novembre 2023', 'Soirée', 'Bordeaux'],
         ['16 décembre 2023', 'Soirée', 'Bordeaux'],
+        ['27 janvier 2024', 'Soirée', 'Bordeaux'],
+        ['18 juin 2024', 'Soirée', 'Bordeaux'],
       ]
     },
   ]
