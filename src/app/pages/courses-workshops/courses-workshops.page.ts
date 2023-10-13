@@ -164,10 +164,16 @@ export class CoursesWorkshopsPage implements OnInit {
     {
       headers: ['Stages'],
       content: [
-        ['Semaine', '400€ + logement 50€',],
-        ['Weekend', '150€',],
-        ['Journée', '90€',],
+        ['Semaine', '370€ + logement 50€',],
+        ['Weekend', '120€',],
+        ['Journée', '75€',],
         // ['Pack (3 stages weekend ou journée dans l\'année)', '90€',],
+      ]
+    },
+    {
+      headers: ['Offre 3 stages(hors stage d\'une semaine)'],
+      content: [
+        ['-10% sur le total'],
       ]
     },
   ]
