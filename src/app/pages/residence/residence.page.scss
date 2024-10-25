@@ -7,6 +7,10 @@
   align-items: flex-start;
   justify-content: flex-start;
   margin: 1rem auto 0;
+
+  &__sublist{
+    margin: 0.5rem 0 0 2rem;
+  }
 }
 .description-item--icon {
   width: 20px;
